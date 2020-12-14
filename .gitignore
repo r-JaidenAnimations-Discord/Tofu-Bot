@@ -1,0 +1,11 @@
+# IDE
+/.vscode/
+
+# Archived stuffs
+/Scrapped and archived/
+
+# Use `npm i` to install them
+/node_modules/
+
+# Token and other secrets
+config.json

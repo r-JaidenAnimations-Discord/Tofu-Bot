@@ -4,7 +4,7 @@ module.exports = {
     category: 'Fun',
     usage: 'bean ({@user, something else})',
     description: 'Hmmmmm. Beans',
-	isEnabled: false,
+	isEnabled: true,
 	//aliases: [],
     cooldown: 5,
 	execute: async function(client, message, args) {
@@ -15,7 +15,7 @@ module.exports = {
             if (message.deletable) message.delete();
             return message.channel.send(`${message.mentions.users.first()} was beaned!`);
 
-        } else if (message.guild.members.fetch(args[0])) {
+        } else if (message.guild.members.cache.get(args[0])) {
             if (message.deletable) message.delete();
             return message.channel.send(`<@!${args[0]}> was beaned!`);
 

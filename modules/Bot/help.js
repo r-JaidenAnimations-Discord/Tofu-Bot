@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, infonetOrange } = require('../../config.json');
+const { prefix, tofuOrange } = require('../../config.json');
 const { stripIndents } = require('common-tags');
 
 module.exports = {
@@ -12,12 +12,9 @@ module.exports = {
 	aliases: ['commands'],
     cooldown: 5,
 	execute: async function(client, message, args) {
-        message.channel.bulkDelete(1, true).catch(err => {
-			console.error(err);
-			message.channel.send('Something went *very* wrong, I\'m sorry.');
-			console.error('Basically, without saying too much, you\'re screwed. Royally');
-		});
-		//message.channel.send('This is unfinished and i don\t know how to start');
+        if (message.deletable) {
+            message.delete();
+        }
         if (args[0]) {
             return getCmd(client, message, args[0]);
         } else {
@@ -28,7 +25,7 @@ module.exports = {
 
 function getAll(client, message) {
     const embed = new Discord.MessageEmbed()
-        .setColor(infonetOrange)
+        .setColor(tofuOrange)
         .setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
     
     const commands = (category) => {
@@ -47,7 +44,7 @@ function getAll(client, message) {
 
 function getCmd(client, message, input) {
     const embed = new Discord.MessageEmbed()
-        .setColor('#eb8334')
+        .setColor(tofuOrange)
         .setFooter('Syntax: () = optional; [] = required; {a, b} = choose between a or b');
 
     const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));

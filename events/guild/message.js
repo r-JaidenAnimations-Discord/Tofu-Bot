@@ -1,11 +1,15 @@
-const { prefix, apiKey, infonetBlue, infonetGreen, infonetOrange, generalChannelId } = require('../../config.json');
+const { prefix } = require('../../config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
 
 module.exports = (client, message) => {
     let cooldowns = client.cooldowns;
     // nothing get fucked lmao
-    // very
+	// very
+	
+	if (message.guild === null && !message.author.bot) {
+		return message.channel.send('Can\'t talk right now, I\'m eating tofu');
+	}
 
 	// Bots shall not trigger me
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -25,9 +29,7 @@ module.exports = (client, message) => {
 	}
 
 	// No DMs
-	if (message.channel.type === 'dm') {
-		return message.reply('No DMs!');
-	}
+	if (message.channel.type === 'dm') return;
 
 	// Cooldown?
 	if (!cooldowns.has(command.name)) {

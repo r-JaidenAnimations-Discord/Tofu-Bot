@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, mxmProfile, botProfile, tofuBlue } = require('../config.json');
+const { prefix, botProfile, tofuBlue } = require('../config.json');
 
 let randomStatusEnable = true;
 
@@ -92,7 +92,7 @@ const toggleRandomStatus = (client, message, args) => {
                   .setAuthor('Tofu Bot', botProfile)
                   .setDescription(`Automatic randomised messages have been set to: ${randomStatusEnable}`)
                   .setTimestamp()
-                  .setFooter('Made with love'/*, mxmProfile*/);
+                  .setFooter('Made with love');
 
     message.channel.send(randomStatusEmbed);
     console.log(`Randomoooo set to: ${randomStatusEnable}`);

@@ -1,4 +1,4 @@
-const { infonetGreen } = require('../../config.json');
+const { tofuGreen } = require('../../config.json');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     category: 'Fun',
     usage: 'say [#channel] (embed) [message]',
     description: 'Mess with members',
-	isEnabled: false,
+	isEnabled: true,
 	//aliases: [],
     cooldown: 5,
 	execute: async function(client, message, args) {
@@ -23,7 +23,7 @@ module.exports = {
         
         if (args[1] == 'embed') {
             const embed = new Discord.MessageEmbed()
-                .setColor(infonetGreen)
+                .setColor(tofuGreen)
                 .setDescription(args.slice(2).join(' '));
             
             channel.send(embed);

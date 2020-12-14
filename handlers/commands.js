@@ -24,7 +24,7 @@ module.exports = bot => {
                 table.addRow(file, 'X   Not loaded -> missing a help.name, or help.name is not a string.');
                 continue;
             }
-            //if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => bot.aliases.set(alias, pull.name));
+            if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => bot.aliases.set(alias, pull.name));
         }
     });
     console.log(table.toString());

@@ -45,7 +45,8 @@ module.exports = {
         'Use protection.',
         'y\'all simps',
         'Everyone who\'s watching, if you\'re young, take your time right now, your free time... because you won\'t have free time in the future.',
-        'STOP!! You\'re freaking me out!'
+        'STOP!! You\'re freaking me out!',
+        'If you knowing I\'m hurt, hurts you then I dont wanna tell you when I\'m hurting.'
         //calm down drink a glass of water
     ]
 };

@@ -1,4 +1,4 @@
-const { prefix } = require('../../config.json');
+const { prefix, banKirito } = require('../../config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
 
@@ -26,6 +26,11 @@ module.exports = (client, message) => {
 	// Is this command enabled?
 	if (command.isEnabled === false) {
 		return message.reply('This command has been (temporarily) disabled. (Maxim probably broke it)');
+	}
+
+	if (message.author.id == banKirito) {
+		console.log(message.author.id);
+		return client.users.cache.get(banKirito).send('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
 	}
 
 	// No DMs

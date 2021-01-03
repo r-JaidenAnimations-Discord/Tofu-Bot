@@ -3,7 +3,7 @@ module.exports = {
 	helpTitle: 'Reverse',
     category: 'Text Manipulation',
     usage: 'reverse [text]',
-	description: 'Reverse text',
+	description: 'Reverse text.',
 	isEnabled: true,
 	//aliases: [],
 	cooldown: 5,

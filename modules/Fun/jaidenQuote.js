@@ -1,15 +1,15 @@
 const Discord = require('discord.js');
-const { tofuGreen } = require('../../config.json')
+const { tofuGreen } = require('../../config.json');
 const { quotes } = require('../../commanddata/jaidenQuoteList.js');
 
 module.exports = {
-	name: 'jaidenquote',
+	name: 'quote',
 	helpTitle: 'Jaiden Quote',
     category: 'Fun',
-    usage: 'jaidenquote',
+    usage: 'quote',
     description: 'Send a random quote from Jaiden',
 	isEnabled: true,
-	aliases: ['quote', 'jquote'],
+	aliases: ['jaidenquote', 'jquote'],
 	cooldown: 3,
 	execute: async function(client, message, args) {
         const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];

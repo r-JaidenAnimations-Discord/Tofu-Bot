@@ -5,7 +5,7 @@ module.exports = {
     name: 'status',
     helpTitle: 'Status',
     category: 'Bot',
-    usage: 'status [{random, awake, asleep, busy, gone, stream, play, listen, next}]',
+    usage: 'status [{random ({enable, disable}), awake, asleep, busy, gone, stream, play, listen, next}]',
     description: 'Set the client\'s status',
     isEnabled: true,
     aliases: ['sts', 'stat'],
@@ -16,5 +16,7 @@ module.exports = {
 
       // yeah it just does this
       setSts(client, message, args[0]);  
+
+      message.react('✅');
     },
 };

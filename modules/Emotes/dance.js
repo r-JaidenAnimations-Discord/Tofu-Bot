@@ -9,7 +9,7 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
         try {
-			message.channel.send({files: ['./commanddata/JaidenDance.gif']})
+			message.channel.send({files: ['./commanddata/JaidenDance.gif']});
 			message.delete();
 		} catch (e) {
 			console.error(e);

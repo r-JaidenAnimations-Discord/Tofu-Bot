@@ -1,6 +1,7 @@
 const { prefix, banKirito } = require('../../config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
+const { noKirito } = require('../../functions/kiritoTrust.js')
 
 module.exports = (client, message) => {
     let cooldowns = client.cooldowns;
@@ -19,7 +20,7 @@ module.exports = (client, message) => {
 
 	// Include aliases
 	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));	
+		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	
 	if (!command) return;
 	
@@ -29,8 +30,7 @@ module.exports = (client, message) => {
 	}
 
 	if (message.author.id == banKirito) {
-		console.log(message.author.id);
-		return client.users.cache.get(banKirito).send('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
+		noKirito(client, message, args);
 	}
 
 	// No DMs

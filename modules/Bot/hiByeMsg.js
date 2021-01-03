@@ -5,7 +5,7 @@ module.exports = {
     name: 'announce',
     helpTitle: 'Announce',
     category: 'Bot',
-    usage: 'announce',
+    usage: 'announce ({enable, disable})',
     description: 'Enable or Disable the welcome/bye message.',
     isEnabled: true,
     //aliases: [],
@@ -15,6 +15,6 @@ module.exports = {
       if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply('You fool, need more permissions');
 
       // yeah it just does this
-      toggleHeyEnable(client, message, args[0]);  
+      toggleHeyEnable(client, message, args);
     },
 };

@@ -71,26 +71,49 @@ const setSts = (client, message, selectedStatus) => {
             });
             break;
         case 'next':
-            randomStatus(client, message);
+            const nextState = states[Math.floor(Math.random() * states.length)];
+            setSts(client, message, nextState);
             break;
         case 'random':
               const args = message.content.slice(prefix.length).trim().split(/ +/g);
-              toggleRandomStatus(client, message, args); 
+              if (!args[2]) {
+                  const randomStatusState = new Discord.MessageEmbed()
+                        .setColor(tofuBlue)
+                        .setAuthor('Tofu Bot', botProfile)
+                        .setDescription(`Random statusses: \`${randomStatusEnable}\`. (not modified)`)
+                        .setTimestamp()
+                        .setFooter('Made with love');
+
+                  return message.channel.send(randomStatusState);
+              }
+              else {
+                  toggleRandomStatus(client, message, args);
+              }
               break;
         default:
-            message.channel.send('Invalid argument given');  
+            message.channel.send('Invalid argument given');
         }
     }
 
 // Enable or disable the randomised status
 const toggleRandomStatus = (client, message, args) => {
-    randomStatusEnable = !randomStatusEnable
+    //randomStatusEnable = !randomStatusEnable
     //randomStatus(client);
 
+    if (args[2] == 'enable') {
+        randomStatusEnable = true;
+    }
+    else if (args[2] == 'disable') {
+        randomStatusEnable = false;
+    }
+    else {
+        return message.channel.send(`\`${args[2]}\` is not a valid argument. Allowed arguments are 'enable' and 'disable'`);
+    }
+    
     const randomStatusEmbed = new Discord.MessageEmbed()
                   .setColor(tofuBlue)
                   .setAuthor('Tofu Bot', botProfile)
-                  .setDescription(`Automatic randomised messages have been set to: ${randomStatusEnable}`)
+                  .setDescription(`Automatic randomised messages have been set to: \`${randomStatusEnable}\``)
                   .setTimestamp()
                   .setFooter('Made with love');
 

@@ -14,10 +14,10 @@ module.exports = {
         let channel = message.mentions.channels.first() ||
         message.guild.channels.cache.find(c => c.id == args[0]) ||
         message.guild.channels.cache.find(c => c.name == args[0]);
-
-        if (!channel) return message.channel.send('Couldn\'t find a channel with the arguments provided');
     
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You fool, need more permissions');
+        
+        if (!channel) return message.channel.send('Couldn\'t find a channel with the arguments provided');
 
         if (message.deletable) message.delete();
         

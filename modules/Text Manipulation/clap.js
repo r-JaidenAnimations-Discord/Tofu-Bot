@@ -3,7 +3,7 @@ module.exports = {
 	helpTitle: 'Clap',
     category: 'Text Manipulation',
     usage: 'clap [text]',
-	description: 'Clap ',
+	description: 'Clap.',
 	isEnabled: true,
 	//aliases: [],
 	cooldown: 5,

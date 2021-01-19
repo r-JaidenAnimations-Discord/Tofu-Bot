@@ -29,7 +29,7 @@ const toggleKiritoTrust = (client, message, args) => {
     const kiritoEmbed = new Discord.MessageEmbed()
                   .setColor(tofuBlue)
                   .setAuthor('Tofu Bot', botProfile)
-                  .setDescription(`Welcome messages have been set to: \`${kiritoTrusted}\``)
+                  .setDescription(`Kirito trust: \`${kiritoTrusted}\``)
                   .setTimestamp()
                   .setFooter('Made with love');
 

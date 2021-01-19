@@ -59,7 +59,7 @@ module.exports = {
             correct: 2,
         },
         {
-            question: "Expert: 'I totally get an A++ Super with stars and hearts and the persons little avatar would go'",
+            question: "'I totally get an A++ Super with stars and hearts and the persons little avatar would go'",
             answers: ["finger guns", "SUGOI", "dabbing"],
             correct: 1,
         },

@@ -47,7 +47,10 @@ module.exports = {
         'Everyone who\'s watching, if you\'re young, take your time right now, your free time... because you won\'t have free time in the future.',
         'STOP!! You\'re freaking me out!',
         'If you knowing I\'m hurt, hurts you then I dont wanna tell you when I\'m hurting.',
-        'I was just recording a video with a bunch of friends and I got a Twitter notification, and in the middle of conversation I went: "Holy-!", a-and then I swore'
-        //calm down drink a glass of water
+        'I was just recording a video with a bunch of friends and I got a Twitter notification, and in the middle of conversation I went: "Holy-!", a-and then I swore',
+        'Calm down drink a cup of water or something",
+        'Everyone\'s so quick to just hate each other now'
+        'It\'s not edgy to be edgy anymore'
+        ' just because this person is being scummy doesn\'t mean you can automatically be scummy back to them that\'s that\'s not at all how it works'
     ]
 };

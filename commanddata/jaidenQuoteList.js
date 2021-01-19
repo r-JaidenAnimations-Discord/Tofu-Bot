@@ -51,6 +51,6 @@ module.exports = {
         'Calm down drink a cup of water or something",
         'Everyone\'s so quick to just hate each other now'
         'It\'s not edgy to be edgy anymore'
-        ' just because this person is being scummy doesn\'t mean you can automatically be scummy back to them that\'s that\'s not at all how it works'
+        'Just because this person is being scummy, doesn\'t mean you can automatically be scummy back to them that\'s that\'s not at all how it works'
     ]
 };

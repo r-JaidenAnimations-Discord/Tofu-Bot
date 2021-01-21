@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { toggleKiritoTrust } = require('../../functions/kiritoTrust.js');
-const { maxID } = require('../../config.json');
+const { gradyID, retainedID, teraID, maxID } = require('../../config.json');
 
 module.exports = {
     name: 'kirito',
@@ -13,7 +13,7 @@ module.exports = {
     cooldown: 0,
     execute: async function(client, message, args) {
 
-        if (!message.author.id == maxID) return;
+        if (message.author.id !== gradyID && message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) return;
 
       // yeah it just does this
       toggleKiritoTrust(client, message, args);

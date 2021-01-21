@@ -23,7 +23,7 @@ module.exports = {
 	description: 'Play some trivia.',
 	isEnabled: true,
 	aliases: ['jaidentrivia', 'jtrivia'],
-	cooldown: 3,
+	cooldown: 30,
 	execute: async function(client, message, args) {
 		if (args[0] == 'rules') {
 			//return message.channel.send('Rules and info will be put here');
@@ -56,7 +56,7 @@ module.exports = {
 				})
 			)
 			.setColor(tofuGreen)
-			.setFooter(`You can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
+			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 		message.channel.send(Embed).then(async sentEmbed => {
 			let count;
 			for (count = 0; count < q.answers.length; count++) {

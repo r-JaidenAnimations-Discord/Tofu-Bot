@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { botProfile, tofuBlue, generalChannelId } = require('../config.json');
+const { botProfile, tofuBlue, generalChannelId, maxID, tofuError } = require('../config.json');
 
 
 let heyEnable = false;
@@ -18,7 +18,20 @@ const toggleHeyEnable = (client, message, args) => {
                   .setTimestamp()
                   .setFooter('Made with love');
 
-        return message.channel.send(heyaState);
+        try {
+            return message.channel.send(heyaState);
+        } catch (e) {
+            try {
+                console.log(e);
+                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: welcomeMsg.js: Error on sending the heyaState embed \n \`\`${e}\`\``).setColor(tofuError));
+                return;
+            } catch(f) {
+                console.log('========================================================================================================');
+                console.error(`welcomeMsg.js: Error on sending the heyaState embed, sending error DM failed: ${e} \n DMError: ${f}`);
+                console.log('========================================================================================================');
+                return;
+            }
+        }
     }
     else if (args[0] == 'enable') {
         heyEnable = true;
@@ -27,7 +40,20 @@ const toggleHeyEnable = (client, message, args) => {
         heyEnable = false;
     }
     else {
-        return message.channel.send(`\`${args[0]}\` is not a valid argument. Allowed arguments are 'enable' and 'disable'`);
+        try {
+            return message.channel.send(`\`${args[0]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable\``);///////////////////
+        } catch (e) {
+            try {
+                console.log(e);
+                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: welcomeMsg.js: Error on sending the invalid argument message \n \`\`${e}\`\``).setColor(tofuError));
+                return;
+            } catch(f) {
+                console.log('========================================================================================================');
+                console.error(`welcomeMsg.js: Error on sending the invalid argument message, sending error DM failed: ${e} \n DMError: ${f}`);
+                console.log('========================================================================================================');
+                return;
+            }
+        }
     }
     
     const heyaEmbed = new Discord.MessageEmbed()
@@ -37,20 +63,60 @@ const toggleHeyEnable = (client, message, args) => {
                   .setTimestamp()
                   .setFooter('Made with love');
 
-    message.channel.send(heyaEmbed);
-    console.log(`Heya cya set to: ${heyEnable}`);
+    try {
+        message.channel.send(heyaEmbed);
+        console.log(`Heya cya set to: ${heyEnable}`);
+    } catch (e) {
+        try {
+            console.log(e);
+            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: welcomeMsg.js: Error on sending heyaEmbed \n \`\`${e}\`\``).setColor(tofuError));
+            return;
+        } catch(f) {
+            console.log('========================================================================================================');
+            console.error(`welcomeMsg.js: Error on sending heyaEmbed, sending error DM failed: ${e} \n DMError: ${f}`);
+            console.log('========================================================================================================');
+            return;
+        }
+    }
 }
 
-const usrLeft = (client, member) => {
+const usrLeft = async (client, member) => {
     console.log(heyEnable);
     if (heyEnable === false) return;
-    client.channels.cache.get(generalChannelId).send(`Welps, guess like **${member.displayName}** couldn't stand to be around us, adiós.`);
+    try {
+        return client.channels.cache.get(generalChannelId).send(`Welps, guess like **${member.displayName}** couldn't stand to be around us, adiós.`);
+    } catch(e) {
+
+        try {
+            console.log(e);
+            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: welcomeMsg.js: Error on sending cya message \n \`\`${e}\`\``).setColor(tofuError));
+            return;
+        } catch(f) {
+            console.log('========================================================================================================');
+            console.error(`welcomeMsg.js: Error on sending cya message, sending error DM failed: ${e} \n DMError: ${f}`);
+            console.log('========================================================================================================');
+            return;
+        }
+    }
 }
 
-const usrJoin = (client, member) => {
+const usrJoin = async (client, member) => {
     console.log(heyEnable);
     if (heyEnable === false) return;
-    client.channels.cache.get(generalChannelId).send(`Hello, <@${member.id}>. Welcome to r/JaidenAnimations!`);
+    try {
+        return client.channels.cache.get(generalChannelId).send(`Hello, <@${member.id}>. Welcome to r/JaidenAnimations!`);
+    } catch(e) {
+        try {
+            console.log(e);
+            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: welcomeMsg.js: Error on sending welcome message \n \`\`${e}\`\``).setColor(tofuError));
+            return;
+        } catch(f) {
+            console.log('========================================================================================================');
+            console.error(`welcomeMsg.js: Error on sending welcome message, sending error DM failed: ${e} \n DMError: ${f}`);
+            console.log('========================================================================================================');
+            return;
+        }
+    }
 }
    
 module.exports = {

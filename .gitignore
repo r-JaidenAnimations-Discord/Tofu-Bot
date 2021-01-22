@@ -9,3 +9,6 @@
 
 # Token and other secrets
 config.json
+
+# Also token and stuff but for dev purposes
+deployConfig.json

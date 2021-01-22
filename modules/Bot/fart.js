@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { gradyID, retainedID, maxID } = require('../../config.json');
 
 module.exports = {
     name: 'fart',
@@ -11,7 +12,9 @@ module.exports = {
     cooldown: 0,
     execute: async function(client, message, args) {
 
-      if (!message.member.hasPermission('BAN_MEMBERS')) return;
+      ///if (!message.member.hasPermission('BAN_MEMBERS')) return;
+      if (message.author.id !== gradyID && message.author.id !== retainedID && message.author.id !== maxID) return;
+
       message.channel.send('💨');
       message.react('💨');
     },

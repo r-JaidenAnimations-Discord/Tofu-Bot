@@ -1,7 +1,8 @@
-const { prefix, banKirito } = require('../../config.json');
+const { prefix, banKirito, banAli, maxID, tofuError } = require('../../config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
-const { noKirito } = require('../../functions/kiritoTrust.js')
+const { noKirito } = require('../../functions/kiritoTrust.js');
+const { noAli } = require('../../functions/aliTrust.js');
 
 module.exports = (client, message) => {
     let cooldowns = client.cooldowns;
@@ -9,7 +10,20 @@ module.exports = (client, message) => {
 	// very
 	
 	if (message.guild === null && !message.author.bot) {
-		return message.channel.send('Can\'t talk right now, I\'m eating tofu');
+		try {
+			return message.channel.send('Can\'t talk right now, I\'m eating tofu');
+		} catch (e) {
+			try {
+				console.log(e);
+				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending can't talk message \n \`\`${e}\`\``).setColor(tofuError));
+				return;
+			} catch(f) {
+				console.log('========================================================================================================');
+				console.error(`message.js: Error on sending can't talk DM, sending error DM failed: ${e} \n DMError: ${f}`);
+				console.log('========================================================================================================');
+				return;
+			}
+		}
 	}
 
 	// Bots shall not trigger me
@@ -26,11 +40,28 @@ module.exports = (client, message) => {
 	
 	// Is this command enabled?
 	if (command.isEnabled === false) {
-		return message.reply('This command has been (temporarily) disabled. (Maxim probably broke it)');
+		try {
+			return message.reply('This command has been (temporarily) disabled. (Maxim probably broke it)');
+		} catch (e) {
+			try {
+				console.log(e);
+				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending disabled command message \n \`\`${e}\`\``).setColor(tofuError));
+				return;
+			} catch(f) {
+				console.log('========================================================================================================');
+				console.error(`message.js: Error on sending command disabled message, sending error DM failed: ${e} \n DMError: ${f}`);
+				console.log('========================================================================================================');
+				return;
+			}
+		}
 	}
 
 	if (message.author.id == banKirito) {
 		noKirito(client, message, args);
+	}
+
+	if (message.author.id == banAli) {
+		noAli(client, message, args);
 	}
 
 	// No DMs
@@ -47,8 +78,22 @@ module.exports = (client, message) => {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
-			message.react('⏳');
-			return message.reply(`Please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${command.name}\` command.`);
+			try {
+				message.react('⏳');
+				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${timeLeft.toFixed(1)} second(s) before reusing \`${command.name}\`?`);
+				return;
+			} catch (e) {
+				try {
+					console.log(e);
+					client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending command cooldown message \n \`\`${e}\`\``).setColor(tofuError));
+					return;
+				} catch(f) {
+					console.log('========================================================================================================');
+					console.error(`message.js: Error on sending cooldown message, sending error DM failed: ${e} \n DMError: ${f}`);
+					console.log('========================================================================================================');
+					return;
+				}
+			}
 		}
 	}
 	timestamps.set(message.author.id, now);
@@ -59,6 +104,6 @@ module.exports = (client, message) => {
 		command.execute(client, message, args);
 	} catch (error) {
 		console.error(error);
-		message.reply('Sooo i like um broke');
+		//message.reply('Sooo i like um broke');
 	}
 }

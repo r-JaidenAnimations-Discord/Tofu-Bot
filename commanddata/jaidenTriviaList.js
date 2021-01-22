@@ -6,7 +6,6 @@ module.exports = {
 			answers: ["[]", "[]", "[]", "[]"],
 			correct: ,
 		},
-
         */
         {
             question: "What is the name of Jaiden's younger brother?",

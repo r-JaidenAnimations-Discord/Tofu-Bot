@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { botProfile, tofuBlue, banKirito } = require('../config.json');
+const { botProfile, tofuBlue, banKirito, maxID, tofuError } = require('../config.json');
 
 let kiritoTrusted = true;
 
@@ -14,7 +14,20 @@ const toggleKiritoTrust = (client, message, args) => {
                   .setTimestamp()
                   .setFooter('Made with love');
 
-        return client.users.cache.get(message.author.id).send(kiritoState);
+        try {
+            return client.users.cache.get(message.author.id).send(kiritoState);
+        } catch (e) {
+            try {
+                console.log(e);
+                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: kiritoTrust.js: Error on sending kiritoState embed \n \`\`${e}\`\``).setColor(tofuError));
+                return;
+            } catch(f) {
+                console.log('========================================================================================================');
+                console.error(`kiritoTrust.js: Error on sending kiritoState embed, sending error DM failed: ${e} \n DMError: ${f}`);
+                console.log('========================================================================================================');
+                return;
+            }
+        }
     }
     else if (args[0] == 'enable') {
         kiritoTrusted = true;
@@ -23,25 +36,65 @@ const toggleKiritoTrust = (client, message, args) => {
         kiritoTrusted = false;
     }
     else {
-        return client.users.cache.get(message.author.id).send(`\`${args[0]}\` is not a valid argument. Allowed arguments are 'enable' and 'disable'`);
+        try {
+            return client.users.cache.get(message.author.id).send(`\`${args[0]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable\``);
+        } catch (e) {
+            try {
+                console.log(e);
+                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: kiritoTrust.js: Error on sending invalid argument message \n \`\`${e}\`\``).setColor(tofuError));
+                return;
+            } catch(f) {
+                console.log('========================================================================================================');
+                console.error(`kiritoTrust.js: Error on sending invalid argument message, sending error DM failed: ${e} \n DMError: ${f}`);
+                console.log('========================================================================================================');
+                return;
+            }
+        }
     }
     
     const kiritoEmbed = new Discord.MessageEmbed()
                   .setColor(tofuBlue)
                   .setAuthor('Tofu Bot', botProfile)
-                  .setDescription(`Welcome messages have been set to: \`${kiritoTrusted}\``)
+                  .setDescription(`Kirito trust has been set to: \`${kiritoTrusted}\``)
                   .setTimestamp()
                   .setFooter('Made with love');
-
-    client.users.cache.get(message.author.id).send(kiritoEmbed);
-    console.log(`Kirito trust set to: ${kiritoTrusted}`);
+            
+    try {
+        client.users.cache.get(message.author.id).send(kiritoEmbed);
+        console.log(`Kirito trust set to: ${kiritoTrusted}`);
+        return;
+    } catch (e) {
+        try {
+            console.log(e);
+            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: kiritoTrust.js: Error on sending kiritoEmbed \n \`\`${e}\`\``).setColor(tofuError));
+            return;
+        } catch(f) {
+            console.log('========================================================================================================');
+            console.error(`kiritoTrust.js: Error on sending kiritoEmbed, sending error DM failed: ${e} \n DMError: ${f}`);
+            console.log('========================================================================================================');
+            return;
+        }
+    }
 }
 
 const noKirito = (client, message, args) => {
     if (kiritoTrusted === true) {
         return;
     } else {
-        return client.users.cache.get(banKirito).send('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
+        try {
+            return client.users.cache.get(banKirito).send('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
+        } catch (e) {
+            try {
+                console.log(e);
+                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: kiritoTrust.js: Error on sending nokirito DM \n \`\`${e}\`\``).setColor(tofuError));
+                return;
+            } catch(f) {
+                console.log('========================================================================================================');
+                console.error(`kiritoTrust.js: Error on sending nokirito DM, sending error DM failed: ${e} \n DMError: ${f}`);
+                console.log('========================================================================================================');
+                return;
+            }
+        }
     }
 }
 

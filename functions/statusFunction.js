@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, botProfile, tofuBlue } = require('../config.json');
+const { prefix, botProfile, tofuBlue, maxID, tofuError } = require('../config.json');
 
 let randomStatusEnable = true;
 
@@ -75,23 +75,49 @@ const setSts = (client, message, selectedStatus) => {
             setSts(client, message, nextState);
             break;
         case 'random':
-              const args = message.content.slice(prefix.length).trim().split(/ +/g);
-              if (!args[2]) {
-                  const randomStatusState = new Discord.MessageEmbed()
-                        .setColor(tofuBlue)
-                        .setAuthor('Tofu Bot', botProfile)
-                        .setDescription(`Random statusses: \`${randomStatusEnable}\`. (not modified)`)
-                        .setTimestamp()
-                        .setFooter('Made with love');
+                const args = message.content.slice(prefix.length).trim().split(/ +/g);
+                if (!args[2]) {
+                    const randomStatusState = new Discord.MessageEmbed()
+                          .setColor(tofuBlue)
+                          .setAuthor('Tofu Bot', botProfile)
+                          .setDescription(`Random statusses: \`${randomStatusEnable}\`. (not modified)`)
+                          .setTimestamp()
+                          .setFooter('Made with love');
 
-                  return message.channel.send(randomStatusState);
-              }
-              else {
-                  toggleRandomStatus(client, message, args);
-              }
-              break;
+                    try {
+                        return message.channel.send(randomStatusState);
+                    } catch (e) {
+                        try {
+                            console.log(e);
+                            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending randomStatusState embed \n \`\`${e}\`\``).setColor(tofuError));
+                            return;
+                        } catch(f) {
+                            console.log('========================================================================================================');
+                            console.error(`statusFunction.js: Error on sending randomStatusState embed, sending error DM failed: ${e} \n DMError: ${f}`);
+                            console.log('========================================================================================================');
+                            return;
+                        }
+                    }
+                }
+                else {
+                    toggleRandomStatus(client, message, args);
+                }
+            break;
         default:
-            message.channel.send('Invalid argument given');
+            try {
+                return message.channel.send('Invalid argument given');
+            } catch (e) {
+                try {
+                    console.log(e);
+                    client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending invalid status argument message \n \`\`${e}\`\``).setColor(tofuError));
+                    return;
+                } catch(f) {
+                    console.log('========================================================================================================');
+                    console.error(`statusFunction.js: Error on sending invalid status argument message, sending error DM failed: ${e} \n DMError: ${f}`);
+                    console.log('========================================================================================================');
+                    return;
+                }
+            }
         }
     }
 
@@ -107,7 +133,20 @@ const toggleRandomStatus = (client, message, args) => {
         randomStatusEnable = false;
     }
     else {
-        return message.channel.send(`\`${args[2]}\` is not a valid argument. Allowed arguments are 'enable' and 'disable'`);
+        try {
+            return message.channel.send(`\`${args[2]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable\``);
+        } catch (e) {
+            try {
+                console.log(e);
+                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending invalid randmom status argument message \n \`\`${e}\`\``).setColor(tofuError));
+                return;
+            } catch(f) {
+                console.log('========================================================================================================');
+                console.error(`statusFunction.js: Error on sending invalid random status argument message, sending error DM failed: ${e} \n DMError: ${f}`);
+                console.log('========================================================================================================');
+                return;
+            }
+        }
     }
     
     const randomStatusEmbed = new Discord.MessageEmbed()
@@ -117,8 +156,22 @@ const toggleRandomStatus = (client, message, args) => {
                   .setTimestamp()
                   .setFooter('Made with love');
 
-    message.channel.send(randomStatusEmbed);
-    console.log(`Randomoooo set to: ${randomStatusEnable}`);
+    try {
+        message.channel.send(randomStatusEmbed);/////////////
+        console.log(`Randomoooo set to: ${randomStatusEnable}`);
+        return;
+    } catch (e) {
+        try {
+            console.log(e);
+            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending randomStatusEmbed \n \`\`${e}\`\``).setColor(tofuError));
+            return;
+        } catch(f) {
+            console.log('========================================================================================================');
+            console.error(`statusFunction.js: Error on sending randomStatusEmbed, sending error DM failed: ${e} \n DMError: ${f}`);
+            console.log('========================================================================================================');
+            return;
+        }
+    }
 }
 
 // We don't want to have the bot appear offline

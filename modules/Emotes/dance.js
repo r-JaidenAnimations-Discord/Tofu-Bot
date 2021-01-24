@@ -5,6 +5,7 @@ module.exports = {
     usage: 'dance',
 	description: 'Answer with the dance emote',
 	isEnabled: true,
+	isDeprecated: true,
 	aliases: ['jaidendance'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

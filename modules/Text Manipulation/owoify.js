@@ -8,11 +8,11 @@ module.exports = {
     usage: 'owoify [text]',
     description: 'OwO what\'s this',
     isEnabled: true,
+    isDeprecated: false,
     aliases: ['owofy'],
     cooldown: 5,
-
-    run: async(bot, message, args) => {
-        if (args.length < 1) return message.channel.send('You must input text to be reversed!');
+    execute: async(client, message, args) => {
+        if (args.length < 1) return message.channel.send('What to say tho. ;-;');
         if (message.deletable) message.delete();
 
         let input = args.join(' ');

@@ -8,7 +8,8 @@ module.exports = {
     category: 'Bot',
     usage: 'help (command)',
     description: 'Stop, get help',
-	isEnabled: true,
+    isEnabled: true,
+    isDeprecated: false,
 	aliases: ['commands'],
     cooldown: 5,
 	execute: async function(client, message, args) {
@@ -50,7 +51,7 @@ function getCmd(client, message, input) {
     const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
     if (!cmd) {
-        return message.channel.send(`**${input.toLowerCase()}** is not a command. (or it's an alias)`);
+        return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
     }
 
     if (cmd.name) embed.setDescription(`**${cmd.helpTitle} command**`);

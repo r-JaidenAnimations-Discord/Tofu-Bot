@@ -9,6 +9,7 @@ module.exports = {
     usage: 'cringe ({enable, disable})',
     description: 'Enable or Disable the ali trust.',
     isEnabled: true,
+    isDeprecated: false,
     aliases: ['ali'],
     cooldown: 0,
     execute: async function(client, message, args) {

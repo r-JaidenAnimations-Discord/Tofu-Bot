@@ -3,8 +3,9 @@ module.exports = {
 	helpTitle: 'Clap',
     category: 'Text Manipulation',
     usage: 'clap [text]',
-	description: 'Clap.',
-	isEnabled: true,
+	description: 'Why 👏 did 👏 I 👏 make 👏 this? 👏',
+    isEnabled: true,
+    isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
@@ -12,7 +13,7 @@ module.exports = {
             message.delete();
         }
         if (args.length < 1) {
-            return message.reply('You must input text to be reversed!');
+            return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');
         }
         console.log(args)
         //const clapped = args.split(' ').join(' 👏 ');
@@ -22,7 +23,7 @@ module.exports = {
             return message.channel.send(clappedEnd);
         }
         else {
-            return message.reply('Invalid text, your text is too long.');
+            return message.reply('Hey, can you chill? Keep the length of the message a bit shorter.');
         }
 	},
 };

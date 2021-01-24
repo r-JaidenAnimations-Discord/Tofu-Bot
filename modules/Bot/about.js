@@ -8,6 +8,7 @@ module.exports = {
     usage: 'about',
     description: 'Display the bot\'s information',
     isEnabled: true,
+    isDeprecated: false,
     aliases: ['bot', 'botinfo', 'info'],
 	cooldown: 20,
 	execute: async function(client, message, args) {

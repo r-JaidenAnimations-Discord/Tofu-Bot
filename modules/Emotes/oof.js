@@ -7,6 +7,7 @@ module.exports = {
     usage: 'oof',
     description: 'Answer with the oof emote',
 	isEnabled: true,
+	isDeprecated: true,
     aliases: ['jaidenoof', 'off', 'jaidenoff'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

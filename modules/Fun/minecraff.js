@@ -8,7 +8,8 @@ module.exports = {
     category: 'Fun',
     usage: 'minecraft',
     description: 'Show info about our minecraft server!',
-	isEnabled: true,
+    isEnabled: true,
+    isDeprecated: false,
 	aliases: ['mc', 'minecraff', 'minecrap'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

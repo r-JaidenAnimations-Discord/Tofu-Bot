@@ -8,6 +8,7 @@ module.exports = {
     usage: 'status [{random ({enable, disable}), awake, asleep, busy, gone, stream, play, listen, next}]',
     description: 'Set the client\'s status',
     isEnabled: true,
+    isDeprecated: false,
     aliases: ['sts', 'stat'],
     cooldown: 1,
     execute: async function(client, message, args) {

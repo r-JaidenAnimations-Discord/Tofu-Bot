@@ -5,6 +5,7 @@ module.exports = {
     usage: 'pat',
 	description: 'Answer with the pat emote',
 	isEnabled: true,
+	isDeprecated: true,
 	aliases: ['jaidenpat'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

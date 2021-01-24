@@ -8,6 +8,7 @@ module.exports = {
     usage: 'fart',
     description: 'Because Grady be funni.',
     isEnabled: true,
+    isDeprecated: false,
     //aliases: [],
     cooldown: 0,
     execute: async function(client, message, args) {

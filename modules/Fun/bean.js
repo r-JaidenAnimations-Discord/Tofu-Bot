@@ -4,7 +4,8 @@ module.exports = {
     category: 'Fun',
     usage: 'bean ({@user, something else})',
     description: 'Hmmmmm. Beans',
-	isEnabled: true,
+    isEnabled: true,
+    isDeprecated: false,
 	//aliases: [],
     cooldown: 5,
 	execute: async function(client, message, args) {

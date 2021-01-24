@@ -7,7 +7,8 @@ module.exports = {
     category: 'Fun',
     usage: 'say [#channel] (embed) [message]',
     description: 'Mess with members',
-	isEnabled: true,
+    isEnabled: true,
+    isDeprecated: false,
 	//aliases: [],
     cooldown: 5,
 	execute: async function(client, message, args) {

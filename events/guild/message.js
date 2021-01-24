@@ -41,7 +41,7 @@ module.exports = (client, message) => {
 	// Is this command enabled?
 	if (command.isEnabled === false) {
 		try {
-			return message.reply('This command has been (temporarily) disabled. (Maxim probably broke it)');
+			return message.reply('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?');
 		} catch (e) {
 			try {
 				console.log(e);
@@ -50,6 +50,24 @@ module.exports = (client, message) => {
 			} catch(f) {
 				console.log('========================================================================================================');
 				console.error(`message.js: Error on sending command disabled message, sending error DM failed: ${e} \n DMError: ${f}`);
+				console.log('========================================================================================================');
+				return;
+			}
+		}
+	}
+
+	// Is this command deprecated?
+	if (command.isDeprecated === true) {
+		try {
+			message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!');
+		} catch (e) {
+			try {
+				console.log(e);
+				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending deprecated command message \n \`\`${e}\`\``).setColor(tofuError));
+				return;
+			} catch(f) {
+				console.log('========================================================================================================');
+				console.error(`message.js: Error on sending command deprecated message, sending error DM failed: ${e} \n DMError: ${f}`);
 				console.log('========================================================================================================');
 				return;
 			}

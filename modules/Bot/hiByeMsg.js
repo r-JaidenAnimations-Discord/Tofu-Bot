@@ -8,6 +8,7 @@ module.exports = {
     usage: 'announce ({enable, disable})',
     description: 'Enable or Disable the welcome/bye message.',
     isEnabled: true,
+    isDeprecated: false,
     //aliases: [],
     cooldown: 0,
     execute: async function(client, message, args) {

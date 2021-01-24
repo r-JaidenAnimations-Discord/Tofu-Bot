@@ -7,6 +7,7 @@ module.exports = {
     usage: 'ping',
     description: 'Ping!',
     isEnabled: true,
+    isDeprecated: false,
     aliases: ['delay', 'latency'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

@@ -9,6 +9,7 @@ module.exports = {
     usage: 'quote',
     description: 'Send a random quote from Jaiden',
 	isEnabled: true,
+	isDeprecated: false,
 	aliases: ['jaidenquote', 'jquote'],
 	cooldown: 3,
 	execute: async function(client, message, args) {

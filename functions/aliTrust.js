@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const { botProfile, tofuBlue, banAli, maxID, tofuError } = require('../config.json');
+const { handleError } = require('./errorHandler.js');
 
 let AliTrusted = true;
 
@@ -17,15 +18,7 @@ const toggleAliTrust = (client, message, args) => {
         try {
             return client.users.cache.get(message.author.id).send(AliState);
         } catch (e) {
-            try {
-                console.log(e);
-                return client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: aliTrust.js: Error on sending AliState embed \n \`\`${e}\`\``).setColor(tofuError));
-            } catch(f) {
-                console.log('========================================================================================================');
-                console.error(`aliTrust.js: Error on sending AliState embed, sending error DM failed: ${e} \n DMError: ${f}`);
-                console.log('========================================================================================================');
-                return;
-            }
+            handleError(client, message, args, 'aliTrust.js', 'Error on sending AliState embed', e);
         }
     }
     else if (args[0] == 'enable') {

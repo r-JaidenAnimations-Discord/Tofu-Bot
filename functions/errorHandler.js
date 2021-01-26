@@ -1,21 +1,15 @@
 const Discord = require('discord.js');
-const { botProfile, tofuBlue, banAli, maxID, tofuError } = require('../config.json');
+const { maxID, tofuError } = require('../config.json');
 
-const handleError = (client, message, args) => {
+const handleError = (client, file, text, e) => {
+    try {
+        console.error(`${file}: ${text}: ${e}`);
+        return client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: ${file}: ${text} \n\`\`${e}\`\``).setColor(tofuError));
+    } catch(f) {
+        console.error(`Sending error DM failed! DMError: ${f}`);
+        return;
+    }
 
-        try {
-            return client.users.cache.get(banAli).send('Yeah, never send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
-        } catch (e) {
-                try {
-                    console.log(e);
-                    return client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: aliTrust.js: Error on sending nocringe DM \n \`\`${e}\`\``).setColor(tofuError));
-                } catch(f) {
-                    console.log('========================================================================================================');
-                    console.error(`aliTrust.js: Error on sending nocringe DM, sending error DM failed: ${e} \n DMError: ${f}`);
-                    console.log('========================================================================================================');
-                    return;
-                }
-        }
 }
 
 module.exports = {

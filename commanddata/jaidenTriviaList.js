@@ -155,7 +155,7 @@ module.exports = {
         {
 			question: "What game was in \“the most underrated game\"",
 			answers: ["The Powerpuff Girls: Battle HIM", "SpongeBob Battle For Bikini Bottom", "Fossil Fighters"],
-			correct: 3,
+			correct: 2,
 		},
 	]
 };

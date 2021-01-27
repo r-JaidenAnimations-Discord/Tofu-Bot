@@ -74,7 +74,7 @@ const noAli = (client, message, args) => {
 
 
         try {
-            return client.users.cache.get(banAli).send('Your very existence causes my intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
+            return client.users.cache.get(banAli).send('Your very existence causes m intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
         } catch (e) {
                 try {
                     console.log(e);

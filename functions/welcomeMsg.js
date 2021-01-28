@@ -106,7 +106,7 @@ const usrJoin = async (client, member) => {
     try {
         return client.channels.cache.get(generalChannelId).send(`Hello, <@${member.id}>. Welcome to r/JaidenAnimations!
     
-    Please make sure to read <#755180458563600445> and the pinned comments / topics for this and other channels`);
+Please make sure to read <#755180458563600445> and the pinned comments / topics for this and other channels`);
     } catch(e) {
         try {
             console.log(e);

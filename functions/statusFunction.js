@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const { prefix, botProfile, tofuBlue, maxID, tofuError } = require('../config.json');
+const { prefix, botProfile, tofuBlue } = require('../config.json');
+const { handleError } = require('./errorHandler.js');
 
 let randomStatusEnable = true;
 
@@ -87,19 +88,9 @@ const setSts = (client, message, selectedStatus) => {
                     try {
                         return message.channel.send(randomStatusState);
                     } catch (e) {
-                        try {
-                            console.log(e);
-                            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending randomStatusState embed \n \`\`${e}\`\``).setColor(tofuError));
-                            return;
-                        } catch(f) {
-                            console.log('========================================================================================================');
-                            console.error(`statusFunction.js: Error on sending randomStatusState embed, sending error DM failed: ${e} \n DMError: ${f}`);
-                            console.log('========================================================================================================');
-                            return;
-                        }
+                        return handleError(client, message, args, 'statusFunction.js', 'Error on sending randomStatusState embed', e);
                     }
-                }
-                else {
+                } else {
                     toggleRandomStatus(client, message, args);
                 }
             break;
@@ -107,16 +98,7 @@ const setSts = (client, message, selectedStatus) => {
             try {
                 return message.channel.send('Invalid argument given');
             } catch (e) {
-                try {
-                    console.log(e);
-                    client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending invalid status argument message \n \`\`${e}\`\``).setColor(tofuError));
-                    return;
-                } catch(f) {
-                    console.log('========================================================================================================');
-                    console.error(`statusFunction.js: Error on sending invalid status argument message, sending error DM failed: ${e} \n DMError: ${f}`);
-                    console.log('========================================================================================================');
-                    return;
-                }
+                return handleError(client, message, args, 'statusFunction.js', 'Error on sending invalid status argument message', e);
             }
         }
     }
@@ -131,21 +113,11 @@ const toggleRandomStatus = (client, message, args) => {
     }
     else if (args[2] == 'disable') {
         randomStatusEnable = false;
-    }
-    else {
+    } else {
         try {
             return message.channel.send(`\`${args[2]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable\``);
         } catch (e) {
-            try {
-                console.log(e);
-                client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending invalid randmom status argument message \n \`\`${e}\`\``).setColor(tofuError));
-                return;
-            } catch(f) {
-                console.log('========================================================================================================');
-                console.error(`statusFunction.js: Error on sending invalid random status argument message, sending error DM failed: ${e} \n DMError: ${f}`);
-                console.log('========================================================================================================');
-                return;
-            }
+            return handleError(client, message, args, 'statusFunction.js', 'Error on sending invalid random status argument message', e);
         }
     }
     
@@ -161,16 +133,7 @@ const toggleRandomStatus = (client, message, args) => {
         console.log(`Randomoooo set to: ${randomStatusEnable}`);
         return;
     } catch (e) {
-        try {
-            console.log(e);
-            client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: statusFunction.js: Error on sending randomStatusEmbed \n \`\`${e}\`\``).setColor(tofuError));
-            return;
-        } catch(f) {
-            console.log('========================================================================================================');
-            console.error(`statusFunction.js: Error on sending randomStatusEmbed, sending error DM failed: ${e} \n DMError: ${f}`);
-            console.log('========================================================================================================');
-            return;
-        }
+        return handleError(client, message, args, 'statusFunction.js', 'Error on sending randomStatusEmbed', e);
     }
 }
 

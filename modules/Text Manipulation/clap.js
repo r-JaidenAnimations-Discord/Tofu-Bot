@@ -21,8 +21,7 @@ module.exports = {
         const clappedEnd = `${clapped} 👏`;
         if (clappedEnd.length < 2000) {
             return message.channel.send(clappedEnd);
-        }
-        else {
+        } else {
             return message.reply('Hey, can you chill? Keep the length of the message a bit shorter.');
         }
 	},

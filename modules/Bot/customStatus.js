@@ -40,8 +40,7 @@ module.exports = {
         }
         else if (args[1] == 'listen') {
             activity = 'LISTENING';
-        }
-        else {
+        } else {
             return message.channel.send('You must enter the proper activity.');
         }
         let textString = args.slice(2).join(' ');

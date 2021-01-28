@@ -1,8 +1,9 @@
-const { prefix, banKirito, banAli, maxID, tofuError } = require('../../config.json');
+const { prefix, banKirito, banAli } = require('../../config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
 const { noKirito } = require('../../functions/kiritoTrust.js');
 const { noAli } = require('../../functions/aliTrust.js');
+const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = (client, message) => {
     let cooldowns = client.cooldowns;
@@ -13,16 +14,7 @@ module.exports = (client, message) => {
 		try {
 			return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 		} catch (e) {
-			try {
-				console.log(e);
-				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending can't talk message \n \`\`${e}\`\``).setColor(tofuError));
-				return;
-			} catch(f) {
-				console.log('========================================================================================================');
-				console.error(`message.js: Error on sending can't talk DM, sending error DM failed: ${e} \n DMError: ${f}`);
-				console.log('========================================================================================================');
-				return;
-			}
+
 		}
 	}
 
@@ -43,16 +35,7 @@ module.exports = (client, message) => {
 		try {
 			return message.reply('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?');
 		} catch (e) {
-			try {
-				console.log(e);
-				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending disabled command message \n \`\`${e}\`\``).setColor(tofuError));
-				return;
-			} catch(f) {
-				console.log('========================================================================================================');
-				console.error(`message.js: Error on sending command disabled message, sending error DM failed: ${e} \n DMError: ${f}`);
-				console.log('========================================================================================================');
-				return;
-			}
+			return handleError(client, message, args, 'message.js', 'Error on sending command disabled message', e);
 		}
 	}
 
@@ -61,16 +44,7 @@ module.exports = (client, message) => {
 		try {
 			message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!');
 		} catch (e) {
-			try {
-				console.log(e);
-				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending deprecated command message \n \`\`${e}\`\``).setColor(tofuError));
-				return;
-			} catch(f) {
-				console.log('========================================================================================================');
-				console.error(`message.js: Error on sending command deprecated message, sending error DM failed: ${e} \n DMError: ${f}`);
-				console.log('========================================================================================================');
-				return;
-			}
+			return handleError(client, message, args, 'message.js', 'Error on sending deprecated command message', e);
 		}
 	}
 
@@ -101,16 +75,7 @@ module.exports = (client, message) => {
 				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${timeLeft.toFixed(1)} second(s) before reusing \`${command.name}\`?`);
 				return;
 			} catch (e) {
-				try {
-					console.log(e);
-					client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: message.js: Error on sending command cooldown message \n \`\`${e}\`\``).setColor(tofuError));
-					return;
-				} catch(f) {
-					console.log('========================================================================================================');
-					console.error(`message.js: Error on sending cooldown message, sending error DM failed: ${e} \n DMError: ${f}`);
-					console.log('========================================================================================================');
-					return;
-				}
+				return handleError(client, message, args, 'message.js', 'Error on sending command cooldown message', e);
 			}
 		}
 	}

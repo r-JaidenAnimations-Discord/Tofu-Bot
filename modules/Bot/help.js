@@ -13,9 +13,8 @@ module.exports = {
 	aliases: ['commands'],
     cooldown: 5,
 	execute: async function(client, message, args) {
-        if (message.deletable) {
-            message.delete();
-        }
+        if (message.deletable) message.delete();
+
         if (args[0]) {
             return getCmd(client, message, args[0]);
         } else {

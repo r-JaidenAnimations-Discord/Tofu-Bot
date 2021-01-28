@@ -18,7 +18,7 @@ const toggleKiritoTrust = (client, message, args) => {
         try {
             return client.users.cache.get(message.author.id).send(kiritoState);
         } catch (e) {
-            return handleError(client, message, args, 'kiritoTrust.js', 'Error on sending kiritoState embed', e);
+            return handleError(client, 'kiritoTrust.js', 'Error on sending kiritoState embed', e);
         }
     }
     else if (args[0] == 'enable') {
@@ -30,7 +30,7 @@ const toggleKiritoTrust = (client, message, args) => {
         try {
             return client.users.cache.get(message.author.id).send(`\`${args[0]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable\``);
         } catch (e) {
-            return handleError(client, message, args, 'kiritoTrust.js', 'Error on sending invalid argument message', e);
+            return handleError(client, 'kiritoTrust.js', 'Error on sending invalid argument message', e);
         }
     }
     
@@ -46,7 +46,7 @@ const toggleKiritoTrust = (client, message, args) => {
         console.log(`Kirito trust set to: ${kiritoTrusted}`);
         return;
     } catch (e) {
-        return handleError(client, message, args, 'kiritoTrust.js', 'Error on sending kiritoEmbed', e);
+        return handleError(client, 'kiritoTrust.js', 'Error on sending kiritoEmbed', e);
     }
 }
 
@@ -57,7 +57,7 @@ const noKirito = (client, message, args) => {
         try {
             return client.users.cache.get(banKirito).send('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
         } catch (e) {
-            return handleError(client, message, args, 'kiritoTrust.js', 'Error on sending nokirito DM', e);
+            return handleError(client, 'kiritoTrust.js', 'Error on sending nokirito DM', e);
         }
     }
 }

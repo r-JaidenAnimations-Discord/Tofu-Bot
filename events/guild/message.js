@@ -14,7 +14,7 @@ module.exports = (client, message) => {
 		try {
 			return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 		} catch (e) {
-
+			return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
 		}
 	}
 
@@ -35,7 +35,7 @@ module.exports = (client, message) => {
 		try {
 			return message.reply('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?');
 		} catch (e) {
-			return handleError(client, message, args, 'message.js', 'Error on sending command disabled message', e);
+			return handleError(client, 'message.js', 'Error on sending command disabled message', e);
 		}
 	}
 
@@ -44,7 +44,7 @@ module.exports = (client, message) => {
 		try {
 			message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!');
 		} catch (e) {
-			return handleError(client, message, args, 'message.js', 'Error on sending deprecated command message', e);
+			return handleError(client, 'message.js', 'Error on sending deprecated command message', e);
 		}
 	}
 
@@ -75,7 +75,7 @@ module.exports = (client, message) => {
 				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${timeLeft.toFixed(1)} second(s) before reusing \`${command.name}\`?`);
 				return;
 			} catch (e) {
-				return handleError(client, message, args, 'message.js', 'Error on sending command cooldown message', e);
+				return handleError(client, 'message.js', 'Error on sending command cooldown message', e);
 			}
 		}
 	}
@@ -86,7 +86,7 @@ module.exports = (client, message) => {
 	try {
 		command.execute(client, message, args);
 	} catch (error) {
-		console.error(error);
+		return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
 		//message.reply('Sooo i like um broke');
 	}
 }

@@ -11,7 +11,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		try {
 			message.channel.send({files: ['./commanddata/JaidenHype.gif']});
-			message.delete();
+			if (message.deletable) message.delete();
 		} catch (e) {
 			console.error(e);
 			message.channel.send('Something went wrong, I\'m sorry');

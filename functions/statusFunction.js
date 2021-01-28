@@ -88,7 +88,7 @@ const setSts = (client, message, selectedStatus) => {
                     try {
                         return message.channel.send(randomStatusState);
                     } catch (e) {
-                        return handleError(client, message, args, 'statusFunction.js', 'Error on sending randomStatusState embed', e);
+                        return handleError(client, 'statusFunction.js', 'Error on sending randomStatusState embed', e);
                     }
                 } else {
                     toggleRandomStatus(client, message, args);
@@ -98,7 +98,7 @@ const setSts = (client, message, selectedStatus) => {
             try {
                 return message.channel.send('Invalid argument given');
             } catch (e) {
-                return handleError(client, message, args, 'statusFunction.js', 'Error on sending invalid status argument message', e);
+                return handleError(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
             }
         }
     }
@@ -117,7 +117,7 @@ const toggleRandomStatus = (client, message, args) => {
         try {
             return message.channel.send(`\`${args[2]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable\``);
         } catch (e) {
-            return handleError(client, message, args, 'statusFunction.js', 'Error on sending invalid random status argument message', e);
+            return handleError(client, 'statusFunction.js', 'Error on sending invalid random status argument message', e);
         }
     }
     
@@ -133,7 +133,7 @@ const toggleRandomStatus = (client, message, args) => {
         console.log(`Randomoooo set to: ${randomStatusEnable}`);
         return;
     } catch (e) {
-        return handleError(client, message, args, 'statusFunction.js', 'Error on sending randomStatusEmbed', e);
+        return handleError(client, 'statusFunction.js', 'Error on sending randomStatusEmbed', e);
     }
 }
 

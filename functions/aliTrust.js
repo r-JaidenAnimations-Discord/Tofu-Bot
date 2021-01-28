@@ -18,7 +18,7 @@ const toggleAliTrust = (client, message, args) => {
         try {
             return client.users.cache.get(message.author.id).send(AliState);
         } catch (e) {
-            return handleError(client, message, args, 'aliTrust.js', 'Error on sending AliState embed', e);
+            return handleError(client, 'aliTrust.js', 'Error on sending AliState embed', e);
         }
     }
     else if (args[0] == 'enable') {
@@ -30,7 +30,7 @@ const toggleAliTrust = (client, message, args) => {
         try {
             return client.users.cache.get(message.author.id).send(`\`${args[0]}\` is not a valid argument. Allowed arguments are \`enable\` and \`disable)\``);
         } catch (e) {
-            return handleError(client, message, args, 'aliTrust.js', 'Error on sending invalid argument message', e);
+            return handleError(client, 'aliTrust.js', 'Error on sending invalid argument message', e);
         }
     }
     
@@ -46,7 +46,7 @@ const toggleAliTrust = (client, message, args) => {
         console.log(`Ali trust set to: ${AliTrusted}`);
         return;
     } catch (e) {
-        return handleError(client, message, args, 'aliTrust.js', 'Error on sending AliEmbed', e);
+        return handleError(client, 'aliTrust.js', 'Error on sending AliEmbed', e);
     }
 }
 
@@ -57,7 +57,7 @@ const noAli = (client, message, args) => {
         try {
             return client.users.cache.get(banAli).send('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
         } catch (e) {
-            return handleError(client, message, args, 'aliTrust.js', 'Error on sending nocringe DM', e);
+            return handleError(client, 'aliTrust.js', 'Error on sending nocringe DM', e);
         }
     }
 }

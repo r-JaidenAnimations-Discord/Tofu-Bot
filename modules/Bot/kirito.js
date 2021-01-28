@@ -19,7 +19,7 @@ module.exports = {
       // yeah it just does this
       toggleKiritoTrust(client, message, args);
       
-      message.delete();
+      if (message.deletable) message.delete();
       //message.react('✅');
     },
 };

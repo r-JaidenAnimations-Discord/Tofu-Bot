@@ -13,7 +13,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		try {
 			message.channel.send(`<:OOF1:${OOF1}><:OOF1:${OOF2}>\n<:OOF1:${OOF3}><:OOF1:${OOF4}>`);
-			//message.delete();
+			//if (message.deletable) message.delete();
 		} catch (e) {
 			console.error(e);
 			message.channel.send('Something went wrong, I\'m sorry');

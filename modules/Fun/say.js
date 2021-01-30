@@ -18,17 +18,24 @@ module.exports = {
     
         if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You fool, need more permissions');
         
-        if (!channel) return message.channel.send('Couldn\'t find a channel with the arguments provided');
+        if (!channel) return message.channel.send('Where the actual F*CK do you want me to put that? My ass?');
 
         if (message.deletable) message.delete();
         
         if (args[1] == 'embed') {
+            if (!args.slice(2).join(' ')) {
+                return message.reply('haha veri funni')
+            }
+
             const embed = new Discord.MessageEmbed()
                 .setColor(tofuGreen)
                 .setDescription(args.slice(2).join(' '));
             
             channel.send(embed);
         } else {
+            if (!args.slice(1).join(' ')) {
+                return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
+            }
             channel.send(args.slice(1).join(' '));
         }
     },

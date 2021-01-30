@@ -8,7 +8,7 @@ module.exports = client => {
     console.log(`Alive as ${client.user.tag}`);
 
     try {
-        client.channels.cache.get(staffChatId).send(`I'm back b!tches!`);
+        //client.channels.cache.get(staffChatId).send(`I'm back b!tches!`);
     } catch (e) {
         return handleError(client, 'ready.js', 'Error on sending I\'m back', e);
     }

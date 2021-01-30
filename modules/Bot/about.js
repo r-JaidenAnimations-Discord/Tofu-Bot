@@ -29,6 +29,11 @@ module.exports = {
                 { name: 'Trivia:', value: '<@768384164810457128>, <@740491200972193793>, <@392632687782789121>' }
             )
             .setFooter('Made with ☕, without swear words');
-        message.channel.send(aboutEmbed);
+
+        try {
+            message.channel.send(aboutEmbed);
+        } catch(e) {
+            return handleError(client, 'aliTrust.js', 'Error on sending nocringe DM', e);
+        }
 	},
 };

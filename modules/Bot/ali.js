@@ -7,7 +7,7 @@ module.exports = {
     category: 'Hidden',
     usage: 'fart',
     description: 'Because Grady be funni.',
-    isEnabled: true,
+    isEnabled: false,
     isDeprecated: false,
     //aliases: [],
     cooldown: 0,

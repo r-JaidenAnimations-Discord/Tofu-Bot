@@ -143,7 +143,7 @@ module.exports = {
 			correct: 0,
 		},
         {
-			question: "When is Jaiden's birthday?",
+			question: "Expert: When is Jaiden's birthday?",
 			answers: ["September 14, 1994", "September 27, 1994", "September 14, 1997", "September 27, 1997"],
 			correct: 3,
 		},	 

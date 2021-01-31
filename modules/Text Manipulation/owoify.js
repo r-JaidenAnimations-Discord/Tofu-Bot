@@ -4,7 +4,7 @@ const owofy = require('owofy');
 module.exports = {
     name: 'owoify',
     helpTitle: 'OwOify',
-    category: 'Fun',
+    category: 'Text Manipulation',
     usage: 'owoify [text]',
     description: 'OwO what\'s this',
     isEnabled: true,

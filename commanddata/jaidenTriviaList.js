@@ -4,7 +4,7 @@ module.exports = {
 		{
 			question: "",
 			answers: ["[]", "[]", "[]", "[]"],
-			correct: ,
+			correct: , // number. 0 corresponds to the first item in the answers array
 		},
         */
         {
@@ -23,8 +23,8 @@ module.exports = {
             correct: 0,
         },
         {
-            question: "Is Jaiden allergic to cats?",
-            answers: ["Yes", "No"],
+            question: "What animal is Jaiden allergic to?",
+            answers: ["Cats", "Dogs", "Horses", "Sheep"],
             correct: 0,
         },
         {

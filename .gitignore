@@ -12,3 +12,6 @@ config.json
 
 # Also token and stuff but for dev purposes
 deployConfig.json
+
+# yes
+modules/Bot/ali.js

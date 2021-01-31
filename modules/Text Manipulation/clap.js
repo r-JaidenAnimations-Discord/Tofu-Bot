@@ -9,13 +9,18 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-        if (message.deletable) {
-            message.delete();
-        }
+        if (message.deletable) message.delete();
+
         if (args.length < 1) {
             return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');
         }
-        console.log(args)
+        
+        // Supress @everyone, @here and pinging roles
+        [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+            input = input.replace(ping, '');
+        });
+
+        //console.log(args)
         //const clapped = args.split(' ').join(' 👏 ');
         const clapped = args.join(' 👏 ');
         const clappedEnd = `${clapped} 👏`;

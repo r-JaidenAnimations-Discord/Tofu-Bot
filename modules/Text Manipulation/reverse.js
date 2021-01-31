@@ -9,9 +9,13 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-        if (message.deletable) {
-            message.delete();
-        }
+        if (message.deletable) message.delete();
+
+        // Supress @everyone, @here and pinging roles
+        [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+            input = input.replace(ping, '');
+        });
+
         if (args.length < 1) {
             return message.reply(';-; .oht yas ot tahW');
         }

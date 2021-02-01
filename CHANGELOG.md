@@ -22,7 +22,10 @@ because Max no admin, command to be able to ping the movie night role
 yes, we have an eval command now
 
 ## say.js
-updated some strings and crash prevention soon
+updated some strings and crash prevention
+
+## Text Manipulation
+mass ping prevention because just in case
 
 ## generally
 Added a deprecation module. Also deprecated fart.js and all emotes.

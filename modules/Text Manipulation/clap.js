@@ -15,15 +15,16 @@ module.exports = {
             return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');
         }
         
+        let input = args.join(' 👏 ');
+
         // Supress @everyone, @here and pinging roles
         [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
-            input = input.replace(ping, '');
+            input = input.replace(ping, 'haha funny ping');
         });
 
         //console.log(args)
-        //const clapped = args.split(' ').join(' 👏 ');
-        const clapped = args.join(' 👏 ');
-        const clappedEnd = `${clapped} 👏`;
+        //const clapped = input /*input.join(' 👏 ');*/
+        const clappedEnd = `${input} 👏`;
         if (clappedEnd.length < 2000) {
             return message.channel.send(clappedEnd);
         } else {

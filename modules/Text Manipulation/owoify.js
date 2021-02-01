@@ -19,7 +19,7 @@ module.exports = {
 
         // Supress @everyone, @here and pinging roles
         [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
-            input = input.replace(ping, '');
+            input = input.replace(ping, 'haha funny ping');
         });
 
         const owo = owofy(input);

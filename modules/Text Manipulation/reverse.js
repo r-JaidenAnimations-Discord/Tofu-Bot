@@ -11,14 +11,16 @@ module.exports = {
 	execute: async function(client, message, args) {
         if (message.deletable) message.delete();
 
+        let input = args.join(' ');
+
         // Supress @everyone, @here and pinging roles
         [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
-            input = input.replace(ping, '');
+            input = input.replace(ping, 'haha funny ping');
         });
 
         if (args.length < 1) {
             return message.reply(';-; .oht yas ot tahW');
         }
-        message.channel.send(args.join(' ').split('').reverse().join(''));
+        message.channel.send(input.split('').reverse().join(''));
 	},
 };

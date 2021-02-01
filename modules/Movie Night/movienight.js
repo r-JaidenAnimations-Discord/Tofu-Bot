@@ -7,7 +7,7 @@ module.exports = {
     category: 'Movie Night',
     usage: 'movienight',
     description: 'Not sure, but it sounded fun',
-    isEnabled: true,
+    isEnabled: false,
     isDeprecated: false,
 	aliases: ['mn'],
 	cooldown: 2,

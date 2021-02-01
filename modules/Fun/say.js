@@ -24,7 +24,7 @@ module.exports = {
         
         if (args[1] == 'embed') {
             if (!args.slice(2).join(' ')) {
-                return message.reply('haha veri funni')
+                return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')
             }
 
             const embed = new Discord.MessageEmbed()

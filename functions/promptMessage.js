@@ -9,15 +9,15 @@
 * @param {Array} validReactions Array with reactions the bot will listen to
 */
 async function promptMessage(message, author, time, validReactions) {
-    time *= 1000;
+	time *= 1000;
 
-    for(const reaction of validReactions) await message.react(reaction);
+	for(const reaction of validReactions) await message.react(reaction);
 
-    const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
+	const filter = (reaction, user) => validReactions.includes(reaction.emoji.name) && user.id === author.id;
 
-    return message
-        .awaitReactions(filter, { max: 1, time: time})
-        .then(collected => collected.first() && collected.first().emoji.name);
+	return message
+		.awaitReactions(filter, { max: 1, time: time})
+		.then(collected => collected.first() && collected.first().emoji.name);
 }
 
 module.exports = { promptMessage };

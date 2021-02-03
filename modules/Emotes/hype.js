@@ -1,9 +1,9 @@
 module.exports = {
 	name: 'hype',
 	helpTitle: 'Hype',
-    category: 'Emotes',
-    usage: 'hype',
-    description: 'Answer with the hype emote',
+	category: 'Emotes',
+	usage: 'hype',
+	description: 'Answer with the hype emote',
 	isEnabled: true,
 	isDeprecated: true,
 	aliases: ['jaidenhype'],

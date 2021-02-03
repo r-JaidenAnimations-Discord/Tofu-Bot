@@ -1,26 +1,26 @@
 module.exports = {
 	name: 'reverse',
 	helpTitle: 'Reverse',
-    category: 'Text Manipulation',
-    usage: 'reverse [text]',
+	category: 'Text Manipulation',
+	usage: 'reverse [text]',
 	description: 'Reverse text.',
-    isEnabled: true,
-    isDeprecated: false,
+	isEnabled: true,
+	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-        if (message.deletable) message.delete();
+		if (message.deletable) message.delete();
 
-        let input = args.join(' ');
+		let input = args.join(' ');
 
-        // Supress @everyone, @here and pinging roles
-        [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
-            input = input.replace(ping, 'haha funny ping');
-        });
+		// Supress @everyone, @here and pinging roles
+		[/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+			input = input.replace(ping, 'haha funny ping');
+		});
 
-        if (args.length < 1) {
-            return message.reply(';-; .oht yas ot tahW');
-        }
-        message.channel.send(input.split('').reverse().join(''));
+		if (args.length < 1) {
+			return message.reply(';-; .oht yas ot tahW');
+		}
+		message.channel.send(input.split('').reverse().join(''));
 	},
 };

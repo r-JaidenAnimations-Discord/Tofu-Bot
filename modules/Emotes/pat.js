@@ -1,8 +1,8 @@
 module.exports = {
 	name: 'pat',
 	helpTitle: 'Pat',
-    category: 'Emotes',
-    usage: 'pat',
+	category: 'Emotes',
+	usage: 'pat',
 	description: 'Answer with the pat emote',
 	isEnabled: true,
 	isDeprecated: true,

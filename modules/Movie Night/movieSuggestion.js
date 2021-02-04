@@ -23,7 +23,7 @@ module.exports = {
 			.setTitle(movie)
 			//.setDescription(`Suggested by ${message.author}`)
 			.setTimestamp()
-			.setFooter(`Suggested by ${message.member.displayName}`);
+			//.setFooter(`Suggested by ${message.member.displayName}`);
 
 		try {	
 			client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {

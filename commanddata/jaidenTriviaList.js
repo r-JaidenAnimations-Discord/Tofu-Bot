@@ -18,9 +18,9 @@ module.exports = {
 			correct: 1,
 		},
 		{
-			question: "What race was Keisha",
+			question: "What race was Kaisha?",
 			answers: ["Collie", "Golden Retriever", "German Sheperd", "Shetland Sheepdog"],
-			correct: 0,
+			correct: 3,
 		},
 		{
 			question: "What animal is Jaiden allergic to?",

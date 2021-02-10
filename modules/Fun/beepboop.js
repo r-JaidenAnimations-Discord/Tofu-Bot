@@ -1,9 +1,9 @@
 module.exports = {
 	name: 'beep',
 	helpTitle: 'Beep',
-    category: 'Fun',
-    usage: 'beep',
-    description: 'Beep boop?',
+	category: 'Fun',
+	usage: 'beep',
+	description: 'Beep boop?',
 	isEnabled: true,
 	isDeprecated: false,
 	//aliases: [],

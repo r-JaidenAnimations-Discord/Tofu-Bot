@@ -6,8 +6,8 @@ const { noAli } = require('../../functions/aliTrust.js');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = (client, message) => {
-    let cooldowns = client.cooldowns;
-    // nothing get fucked lmao
+	let cooldowns = client.cooldowns;
+	// nothing get fucked lmao
 	// very
 	
 	if (message.guild === null && !message.author.bot) {

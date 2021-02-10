@@ -67,11 +67,12 @@ module.exports = {
 			setTimeout(async() => {
 				//sentEmbed.react('✅');
 				const correct = await promptMessage(sentEmbed, message.author, 45, ['✅']);
-            
+			
 				if (correct === '✅') {
 					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
 					sentEmbed.edit(correctedEmbed);
-				} else {
+				}
+				else {
 					//message.channel.send('k')
 					sentEmbed.edit(correctedEmbed);
 				}

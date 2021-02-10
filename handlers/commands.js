@@ -13,19 +13,20 @@ let table = new ascii('Commands');
 table.setHeading('Command', 'Load Status');
 
 module.exports = bot => {
-    readdirSync('./modules/').forEach(dir => {
-        const commands = readdirSync(`./modules/${dir}/`).filter(file => file.endsWith('.js'));
-        for (let file of commands) {
-            let pull = require(`../modules/${dir}/${file}`);
-            if (pull.name) {
-                bot.commands.set(pull.name, pull);
-                table.addRow(file, '✔   Loaded');
-            } else {
-                table.addRow(file, 'X   Not loaded -> missing a help.name, or help.name is not a string.');
-                continue;
-            }
-            if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => bot.aliases.set(alias, pull.name));
-        }
-    });
-    console.log(table.toString());
+	readdirSync('./modules/').forEach(dir => {
+		const commands = readdirSync(`./modules/${dir}/`).filter(file => file.endsWith('.js'));
+		for (let file of commands) {
+			let pull = require(`../modules/${dir}/${file}`);
+			if (pull.name) {
+				bot.commands.set(pull.name, pull);
+				table.addRow(file, '✔   Loaded');
+			}
+			else {
+				table.addRow(file, 'X   Not loaded -> missing a help.name, or help.name is not a string.');
+				continue;
+			}
+			if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => bot.aliases.set(alias, pull.name));
+		}
+	});
+	console.log(table.toString());
 };

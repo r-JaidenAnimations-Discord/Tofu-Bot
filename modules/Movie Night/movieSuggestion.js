@@ -4,14 +4,14 @@ const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'suggestmovie',
-	helpTitle: 'Suggest a movie to play at movie night',
+	helpTitle: 'Suggest Movie',
 	category: 'Movie Night',
 	usage: 'suggestmovie [movie]',
-	description: 'Let\'s explain that.....',
+	description: 'Suggest a movie to play at movie night',
 	isEnabled: true,
 	isDeprecated: false,
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
-	cooldown: 120,
+	cooldown: 86400,
 	execute: async function(client, message, args) {
 		let movie = args.slice(0).join(' ');
 		if (!movie) {

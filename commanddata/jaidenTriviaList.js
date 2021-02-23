@@ -128,6 +128,11 @@ module.exports = {
 			correct: 1,
 		},
 		{
+			question: "What kind of bird is Tofu?",
+			answers: ["Blaze Winged Conure", "Maroon Bellied Conure", "Crimson Bellied Conure", "Flame Winged Conure"],
+			correct: 2,
+		},
+		{
 			question: "What video is Ari's first appearance in the channel?",
 			answers: ["Parent Stories", "Cringing at My Old Drawings (100k Milestone)", "My Childhood Obsession with Animals", "New Member of the Family!"],
 			correct: 3,

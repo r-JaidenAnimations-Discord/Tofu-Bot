@@ -22,7 +22,7 @@ module.exports = {
 				{ name: 'Bot release date:', value: releaseDate },
 				{ name: 'Uptime', value: `${(process.uptime() / 3600).toFixed(1)} hours` },
 				{ name: 'Memory Usage', value: `${(heapUsed / 1024 / 1024).toFixed(1)} MB / ${(heapTotal / 1024 / 1024).toFixed(1)}MB (${(heapUsed / heapTotal * 100).toFixed(2)}%)` },
-				{ name: 'Coding:', value: '<@488064501816492047>, <@558264504736153600>, <@768384164810457128>' },
+				{ name: 'Coding:', value: '<@488064501816492047>, <@558264504736153600>, <@768384164810457128>, <@740491200972193793>' },
 				{ name: 'Avatar:', value: '<@768384164810457128>' },
 				{ name: 'Testing:', value: '<@740491200972193793>, <@558264504736153600>, <@768384164810457128>, <@722786367821578311>' },
 				{ name: 'Quotes:', value: '<@768384164810457128>, <@740491200972193793>, <@392632687782789121>' },

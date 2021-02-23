@@ -5,7 +5,7 @@ module.exports = {
 	usage: 'whymaxretired',
 	description: 'Let\'s explain that.....',
 	isEnabled: true,
-	isDeprecated: false,
+	isDeprecated: true,
 	aliases: ['whyresign', 'resigned'],
 	cooldown: 30,
 	execute: async function(client, message, args) {

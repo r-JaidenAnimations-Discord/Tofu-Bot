@@ -5,6 +5,7 @@ module.exports = {
 	usage: 'reverse [text]',
 	description: 'Reverse text.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,

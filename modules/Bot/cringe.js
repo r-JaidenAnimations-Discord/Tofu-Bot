@@ -9,6 +9,7 @@ module.exports = {
 	usage: 'cringe ({enable, disable})',
 	description: 'Enable or Disable the ali trust.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['ali'],
 	cooldown: 0,

@@ -5,6 +5,7 @@ module.exports = {
 	usage: 'beep',
 	description: 'Beep boop?',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,

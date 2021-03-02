@@ -9,6 +9,7 @@ module.exports = {
 	usage: 'kirito ({enable, disable})',
 	description: 'Enable or Disable the kirito trust.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 0,

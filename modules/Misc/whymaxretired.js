@@ -5,6 +5,7 @@ module.exports = {
 	usage: 'whymaxretired',
 	description: 'Let\'s explain that.....',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: true,
 	aliases: ['whyresign', 'resigned'],
 	cooldown: 30,

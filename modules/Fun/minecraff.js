@@ -9,6 +9,7 @@ module.exports = {
 	usage: 'minecraft',
 	description: 'Show info about our minecraft server!',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['mc', 'minecraff', 'minecrap'],
 	cooldown: 5,

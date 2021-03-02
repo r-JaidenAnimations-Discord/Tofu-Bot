@@ -9,6 +9,7 @@ module.exports = {
 	usage: 'help (command)',
 	description: 'Stop, get help',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['commands'],
 	cooldown: 5,

@@ -22,6 +22,7 @@ module.exports = {
 	usage: 'trivia (rules)',
 	description: 'Play some trivia.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['jaidentrivia', 'jtrivia'],
 	cooldown: 30,

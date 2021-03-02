@@ -10,13 +10,26 @@ module.exports = (client, message) => {
 	// nothing get fucked lmao
 	// very
 	
-	if (message.guild === null && !message.author.bot) {
-		try {
-			return message.channel.send('Can\'t talk right now, I\'m eating tofu');
-		} catch (e) {
-			return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+	// Is this command allowed inside DM?
+	if (command.isDMAllowed && message.channel.type === 'dm') {
+		if (message.guild === null && !message.author.bot) {
+			try {
+				return message.channel.send('Can\'t talk right now, I\'m eating tofu');
+			} catch (e) {
+				return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+			}
 		}
 	}
+
+	// Respond on bot ping
+    if (message.mentions.has(client.user.id)) {
+		if (message.content.includes('@here') || message.content.includes('@everyone')) return;
+		try {
+			message.channel.send('Can you not? ;_;');
+		} catch(e) {
+			return handleError(client, 'message.js', 'Error on sending mad ping', e);
+		}
+    };	
 
 	// Bots shall not trigger me
 	if (!message.content.startsWith(prefix) || message.author.bot) return;

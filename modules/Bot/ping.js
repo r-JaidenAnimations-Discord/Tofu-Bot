@@ -7,6 +7,7 @@ module.exports = {
 	usage: 'ping',
 	description: 'Ping!',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['delay', 'latency'],
 	cooldown: 5,

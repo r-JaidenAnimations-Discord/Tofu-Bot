@@ -8,6 +8,7 @@ module.exports = {
 	usage: 'welcome ({enable, disable})',
 	description: 'Enable or Disable the welcome/bye message.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['announce'],
 	cooldown: 0,

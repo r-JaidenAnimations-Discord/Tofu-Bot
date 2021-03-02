@@ -8,6 +8,7 @@ module.exports = {
 	usage: 'fart',
 	description: 'Because Grady be funni.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: true,
 	//aliases: [],
 	cooldown: 0,

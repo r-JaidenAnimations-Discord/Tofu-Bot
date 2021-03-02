@@ -1,8 +1,7 @@
 const Discord = require('discord.js');
 const beautify = require('beautify');
 const { teraID, retainedID ,maxID, tofuGreen, tofuError } = require('../../config.json');
-
-const {apiKey} = require('../../config.json');
+// NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
 module.exports = {
 	name: 'eval',
@@ -32,8 +31,6 @@ module.exports = {
 
 			const toEval = args.join(' ');
 			const evaluated = eval(toEval);
-
-			if (evaluated.includes(apiKey)) return message.channel.send('no.');
 
 			console.log(typeof evaluated);
 

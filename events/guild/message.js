@@ -18,7 +18,7 @@ module.exports = (client, message) => {
 		} catch(e) {
 			return handleError(client, 'message.js', 'Error on sending mad ping', e);
 		}
-    };	
+    }
 
 	// Bots shall not trigger me
 	if (!message.content.startsWith(prefix) || message.author.bot) return;

@@ -20,7 +20,7 @@ module.exports = {
 		
 		if (!channel) return message.channel.send('Where the actual F*CK do you want me to place that?');
 
-		if (message.deletable) message.delete();
+		//if (message.deletable) message.delete();
 		
 		if (!args.slice(1).join(' ')) {
 			return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');

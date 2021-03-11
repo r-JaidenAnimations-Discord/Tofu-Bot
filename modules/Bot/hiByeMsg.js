@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const { toggleHeyEnable } = require('../../functions/welcomeMsg.js');
 
 module.exports = {
-	name: 'Welcome',
+	name: 'welcome',
 	helpTitle: 'Welcome message',
 	category: 'Bot',
 	usage: 'welcome ({enable, disable})',

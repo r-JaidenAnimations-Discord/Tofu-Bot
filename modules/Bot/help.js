@@ -9,11 +9,12 @@ module.exports = {
 	usage: 'help (command)',
 	description: 'Stop, get help',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['commands'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		if (message.deletable) message.delete();
+		//if (message.deletable) message.delete();
 
 		if (args[0]) {
 			return getCmd(client, message, args[0]);
@@ -56,6 +57,8 @@ function getCmd(client, message, input) {
 
 	if (cmd.name) embed.setDescription(`**${cmd.helpTitle} command**`);
 	if (cmd.aliases) embed.addField('**Aliases**', `${cmd.aliases.map(a => `\`${a}\``).join(' ')}`);
+	/*if (cmd.isEnabled)*/ embed.addField(`**Status:**`, `${cmd.isEnabled === true ? 'Command is currently enabled' : '⚠️ Command has been disabled'}`);
+	/*if (cmd.isDMAllowed)*/ embed.addField('**Is allowed trough DM**', `${cmd.isDMAllowed === true ? '\`yes\`' : '\`no\`'}`);
 	if (cmd.description) embed.addField('**Command Description**', `${cmd.description}`);
 	if (cmd.usage) embed.addField('**Command Structure**', `\`${prefix}${cmd.usage}\``);
 

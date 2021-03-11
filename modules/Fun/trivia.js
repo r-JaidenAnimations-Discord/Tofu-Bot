@@ -22,6 +22,7 @@ module.exports = {
 	usage: 'trivia (rules)',
 	description: 'Play some trivia.',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['jaidentrivia', 'jtrivia'],
 	cooldown: 30,
@@ -39,7 +40,7 @@ module.exports = {
 		//message.channel.send('hotel? Trivia!');
 		let q = trivia[Math.floor(Math.random() * trivia.length)];
 		let i = 0;
-		const correctedEmbed = new Discord.MessageEmbed()
+		let correctedEmbed = new Discord.MessageEmbed()
 			.setTitle(q.question)
 			.setDescription(
 				q.answers.map((answer, i) =>
@@ -47,7 +48,7 @@ module.exports = {
 				)
 			)
 			.setColor(tofuGreen)
-			.setFooter(`The correct answer has been marked.`);
+			//.setFooter(`The correct answer has been marked.`);
 		const Embed = new Discord.MessageEmbed()
 			.setTitle(q.question)
 			.setDescription(
@@ -70,10 +71,12 @@ module.exports = {
 			
 				if (correct === '✅') {
 					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
+					correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
 					sentEmbed.edit(correctedEmbed);
 				}
 				else {
 					//message.channel.send('k')
+					correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
 					sentEmbed.edit(correctedEmbed);
 				}
 			}, 15000);

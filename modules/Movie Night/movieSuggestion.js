@@ -4,14 +4,15 @@ const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'suggestmovie',
-	helpTitle: 'Suggest a movie to play at movie night',
+	helpTitle: 'Suggest Movie',
 	category: 'Movie Night',
 	usage: 'suggestmovie [movie]',
-	description: 'Let\'s explain that.....',
+	description: 'Suggest a movie to play at movie night',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
-	cooldown: 120,
+	cooldown: 86400,
 	execute: async function(client, message, args) {
 		let movie = args.slice(0).join(' ');
 		if (!movie) {
@@ -26,12 +27,13 @@ module.exports = {
 			//.setFooter(`Suggested by ${message.member.displayName}`);
 
 		try {	
-			client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {
+			/*client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {
 				suggestionEmbed.react(fingerupvote);
 				suggestionEmbed.react(fingerdownvote);
 			});
 			message.react('✅');
-			message.channel.send('Your movie suggestion was registered, thank you!');
+			message.channel.send('Your movie suggestion was registered, thank you!');*/
+			message.channel.send('We\'re really sorry, but due to Discord\'s TOS, we have to cancel Movie Nights for the forseeable future. Movie suggestions have been closed down and we\'re reevaluating the Movie Night formula.');
 			return;
 		} catch (e) {
 			return handleError(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);

@@ -8,6 +8,7 @@ module.exports = {
 	usage: 'say [#channel] (embed) [message]',
 	description: 'Mess with members',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,
@@ -17,6 +18,8 @@ module.exports = {
 		message.guild.channels.cache.find(c => c.name == args[0]);
 	
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) return message.reply('You fool, need more permissions');
+
+		if (message.author.id == '725836730846019644') return message.channel.send('Get F\'ed pent');
 		
 		if (!channel) return message.channel.send('Where the actual F*CK do you want me to put that? My ass?');
 

@@ -4,7 +4,7 @@ const { staffChatId } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = client => {
-	randomStatus(client)
+	randomStatus(client);
 	console.log(`Alive as ${client.user.tag}`);
 
 	try {

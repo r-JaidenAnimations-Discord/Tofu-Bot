@@ -5,6 +5,7 @@ module.exports = {
 	usage: 'bean ({@user, something else})',
 	description: 'Hmmmmm. Beans',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,

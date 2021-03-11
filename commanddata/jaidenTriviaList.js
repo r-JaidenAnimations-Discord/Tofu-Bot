@@ -78,7 +78,7 @@ module.exports = {
 			correct: 0,
 		},
 		{
-			question: "Quote: 'I think I\'m supposed to fall in the category of adult now'",
+			question: "Quote: 'I think I'm supposed to fall in the category of adult now'",
 			answers: ["Parent Stories", "Random Thoughts", "Things I Do that Adults Probably Don't Do", "My Childhood Stories"],
 			correct: 2,
 		},
@@ -98,7 +98,7 @@ module.exports = {
 			correct: 0,
 		},
 		{
-			question: "Quote: 'Jaiden you\'re so good all of the time, you gotta be rebellious every once in a while'",
+			question: "Quote: 'Jaiden you're so good all of the time, you gotta be rebellious every once in a while'",
 			answers: ["The History of my Hair", "Our tour went wrong in all the best ways", "Childhood Stories", "I Attempted a Speedrun (and got a world record)"],
 			correct: 2,
 		},
@@ -128,6 +128,11 @@ module.exports = {
 			correct: 1,
 		},
 		{
+			question: "What kind of bird is Tofu?",
+			answers: ["Blaze Winged Conure", "Maroon Bellied Conure", "Crimson Bellied Conure", "Flame Winged Conure"],
+			correct: 2,
+		},
+		{
 			question: "What video is Ari's first appearance in the channel?",
 			answers: ["Parent Stories", "Cringing at My Old Drawings (100k Milestone)", "My Childhood Obsession with Animals", "New Member of the Family!"],
 			correct: 3,
@@ -153,7 +158,7 @@ module.exports = {
 			correct: 2,
 		},	
 		{
-			question: "What game was in \“the most underrated game\"",
+			question: "What game was in 'the most underrated game'",
 			answers: ["The Powerpuff Girls: Battle HIM", "SpongeBob Battle For Bikini Bottom", "Fossil Fighters"],
 			correct: 2,
 		},

@@ -5,6 +5,7 @@ module.exports = {
 	usage: 'clap [text]',
 	description: 'Why 👏 did 👏 I 👏 make 👏 this? 👏',
 	isEnabled: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,

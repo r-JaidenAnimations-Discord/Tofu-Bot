@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { botProfile, tofuBlue, generalChannelId } = require('../config.json');
 const { handleError } = require('./errorHandler.js');
+//const { welcomes, byes } = require('../commanddata/greetingList.js');
 
 let heyEnable = false;
 
@@ -55,20 +56,39 @@ const toggleHeyEnable = (client, message, args) => {
 }
 
 const usrLeft = async (client, member) => {
+	// tried it in a separate file, didn't work, this is my botch
+	const byes = [
+		`Welps, guess like **${member.displayName}** couldn't stand to be around us, adiós.`,
+		`**${member.displayName}** is hanging up now, bye.`
+	
+	];
+
 	console.log(heyEnable);
 	if (heyEnable === false) return;
 	try {
-		return client.channels.cache.get(generalChannelId).send(`Welps, guess like **${member.displayName}** couldn't stand to be around us, adiós.`);
+		let randomBye = byes[Math.floor(Math.random() * byes.length)];
+		client.channels.cache.get(generalChannelId).send(randomBye);
+		return;
 	} catch(e) {
 		return handleError(client, 'welcomeMsg.js', 'Error on sending cya message', e);
 	}
 }
 
 const usrJoin = async (client, member) => {
+	// tried it in a separate file, didn't work, this is my botch
+	const welcomes = [
+		`<@${member.id}> burst through the window for welcome!`,
+		`Hello, <@${member.id}>. Welcome to r/JaidenAnimations!`,
+		`Hello, <@${member.id}>, still waiting for plont...`,
+		`Hello <@${member.id}> grab a cup o' water and talk with us`
+	];
+
 	console.log(heyEnable);
 	if (heyEnable === false) return;
 	try {
-		return client.channels.cache.get(generalChannelId).send(`Hello, <@${member.id}>. Welcome to r/JaidenAnimations!\n\nPlease make sure to read <#755180458563600445> and the pinned comments / topics for this and other channels`);
+		let randomWelc = welcomes[Math.floor(Math.random() * welcomes.length)];
+		client.channels.cache.get(generalChannelId).send(randomWelc);
+		return;
 	} catch(e) {
 		return handleError(client, 'welcomeMsg.js', 'Error on sending welcome message', e);
 	}

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { botProfile, tofuBlue, generalChannelId } = require('../config.json');
+const { botProfile, tofuBlue, generalChannelId, rulesChannelID } = require('../config.json');
 const { handleError } = require('./errorHandler.js');
 //const { welcomes, byes } = require('../commanddata/greetingList.js');
 
@@ -87,7 +87,7 @@ const usrJoin = async (client, member) => {
 	if (heyEnable === false) return;
 	try {
 		let randomWelc = welcomes[Math.floor(Math.random() * welcomes.length)];
-		client.channels.cache.get(generalChannelId).send(randomWelc);
+		client.channels.cache.get(generalChannelId).send(`${randomWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
 		return;
 	} catch(e) {
 		return handleError(client, 'welcomeMsg.js', 'Error on sending welcome message', e);

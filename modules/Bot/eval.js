@@ -13,10 +13,10 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
-	cooldown: 5,
+	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
-			return message.channel.send('No dude. I don\'t want anyone but my master mess with code in the bot...')
+			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
 		}
 

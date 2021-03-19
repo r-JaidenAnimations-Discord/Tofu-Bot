@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const { noKirito } = require('../../functions/kiritoTrust.js');
 const { noAli } = require('../../functions/aliTrust.js');
 const { handleError } = require('../../functions/errorHandler.js');
-const { disabledCommands } = require('../../commanddata/Configuration/commands.json');
+const { disabledCommands } = require('../../commanddata/Configuration/settings.json');
 const { promptMessage } = require('../../functions/promptMessage.js');
 
 module.exports = (client, message) => {
@@ -107,7 +107,7 @@ module.exports = (client, message) => {
 		}	
 	}
 	// Warn when a command is executed from the devserver to the main deploy
-	if (message.guild.id !== jaidenServerID && isDevelopmentServer == true) {
+	if (message.guild.id !== jaidenServerID && isDevelopmentServer == false) {
 		
 		const warnEmbed = new Discord.MessageEmbed()
 			.setColor(tofuRed)

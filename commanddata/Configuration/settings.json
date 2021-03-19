@@ -1,0 +1,6 @@
+{
+    "welcomer": true,
+    "disabledCommands": [
+        "movienight"
+    ]
+}

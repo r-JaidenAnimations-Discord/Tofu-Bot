@@ -10,7 +10,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		if (message.deletable) message.delete();
+		//if (message.deletable) message.delete();
 
 		let input = args.join(' ');
 

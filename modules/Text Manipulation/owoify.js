@@ -14,7 +14,7 @@ module.exports = {
 	cooldown: 5,
 	execute: async(client, message, args) => {
 		if (args.length < 1) return message.channel.send('What to say tho. ;-;');
-		if (message.deletable) message.delete();
+		//if (message.deletable) message.delete();
 
 		let input = args.join(' ');
 

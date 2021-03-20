@@ -1,16 +1,26 @@
-const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, isDevelopmentServer, jaidenServerID, trustedServers } = require('../../config.json');
-//const fs = require('fs');
+const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
+const fs = require('fs');
 const Discord = require('discord.js');
-const { noKirito } = require('../../functions/kiritoTrust.js');
-const { noAli } = require('../../functions/aliTrust.js');
+//const { noKirito } = require('../../functions/kiritoTrust.js');
+//const { noAli } = require('../../functions/aliTrust.js');
 const { handleError } = require('../../functions/errorHandler.js');
-const { disabledCommands } = require('../../commanddata/Configuration/settings.json');
+//const { disabledCommands } = require('../../commanddata/Configuration/settings.json');
+//var settingsFile = JSON.parse(fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8'));
+//var disabledCommands = settingsFile.disabledCommands
 const { promptMessage } = require('../../functions/promptMessage.js');
 
-module.exports = (client, message) => {
+module.exports = async (client, message) => {
 	let cooldowns = client.cooldowns;
 	// nothing get fucked lmao
 	// very
+
+
+	// Pull the list of disabled commands from the settings JSON file. Man this was a pain to get working
+	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+	var settingsFile = JSON.parse(data);
+	console.log(data);
+	console.log(settingsFile);
+	console.log(settingsFile.disabledCommands);
 
 	// Respond on bot ping
     if (message.mentions.has(client.user.id)) {
@@ -35,13 +45,13 @@ module.exports = (client, message) => {
 	if (!command) return;
 
 	// Is this command enabled?
-	if (command.isEnabled === false) {
+	/*if (command.isEnabled === false) {
 		try {
 			return message.reply('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?');
 		} catch (e) {
 			return handleError(client, 'message.js', 'Error on sending command disabled message', e);
 		}
-	}
+	}*/
 
 	// Is this command allowed inside DM?
 	if (command.isDMAllowed && message.channel.type === 'dm') {
@@ -64,11 +74,23 @@ module.exports = (client, message) => {
 	}
 
 	if (message.author.id == banKirito) {
-		noKirito(client, message, args);
+		if (settingsFile.kiritoTrust === false) {
+			try {
+				return message.channel.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
+			} catch (e) {
+				return handleError(client, 'message.js', 'Error on sending nokirito message', e);
+			}
+		}
 	}
 
 	if (message.author.id == banAli) {
-		noAli(client, message, args);
+		if (settingsFile.aliTrust === false) {
+			try {
+				return message.channel.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
+			} catch (e) {
+				return handleError(client, 'message.js', 'Error on sending nocringe message', e);
+			}
+		}
 	}
 
 	// No DMs
@@ -106,20 +128,20 @@ module.exports = (client, message) => {
 			return handleError(client, 'message.js', 'Error on sending untrusted server message', e);
 		}	
 	}
+
 	// Warn when a command is executed from the devserver to the main deploy
-	if (message.guild.id !== jaidenServerID && isDevelopmentServer == false) {
+	if (message.guild.id !== jaidenServerID && devMode === false) {
 		
 		const warnEmbed = new Discord.MessageEmbed()
 			.setColor(tofuRed)
 			.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
 			.setTitle('HOLD UP')
 			.setDescription('You are about to execute a command that could affect the bot in the main server. Are you absolutely sure you want to do this?')
-			.setTimestamp()
-			//.setFooter(`Suggested by ${message.member.displayName}`);
+			.setTimestamp();
 
 		return message.channel.send(warnEmbed).then(async msg => {
 		const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
-		
+
 		if (emoji === '✅') {
 			msg.delete();
 			message.channel.send('Done, you were warned');
@@ -145,7 +167,7 @@ module.exports = (client, message) => {
 		});
 	}
 
-	if (disabledCommands.includes(command.name)) {
+	if (settingsFile.disabledCommands.includes(command.name)) {
 		try{ 
 			return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif']});
 		} catch(e) {

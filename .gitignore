@@ -2,7 +2,7 @@
 /.vscode/
 
 # Archived stuffs
-/Scrapped and archived/
+#/Scrapped and archived/ (no longer exists)
 
 # Use `npm i` to install them
 /node_modules/
@@ -13,7 +13,7 @@ config.json
 # Also token and stuff but for dev purposes
 deployConfig.json
 
-# yes | We're removing that 
+# yes | We're removing that \ edit, just found out this was my tfix command kekw
 #modules/Bot/ali.js
 
 # I readded my deleted stuff for later reference, but i'm not pushing them to the repo
@@ -21,3 +21,5 @@ deployConfig.json
 
 # Settings file
 commanddata/Configuration/settings.json
+
+api.json

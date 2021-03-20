@@ -57,7 +57,8 @@ function getCmd(client, message, input) {
 
 	if (cmd.name) embed.setDescription(`**${cmd.helpTitle} command**`);
 	if (cmd.aliases) embed.addField('**Aliases**', `${cmd.aliases.map(a => `\`${a}\``).join(' ')}`);
-	/*if (cmd.isEnabled)*/ embed.addField(`**Status:**`, `${cmd.isEnabled === true ? 'Command is currently enabled' : '⚠️ Command has been disabled'}`);
+	/*if (cmd.isEnabled)*/ embed.addField('**Status:**', `${cmd.isEnabled === true ? 'Command is currently enabled' : '⚠️ Command has been disabled'}`);
+	if (cmd.category) embed.addField('**Category**', cmd.category);
 	/*if (cmd.isDMAllowed)*/ embed.addField('**Is allowed trough DM**', `${cmd.isDMAllowed === true ? '\`yes\`' : '\`no\`'}`);
 	if (cmd.description) embed.addField('**Command Description**', `${cmd.description}`);
 	if (cmd.usage) embed.addField('**Command Structure**', `\`${prefix}${cmd.usage}\``);

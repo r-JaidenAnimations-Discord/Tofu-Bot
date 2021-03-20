@@ -1,6 +1,6 @@
-const Discord = require('discord.js');
+//const Discord = require('discord.js');
 const { randomStatus } = require('../../functions/statusFunction.js');
-const { staffChatId } = require('../../config.json');
+//const { staffChatId } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = client => {

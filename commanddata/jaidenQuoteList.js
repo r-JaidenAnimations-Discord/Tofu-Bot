@@ -28,7 +28,7 @@ module.exports = {
 		'We have some Asain blood in us, so we can\'t bring dishonor to the family.',
 		'It\'s simple, just don\'t be stupid',
 		'Wind is my least favorite weather! People with long hair can understand…',
-		'If you can\’t help yourself, help others. Then eventually, you might be able to learn how to help yourself, too.',
+		'If you can\'t help yourself, help others. Then eventually, you might be able to learn how to help yourself, too.',
 		'I\'ll be personally offended if you don\'t let me play with your pet for at least 2 hours.',
 		'What’s in that forest, Logan?',
 		'I\'M GAYYYY!!!!!!',

@@ -6,7 +6,7 @@ const handleError = (client, file, text, e) => {
 	try {
 		console.error(`${file}: ${text}: ${e}`);
 		return client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: ${file}: ${text} \n\`\`${e}\`\``).setColor(tofuError));
-	} catch(f) {
+	} catch (f) {
 		console.error(`Sending error DM failed! DMError: ${f}`);
 		return;
 	}

@@ -1,16 +1,14 @@
 const Discord = require('discord.js');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 const { teraID, retainedID ,maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('../../config.json');
-const { promptMessage } = require('../../functions/promptMessage.js');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'settings',
 	helpTitle: 'Settings',
 	category: 'Bot Management',
-	usage: 'i actually don\'t know yet',
+	usage: 'settings {[{enable, disable}] [command], [{welcomer, announce, welcome, greeting, alitrust, ali, kirito, kiritotrust, bankirito}] [{enable, disable}]}',
 	description: 'Set',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['set', 'config'],

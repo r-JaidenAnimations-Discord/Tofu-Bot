@@ -18,3 +18,6 @@ deployConfig.json
 
 # I readded my deleted stuff for later reference, but i'm not pushing them to the repo
 /Z Legacy/
+
+# Settings file
+commanddata/Configuration/settings.json

@@ -1,12 +1,7 @@
 const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
 const fs = require('fs');
 const Discord = require('discord.js');
-//const { noKirito } = require('../../functions/kiritoTrust.js');
-//const { noAli } = require('../../functions/aliTrust.js');
 const { handleError } = require('../../functions/errorHandler.js');
-//const { disabledCommands } = require('../../commanddata/Configuration/settings.json');
-//var settingsFile = JSON.parse(fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8'));
-//var disabledCommands = settingsFile.disabledCommands
 const { promptMessage } = require('../../functions/promptMessage.js');
 
 module.exports = async (client, message) => {
@@ -18,16 +13,16 @@ module.exports = async (client, message) => {
 	// Pull the list of disabled commands from the settings JSON file. Man this was a pain to get working
 	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
-	console.log(data);
-	console.log(settingsFile);
-	console.log(settingsFile.disabledCommands);
+	//console.log(data);
+	//console.log(settingsFile);
+	//console.log(settingsFile.disabledCommands);
 
 	// Respond on bot ping
     if (message.mentions.has(client.user.id)) {
 		if (message.content.includes('@here') || message.content.includes('@everyone')) return;
 		try {
 			message.channel.send('Can you not? ;_;');
-		} catch(e) {
+		} catch (e) {
 			return handleError(client, 'message.js', 'Error on sending mad ping', e);
 		}
     }
@@ -43,15 +38,6 @@ module.exports = async (client, message) => {
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	
 	if (!command) return;
-
-	// Is this command enabled?
-	/*if (command.isEnabled === false) {
-		try {
-			return message.reply('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?');
-		} catch (e) {
-			return handleError(client, 'message.js', 'Error on sending command disabled message', e);
-		}
-	}*/
 
 	// Is this command allowed inside DM?
 	if (command.isDMAllowed && message.channel.type === 'dm') {
@@ -124,7 +110,7 @@ module.exports = async (client, message) => {
 			message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
 			client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
 			return;
-		} catch(e) {
+		} catch (e) {
 			return handleError(client, 'message.js', 'Error on sending untrusted server message', e);
 		}	
 	}
@@ -148,7 +134,7 @@ module.exports = async (client, message) => {
 				if (disabledCommands.includes(command.name)) {
 				try{ 
 					return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif']});
-				} catch(e) {
+				} catch (e) {
 					return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 				}
 			}
@@ -167,10 +153,11 @@ module.exports = async (client, message) => {
 		});
 	}
 
+	// Is this command enabled?
 	if (settingsFile.disabledCommands.includes(command.name)) {
 		try{ 
 			return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif']});
-		} catch(e) {
+		} catch (e) {
 			return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 		}
 	}

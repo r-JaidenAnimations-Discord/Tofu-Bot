@@ -3,7 +3,6 @@ const { jaidenServerID, generalChannelId, rulesChannelID, devMode, gradyID, maxI
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = async (client, member) => {
-	console.log(member.id)
 	if (member.guild.id != jaidenServerID && devMode === false) return console.log('joined but not jaidenserver');
 
 	if (member.id == gradyID) {

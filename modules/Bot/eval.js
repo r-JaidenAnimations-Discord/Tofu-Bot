@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const beautify = require('beautify');
-const { teraID, retainedID ,maxID, tofuGreen, tofuError } = require('../../config.json');
+const { teraID, retainedID ,maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
 // NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
 module.exports = {
@@ -16,12 +16,14 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
-			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
+				message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
+				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`));
+				return;
 		}
 
 		if (!args[0]) { 
-			return message.channel.send('Give me something to evaluate tho')
+				return message.channel.send('Give me something to evaluate tho')
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
 		}
 
@@ -47,7 +49,7 @@ module.exports = {
 				.addField('Type of', typeof(evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			message.channel.send(embed);
+				message.channel.send(embed);
 		} catch (e) {
 			let embed = new Discord.MessageEmbed()
 				.setColor(tofuError)
@@ -55,7 +57,7 @@ module.exports = {
 				.setDescription(e)
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			message.channel.send(embed);
+				message.channel.send(embed);
 		}
 		
 // ... all your eval shit

@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'about',
 	description: 'Display the bot\'s information',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['bot', 'botinfo', 'info'],

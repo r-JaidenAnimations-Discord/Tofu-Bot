@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'status [{random ({enable, disable}), awake, asleep, busy, gone, stream, play, listen, next}]',
 	description: 'Set the client\'s status',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['sts', 'stat'],

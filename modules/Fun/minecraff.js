@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'minecraft',
 	description: 'Show info about our minecraft server!',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['mc', 'minecraff', 'minecrap'],

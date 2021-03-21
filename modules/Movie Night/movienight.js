@@ -6,7 +6,6 @@ module.exports = {
 	category: 'Movie Night',
 	usage: 'movienight',
 	description: 'Not sure, but it sounded fun',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['mn'],

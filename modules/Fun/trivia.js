@@ -22,7 +22,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'trivia (rules)',
 	description: 'Play some trivia.',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['jaidentrivia', 'jtrivia'],

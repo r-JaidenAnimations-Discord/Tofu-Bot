@@ -8,7 +8,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'say [#channel] (embed) [message]',
 	description: 'Mess with members',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],

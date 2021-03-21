@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Text Manipulation',
 	usage: 'owoify [text]',
 	description: 'OwO what\'s this',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['owofy'],

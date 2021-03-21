@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'customstatus [{online, idle, dnd}] [{watch, play, listen}] [text]',
 	description: 'Set the client\'s status',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['csts', 'stat'],

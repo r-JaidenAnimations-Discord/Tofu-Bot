@@ -10,7 +10,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'help (command)',
 	description: 'Stop, get help',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['commands'],

@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Movie Night',
 	usage: 'maxnoadnin [#channel] [message]',
 	description: 'Because Max doesn\'t have perms to ping movie night AAAAAAAAAAAA',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],

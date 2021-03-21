@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'quote',
 	description: 'Send a random quote from Jaiden',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['jaidenquote', 'jquote'],

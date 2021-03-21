@@ -1,5 +1,5 @@
 const fs = require('fs')
-const { jaidenServerID, generalChannelId, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
+const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = async (client, member) => {
@@ -7,7 +7,7 @@ module.exports = async (client, member) => {
 
 	if (member.id == gradyID) {
 		try {
-			client.channels.cache.get(generalChannelId).send('GRADY, you\'re back!!!! omgomgomgomgomg');
+			client.channels.cache.get(generalChannelID).send('GRADY, you\'re back!!!! omgomgomgomgomg');
 			client.users.cache.get(maxID).send('GRADY IS BACK!!!!');
 		} catch (e) {
 			return handleError(client, 'guildMemberRemove.js', 'Error on sending grady joined message.', e);
@@ -29,7 +29,7 @@ module.exports = async (client, member) => {
 	if (welcomerState === false) return;
 	try {
 		let randomWelc = welcomes[Math.floor(Math.random() * welcomes.length)];
-		client.channels.cache.get(generalChannelId).send(`${randomWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
+		client.channels.cache.get(generalChannelID).send(`${randomWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
 		return;
 	} catch (e) {
 		return handleError(client, 'guildMemberAdd.js', 'Error on sending welcome message', e);

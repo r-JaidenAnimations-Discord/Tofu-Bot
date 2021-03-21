@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { jaidenServerID, generalChannelId, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
+const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = async (client, member) => {
@@ -7,7 +7,7 @@ module.exports = async (client, member) => {
 
 	if (member.id == gradyID) {
 		try {
-			client.channels.cache.get(generalChannelId).send('GRADY, NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!');
+			client.channels.cache.get(generalChannelID).send('GRADY, NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!');
 			client.users.cache.get(maxID).send('Grady left, noooooooo');
 		} catch (e) {
 			return handleError(client, 'guildMemberRemove.js', 'Error on sending grady left message.', e);
@@ -27,7 +27,7 @@ module.exports = async (client, member) => {
 	if (welcomerState === false) return;
 	try {
 		let randomBye = byes[Math.floor(Math.random() * byes.length)];
-		client.channels.cache.get(generalChannelId).send(randomBye);
+		client.channels.cache.get(generalChannelID).send(randomBye);
 		return;
 	} catch (e) {
 		return handleError(client, 'guildMemberRemove.js', 'Error on sending cya message', e);

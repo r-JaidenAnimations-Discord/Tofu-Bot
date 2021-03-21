@@ -8,10 +8,10 @@ module.exports = client => {
 	randomStatus(client);
 	console.log(chalk.green(`Alive as ${client.user.tag}`));
 
-	try {
+	/*try {
 		client.channels.cache.get(staffChatID).send(`I'm back b!tches!`);
 	} catch (e) {
 		return handleError(client, 'ready.js', 'Error on sending I\'m back', e);
-	}
+	}*/
 
 }

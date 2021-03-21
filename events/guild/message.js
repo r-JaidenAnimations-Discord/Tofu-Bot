@@ -37,19 +37,27 @@ module.exports = async (client, message) => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 	
-	if (!command) return;
-
-	// Is this command allowed inside DM?
-	if (command.isDMAllowed && message.channel.type === 'dm') {
+		
+		// Is this command allowed inside DM?
 		if (message.guild === null && !message.author.bot) {
-			try {
-				return message.channel.send('Can\'t talk right now, I\'m eating tofu');
-			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+			if (command.isDMAllowed == false && message.channel.type === 'dm') {
+				try {
+					return message.channel.send('Can\'t talk right now, I\'m eating tofuuuuu');
+				} catch (e) {
+					return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+				}
+			}
+			if (!command) {
+				try {
+					return message.channel.send('Can\'t talk right now, I\'m eating tofuuuuu');
+				} catch (e) {
+					return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+				}
 			}
 		}
-	}
-	
+
+	if (!command) return;
+		
 	// Is this command deprecated?
 	if (command.isDeprecated === true) {
 		try {
@@ -80,7 +88,7 @@ module.exports = async (client, message) => {
 	}
 
 	// No DMs
-	if (message.channel.type === 'dm') return;
+	//if (message.channel.type === 'dm') return;
 
 	// Cooldown?
 	if (!cooldowns.has(command.name)) {
@@ -105,52 +113,55 @@ module.exports = async (client, message) => {
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-	if (!trustedServers.includes(message.guild.id)) {
-		try {
-			message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
-			client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
-			return;
-		} catch (e) {
-			return handleError(client, 'message.js', 'Error on sending untrusted server message', e);
-		}	
-	}
-
-	// Warn when a command is executed from the devserver to the main deploy
-	if (message.guild.id !== jaidenServerID && devMode === false) {
-		
-		const warnEmbed = new Discord.MessageEmbed()
-			.setColor(tofuRed)
-			.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
-			.setTitle('HOLD UP')
-			.setDescription('You are about to execute a command that could affect the bot in the main server. Are you absolutely sure you want to do this?')
-			.setTimestamp();
-
-		return message.channel.send(warnEmbed).then(async msg => {
-		const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
-
-		if (emoji === '✅') {
-			msg.delete();
-			message.channel.send('Done, you were warned');
-				if (disabledCommands.includes(command.name)) {
-				try{ 
-					return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif']});
-				} catch (e) {
-					return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
-				}
-			}
-
-			// All requirements are met, try running the command
+	if (message.guild) {
+		// Check if bot is used in unauthorized server
+		if (!trustedServers.includes(message.guild.id)) {
 			try {
-				command.execute(client, message, args);
-			} catch (error) {
-				return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
-			}
-			
-		} else if (emoji === '❌') {
-			msg.delete();
-			message.channel.send('Okay');
+				message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
+				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
+				return;
+			} catch (e) {
+				return handleError(client, 'message.js', 'Error on sending untrusted server message', e);
+			}	
 		}
-		});
+
+		// Warn when a command is executed from the devserver to the main deploy
+		if (message.guild.id !== jaidenServerID && devMode === false) {
+
+			const warnEmbed = new Discord.MessageEmbed()
+				.setColor(tofuRed)
+				.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
+				.setTitle('HOLD UP')
+				.setDescription('You are about to execute a command that could affect the bot in the main server. Are you absolutely sure you want to do this?')
+				.setTimestamp();
+
+			return message.channel.send(warnEmbed).then(async msg => {
+			const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
+
+			if (emoji === '✅') {
+				msg.delete();
+				message.channel.send('Done, you were warned');
+					if (disabledCommands.includes(command.name)) {
+					try{ 
+						return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif']});
+					} catch (e) {
+						return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
+					}
+				}
+
+				// All requirements are met, try running the command
+				try {
+					command.execute(client, message, args);
+				} catch (error) {
+					return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+				}
+
+			} else if (emoji === '❌') {
+				msg.delete();
+				message.channel.send('Okay');
+			}
+			});
+		}
 	}
 
 	// Is this command enabled?

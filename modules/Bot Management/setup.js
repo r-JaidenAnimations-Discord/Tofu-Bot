@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const { readJSONSync, writeJSONSync } = require('fs-extra');
+const { stripIndents } = require('common-tags');
+const { readJSONSync, writeJSONSync, read, readdir } = require('fs-extra');
 const { teraID, retainedID ,maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
@@ -296,11 +297,16 @@ module.exports = {
 				const embed = new Discord.MessageEmbed()
 					.setColor(tofuBlue)
 					.setDescription(
-						stripIndents`Welcomer: \`${formatBool(readData.welcome)}\`
-					Blacklisting: \`${formatBool(readData.blacklisting)}\`
+						stripIndents`Welcome Messages: \`${formatBool(readData.welcome)}\`
+					Kirito Trust: \`${formatBool(readData.kiritoTrust)}\`
+					Ali Trust: \`${formatBool(readData.kiritoTrust)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
-				message.channel.send(embed);
+				try {
+					message.channel.send(embed);
+				} catch (e) {
+					handleError(client, 'setup.js', 'Error on sending settings list', e);
+				}
 				break;
 			}
 
@@ -324,7 +330,23 @@ module.exports = {
 				writeJSONSync('./commanddata/Configuration/settings.json', defaults, { spaces: 4 });
 				break;
 			}
-			default: return message.channel.send('Invalid argument, please check the usage in the help command');
+			default: {
+				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
+
+				const embed = new Discord.MessageEmbed()
+					.setColor(tofuBlue)
+					.setDescription(
+						stripIndents`Welcome Messages: \`${formatBool(readData.welcome)}\`
+					Kirito Trust: \`${formatBool(readData.kiritoTrust)}\`
+					Ali Trust: \`${formatBool(readData.kiritoTrust)}\`
+					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
+				
+				try {
+					message.channel.send(embed);
+				} catch (e) {
+					handleError(client, 'setup.js', 'Error on sending settings list', e);
+				}
+			}
 		}
 	},
 };

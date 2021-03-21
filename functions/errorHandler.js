@@ -10,7 +10,6 @@ const handleError = (client, file, text, e) => {
 		console.log(chalk.redBright(`Sending error DM failed! DMError: ${f}`));
 		return;
 	}
-
 }
 
 module.exports = {

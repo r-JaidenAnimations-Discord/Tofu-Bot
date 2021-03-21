@@ -20,4 +20,6 @@ async function promptMessage(message, author, time, validReactions) {
 		.then(collected => collected.first() && collected.first().emoji.name);
 }
 
-module.exports = { promptMessage };
+module.exports = {
+	promptMessage
+};

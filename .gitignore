@@ -1,4 +1,4 @@
-# IDE
+# IDE, this is where i keep my debugger config and stuff
 /.vscode/
 
 # Archived stuffs
@@ -21,3 +21,6 @@ deployConfig.json
 
 # Settings file
 commanddata/Configuration/settings.json
+
+# Changelog is always out of date, i just keep them locally now. Check the releases tab for changelogs
+CHANGELOG.md

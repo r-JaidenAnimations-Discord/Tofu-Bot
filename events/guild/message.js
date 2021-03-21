@@ -62,7 +62,7 @@ module.exports = async (client, message) => {
 	if (message.author.id == banKirito) {
 		if (settingsFile.kiritoTrust === false) {
 			try {
-				return message.channel.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
+				return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
 			} catch (e) {
 				return handleError(client, 'message.js', 'Error on sending nokirito message', e);
 			}
@@ -72,7 +72,7 @@ module.exports = async (client, message) => {
 	if (message.author.id == banAli) {
 		if (settingsFile.aliTrust === false) {
 			try {
-				return message.channel.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
+				return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
 			} catch (e) {
 				return handleError(client, 'message.js', 'Error on sending nocringe message', e);
 			}

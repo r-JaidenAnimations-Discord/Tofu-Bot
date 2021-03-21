@@ -131,7 +131,7 @@ const toggleRandomStatus = (client, message, args) => {
 		.setFooter('Made with love');
 
 	try {
-		message.channel.send(randomStatusEmbed);/////////////
+		message.channel.send(randomStatusEmbed);
 		console.log(`Randomoooo set to: ${randomStatusEnable}`);
 		return;
 	} catch (e) {

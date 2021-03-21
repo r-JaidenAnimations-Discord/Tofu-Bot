@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const { tofuGreen } = require('../../config.json');
 const { trivia } = require('../../commanddata/jaidenTriviaList.js');
 const { promptMessage } = require('../../functions/promptMessage.js');
+const { handleError } = require('../../functions/errorHandler.js');
 
 let numberReactions = new Map([
 	[1, '1️⃣'],
@@ -34,7 +35,11 @@ module.exports = {
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
 				.setColor(tofuGreen);
 			
-			return message.channel.send(ruleEmbed);    
+			try {
+				return message.channel.send(ruleEmbed); 		
+			} catch (e) {
+				return handleError(client, 'trivia.js', 'Error on sending ruleEmbed', e);
+			}   
 			}
 
 		//message.channel.send('hotel? Trivia!');
@@ -59,27 +64,45 @@ module.exports = {
 			)
 			.setColor(tofuGreen)
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
-		message.channel.send(Embed).then(async sentEmbed => {
-			let count;
-			for (count = 0; count < q.answers.length; count++) {
-				//console.log(`${numberReactions.get(count + 1)}`);
-			  sentEmbed.react(`${numberReactions.get(count + 1)}`);
-			} 
-			setTimeout(async() => {
-				//sentEmbed.react('✅');
-				const correct = await promptMessage(sentEmbed, message.author, 45, ['✅']);
-			
-				if (correct === '✅') {
-					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
-					correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
-					sentEmbed.edit(correctedEmbed);
-				}
-				else {
-					//message.channel.send('k')
-					correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
-					sentEmbed.edit(correctedEmbed);
-				}
-			}, 15000);
-		});
+
+			try {
+				message.channel.send(Embed).then(async sentEmbed => {
+					let count;
+					for (count = 0; count < q.answers.length; count++) {
+						//console.log(`${numberReactions.get(count + 1)}`);
+					  try {
+						sentEmbed.react(`${numberReactions.get(count + 1)}`);
+					  } catch (e) {
+						  return handleError(client, 'trivia.js', 'Error on reacting to embed', e);
+					  }
+					} 
+					setTimeout(async() => {
+						//sentEmbed.react('✅');
+						const correct = await promptMessage(sentEmbed, message.author, 45, ['✅']);
+					
+						if (correct === '✅') {
+							//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
+							correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
+							try {
+								sentEmbed.edit(correctedEmbed);
+							} catch (e) {
+								return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
+							}
+						}
+						else {
+							//message.channel.send('k')
+							correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
+							try {
+								sentEmbed.edit(correctedEmbed);
+							} catch (e) {
+								return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
+							}
+						}
+					}, 15000);
+				});
+			} catch (e) {
+				return handleError(client, 'trivia.js', 'Error on sending mainEmbed', e);
+			}
+
 	},
 };

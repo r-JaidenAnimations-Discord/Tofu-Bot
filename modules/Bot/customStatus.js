@@ -1,4 +1,5 @@
 //const Discord = require('discord.js');
+const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'customstatus',
@@ -12,7 +13,13 @@ module.exports = {
 	aliases: ['csts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {
-		if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply('You fool, need more permissions');
+		if (!message.member.hasPermission('BAN_MEMBERS')) {
+			try {
+				return message.reply('You fool, need more permissions');
+			} catch (e) {
+				return handleError(client, 'customStatus.js', 'Error on sending permission error', e);
+			}
+		}
 
 		let status;
 		let activity;
@@ -27,7 +34,11 @@ module.exports = {
 			status = 'dnd';
 		}
 		else {
-			return message.channel.send('You must enter the proper status.');
+			try {
+				return message.channel.send('You must enter the proper status.');
+			} catch (e) {
+				return handleError(client, 'customStatus.js', 'Error on sending \'Enter proper status\' message');
+			}
 		}
 
 		if (args[1] == 'watch') {
@@ -43,11 +54,19 @@ module.exports = {
 			activity = 'LISTENING';
 		}
 		else {
-			return message.channel.send('You must enter the proper activity.');
+			try {
+				return message.channel.send('You must enter the proper activity.');
+			} catch (e) {
+				return handleError(client, 'customStatus.js', 'Error on sending \'Enter proper activity\' message');
+			}
 		}
 		let textString = args.slice(2).join(' ');
 		if (textString.length == 0) {
-			return message.channel.send('You must enter text to show');
+			try {
+				return message.channel.send('You must enter text to show');
+			} catch (e) {
+				return handleError(client, 'customStatus.js', 'Error on sending \'Enter text to show\' message');
+			}
 		}
 		client.user.setPresence({
 			status: `${status}`,

@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const { prefix, tofuOrange } = require('../../config.json');
 const { stripIndents } = require('common-tags');
+const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'help',
@@ -41,8 +42,13 @@ async function getAll(client, message) {
 	const info = client.categories 
 		.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n\n${commands(cat)}`)
 		.reduce((string, category) => string + '\n\n' + category);
- 
-	return message.channel.send(embed.setDescription(info));
+
+	try {
+		return message.channel.send(embed.setDescription(info));
+
+	} catch (e) {
+		return handleError(client, 'help.js', 'Error sending help embed', e);
+	}
 }
 
 async function getCmd(client, message, input) {
@@ -53,7 +59,11 @@ async function getCmd(client, message, input) {
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
 	if (!cmd) {
-		return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
+		try {
+			return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
+		} catch (e) {
+			return handleError(client, 'help.js', 'Error on sending not a command error.');
+		}
 	}
 
 	// Fetch disabled commands

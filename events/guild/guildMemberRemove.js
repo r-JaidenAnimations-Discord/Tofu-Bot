@@ -32,5 +32,4 @@ module.exports = async (client, member) => {
 	} catch (e) {
 		return handleError(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
 	}
-
 };

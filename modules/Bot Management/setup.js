@@ -261,6 +261,7 @@ module.exports = {
 					return; 
 				}
 
+				if (!client.commands.get(input)) return message.channel.send('There\'s no such command! Make sure you are not using an alias.');
 				if (!disabledCommands.includes(input)) return message.channel.send(`The command \`${input}\` is not disabled!`);
 
 				const embed = new Discord.MessageEmbed()
@@ -275,6 +276,7 @@ module.exports = {
 			}
 
 			case 'disable': {
+				if (!client.commands.get(input)) return message.channel.send('There\'s no such command! Make sure you are not using an alias.');
 				if (disabledCommands.includes(input)) return message.channel.send(`The command \`${input}\` is already disabled!`);
 				if (input == 'settings') return message.channel.send('HAHAHAHAHAHAHAHAHAHAHHAHAHHAHAHAHHA very funni');
 

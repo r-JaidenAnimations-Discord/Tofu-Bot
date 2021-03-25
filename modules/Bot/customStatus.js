@@ -74,5 +74,6 @@ module.exports = {
 				type: `${activity}`
 			}
 		});
+		message.react('✅');
 	},
 };

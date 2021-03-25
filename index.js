@@ -28,7 +28,7 @@ client.on('warn', w => {
 });
 client.on('error', e => {
 	console.error(`${chalk.redBright('[ERROR]')}: ${e.stack}`);
-	handleError(client, 'index.js', `[ERROR]: Unspecified error - ${e.stack}`, e);
+	handleError(client, 'index.js', `[ERROR]: Unspecified error: ${e.stack}`, e);
 });
 process.on('uncaughtException', e => console.error(`${chalk.redBright('[Error]')} - ${e.stack}`));
 process.on('unhandledRejection', e => console.error(`${chalk.redBright('[Error]')} - ${e.stack}`));

@@ -1,11 +1,11 @@
-const Discord = require('discord.js');
+//const Discord = require('discord.js');
 const { setSts } = require('../../functions/statusFunction.js');
 
 module.exports = {
 	name: 'status',
 	helpTitle: 'Status',
 	category: 'Bot',
-	usage: 'status [{random ({enable, disable}), awake, asleep, busy, gone, stream, play, listen, next}]',
+	usage: 'status [{random ({enable, disable}), awake, asleep, busy, gone, stream, play, listen, randomuser, next}]',
 	description: 'Set the client\'s status',
 	isDMAllowed: false,
 	isDeprecated: false,

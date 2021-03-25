@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { prefix, botProfile, tofuBlue } = require('../config.json');
+const { prefix, botProfile, tofuBlue, jaidenServerID, level20RoleID } = require('../config.json');
 const { handleError } = require('./errorHandler.js');
 
 let randomStatusEnable = true;
@@ -95,6 +95,34 @@ const setSts = (client, message, selectedStatus) => {
 					toggleRandomStatus(client, message, args);
 				}
 			break;
+		case 'randomuser':
+			//This is where more stuff will eventually happen
+			/*t+eval var getMap =  message.guild.roles.cache.get('774872082290704394').members.map(m=>m.user.tag);
+var getArray = Array.from(getMap)
+message.channel.send(getArray[Math.floor(Math.random() * getArray.length)]);*/
+			//this mess works and returns a random user with the right role, i'll figure out the rest later
+
+			//better and fetches actual username
+			/*t+eval let memberMap = message.guild.roles.cache.get('774872082290704394').members.map(m=>m.user.id);
+			let memberArr = Array.from(memberMap);
+			let randomMemberID = memberArr[Math.floor(Math.random() * memberArr.length)];
+			let selectedDisplayName = client.guilds.cache.get('754451472699228281').members.cache.get(randomMemberID).displayName;
+			message.channel.send(selectedDisplayName)*/
+			
+
+			let memberMap = message.guild.roles.cache.get(level20RoleID).members.map(m=>m.user.id);
+			let memberArr = Array.from(memberMap);
+			let randomMemberID = memberArr[Math.floor(Math.random() * memberArr.length)];
+			let selectedDisplayName = client.guilds.cache.get(jaidenServerID).members.cache.get(randomMemberID).displayName;
+
+			client.user.setPresence({
+				activity: {
+					name: selectedDisplayName,
+					type: 'WATCHING'
+				}
+			});
+
+			break;
 		default:
 			try {
 				return message.channel.send('Invalid argument given');
@@ -140,7 +168,7 @@ const toggleRandomStatus = (client, message, args) => {
 }
 
 // We don't want to have the bot appear offline
-const states = ['awake', 'asleep', 'busy', /*'gone', */'stream', 'play', 'listen'];
+const states = ['awake', 'asleep', 'busy', /*'gone', */'stream', 'play', 'listen', 'randomuser'];
 const randomStatus = (client, message) => { 
   if (randomStatusEnable) {
 	//console.log({randomStatusEnable});

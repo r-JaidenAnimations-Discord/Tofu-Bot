@@ -261,7 +261,6 @@ module.exports = {
 					return; 
 				}
 
-				if (!client.commands.get(input)) return message.channel.send('There\'s not such command! Make sure you are not using an alias.');
 				if (!disabledCommands.includes(input)) return message.channel.send(`The command \`${input}\` is not disabled!`);
 
 				const embed = new Discord.MessageEmbed()
@@ -276,7 +275,6 @@ module.exports = {
 			}
 
 			case 'disable': {
-				if (!client.commands.get(input)) return message.channel.send('There\'s not such command! Make sure you are not using an alias.');
 				if (disabledCommands.includes(input)) return message.channel.send(`The command \`${input}\` is already disabled!`);
 				if (input == 'settings') return message.channel.send('HAHAHAHAHAHAHAHAHAHAHHAHAHHAHAHAHHA very funni');
 
@@ -291,7 +289,7 @@ module.exports = {
 				break;
 			}
 
-			case 'list': {
+			/*case 'list': {
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
 
 				const embed = new Discord.MessageEmbed()
@@ -308,7 +306,7 @@ module.exports = {
 					handleError(client, 'setup.js', 'Error on sending settings list', e);
 				}
 				break;
-			}
+			}*/
 
 			case 'reset': {
 				/*let defaults = {
@@ -330,6 +328,7 @@ module.exports = {
 				writeJSONSync('./commanddata/Configuration/settings.json', defaults, { spaces: 4 });
 				break;
 			}
+			case 'list':
 			default: {
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
 

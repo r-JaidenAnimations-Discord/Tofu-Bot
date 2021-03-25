@@ -1,5 +1,6 @@
-const Discord = require('discord.js');
-const { prefix, botProfile, tofuBlue, jaidenServerID, level20RoleID } = require('../config.json');
+//const Discord = require('discord.js');
+const fs = require('fs');
+const { /*prefix, botProfile, tofuBlue, */jaidenServerID, level20RoleID } = require('../config.json');
 const { handleError } = require('./errorHandler.js');
 
 let randomStatusEnable = true;
@@ -76,7 +77,7 @@ const setSts = (client, message, selectedStatus) => {
 			setSts(client, message, nextState);
 			break;
 		case 'random':
-				const args = message.content.slice(prefix.length).trim().split(/ +/g);
+				/*const args = message.content.slice(prefix.length).trim().split(/ +/g);
 				if (!args[2]) {
 					const randomStatusState = new Discord.MessageEmbed()
 						.setColor(tofuBlue)
@@ -93,7 +94,8 @@ const setSts = (client, message, selectedStatus) => {
 				}
 				else {
 					toggleRandomStatus(client, message, args);
-				}
+				}*/
+				message.channel.send('This command has been moved, use the `settings` command to enable or disable the random status setting');
 			break;
 		case 'randomuser':
 			//This is where more stuff will eventually happen
@@ -136,7 +138,7 @@ message.channel.send(getArray[Math.floor(Math.random() * getArray.length)]);*/
 	}
 
 // Enable or disable the randomised status
-const toggleRandomStatus = (client, message, args) => {
+/*const toggleRandomStatus = (client, message, args) => {
 	//randomStatusEnable = !randomStatusEnable
 	//randomStatus(client);
 
@@ -168,12 +170,16 @@ const toggleRandomStatus = (client, message, args) => {
 	} catch (e) {
 		return handleError(client, 'statusFunction.js', 'Error on sending randomStatusEmbed', e);
 	}
-}
+}*/
 
 // We don't want to have the bot appear offline
 const states = ['awake', 'asleep', 'busy', /*'gone', */'stream', 'play', 'listen', 'randomuser'];
-const randomStatus = (client, message) => { 
-  if (randomStatusEnable) {
+const randomStatus = async (client, message) => {
+	// Fetch the settings JSON file and pull it's randomStatus string
+	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+	var settingsFile = JSON.parse(data);
+
+  /*if (randomStatusEnable) {
 	//console.log({randomStatusEnable});
 	const nextState = states[Math.floor(Math.random() * states.length)];
 	setSts(client, message, nextState);
@@ -181,9 +187,17 @@ const randomStatus = (client, message) => {
   }
   else {
 	//console.log({randomStatusEnable});
-  }
+  }*/
+  	if (settingsFile.randomStatus === true) {
+		const nextState = states[Math.floor(Math.random() * states.length)];
+		setSts(client, message, nextState);
+		//console.log('[RAND] Enabled, set');
+	}
+	/*else {
+		console.log('[RAND] Disabled');
+	}*/
 }
-   
+
 module.exports = {
 	setSts,
 	randomStatus

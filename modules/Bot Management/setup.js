@@ -247,6 +247,81 @@ module.exports = {
 				break;
 			}
 
+			// Random status
+			case 'randomstatus':
+			case 'rstatus':
+			case 'rstat':
+			case 'rsts':
+			case 'status': {
+				// Do we have more args?
+				switch(args[1]) {
+					case 'enable':
+					case 'true':
+					case 'on': {
+						if (readData.randomStatus === true) {
+							try {
+								return message.channel.send('Random status is already `enabled`');
+							} catch (e) {
+								return handleError(client, 'setup.js', 'Error on sending random status already enabled message.', e);
+							}
+						} else {
+							readData.randomStatus = true; // Enable the randomStatus thing
+						
+							const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
+							const embed = new Discord.MessageEmbed()
+								.setColor(tofuGreen)
+								.setDescription(`\`${formatBool(readData.randomStatus)}\` random status settings`)
+								.setTimestamp()
+								.setFooter('Made with love');
+						
+							await message.channel.send(embed);
+							writeJSONSync('./commanddata/Configuration/settings.json', readData, { spaces: 4 });
+						}
+						break;
+					}
+					case 'disable':
+					case 'false':
+					case 'off': {
+						if (readData.randomStatus === false) {
+							try {
+								return message.channel.send('Random status is already `disabled`');
+							} catch (e) {
+								return handleError(client, 'setup.js', 'Error on sending random status already disabled message.', e);
+							}
+						} else {
+							readData.randomStatus = false; // Disable the randomStatus thing
+						
+							const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
+							const embed = new Discord.MessageEmbed()
+								.setColor(tofuGreen)
+								.setDescription(`\`${formatBool(readData.randomStatus)}\` random status settings`)
+								.setTimestamp()
+								.setFooter('Made with love');
+						
+							await message.channel.send(embed);
+							writeJSONSync('./commanddata/Configuration/settings.json', readData, { spaces: 4 });
+						}
+						break;
+					}
+					default: {
+						const formatBool = (elem) => elem ? 'enabled' : 'disabled';
+					
+						const randomStatusStateEmbed = new Discord.MessageEmbed()
+						.setColor(tofuGreen)
+						.setDescription(`Random status currently \`${formatBool(readData.randomStatus)}\`.`);
+					
+						try {
+							message.channel.send(randomStatusStateEmbed);
+						} catch (e) {
+							return handleError(client, 'setup.js', 'Error on sending randomStatusStateEmbed', e);
+						}
+						break;
+					}
+					//end of inner switchcase
+				}
+				break;
+			}
+
 			// Setting the commands
 			case 'enable': {
 				if (input == 'all') {
@@ -340,6 +415,7 @@ module.exports = {
 						stripIndents`Welcome Messages: \`${formatBool(readData.welcome)}\`
 					Kirito Trust: \`${formatBool(readData.kiritoTrust)}\`
 					Ali Trust: \`${formatBool(readData.kiritoTrust)}\`
+					Random status: \`${formatBool(readData.randomStatus)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 				
 				try {

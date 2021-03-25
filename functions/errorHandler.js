@@ -4,10 +4,10 @@ const chalk = require('chalk');
 
 const handleError = (client, file, text, e) => {
 	try {
-		console.log(chalk.yellow(`${file}: ${text}: ${e}`));
+		console.log(`${chalk.yellow('[ERROR]')}: ${file}: ${text}: ${e}`);
 		return client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`BIG OOF: ${file}: ${text} \n\`\`${e}\`\``).setColor(tofuError));
 	} catch (f) {
-		console.log(chalk.redBright(`Sending error DM failed! DMError: ${f}`));
+		console.log(`${chalk.redBright('[FAIL]')}: Sending error DM failed! DMError: ${f}`);
 		return;
 	}
 }

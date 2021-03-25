@@ -19,12 +19,15 @@ client.categories = fs.readdirSync('./modules/');
 client.login(apiKey);
 
 //if sh!t goes wrong
+client.on('rateLimit', r => {
+	console.warn(`${chalk.yellow('[RATELIMIT]')}: ${r}`);
+})
 client.on('warn', w => {
-	console.warn(`${chalk.yellow('[Warn]')} - ${w}`);
+	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);
 	handleError(client, 'index.js', '[WARN]: Unspecified warning', w);
 });
 client.on('error', e => {
-	console.error(`${chalk.redBright('[ERROR]')} - ${e.stack}`);
+	console.error(`${chalk.redBright('[ERROR]')}: ${e.stack}`);
 	handleError(client, 'index.js', `[ERROR]: Unspecified error - ${e.stack}`, e);
 });
 process.on('uncaughtException', e => console.error(`${chalk.redBright('[Error]')} - ${e.stack}`));

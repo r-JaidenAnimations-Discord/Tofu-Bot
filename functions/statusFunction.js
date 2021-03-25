@@ -109,15 +109,18 @@ message.channel.send(getArray[Math.floor(Math.random() * getArray.length)]);*/
 			let selectedDisplayName = client.guilds.cache.get('754451472699228281').members.cache.get(randomMemberID).displayName;
 			message.channel.send(selectedDisplayName)*/
 			
-
-			let memberMap = message.guild.roles.cache.get(level20RoleID).members.map(m=>m.user.id);
+			//This works, but it's also called spaghetticode apparently
+			/*let memberMap = message.guild.roles.cache.get(level20RoleID).members.map(m=>m.user.id);
 			let memberArr = Array.from(memberMap);
 			let randomMemberID = memberArr[Math.floor(Math.random() * memberArr.length)];
-			let selectedDisplayName = client.guilds.cache.get(jaidenServerID).members.cache.get(randomMemberID).displayName;
+			let selectedDisplayName = client.guilds.cache.get(jaidenServerID).members.cache.get(randomMemberID).displayName;*/
+
+			let memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
+			let randomMember = memberList[Math.floor(Math.random() * memberList.length)]
 
 			client.user.setPresence({
 				activity: {
-					name: selectedDisplayName,
+					name: randomMember,
 					type: 'WATCHING'
 				}
 			});

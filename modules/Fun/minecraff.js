@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const https = require('https');
 const { minecraftIP, tofuGreen, botProfile, maxID, tofuError } = require('../../config.json');
+const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'minecraft',
@@ -8,7 +9,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'minecraft',
 	description: 'Show info about our minecraft server!',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['mc', 'minecraff', 'minecrap'],
@@ -70,23 +70,19 @@ module.exports = {
 				try {
 					message.channel.stopTyping();
 					message.channel.send(minecraftEmbed);
-				} catch(e) {
+				} catch (e) {
 					console.log(`kek ${e}`)
 				}
 			});
 		}).on('error', function(e) {
-				try {
-					message.channel.stopTyping();
-					console.log("Got an error: ", e);
-					message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
-					client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`minecraff.js: API did not respond \n \`\`${e}\`\``).setColor(tofuError));
-					return;
-				} catch(f) {
-					console.log('========================================================================================================');
-					console.error(`minecraff.js: API did not respond, sending error DM failed: ${e} \n DMError: ${f}`);
-					console.log('========================================================================================================');
-					return;
-				}
+			try {
+				message.channel.stopTyping();
+				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
+				handleError(client, 'minecraff.js', 'API did not respond', e);
+
+			} catch (f) {
+				handleError(client, 'minecraff.js', 'Error on sending error embed', f);
+			}
 		});
 	},
 };

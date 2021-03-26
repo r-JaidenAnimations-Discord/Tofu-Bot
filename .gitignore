@@ -1,8 +1,8 @@
-# IDE
+# IDE, this is where i keep my debugger config and stuff
 /.vscode/
 
 # Archived stuffs
-/Scrapped and archived/
+#/Scrapped and archived/ (no longer exists)
 
 # Use `npm i` to install them
 /node_modules/
@@ -13,5 +13,14 @@ config.json
 # Also token and stuff but for dev purposes
 deployConfig.json
 
-# yes
-modules/Bot/ali.js
+# yes | We're removing that \ edit, just found out this was my tfix command kekw
+#modules/Bot/ali.js
+
+# I readded my deleted stuff for later reference, but i'm not pushing them to the repo
+/Z Legacy/
+
+# Settings file
+commanddata/Configuration/settings.json
+
+# Changelog is always out of date, i just keep them locally now. Check the releases tab for changelogs
+CHANGELOG.md

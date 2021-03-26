@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const { tofuGreen } = require('../../config.json');
 const { quotes } = require('../../commanddata/jaidenQuoteList.js');
+const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'quote',
@@ -8,7 +9,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'quote',
 	description: 'Send a random quote from Jaiden',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['jaidenquote', 'jquote'],
@@ -20,6 +20,10 @@ module.exports = {
 			.setColor(tofuGreen)
 			.setDescription(randomQuote);
 
-		message.channel.send(randomQuoteEmbed);
+			try {
+				message.channel.send(randomQuoteEmbed);
+			} catch (e) {
+				return handleError(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
+			}
 	},
 };

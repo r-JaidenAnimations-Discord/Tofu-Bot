@@ -1,0 +1,9 @@
+{
+    "welcome": false,
+    "kiritoTrust": true,
+    "aliTrust": true,
+    "randomStatus": true,
+    "disabledCommands": [
+        "movienight"
+    ]
+}

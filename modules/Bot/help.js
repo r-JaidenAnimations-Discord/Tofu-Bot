@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
+const fs = require('fs');
 const { prefix, tofuOrange } = require('../../config.json');
 const { stripIndents } = require('common-tags');
+const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'help',
@@ -8,7 +10,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'help (command)',
 	description: 'Stop, get help',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['commands'],
@@ -25,7 +26,7 @@ module.exports = {
 	},
 };
 
-function getAll(client, message) {
+async function getAll(client, message) {
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
@@ -40,11 +41,16 @@ function getAll(client, message) {
 	const info = client.categories 
 		.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n\n${commands(cat)}`)
 		.reduce((string, category) => string + '\n\n' + category);
- 
-	return message.channel.send(embed.setDescription(info));
+
+	try {
+		return message.channel.send(embed.setDescription(info));
+
+	} catch (e) {
+		return handleError(client, 'help.js', 'Error sending help embed', e);
+	}
 }
 
-function getCmd(client, message, input) {
+async function getCmd(client, message, input) {
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional; [] = required; {a, b} = choose between a or b');
@@ -52,12 +58,21 @@ function getCmd(client, message, input) {
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
 	if (!cmd) {
-		return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
+		try {
+			return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
+		} catch (e) {
+			return handleError(client, 'help.js', 'Error on sending not a command error.');
+		}
 	}
+
+	// Fetch disabled commands
+	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+	var settingsFile = JSON.parse(data);
 
 	if (cmd.name) embed.setDescription(`**${cmd.helpTitle} command**`);
 	if (cmd.aliases) embed.addField('**Aliases**', `${cmd.aliases.map(a => `\`${a}\``).join(' ')}`);
-	/*if (cmd.isEnabled)*/ embed.addField(`**Status:**`, `${cmd.isEnabled === true ? 'Command is currently enabled' : '⚠️ Command has been disabled'}`);
+	/*if (cmd.isEnabled)*/ embed.addField('**Status:**', `${settingsFile.disabledCommands.includes(cmd.name) || settingsFile.disabledCommands.includes(cmd.aliases) ? '⚠️ Command has been disabled' : 'Command is currently enabled'}`);
+	if (cmd.category) embed.addField('**Category**', cmd.category);
 	/*if (cmd.isDMAllowed)*/ embed.addField('**Is allowed trough DM**', `${cmd.isDMAllowed === true ? '\`yes\`' : '\`no\`'}`);
 	if (cmd.description) embed.addField('**Command Description**', `${cmd.description}`);
 	if (cmd.usage) embed.addField('**Command Structure**', `\`${prefix}${cmd.usage}\``);

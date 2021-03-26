@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'about',
 	description: 'Display the bot\'s information',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['bot', 'botinfo', 'info'],
@@ -33,8 +32,8 @@ module.exports = {
 
 		try {
 			message.channel.send(aboutEmbed);
-		} catch(e) {
-			return handleError(client, 'aliTrust.js', 'Error on sending nocringe DM', e);
+		} catch (e) {
+			return handleError(client, 'about.js', 'Error on sending aboutEmbed', e);
 		}
 	},
 };

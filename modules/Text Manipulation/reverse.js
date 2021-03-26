@@ -4,13 +4,12 @@ module.exports = {
 	category: 'Text Manipulation',
 	usage: 'reverse [text]',
 	description: 'Reverse text.',
-	isEnabled: true,
 	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		if (message.deletable) message.delete();
+		//if (message.deletable) message.delete();
 
 		let input = args.join(' ');
 

@@ -32,7 +32,15 @@ const setSts = (client, message, selectedStatus) => {
 				activity: {
 					name: 'Jaiden',
 					type: 'WATCHING'
-					
+				}
+			});
+			break;
+		case 'busy':
+			client.user.setPresence({
+				status: 'dnd',
+				activity: {
+					name: 'Jaiden sleep',
+					type: 'WATCHING'
 				}
 			});
 			break;

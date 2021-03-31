@@ -64,6 +64,16 @@ const setSts = (client, message, selectedStatus) => {
 				}
 			});
 			break;
+		case 'stream':
+			client.user.setPresence({
+				status: 'online',
+				activity: {
+					name: 'something',
+					type: 'STREAMING',
+					url: 'https://www.youtube.com/watch?v=raTkZqz680Y&feature=youtu.be'
+				}
+			});
+			break;
 		case 'play':
 			client.user.setPresence({
 				status: 'online',

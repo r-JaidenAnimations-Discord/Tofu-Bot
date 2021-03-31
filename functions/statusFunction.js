@@ -3,7 +3,7 @@ const fs = require('fs');
 const { /*prefix, botProfile, tofuBlue, */jaidenServerID, level20RoleID } = require('../config.json');
 const { handleError } = require('./errorHandler.js');
 
-let randomStatusEnable = true;
+//let randomStatusEnable = true;
 
 // Set the bot's status
 const setSts = (client, message, selectedStatus) => {
@@ -51,7 +51,7 @@ const setSts = (client, message, selectedStatus) => {
 				activity: {
 					name: 'something',
 					type: 'STREAMING',
-					url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+					url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
 				}
 			});
 			break;

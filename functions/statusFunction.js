@@ -7,12 +7,13 @@ let randomStatusEnable = true;
 
 // Set the bot's status
 const setSts = (client, message, selectedStatus) => {
+	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/*this.*/selectedStatus) { // lmao, i fucking hate this.
 		case 'awake':
 			client.user.setPresence({
 				status: 'online',
 				activity: {
-					name: 'you',
+					name: youOrJaiden,
 					type: 'WATCHING'
 				}
 			});
@@ -21,7 +22,7 @@ const setSts = (client, message, selectedStatus) => {
 			client.user.setPresence({
 				status: 'idle',
 				activity: {
-					name: 'you but half asleep',
+					name: `${youOrJaiden} but half asleep`,
 					type: 'WATCHING'
 				}
 			});

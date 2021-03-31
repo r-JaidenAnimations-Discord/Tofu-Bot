@@ -26,6 +26,16 @@ const setSts = (client, message, selectedStatus) => {
 				}
 			});
 			break;
+		case 'asleep':
+			client.user.setPresence({
+				status: 'idle',
+				activity: {
+					name: 'Jaiden',
+					type: 'WATCHING'
+					
+				}
+			});
+			break;
 		case 'busy':
 			client.user.setPresence({
 				status: 'dnd',

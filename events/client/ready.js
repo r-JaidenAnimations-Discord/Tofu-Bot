@@ -2,7 +2,7 @@
 const chalk = require('chalk');
 const { randomStatus } = require('../../functions/statusFunction.js');
 //const { staffChatID } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = client => {
 	randomStatus(client);

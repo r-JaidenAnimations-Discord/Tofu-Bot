@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const { stripIndents } = require('common-tags');
-const { readJSONSync, writeJSONSync, read, readdir } = require('fs-extra');
+const { readJSONSync, writeJSONSync } = require('fs-extra');
 const { teraID, retainedID ,maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 

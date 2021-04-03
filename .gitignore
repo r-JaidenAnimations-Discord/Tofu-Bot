@@ -24,3 +24,6 @@ commanddata/Configuration/settings.json
 
 # Changelog is always out of date, i just keep them locally now. Check the releases tab for changelogs
 CHANGELOG.md
+
+# The actual blacklist shouldn't be pushed
+commanddata/Blacklist/blacklist.json

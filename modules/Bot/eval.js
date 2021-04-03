@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const beautify = require('beautify');
-const { teraID, retainedID ,maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
+const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler');
 // NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
@@ -26,7 +26,7 @@ module.exports = {
 			}
 		}
 
-		if (!args[0]) { 
+		if (!args[0]) {
 			try {
 				return message.channel.send('Give me something to evaluate tho')
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
@@ -38,7 +38,7 @@ module.exports = {
 		try {
 			if (args.join(' ').toLowerCase().includes('token')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 			if (args.join(' ').toLowerCase().includes('key')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
-			
+
 
 			const toEval = args.join(' ');
 			const evaluated = eval(toEval);
@@ -54,7 +54,7 @@ module.exports = {
 				.setTitle('Eval')
 				.addField('To Evaluate', `\`\`\`js\n${beautify(toEval, { format: 'js' })}\n\`\`\``)
 				.addField('Evaluated', evaluated)
-				.addField('Type of', typeof(evaluated))
+				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
 			try {
@@ -75,9 +75,9 @@ module.exports = {
 				handleError(client, 'eval.js', 'Error on sending errorEmbed', e);
 			}
 		}
-		
-// ... all your eval shit
 
-//message.channel.send(eval(args.join(' ').replace(apiKey, 'funny token time')));
+		// ... all your eval shit
+
+		//message.channel.send(eval(args.join(' ').replace(apiKey, 'funny token time')));
 	},
 };

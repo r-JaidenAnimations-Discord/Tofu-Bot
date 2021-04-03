@@ -1,4 +1,4 @@
-const { gradyID, teraID, retainedID, maxID} = require('../../config.json');
+const { gradyID, teraID, retainedID, maxID } = require('../../config.json');
 
 module.exports = {
 	name: 'kirito',

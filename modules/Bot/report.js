@@ -38,7 +38,7 @@ module.exports = {
 					.setDescription(args.slice(0).join(' '))
 					.setFooter(`ID: ${message.author.id}`)
 					.setTimestamp();
-				
+
 				msg.delete();
 				try {
 					client.channels.cache.get(bugReportChannelID).send(reportEmbed);
@@ -53,7 +53,7 @@ module.exports = {
 				}
 			} else if (emoji === '❌') {
 				msg.delete();
-			} 
+			}
 		});
 	},
 };

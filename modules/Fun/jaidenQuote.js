@@ -15,15 +15,15 @@ module.exports = {
 	cooldown: 3,
 	execute: async function(client, message, args) {
 		const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-		
+
 		const randomQuoteEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
 			.setDescription(randomQuote);
 
-			try {
-				message.channel.send(randomQuoteEmbed);
-			} catch (e) {
-				return handleError(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
-			}
+		try {
+			message.channel.send(randomQuoteEmbed);
+		} catch (e) {
+			return handleError(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
+		}
 	},
 };

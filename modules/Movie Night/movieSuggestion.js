@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote, botProfile} = require('../../config.json');
+const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote, botProfile } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
@@ -23,9 +23,9 @@ module.exports = {
 			.setTitle(movie)
 			//.setDescription(`Suggested by ${message.author}`)
 			.setTimestamp()
-			//.setFooter(`Suggested by ${message.member.displayName}`);
+		//	.setFooter(`Suggested by ${message.member.displayName}`);
 
-		try {	
+		try {
 			/*client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {
 				suggestionEmbed.react(fingerupvote);
 				suggestionEmbed.react(fingerdownvote);

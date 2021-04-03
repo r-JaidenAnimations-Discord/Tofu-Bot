@@ -15,7 +15,7 @@ module.exports = {
 		if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply('You fool, need more permissions');
 
 		// yeah it just does this
-		setSts(client, message, args[0]);  
+		setSts(client, message, args[0]);
 
 		message.react('✅');
 	},

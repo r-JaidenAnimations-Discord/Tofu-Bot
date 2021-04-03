@@ -22,7 +22,7 @@ module.exports = {
 		}
 		else {
 			return getAll(client, message);
-		}	
+		}
 	},
 };
 
@@ -30,7 +30,7 @@ async function getAll(client, message) {
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
-	
+
 	const commands = (category) => {
 		return client.commands
 			.filter(cmd => cmd.category === category)
@@ -38,7 +38,7 @@ async function getAll(client, message) {
 			.join(' ');
 	};
 
-	const info = client.categories 
+	const info = client.categories
 		.map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n\n${commands(cat)}`)
 		.reduce((string, category) => string + '\n\n' + category);
 

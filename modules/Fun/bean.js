@@ -11,7 +11,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		if(!args[0] || message.mentions.users.first() === message.author) {
+		if (!args[0] || message.mentions.users.first() === message.author) {
 			try {
 				return message.channel.send('You got some beans and ate them with your rice, ah yes...');
 			} catch (e) {

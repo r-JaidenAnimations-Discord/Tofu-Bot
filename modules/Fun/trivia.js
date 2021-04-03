@@ -33,13 +33,13 @@ module.exports = {
 				.setTitle('Trivia Info')
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
 				.setColor(tofuGreen);
-			
+
 			try {
-				return message.channel.send(ruleEmbed); 		
+				return message.channel.send(ruleEmbed);
 			} catch (e) {
 				return handleError(client, 'trivia.js', 'Error on sending ruleEmbed', e);
 			}
-			}
+		}
 
 		//message.channel.send('hotel? Trivia!');
 		let q = trivia[Math.floor(Math.random() * trivia.length)];
@@ -48,60 +48,60 @@ module.exports = {
 			.setTitle(q.question)
 			.setDescription(
 				q.answers.map((answer, i) =>
-  					`${i === q.correct ? "✅ **" : "❌ "}${numberReactions.get(i + 1)}: ${answer}${i === q.correct ? "**" : ""}\n`
+					`${i === q.correct ? "✅ **" : "❌ "}${numberReactions.get(i + 1)}: ${answer}${i === q.correct ? "**" : ""}\n`
 				)
 			)
 			.setColor(tofuGreen)
-			//.setFooter(`The correct answer has been marked.`);
+		//.setFooter(`The correct answer has been marked.`);
 		const Embed = new Discord.MessageEmbed()
 			.setTitle(q.question)
 			.setDescription(
 				q.answers.map((opt) => {
-				  i++;
-				  return `${numberReactions.get(i)}: ${opt}\n`;
+					i++;
+					return `${numberReactions.get(i)}: ${opt}\n`;
 				})
 			)
 			.setColor(tofuGreen)
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
-			try {
-				message.channel.send(Embed).then(async sentEmbed => {
-					let count;
-					for (count = 0; count < q.answers.length; count++) {
-						//console.log(`${numberReactions.get(count + 1)}`);
-					  try {
+		try {
+			message.channel.send(Embed).then(async sentEmbed => {
+				let count;
+				for (count = 0; count < q.answers.length; count++) {
+					//console.log(`${numberReactions.get(count + 1)}`);
+					try {
 						sentEmbed.react(`${numberReactions.get(count + 1)}`);
-					  } catch (e) {
-						  return handleError(client, 'trivia.js', 'Error on reacting to embed', e);
-					  }
-					} 
-					setTimeout(async() => {
-						//sentEmbed.react('✅');
-						const correct = await promptMessage(sentEmbed, message.author, 45, ['✅']);
-					
-						if (correct === '✅') {
-							//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
-							correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
-							try {
-								sentEmbed.edit(correctedEmbed);
-							} catch (e) {
-								return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
-							}
+					} catch (e) {
+						return handleError(client, 'trivia.js', 'Error on reacting to embed', e);
+					}
+				}
+				setTimeout(async () => {
+					//sentEmbed.react('✅');
+					const correct = await promptMessage(sentEmbed, message.author, 45, ['✅']);
+
+					if (correct === '✅') {
+						//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
+						correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
+						try {
+							sentEmbed.edit(correctedEmbed);
+						} catch (e) {
+							return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 						}
-						else {
-							//message.channel.send('k')
-							correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
-							try {
-								sentEmbed.edit(correctedEmbed);
-							} catch (e) {
-								return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
-							}
+					}
+					else {
+						//message.channel.send('k')
+						correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
+						try {
+							sentEmbed.edit(correctedEmbed);
+						} catch (e) {
+							return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 						}
-					}, 15000);
-				});
-			} catch (e) {
-				return handleError(client, 'trivia.js', 'Error on sending mainEmbed', e);
-			}
+					}
+				}, 15000);
+			});
+		} catch (e) {
+			return handleError(client, 'trivia.js', 'Error on sending mainEmbed', e);
+		}
 
 	},
 };

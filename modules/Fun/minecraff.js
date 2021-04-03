@@ -19,11 +19,11 @@ module.exports = {
 
 		https.get(url, function(res) {
 			var body = '';
-		
+
 			res.on('data', function(chunk) {
 				body += chunk;
 			});
-		
+
 			res.on('end', function() {
 				var APIresponse = JSON.parse(body);
 				//console.log("Got a response: ", APIresponse.ip);
@@ -64,7 +64,7 @@ module.exports = {
 					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
 					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
 				}
-			
+
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				try {

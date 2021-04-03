@@ -38,7 +38,7 @@ module.exports = {
 				return message.channel.send(ruleEmbed); 		
 			} catch (e) {
 				return handleError(client, 'trivia.js', 'Error on sending ruleEmbed', e);
-			}   
+			}
 			}
 
 		//message.channel.send('hotel? Trivia!');

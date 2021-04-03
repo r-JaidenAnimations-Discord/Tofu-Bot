@@ -44,7 +44,7 @@ module.exports = {
 			activity = 'WATCHING';
 		}
 		//else if (args[1] == 'stream') {
-		//    activity = 'STREAMING';
+		//	activity = 'STREAMING';
 		//}
 		else if (args[1] == 'play') {
 			activity = 'PLAYING';

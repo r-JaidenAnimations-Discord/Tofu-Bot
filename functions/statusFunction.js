@@ -9,7 +9,7 @@ const { handleError } = require('./errorHandler.js');
 const setSts = (client, message, selectedStatus) => {
 	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/*this.*/selectedStatus) { // lmao, i fucking hate this.
-		case 'awake':
+		case 'online':
 			client.user.setPresence({
 				status: 'online',
 				activity: {
@@ -18,7 +18,7 @@ const setSts = (client, message, selectedStatus) => {
 				}
 			});
 			break;
-		case 'asleep':
+		case 'idle':
 			client.user.setPresence({
 				status: 'idle',
 				activity: {
@@ -27,7 +27,7 @@ const setSts = (client, message, selectedStatus) => {
 				}
 			});
 			break;
-		case 'busy':
+		case 'dnd':
 			client.user.setPresence({
 				status: 'dnd',
 				activity: {
@@ -90,7 +90,7 @@ const setSts = (client, message, selectedStatus) => {
 			let randomMemberID = memberArr[Math.floor(Math.random() * memberArr.length)];
 			let selectedDisplayName = client.guilds.cache.get('754451472699228281').members.cache.get(randomMemberID).displayName;
 			message.channel.send(selectedDisplayName)*/
-			
+
 			//This works, but it's also called spaghetticode apparently
 			/*let memberMap = message.guild.roles.cache.get(level20RoleID).members.map(m=>m.user.id);
 			let memberArr = Array.from(memberMap);
@@ -98,15 +98,19 @@ const setSts = (client, message, selectedStatus) => {
 			let selectedDisplayName = client.guilds.cache.get(jaidenServerID).members.cache.get(randomMemberID).displayName;*/
 
 			let memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
-			let randomMember = memberList[Math.floor(Math.random() * memberList.length)]
+			let randomMember = memberList[Math.floor(Math.random() * memberList.length)];
+
+			// We don't want to have the bot appear offline
+			const simpleStates = ['online', 'idle', 'dnd'];
+			let randomSimpleState = simpleStates[Math.floor(Math.random() * simpleStates.length)];
 
 			client.user.setPresence({
+				status: randomSimpleState,
 				activity: {
 					name: randomMember,
 					type: 'WATCHING'
 				}
 			});
-
 			break;
 		default:
 			try {
@@ -118,13 +122,13 @@ const setSts = (client, message, selectedStatus) => {
 }
 
 // We don't want to have the bot appear offline
-const states = ['awake', 'asleep', 'busy', /*'gone', */'stream', 'play', 'listen', 'randomuser'];
+const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser'];
 const randomStatus = async (client, message) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
 	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
-  	if (settingsFile.randomStatus === true) {
+	if (settingsFile.randomStatus === true) {
 		const nextState = states[Math.floor(Math.random() * states.length)];
 		setSts(client, message, nextState);
 		//console.log('[RAND] Enabled, set');

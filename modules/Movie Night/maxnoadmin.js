@@ -1,4 +1,4 @@
-const { maxID, movieNightRoleID } = require('../../config.json');
+const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = require('../../config.json');
 const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
@@ -40,8 +40,20 @@ module.exports = {
 				return handleError(client, 'maxnoadmin.js', 'Error on sending no text error', e);
 			}
 		}
+
 		try {
-			channel.send(`<@&${movieNightRoleID}>\n${args.slice(1).join(' ')}`);
+			let movieNightChannelInvite = await client.guilds.cache.get(jaidenServerID).channels.cache.get(movieNightChannelID).createInvite(
+				{
+					maxAge: 3600, // maximum time for the invite, in seconds
+					maxUses: 0 // maximum times it can be used, 0 for infinite
+				},
+				'Movie Night invite'
+			);
+
+			console.log(movieNightChannelInvite);
+
+			channel.send(`<@&${movieNightRoleID}>\n${args.slice(1).join(' ')}\n${movieNightChannelInvite}`);
+			message.react('✅');
 		} catch (e) {
 			return handleError(client, 'maxnoadmin.js', 'Error on sending announcement', e);
 		}

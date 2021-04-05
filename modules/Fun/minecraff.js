@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const https = require('https');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { minecraftIP, tofuGreen, botProfile, maxID, tofuError } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'minecraft',
@@ -19,11 +20,11 @@ module.exports = {
 
 		https.get(url, function(res) {
 			var body = '';
-		
+
 			res.on('data', function(chunk) {
 				body += chunk;
 			});
-		
+
 			res.on('end', function() {
 				var APIresponse = JSON.parse(body);
 				//console.log("Got a response: ", APIresponse.ip);
@@ -64,7 +65,7 @@ module.exports = {
 					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
 					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
 				}
-			
+
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				try {
@@ -78,10 +79,12 @@ module.exports = {
 			try {
 				message.channel.stopTyping();
 				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
-				handleError(client, 'minecraff.js', 'API did not respond', e);
+				//handleError(client, 'minecraff.js', 'API did not respond', e);
+				new Tantrum(client, 'minecraff.js', 'API did not respond', e);
 
 			} catch (f) {
-				handleError(client, 'minecraff.js', 'Error on sending error embed', f);
+				//handleError(client, 'minecraff.js', 'Error on sending error embed', f);
+				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			}
 		});
 	},

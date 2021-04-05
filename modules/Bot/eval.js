@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const beautify = require('beautify');
-const { teraID, retainedID ,maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler');
+const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
 // NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
 module.exports = {
@@ -22,23 +23,25 @@ module.exports = {
 				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`));
 				return;
 			} catch (e) {
-				return handleError(client, 'eval.js', 'Error on sending only masters error', e);
+				//return handleError(client, 'eval.js', 'Error on sending only masters error', e);
+				throw new Tantrum(client, 'eval.js', 'Error on sending only masters error', e);
 			}
 		}
 
-		if (!args[0]) { 
+		if (!args[0]) {
 			try {
 				return message.channel.send('Give me something to evaluate tho')
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
 			} catch (e) {
-				return handleError(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
+				//return handleError(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
+				throw new Tantrum(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
 			}
 		}
 
 		try {
 			if (args.join(' ').toLowerCase().includes('token')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 			if (args.join(' ').toLowerCase().includes('key')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
-			
+
 
 			const toEval = args.join(' ');
 			const evaluated = eval(toEval);
@@ -54,13 +57,14 @@ module.exports = {
 				.setTitle('Eval')
 				.addField('To Evaluate', `\`\`\`js\n${beautify(toEval, { format: 'js' })}\n\`\`\``)
 				.addField('Evaluated', evaluated)
-				.addField('Type of', typeof(evaluated))
+				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
 			try {
 				message.channel.send(embed);
 			} catch (e) {
-				handleError(client, 'eval.js', 'Error on sending eval embed', e);
+				//handleError(client, 'eval.js', 'Error on sending eval embed', e);
+				new Tantrum(client, 'eval.js', 'Error on sending eval embed', e);
 			}
 		} catch (e) {
 			let embed = new Discord.MessageEmbed()
@@ -72,12 +76,13 @@ module.exports = {
 			try {
 				message.channel.send(embed);
 			} catch (e) {
-				handleError(client, 'eval.js', 'Error on sending errorEmbed', e);
+				//handleError(client, 'eval.js', 'Error on sending errorEmbed', e);
+				new Tantrum(client, 'eval.js', 'Error on sending errorEmbed', e);
 			}
 		}
-		
-// ... all your eval shit
 
-//message.channel.send(eval(args.join(' ').replace(apiKey, 'funny token time')));
+		// ... all your eval shit
+
+		//message.channel.send(eval(args.join(' ').replace(apiKey, 'funny token time')));
 	},
 };

@@ -1,6 +1,7 @@
 const fs = require('fs');
-const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler.js');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
+const { jaidenServerID, generalChannelID, devMode, gradyID, maxID } = require('../../config.json');
 
 module.exports = async (client, member) => {
 	if (member.guild.id != jaidenServerID && devMode === false) return console.log('left but not jaidenserver');
@@ -10,7 +11,8 @@ module.exports = async (client, member) => {
 			client.channels.cache.get(generalChannelID).send('GRADY, NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!');
 			client.users.cache.get(maxID).send('Grady left, noooooooo');
 		} catch (e) {
-			return handleError(client, 'guildMemberRemove.js', 'Error on sending grady left message.', e);
+			//return handleError(client, 'guildMemberRemove.js', 'Error on sending grady left message.', e);
+			throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending grady left message.', e);
 		}
 	}
 
@@ -30,6 +32,7 @@ module.exports = async (client, member) => {
 		client.channels.cache.get(generalChannelID).send(randomBye);
 		return;
 	} catch (e) {
-		return handleError(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
+		//return handleError(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
+		throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
 	}
 };

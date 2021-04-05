@@ -14,7 +14,7 @@ module.exports = {
 		if (args.length < 1) {
 			return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');
 		}
-		
+
 		let input = args.join(' 👏 ');
 
 		// Supress @everyone, @here and pinging roles

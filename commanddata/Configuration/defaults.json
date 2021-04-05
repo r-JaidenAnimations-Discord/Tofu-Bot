@@ -3,6 +3,7 @@
     "kiritoTrust": true,
     "aliTrust": true,
     "randomStatus": true,
+    "blackListing": true,
     "disabledCommands": [
         "movienight"
     ]

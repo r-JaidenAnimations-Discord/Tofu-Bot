@@ -1,5 +1,6 @@
 //const Discord = require('discord.js');
-const { handleError } = require('../../functions/errorHandler.js');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'ping',
@@ -17,10 +18,13 @@ module.exports = {
 			try {
 				msg.edit(`Pong!\nLatency: ${Math.floor(msg.createdAt - message.createdAt)}ms\nAPI Latency (Bot): ${client.ws.ping}ms`);
 			} catch (e) {
-				handleError(client, 'ping.js', 'Error on editing ping message', e);
+				//handleError(client, 'ping.js', 'Error on editing ping message', e);
+				new Tantrum(client, 'ping.js', 'Error on editing ping message', e);
+
 			}
 		} catch (e) {
-			handleError(client, 'ping.js', 'Error on sending ping message', e);
+			//handleError(client, 'ping.js', 'Error on sending ping message', e);
+			new Tantrum(client, 'ping.js', 'Error on sending ping message', e);
 		}
 	},
 };

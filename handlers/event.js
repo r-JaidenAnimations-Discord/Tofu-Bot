@@ -18,7 +18,7 @@ module.exports = client => {
 			table.addRow(eName, '✔   Loaded');
 		}
 	};
-	['client', 'guild'].forEach(x=>load(x));
+	['client', 'guild'].forEach(x => load(x));
 	console.log(table.toString());
 };
 //wait might run be because the module export of the event has to be different too?

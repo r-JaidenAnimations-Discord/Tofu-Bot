@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+//const Discord = require('discord.js');
 const owofy = require('owofy');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
 	isDeprecated: false,
 	aliases: ['owofy'],
 	cooldown: 5,
-	execute: async(client, message, args) => {
+	execute: async function(client, message, args) {
 		if (args.length < 1) return message.channel.send('What to say tho. ;-;');
 		//if (message.deletable) message.delete();
 

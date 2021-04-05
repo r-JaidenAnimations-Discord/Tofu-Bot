@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { writeJSONSync } = require('fs-extra');
-const { handleError } = require('../../functions/errorHandler.js');
 const { tofuGreen, tofuRed, maxID } = require('../../config.json');
 
 module.exports = {
@@ -19,7 +20,8 @@ module.exports = {
 			try {
 				return message.reply('You fool, need more permissions');
 			} catch (e) {
-				return handleError(client, 'addBlacklist.js', 'Error on sending permission error', e);
+				//return handleError(client, 'addBlacklist.js', 'Error on sending permission error', e);
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending permission error', e);
 			}
 		}
 
@@ -37,7 +39,8 @@ module.exports = {
 			try {
 				return message.channel.send('No member specified');
 			} catch (e) {
-				return handleError(client, 'addBlacklist.js', 'Error on sending no user defined message', e);
+				//return handleError(client, 'addBlacklist.js', 'Error on sending no user defined message', e);
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no user defined message', e);
 			}
 		}
 
@@ -45,7 +48,8 @@ module.exports = {
 			try {
 				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
 			} catch (e) {
-				return handleError(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+				//return handleError(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
 			}
 		}
 
@@ -55,7 +59,8 @@ module.exports = {
 				blackListJSON.bamboozle.push(message.author.id);
 				return writeJSONSync('./commanddata/Blacklist/blacklist.json', blackListJSON, { spaces: 4 });
 			} catch (e) {
-				return handleError(client, 'addBlacklist.js', 'Error on sending get blacklisted message');
+				//return handleError(client, 'addBlacklist.js', 'Error on sending get blacklisted message');
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending get blacklisted message');
 			}
 		}
 
@@ -64,7 +69,8 @@ module.exports = {
 			try {
 				return message.channel.send('Give me a category to put them in though');
 			} catch (error) {
-				return handleError(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
+				//return handleError(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
 			}
 		}
 
@@ -81,7 +87,8 @@ module.exports = {
 					message.channel.send(alreadyBlacklistedEmbed);
 					return;
 				} catch (e) {
-					return handleError(client, 'addBlacklist.js', 'Error on sending member already in blacklist category message.', e);
+					//return handleError(client, 'addBlacklist.js', 'Error on sending member already in blacklist category message.', e);
+					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending member already in blacklist category message.', e);
 				}
 			}
 		}
@@ -107,7 +114,8 @@ module.exports = {
 					message.channel.send(invalidCategoryEmbed);
 					return;
 				} catch (e) {
-					return handleError(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
+					//return handleError(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
+					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
 				}
 				break;
 		}
@@ -123,7 +131,8 @@ module.exports = {
 			message.channel.send(blackListEmbed);
 			return;
 		} catch (e) {
-			return handleError(client, 'addBlacklist.js', 'Error on saving blacklist settings', e);
+			//return handleError(client, 'addBlacklist.js', 'Error on saving blacklist settings', e);
+			throw new Tantrum(client, 'addBlacklist.js', 'Error on saving blacklist settings', e);
 		}
 	},
 };

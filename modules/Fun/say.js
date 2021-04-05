@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { tofuGreen } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'say',
@@ -21,7 +22,8 @@ module.exports = {
 			try {
 				return message.reply('You fool, need more permissions');
 			} catch (e) {
-				return handleError(client, 'say.js', 'Error on sending permission error', e);
+				//return handleError(client, 'say.js', 'Error on sending permission error', e);
+				throw new Tantrum(client, 'say.js', 'Error on sending permission error', e);
 			}
 		}
 
@@ -31,7 +33,8 @@ module.exports = {
 			try {
 				return message.channel.send('Where the actual F*CK do you want me to put that? My ass?');
 			} catch (e) {
-				return handleError(client, 'say.js', 'Error on sending channel not defined error', e);
+				//return handleError(client, 'say.js', 'Error on sending channel not defined error', e);
+				throw new Tantrum(client, 'say.js', 'Error on sending channel not defined error', e);
 			}
 		}
 
@@ -41,7 +44,8 @@ module.exports = {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')
 				} catch (error) {
-					return handleError(client, 'say.js', 'Error on sending no message error', e);
+					//return handleError(client, 'say.js', 'Error on sending no message error', e);
+					throw new Tantrum(client, 'say.js', 'Error on sending no message error', e);
 				}
 			}
 
@@ -52,7 +56,8 @@ module.exports = {
 			try {
 				channel.send(embed);
 			} catch (e) {
-				return handleError(client, 'say.js', 'Error on sending message', e);
+				//return handleError(client, 'say.js', 'Error on sending message', e);
+				throw new Tantrum(client, 'say.js', 'Error on sending message', e);
 			}
 		}
 		else {
@@ -60,13 +65,15 @@ module.exports = {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
 				} catch (e) {
-					return handleError(client, 'say.js', 'Error on sending no message error', e);
+					//return handleError(client, 'say.js', 'Error on sending no message error', e);
+					throw new Tantrum(client, 'say.js', 'Error on sending no message error', e);
 				}
 			}
 			try {
 				channel.send(args.slice(1).join(' '));
 			} catch (e) {
-				return handleError(client, 'say.js', 'Error on sending message', e);
+				//return handleError(client, 'say.js', 'Error on sending message', e);
+				throw new Tantrum(client, 'say.js', 'Error on sending message', e);
 			}
 		}
 	},

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const { maxID, tofuError } = require('../config.json');
 const chalk = require('chalk');
+const { maxID, tofuError } = require('../config.json');
 
 const handleError = (client, file, text, e) => {
 	try {

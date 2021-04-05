@@ -1,8 +1,9 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const { prefix, tofuOrange } = require('../../config.json');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { stripIndents } = require('common-tags');
-const { handleError } = require('../../functions/errorHandler.js');
+const { prefix, tofuOrange } = require('../../config.json');
 
 module.exports = {
 	name: 'help',
@@ -46,7 +47,8 @@ async function getAll(client, message) {
 		return message.channel.send(embed.setDescription(info));
 
 	} catch (e) {
-		return handleError(client, 'help.js', 'Error sending help embed', e);
+		//return handleError(client, 'help.js', 'Error sending help embed', e);
+		throw new Tantrum(client, 'help.js', 'Error sending help embed', e);
 	}
 }
 
@@ -61,7 +63,8 @@ async function getCmd(client, message, input) {
 		try {
 			return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
 		} catch (e) {
-			return handleError(client, 'help.js', 'Error on sending not a command error.');
+			//return handleError(client, 'help.js', 'Error on sending not a command error.');
+			throw new Tantrum(client, 'help.js', 'Error on sending not a command error.');
 		}
 	}
 
@@ -77,5 +80,9 @@ async function getCmd(client, message, input) {
 	if (cmd.description) embed.addField('**Command Description**', `${cmd.description}`);
 	if (cmd.usage) embed.addField('**Command Structure**', `\`${prefix}${cmd.usage}\``);
 
-	return message.channel.send(embed);
+	try {
+		return message.channel.send(embed);
+	} catch (e) {
+		throw new Tantrum(client, 'help.js', 'Error on sending command help embed', e);
+	}
 }

@@ -1,8 +1,9 @@
-const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
-const fs = require('fs');
 const Discord = require('discord.js');
-const { handleError } = require('../../functions/errorHandler.js');
+const fs = require('fs');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { promptMessage } = require('../../functions/promptMessage.js');
+const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
 
 module.exports = async (client, message) => {
 	let cooldowns = client.cooldowns;
@@ -22,7 +23,8 @@ module.exports = async (client, message) => {
 		try {
 			message.channel.send('Can you not? ;_;');
 		} catch (e) {
-			return handleError(client, 'message.js', 'Error on sending mad ping', e);
+			//return handleError(client, 'message.js', 'Error on sending mad ping', e);
+			throw new Tantrum(client, 'message.js', 'Error on sending mad ping', e);
 		}
 	}
 
@@ -43,14 +45,16 @@ module.exports = async (client, message) => {
 			try {
 				return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+				//return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
 			}
 		}
 		if (!command) {
 			try {
 				return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+				//return handleError(client, 'message.js', 'Error on sending can\'t talk DM', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
 			}
 		}
 	}
@@ -62,7 +66,8 @@ module.exports = async (client, message) => {
 		try {
 			message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!');
 		} catch (e) {
-			return handleError(client, 'message.js', 'Error on sending deprecated command message', e);
+			//return handleError(client, 'message.js', 'Error on sending deprecated command message', e);
+			throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e);
 		}
 	}
 
@@ -72,7 +77,8 @@ module.exports = async (client, message) => {
 			try {
 				return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ["./commanddata/banKirito.png"] });
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending nokirito message', e);
+				//return handleError(client, 'message.js', 'Error on sending nokirito message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
 			}
 		}
 	}
@@ -83,7 +89,8 @@ module.exports = async (client, message) => {
 			try {
 				return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ["./commanddata/infinitecringe.png"] });
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending nocringe message', e);
+				//return handleError(client, 'message.js', 'Error on sending nocringe message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
 			}
 		}
 	}
@@ -104,7 +111,8 @@ module.exports = async (client, message) => {
 			try {
 				return message.channel.send('Come back when you stop using Python');
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending python blacklist message', e);
+				//return handleError(client, 'message.js', 'Error on sending python blacklist message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e);
 			}
 		}
 		else if (blackListData.bamboozle.includes(message.author.id)) {
@@ -113,7 +121,8 @@ module.exports = async (client, message) => {
 			try {
 				return message.channel.send('Ahahahahahahah get f\'ed you foul piece of $h!t', { files: ['./commanddata/lemao.png'] });
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
+				//return handleError(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
 			}
 		}
 		else if (blackListData.hate.includes(message.author.id)) {
@@ -122,7 +131,8 @@ module.exports = async (client, message) => {
 			try {
 				return message.channel.send('I hate you too');
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending hate blacklist message', e);
+				//return handleError(client, 'message.js', 'Error on sending hate blacklist message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e);
 			}
 		}
 		else if (blackListData.wrongchannel.includes(message.author.id)) {
@@ -131,14 +141,16 @@ module.exports = async (client, message) => {
 			try {
 				return message.channel.send('Come back when you learn to use commands in the right place');
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending wrongchannel blacklist message', e);
+				//return handleError(client, 'message.js', 'Error on sending wrongchannel blacklist message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e);
 			}
 		}
 		else if (blackListData.bloop.includes(message.author.id)) {
 			try {
 				return message.channel.send('Haha, queen mush', { files: ['./commanddata/lemao.png'] });
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending bloop blacklist message', e);
+				//return handleError(client, 'message.js', 'Error on sending bloop blacklist message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e);
 			}
 		}
 		else if (blackListData.other.includes(message.author.id)) {
@@ -147,7 +159,8 @@ module.exports = async (client, message) => {
 			try {
 				return message.channel.send('Nope, not listening to you');
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending other blacklist message', e);
+				//return handleError(client, 'message.js', 'Error on sending other blacklist message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e);
 			}
 		}
 
@@ -172,7 +185,8 @@ module.exports = async (client, message) => {
 				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${timeLeft.toFixed(1)} second(s) before reusing \`${command.name}\`?`);
 				return;
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending command cooldown message', e);
+				//return handleError(client, 'message.js', 'Error on sending command cooldown message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
 			}
 		}
 	}
@@ -187,7 +201,8 @@ module.exports = async (client, message) => {
 				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
 				return;
 			} catch (e) {
-				return handleError(client, 'message.js', 'Error on sending untrusted server message', e);
+				//return handleError(client, 'message.js', 'Error on sending untrusted server message', e);
+				throw new Tantrum(client, 'message.js', 'Error on sending untrusted server message', e);
 			}
 		}
 
@@ -211,7 +226,8 @@ module.exports = async (client, message) => {
 						try {
 							return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
 						} catch (e) {
-							return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
+							//return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
+							throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 						}
 					}
 
@@ -219,7 +235,8 @@ module.exports = async (client, message) => {
 					try {
 						command.execute(client, message, args);
 					} catch (error) {
-						return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+						//return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+						throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
 					}
 
 				} else if (emoji === '❌') {
@@ -235,7 +252,8 @@ module.exports = async (client, message) => {
 		try {
 			return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
 		} catch (e) {
-			return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
+			//return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
+			throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 		}
 	}
 
@@ -243,7 +261,8 @@ module.exports = async (client, message) => {
 	try {
 		command.execute(client, message, args);
 	} catch (error) {
-		return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+		//return handleError(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
 		//message.reply('Sooo i like um broke');
 	}
 }

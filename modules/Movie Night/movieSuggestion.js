@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
-const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote, botProfile } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler.js');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
+const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = require('../../config.json');
 
 module.exports = {
 	name: 'suggestmovie',
@@ -33,7 +34,8 @@ module.exports = {
 			message.channel.send('Your movie suggestion was registered, thank you!');
 			return;
 		} catch (e) {
-			return handleError(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
+			//return handleError(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
+			throw new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
 		}
 	},
 };

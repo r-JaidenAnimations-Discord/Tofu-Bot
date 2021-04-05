@@ -1,6 +1,7 @@
-const fs = require('fs')
+const fs = require('fs');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
-const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = async (client, member) => {
 	if (member.guild.id != jaidenServerID && devMode === false) return console.log('joined but not jaidenserver');
@@ -10,7 +11,8 @@ module.exports = async (client, member) => {
 			client.channels.cache.get(generalChannelID).send('GRADY, you\'re back!!!! omgomgomgomgomg');
 			client.users.cache.get(maxID).send('GRADY IS BACK!!!!');
 		} catch (e) {
-			return handleError(client, 'guildMemberRemove.js', 'Error on sending grady joined message.', e);
+			//return handleError(client, 'guildMemberRemove.js', 'Error on sending grady joined message.', e);
+			throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending grady joined message.', e)
 		}
 	}
 
@@ -32,6 +34,7 @@ module.exports = async (client, member) => {
 		client.channels.cache.get(generalChannelID).send(`${randomWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
 		return;
 	} catch (e) {
-		return handleError(client, 'guildMemberAdd.js', 'Error on sending welcome message', e);
+		//return handleError(client, 'guildMemberAdd.js', 'Error on sending welcome message', e);
+		throw new Tantrum(client, 'guildMemberAdd.js', 'Error on sending welcome message', e)
 	}
 };

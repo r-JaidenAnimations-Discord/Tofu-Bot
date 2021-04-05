@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
+const Tantrum = require('../../functions/tantrum.js');
+//const { handleError } = require('../../functions/errorHandler.js');
 const { tofuGreen } = require('../../config.json');
 const { quotes } = require('../../commanddata/jaidenQuoteList.js');
-const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'quote',
@@ -23,7 +24,8 @@ module.exports = {
 		try {
 			message.channel.send(randomQuoteEmbed);
 		} catch (e) {
-			return handleError(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
+			//return handleError(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
+			throw new Tantrum(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
 		}
 	},
 };

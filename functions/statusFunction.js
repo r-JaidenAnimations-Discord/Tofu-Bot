@@ -1,9 +1,8 @@
 //const Discord = require('discord.js');
 const fs = require('fs');
+const Tantrum = require('./tantrum.js');
+//const { handleError } = require('./errorHandler.js');
 const { jaidenServerID, level20RoleID } = require('../config.json');
-const { handleError } = require('./errorHandler.js');
-
-//let randomStatusEnable = true;
 
 // Set the bot's status
 const setSts = (client, message, selectedStatus) => {
@@ -78,24 +77,6 @@ const setSts = (client, message, selectedStatus) => {
 			setSts(client, message, nextState);
 			break;
 		case 'randomuser':
-			//This is where more stuff will eventually happen
-			/*t+eval var getMap =  message.guild.roles.cache.get('774872082290704394').members.map(m=>m.user.tag);
-			var getArray = Array.from(getMap)
-			message.channel.send(getArray[Math.floor(Math.random() * getArray.length)]);*/
-			//this mess works and returns a random user with the right role, i'll figure out the rest later
-
-			//better and fetches actual username
-			/*t+eval let memberMap = message.guild.roles.cache.get('774872082290704394').members.map(m=>m.user.id);
-			let memberArr = Array.from(memberMap);
-			let randomMemberID = memberArr[Math.floor(Math.random() * memberArr.length)];
-			let selectedDisplayName = client.guilds.cache.get('754451472699228281').members.cache.get(randomMemberID).displayName;
-			message.channel.send(selectedDisplayName)*/
-
-			//This works, but it's also called spaghetticode apparently
-			/*let memberMap = message.guild.roles.cache.get(level20RoleID).members.map(m=>m.user.id);
-			let memberArr = Array.from(memberMap);
-			let randomMemberID = memberArr[Math.floor(Math.random() * memberArr.length)];
-			let selectedDisplayName = client.guilds.cache.get(jaidenServerID).members.cache.get(randomMemberID).displayName;*/
 
 			let memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
 			let randomMember = memberList[Math.floor(Math.random() * memberList.length)];
@@ -116,7 +97,8 @@ const setSts = (client, message, selectedStatus) => {
 			try {
 				return message.channel.send('Invalid argument given');
 			} catch (e) {
-				return handleError(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
+				//return handleError(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
+				throw new Tantrum(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
 			}
 	}
 }

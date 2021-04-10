@@ -1,5 +1,5 @@
 const Tantrum = require("../../functions/tantrum.js");
-const { shrimpID } = require('../../config.json');
+const { teraID, retainedID, maxID, shrimpID } = require('../../config.json');
 
 module.exports = {
 	name: 'a',

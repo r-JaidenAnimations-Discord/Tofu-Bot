@@ -50,7 +50,7 @@ module.exports = {
 			.setTitle(q.question)
 			.setDescription(
 				q.answers.map((answer, i) =>
-					`${i === q.correct ? "✅ **" : "❌ "}${numberReactions.get(i + 1)}: ${answer}${i === q.correct ? "**" : ""}\n`
+					`${i === q.correct ? '✅ **' : '❌ '}${numberReactions.get(i + 1)}: ${answer}${i === q.correct ? '**' : ''}\n`
 				)
 			)
 			.setColor(tofuGreen)

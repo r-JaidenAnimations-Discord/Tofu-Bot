@@ -27,7 +27,7 @@ module.exports = {
 
 			res.on('end', function() {
 				var APIresponse = JSON.parse(body);
-				//console.log("Got a response: ", APIresponse.ip);
+				//console.log('Got a response: ', APIresponse.ip);
 				//console.log(APIresponse.players.list)
 				//console.log(APIresponse)
 				var i;

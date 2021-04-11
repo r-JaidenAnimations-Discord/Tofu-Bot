@@ -72,7 +72,7 @@ module.exports = {
 				for (count = 0; count < q.answers.length; count++) {
 					//console.log(`${numberReactions.get(count + 1)}`);
 					try {
-						sentEmbed.react(`${numberReactions.get(count + 1)}`);
+						await sentEmbed.react(`${numberReactions.get(count + 1)}`);
 					} catch (e) {
 						//return handleError(client, 'trivia.js', 'Error on reacting to embed', e);
 						throw new Tantrum(client, 'trivia.js', 'Error on reacting to embed', e);

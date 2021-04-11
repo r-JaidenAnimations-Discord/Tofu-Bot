@@ -43,7 +43,7 @@ module.exports = {
 			if (!args.slice(2).join(' ')) {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')
-				} catch (error) {
+				} catch (e) {
 					//return handleError(client, 'say.js', 'Error on sending no message error', e);
 					throw new Tantrum(client, 'say.js', 'Error on sending no message error', e);
 				}

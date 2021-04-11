@@ -1,6 +1,6 @@
 {
   "name": "tofubot",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "start": "nodemon"
   },
   "keywords": [],
-  "author": "TeraBaito, MaxTechnics, RetainedEdge, Acama",
+  "author": "TeraBaito, MaxTechnics, RetainedEdge, Acama, Paowee",
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.4.0",
@@ -16,10 +16,16 @@
     "beautify": "0.0.8",
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
+    "discord-ytdl-core": "^5.0.2",
     "discord.js": "^12.5.1",
     "ffmpeg-static": "^4.2.7",
     "fs-extra": "^9.1.0",
-    "owofy": "^1.0.2"
+    "lyrics-finder": "^21.7.0",
+    "owofy": "^1.0.2",
+    "simple-youtube-api": "^5.2.1",
+    "soundcloud-downloader": "^1.0.0",
+    "ytdl-core": "^4.5.0",
+    "ytdl-core-discord": "^1.3.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"

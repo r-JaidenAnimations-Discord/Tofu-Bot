@@ -1,9 +1,9 @@
+const { prefix, tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
 const { stripIndents } = require('common-tags');
-const { prefix, tofuOrange } = require('../../config.json');
 
 module.exports = {
 	name: 'help',

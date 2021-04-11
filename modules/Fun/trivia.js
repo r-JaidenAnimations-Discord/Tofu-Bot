@@ -1,8 +1,8 @@
+const { tofuGreen } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
 const { promptMessage } = require('../../functions/promptMessage.js');
-const { tofuGreen } = require('../../config.json');
 const { trivia } = require('../../commanddata/jaidenTriviaList.js');
 
 let numberReactions = new Map([

@@ -1,0 +1,17 @@
+{
+	"permissionsErrs": {
+		"CONNECT": "You fool, more perms lemao",
+		"SPEAK": "You fool, more perms lemao",
+		"MANAGE_MESSAGES": "You fool, more perms lemao"
+
+	},
+	"musicStrings": {
+		"nothingPlaying": "There is nothing playing.",
+		"noQueue": "There is no queue.",
+		"notInChannel": "You need to join a voice channel first!",
+		"invalidArg": "Invalid argument given, consider checking the help command",
+		"notInSameChannel": "You must be in the same channel as the bot",
+		"connectPerm": "Missing permissions to connect to the voice channel",
+		"speakPerm": "Missing permissions to speak in the voice channel"
+	}
+}

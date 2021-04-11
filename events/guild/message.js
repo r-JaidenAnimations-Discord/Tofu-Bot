@@ -224,7 +224,7 @@ module.exports = async (client, message) => {
 					message.channel.send('Done, you were warned');
 					if (settingsFile.disabledCommands.includes(command.name)) {
 						try {
-							return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
+							return message.channel.send('Yikes, looks like this command has been disabled.\n*(Maxim probably broke it)*\nSo uhhhhh if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
 						} catch (e) {
 							//return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 							throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
@@ -250,7 +250,7 @@ module.exports = async (client, message) => {
 	// Is this command enabled?
 	if (settingsFile.disabledCommands.includes(command.name)) {
 		try {
-			return message.channel.send('So uhhhhh. Maxim is really bad at coding and broke this command.\nIt was disabled. So if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
+			return message.channel.send('Yikes, looks like this command has been disabled.\n*(Maxim probably broke it)*\nSo uhhhhh if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
 		} catch (e) {
 			//return handleError(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 			throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);

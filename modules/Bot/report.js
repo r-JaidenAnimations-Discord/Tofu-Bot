@@ -1,15 +1,15 @@
+const { tofuRed, tofuGreen, bugReportChannelID } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
 const { promptMessage } = require('../../functions/promptMessage.js');
-const { tofuRed, tofuGreen, bugReportChannelID } = require('../../config.json');
 
 module.exports = {
 	name: 'report',
 	helpTitle: 'Report',
 	category: 'Bot',
 	usage: 'report [problem]',
-	description: 'Report bugs or other issues on Tofu.\n Improper use is punishable!',
+	description: 'Report bugs or other issues on Tofu.\nImproper use is punishable!',
 	isDMAllowed: true,
 	isDeprecated: false,
 	aliases: ['issue', 'bug', 'bugreport'],
@@ -17,7 +17,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		if (!args[0]) {
 			try {
-				return message.channel.send(`You gotta describe the problem ${message.author.username.toLowerCase()}. That's right, your name doesn't deserve to be capitalized you shrimp's head.`)
+				return message.channel.send(`You gotta describe the problem ${message.author.username.toLowerCase()}. That's right, your name doesn't deserve to be capitalized you vertical coathanger.`)
 			} catch (e) {
 				//return handleError(client, 'report.js', 'Error on sending \'no problem given\' message');
 				throw new Tantrum(client, 'report.js', 'Error on sending \'no problem given\' message');
@@ -28,6 +28,7 @@ module.exports = {
 			//.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
 			.setTitle('HOLD UP')
 			.setDescription('Posting useless things or trolls is a punishable offense. If you are planning on trolling, dismiss right now. Otherwise, confirm below.')
+			.setFooter('This is also a good moment to check your report before posting just in case you missed something.')
 			.setTimestamp();
 
 		return message.channel.send(warnEmbed).then(async msg => {
@@ -44,7 +45,7 @@ module.exports = {
 				msg.delete();
 				try {
 					client.channels.cache.get(bugReportChannelID).send(reportEmbed);
-					message.channel.send('Your report was posted sucessfully');
+					message.channel.send('Your report was posted sucessfully, thank you.\nWe may contact you for more information.');
 				} catch (e) {
 					try {
 						message.channel.send('Sorry, something went wrong while processing your request please try again later and contact Maxim');

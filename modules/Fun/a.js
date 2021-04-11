@@ -1,5 +1,5 @@
-const Tantrum = require("../../functions/tantrum.js");
-const { teraID, retainedID, maxID, shrimpID } = require('../../config.json');
+const Tantrum = require('../../functions/tantrum.js');
+const { teraID, retainedID, maxID, shrimpID, maidID } = require('../../config.json');
 
 module.exports = {
 	name: 'a',
@@ -12,7 +12,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID && message.author.id !== shrimpID) {
+		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID && message.author.id !== shrimpID && message.author.id !== maidID) {
 			try {
 				return message.channel.send('AHAHAHHAHAHH are you shrimp? Only the all mighty shrimp can use this all mighty command!');
 			} catch (e) {

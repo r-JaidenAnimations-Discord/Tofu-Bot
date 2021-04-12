@@ -1,4 +1,4 @@
-const { STAY_TIME, tofuGreen } = require('../config.json');
+const { STAY_TIME, tofuGreen, tofuOrange } = require('../config.json');
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core-discord');
 const scdl = require('soundcloud-downloader').default;
@@ -23,7 +23,7 @@ module.exports = {
 			setTimeout(function() {
 				if (queue.connection.dispatcher && message.guild.me.voice.channel) return;
 				queue.channel.leave();
-				queue.textChannel.send('Leaving voice channel...');
+				queue.textChannel.send(new Discord.MessageEmbed().setDescription('I left the voice channel because I was inactive for too long.').setColor(tofuOrange));
 			}, STAY_TIME * 1000);
 			//queue.textChannel.send('❌ Music queue ended.').catch(console.error);
 			return message.client.queue.delete(message.guild.id);

@@ -36,7 +36,7 @@ module.exports = {
 			try {
 				return message.channel.send(musicStrings.notInSameChannel);
 			} catch (e) {
-				throw new Tantrum(client, 'play.js', 'Error on sending not in same VC message');
+				throw new Tantrum(client, 'play.js', 'Error on sending not in same VC message', e);
 			}
 		}
 
@@ -107,7 +107,7 @@ module.exports = {
 			try {
 				return message.channel.send('Following URL redirection...');
 			} catch (e) {
-				throw new Tantrum(client, 'play.js', 'Error on sending URL redirect message');
+				throw new Tantrum(client, 'play.js', 'Error on sending URL redirect message', e);
 			}
 		}
 

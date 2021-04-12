@@ -7,7 +7,7 @@ module.exports = {
 	usage: 'movienight',
 	description: 'Not sure, but it sounded fun',
 	isDMAllowed: false,
-	isDeprecated: false,
+	isDeprecated: true,
 	aliases: ['mn'],
 	cooldown: 2,
 	execute: async function(client, message, args) {
@@ -21,11 +21,12 @@ module.exports = {
 
 		if (message.deletable) message.delete();
 
-		if (args[1] = 'join') {
+		message.channel.send('This command is no longer to be used because it will interfere with the music module.');
+		/*if (args[1] = 'join') {
 			isStarted = true;
 			voiceChannel.join().then(connection => {
 				// Yay, it worked!
-				console.log("Successfully connected.");
+				console.log('Successfully connected.');
 				const dispatcher = connection.play('https://raw.githubusercontent.com/Infonet-Team/Infonet-Team.github.io/master/Data/Sound/kettle/Engelwood%20-%20Crystal%20Dolphin.mp3');
 			}).catch(e => {
 				// Oh no, it errored! Let's log it to console :)
@@ -34,6 +35,6 @@ module.exports = {
 		}
 		else {
 			voiceChannel.leave();
-		}
+		}*/
 	},
 };

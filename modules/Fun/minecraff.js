@@ -1,8 +1,8 @@
+const { minecraftIP, tofuGreen, botProfile, maxID, tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const https = require('https');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
-const { minecraftIP, tofuGreen, botProfile, maxID, tofuError } = require('../../config.json');
 
 module.exports = {
 	name: 'minecraft',
@@ -27,7 +27,7 @@ module.exports = {
 
 			res.on('end', function() {
 				var APIresponse = JSON.parse(body);
-				//console.log("Got a response: ", APIresponse.ip);
+				//console.log('Got a response: ', APIresponse.ip);
 				//console.log(APIresponse.players.list)
 				//console.log(APIresponse)
 				var i;

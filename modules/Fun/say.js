@@ -1,7 +1,7 @@
+const { tofuGreen } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
-const { tofuGreen } = require('../../config.json');
 
 module.exports = {
 	name: 'say',
@@ -43,7 +43,7 @@ module.exports = {
 			if (!args.slice(2).join(' ')) {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')
-				} catch (error) {
+				} catch (e) {
 					//return handleError(client, 'say.js', 'Error on sending no message error', e);
 					throw new Tantrum(client, 'say.js', 'Error on sending no message error', e);
 				}

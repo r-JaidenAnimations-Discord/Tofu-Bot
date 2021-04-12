@@ -1,9 +1,9 @@
+const { tofuGreen, tofuRed, maxID } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
 const { writeJSONSync } = require('fs-extra');
-const { tofuGreen, tofuRed, maxID } = require('../../config.json');
 
 module.exports = {
 	name: 'blacklist',
@@ -16,20 +16,8 @@ module.exports = {
 	aliases: ['bl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		if (!message.member.hasPermission('BAN_MEMBERS')) {
-			try {
-				return message.reply('You fool, need more permissions');
-			} catch (e) {
-				//return handleError(client, 'addBlacklist.js', 'Error on sending permission error', e);
-				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending permission error', e);
-			}
-		}
-
-		// Pull the blacklist JSON
-		const raw = await fs.readFileSync('./commanddata/Blacklist/blacklist.json', 'utf-8');
-		var blackListJSON = JSON.parse(raw);
-
 		let toBlacklist = false;
+
 		if (message.mentions.members.first()) {
 			toBlacklist = message.mentions.members.first().id;
 		} else if (/^\d{18}$/.test(args[0])) { // regex AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -44,15 +32,6 @@ module.exports = {
 			}
 		}
 
-		if (toBlacklist == message.author.id) {
-			try {
-				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
-			} catch (e) {
-				//return handleError(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
-				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
-			}
-		}
-
 		if (toBlacklist == maxID) {
 			try {
 				message.channel.send('Oh you sly fox, trying to bamboozle me. Get blacklisted LMAO');
@@ -64,11 +43,33 @@ module.exports = {
 			}
 		}
 
+		if (!message.member.hasPermission('BAN_MEMBERS')) {
+			try {
+				return message.reply('You fool, need more permissions');
+			} catch (e) {
+				//return handleError(client, 'addBlacklist.js', 'Error on sending permission error', e);
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending permission error', e);
+			}
+		}
+
+		// Pull the blacklist JSON
+		const raw = await fs.readFileSync('./commanddata/Blacklist/blacklist.json', 'utf-8');
+		var blackListJSON = JSON.parse(raw);
+
+		if (toBlacklist == message.author.id) {
+			try {
+				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
+			} catch (e) {
+				//return handleError(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+			}
+		}
+
 		let category = args[1];
 		if (!category) {
 			try {
 				return message.channel.send('Give me a category to put them in though');
-			} catch (error) {
+			} catch (e) {
 				//return handleError(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
 				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
 			}

@@ -15,6 +15,9 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync('./modules/');
+//music
+client.queue = new Map();
+
 
 // Log in
 client.login(apiKey);
@@ -22,7 +25,7 @@ client.login(apiKey);
 //if sh!t goes wrong
 client.on('rateLimit', r => {
 	console.warn(`${chalk.yellow('[RATELIMIT]')}: ${r}`);
-	console.log(r)
+	console.log(r);
 })
 client.on('warn', w => {
 	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);

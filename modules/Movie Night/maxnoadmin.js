@@ -1,6 +1,6 @@
+const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = require('../../config.json');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
-const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = require('../../config.json');
 
 module.exports = {
 	name: 'maxnoadmin',

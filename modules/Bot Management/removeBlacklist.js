@@ -1,9 +1,9 @@
+const { tofuGreen, tofuRed } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
 const { writeJSONSync } = require('fs-extra');
-const { tofuGreen, tofuRed } = require('../../config.json');
 
 module.exports = {
 	name: 'whitelist',

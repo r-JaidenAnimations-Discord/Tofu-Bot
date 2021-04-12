@@ -59,7 +59,7 @@ module.exports = {
 			try {
 				return message.channel.send(musicStrings.notInSameChannel);
 			} catch (e) {
-				throw new Tantrum(client, 'playlist.js', 'Error on sending not in same VC message');
+				throw new Tantrum(client, 'playlist.js', 'Error on sending not in same VC message', e);
 			}
 		}
 
@@ -87,11 +87,20 @@ module.exports = {
 				videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: 'snippet' });
 			} catch (error) {
 				console.error(error);
-				return message.channel.send('Playlist not found T_T').catch(console.error);////////////////////////////
+				new Tantrum(client, 'playlist.js', 'Error on fetching playlist', error);
+				try {
+					return message.channel.send('Playlist not found T_T');
+				} catch (e) {
+					throw new Tantrum(client, 'playlist.js', 'Error on sending error', e);
+				}
 			}
 		} else if (scdl.isValidUrl(args[0])) {
 			if (args[0].includes('/sets/')) {
-				message.channel.send('Loading playlist...');///////
+				try {
+					message.channel.send('Loading playlist...');
+				} catch (e) {
+					new Tantrum(client, 'playlist.js', 'Error on sending loading playlist message', e);
+				}
 				playlist = await scdl.getSetInfo(args[0], SOUNDCLOUD_CLIENT_ID);
 				videos = playlist.tracks.map((track) => ({
 					title: track.title,

@@ -17,7 +17,7 @@
     "chalk": "^4.1.0",
     "common-tags": "^1.8.0",
     "discord-ytdl-core": "^5.0.2",
-    "discord.js": "^12.5.1",
+    "discord.js": "^12.5.3",
     "ffmpeg-static": "^4.2.7",
     "fs-extra": "^9.1.0",
     "lyrics-finder": "^21.7.0",

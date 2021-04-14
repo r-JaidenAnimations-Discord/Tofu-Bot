@@ -10,7 +10,7 @@ module.exports = {
     description: 'Stop the music, flush the queue and disconnect.',
     isDMAllowed: false,
     isDeprecated: false,
-    //aliases: [],
+    aliases: ['disconnect', 'dc', 'quit'],
     cooldown: 0,
     execute: async function(client, message, args) {
         const queue = message.client.queue.get(message.guild.id);
@@ -38,6 +38,6 @@ module.exports = {
         queue.channel.leave(); // leave vc
         message.client.queue.delete(message.guild.id); // delete queue
 
-        await message.react('👋');
+        await message.react('👋'); //k byeeeeee
     },
 };

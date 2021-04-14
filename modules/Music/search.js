@@ -13,7 +13,7 @@ module.exports = {
 	description: 'Find a specific song and select one to queue up',
 	isDMAllowed: false,
 	isDeprecated: false,
-	aliases: ['find'],
+	aliases: ['find', 'srch'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!args.length) {

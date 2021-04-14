@@ -11,7 +11,7 @@ module.exports = {
 	description: 'View what\'s coming up',
 	isDMAllowed: false,
 	isDeprecated: false,
-	//aliases: [],
+	aliases: ['q'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		const permissions = message.channel.permissionsFor(message.client.user);

@@ -19,6 +19,7 @@ module.exports = {
 
 		const queue = message.client.queue.get(message.guild.id);
 
+		//TODO Rework auto leave system
 		if (!song) {
 			setTimeout(function() {
 				if (queue.connection.dispatcher && message.guild.me.voice.channel) return;

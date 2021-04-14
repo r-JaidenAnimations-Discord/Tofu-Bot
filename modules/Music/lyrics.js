@@ -1,4 +1,4 @@
-const { tofuRed } = require('../../config.json');
+const { tofuGreen, tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const lyricsFinder = require('lyrics-finder');
@@ -26,24 +26,34 @@ module.exports = {
 		}
 
 		let lyrics = null;
+		let fetchSuccessful = false;
 		const title = queue.songs[0].title;
+
 		try {
+			message.channel.startTyping();
 			lyrics = await lyricsFinder(queue.songs[0].title, '');
-			if (!lyrics) lyrics = `No lyrics found for ${title}.`;
+			fetchSuccessful = true;
+			if (!lyrics) {
+				lyrics = `No lyrics found for ${title}.`;
+				fetchSuccessful = false;
+			}
 		} catch (error) {
 			lyrics = `No lyrics found for ${title}.`;
+			fetchSuccessful = false;
 		}
 
 		let lyricsEmbed = new Discord.MessageEmbed()
 			.setTitle(`${title} - Lyrics`)
 			.setDescription(lyrics)
-			.setColor(tofuRed)
+			.setColor(fetchSuccessful === true ? tofuGreen : tofuError)
 			.setTimestamp();
 
 		if (lyricsEmbed.description.length >= 2048)
 			lyricsEmbed.description = `${lyricsEmbed.description.substr(0, 2045)}...`;
 		try {
-			return message.channel.send(lyricsEmbed);
+			message.channel.stopTyping();
+			message.channel.send(lyricsEmbed);
+			return;
 		} catch (e) {
 			throw new Tantrum(client, 'lyrics.js', 'Error on sending lyricsEmbed', e);
 		}

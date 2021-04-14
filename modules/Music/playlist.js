@@ -131,7 +131,8 @@ module.exports = {
 				return (song = {
 					title: video.title,
 					url: video.url,
-					duration: video.durationSeconds
+					duration: video.durationSeconds,
+					requester: message.author.id
 				});
 			});
 

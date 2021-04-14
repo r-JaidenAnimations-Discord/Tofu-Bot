@@ -80,7 +80,7 @@ module.exports = {
 		dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
 		try {
-			var playingMessage = await queue.textChannel.send(new Discord.MessageEmbed().setTitle('Now playing').setDescription(`[${song.title}](${song.url}) [${message.author}]`).setColor(tofuGreen));
+			var playingMessage = await queue.textChannel.send(new Discord.MessageEmbed().setTitle('Now playing').setDescription(`[${song.title}](${song.url}) [<@${song.requester}>]`).setColor(tofuGreen));
 		} catch (error) {
 			console.error(error);
 		}

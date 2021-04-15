@@ -30,7 +30,7 @@ const setSts = (client, message, selectedStatus) => {
 			client.user.setPresence({
 				status: 'dnd',
 				activity: {
-					name: 'you but in a meeting',
+					name: `${youOrJaiden} but in a meeting`,
 					type: 'WATCHING'
 				}
 			});

@@ -89,7 +89,8 @@ module.exports = {
 		//on end of song
 		setTimeout(() => {
 			if (PRUNING && playingMessage && !playingMessage.deleted) {
-				playingMessage.delete({ timeout: 3000 }).catch(console.error);
+				//playingMessage.delete({ timeout: 3000 }).catch(console.error);
+				playingMessage.delete().catch(console.error);
 			}
 		}, song.duration * 1000);
 

@@ -10,7 +10,7 @@ module.exports = {
 	description: 'Feelin\' random?',
 	isDMAllowed: false,
 	isDeprecated: false,
-	aliases: ['randomize'],
+	aliases: ['randomize', 'random'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		const queue = message.client.queue.get(message.guild.id);

@@ -87,7 +87,7 @@ module.exports = {
 				videos = await playlist.getVideos(MAX_PLAYLIST_SIZE || 10, { part: 'snippet' });
 			} catch (error) {
 				console.error(error);
-				new Tantrum(client, 'playlist.js', 'Error on fetching playlist', error);
+				//new Tantrum(client, 'playlist.js', 'Error on fetching playlist', error);
 				try {
 					return message.channel.send('Playlist not found T_T');
 				} catch (e) {
@@ -131,7 +131,8 @@ module.exports = {
 				return (song = {
 					title: video.title,
 					url: video.url,
-					duration: video.durationSeconds
+					duration: video.durationSeconds,
+					requester: message.author.id
 				});
 			});
 

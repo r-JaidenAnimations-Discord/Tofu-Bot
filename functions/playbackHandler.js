@@ -19,6 +19,7 @@ module.exports = {
 
 		const queue = message.client.queue.get(message.guild.id);
 
+		//TODO Rework auto leave system
 		if (!song) {
 			setTimeout(function() {
 				if (queue.connection.dispatcher && message.guild.me.voice.channel) return;
@@ -80,7 +81,7 @@ module.exports = {
 		dispatcher.setVolumeLogarithmic(queue.volume / 100);
 
 		try {
-			var playingMessage = await queue.textChannel.send(new Discord.MessageEmbed().setTitle('Now playing').setDescription(`[${song.title}](${song.url}) [${message.author}]`).setColor(tofuGreen));
+			var playingMessage = await queue.textChannel.send(new Discord.MessageEmbed().setTitle('Now playing').setDescription(`[${song.title}](${song.url}) [<@${song.requester}>]`).setColor(tofuGreen));
 		} catch (error) {
 			console.error(error);
 		}
@@ -88,7 +89,8 @@ module.exports = {
 		//on end of song
 		setTimeout(() => {
 			if (PRUNING && playingMessage && !playingMessage.deleted) {
-				playingMessage.delete({ timeout: 3000 }).catch(console.error);
+				//playingMessage.delete({ timeout: 3000 }).catch(console.error);
+				playingMessage.delete().catch(console.error);
 			}
 		}, song.duration * 1000);
 

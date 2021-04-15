@@ -130,7 +130,8 @@ module.exports = {
 				song = {
 					title: songInfo.videoDetails.title,
 					url: songInfo.videoDetails.video_url,
-					duration: songInfo.videoDetails.lengthSeconds
+					duration: songInfo.videoDetails.lengthSeconds,
+					requester: message.author.id
 				};
 			} catch (error) {
 				console.error(error);
@@ -147,7 +148,8 @@ module.exports = {
 				song = {
 					title: trackInfo.title,
 					url: trackInfo.permalink_url,
-					duration: Math.ceil(trackInfo.duration / 1000)
+					duration: Math.ceil(trackInfo.duration / 1000),
+					requester: message.author.id
 				};
 			} catch (error) {
 				console.error(error);
@@ -165,7 +167,8 @@ module.exports = {
 				song = {
 					title: songInfo.videoDetails.title,
 					url: songInfo.videoDetails.video_url,
-					duration: songInfo.videoDetails.lengthSeconds
+					duration: songInfo.videoDetails.lengthSeconds,
+					requester: message.author.id
 				};
 			} catch (error) {
 				console.error(error);

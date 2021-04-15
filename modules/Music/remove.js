@@ -14,7 +14,7 @@ module.exports = {
 	description: 'Remove an item from the queue',
 	isDMAllowed: false,
 	isDeprecated: false,
-	aliases: ['rm'],
+	aliases: ['rm', 'delete', 'del'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		const queue = message.client.queue.get(message.guild.id);

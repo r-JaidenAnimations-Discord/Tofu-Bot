@@ -1,6 +1,7 @@
-const { tofuRed } = require('../../config.json');
+const { tofuGreen, tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
+const splitLyrics = require('../../functions/pagination.js');
 const lyricsFinder = require('lyrics-finder');
 const { musicStrings } = require('../../commanddata/strings.json');
 
@@ -26,24 +27,42 @@ module.exports = {
 		}
 
 		let lyrics = null;
+		let fetchSuccessful = false;
 		const title = queue.songs[0].title;
+
 		try {
+			message.channel.startTyping();
 			lyrics = await lyricsFinder(queue.songs[0].title, '');
-			if (!lyrics) lyrics = `No lyrics found for ${title}.`;
+			fetchSuccessful = true;
+			if (!lyrics) {
+				lyrics = `No lyrics found for ${title}.`;
+				fetchSuccessful = false;
+			}
 		} catch (error) {
 			lyrics = `No lyrics found for ${title}.`;
+			fetchSuccessful = false;
+		}
+
+		let splitLyricsReturn = undefined;
+		if (/*lyricsEmbed.description*/lyrics.length >= 2048) {
+			//lyricsEmbed.description = `${lyricsEmbed.description.substr(0, 2045)}...`;
+			splitLyricsReturn = splitLyrics.chunk(lyrics, 1024);
 		}
 
 		let lyricsEmbed = new Discord.MessageEmbed()
 			.setTitle(`${title} - Lyrics`)
-			.setDescription(lyrics)
-			.setColor(tofuRed)
+			.setDescription(splitLyricsReturn[0])
+			.setColor(fetchSuccessful === true ? tofuGreen : tofuError)
 			.setTimestamp();
 
-		if (lyricsEmbed.description.length >= 2048)
-			lyricsEmbed.description = `${lyricsEmbed.description.substr(0, 2045)}...`;
+		if (lyrics.length >= 2048) {
+			lyricsEmbed.setFooter(`Page 1 of ${splitLyricsReturn.length}`);
+		}
 		try {
-			return message.channel.send(lyricsEmbed);
+			message.channel.stopTyping();
+			let sentEmbed = await message.channel.send(lyricsEmbed);
+			if (splitLyricsReturn.length > 1) await splitLyrics.pagination(sentEmbed, message.author, splitLyricsReturn);
+			return;
 		} catch (e) {
 			throw new Tantrum(client, 'lyrics.js', 'Error on sending lyricsEmbed', e);
 		}

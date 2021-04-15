@@ -10,7 +10,7 @@ module.exports = {
 	description: 'Don\'t like it, skip it!',
 	isDMAllowed: false,
 	isDeprecated: false,
-	//aliases: [],
+	aliases: ['sk', 'next', 's'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		const queue = message.client.queue.get(message.guild.id);

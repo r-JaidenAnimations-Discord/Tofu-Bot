@@ -44,10 +44,10 @@ module.exports = {
 		}
 
 		let splitLyricsReturn = undefined;
-		if (/*lyricsEmbed.description*/lyrics.length >= 2048) {
-			//lyricsEmbed.description = `${lyricsEmbed.description.substr(0, 2045)}...`;
-			splitLyricsReturn = splitLyrics.chunk(lyrics, 1024);
-		}
+		//if (/*lyricsEmbed.description*/lyrics.length >= 2048) {
+		//lyricsEmbed.description = `${lyricsEmbed.description.substr(0, 2045)}...`;
+		splitLyricsReturn = splitLyrics.chunk(lyrics, 1024);
+		//}
 
 		let lyricsEmbed = new Discord.MessageEmbed()
 			.setTitle(`${title} - Lyrics`)
@@ -61,7 +61,7 @@ module.exports = {
 		try {
 			message.channel.stopTyping();
 			let sentEmbed = await message.channel.send(lyricsEmbed);
-			if (splitLyricsReturn.length > 1) await splitLyrics.pagination(sentEmbed, message.author, splitLyricsReturn);
+			if (splitLyricsReturn[1]) await splitLyrics.pagination(sentEmbed, message.author, splitLyricsReturn);
 			return;
 		} catch (e) {
 			throw new Tantrum(client, 'lyrics.js', 'Error on sending lyricsEmbed', e);

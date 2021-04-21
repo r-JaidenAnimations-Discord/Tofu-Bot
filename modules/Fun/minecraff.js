@@ -42,7 +42,7 @@ module.exports = {
 					.setTitle('Jaiden Animations Minecraft Server'/*, 'attachment://minecraff.png'*/)
 					.setThumbnail('attachment://minecraff.png')
 					.addFields(
-						{ name: 'IP Address:', value: `${APIresponse.ip}:${APIresponse.port}` },
+						{ name: 'IP Address:', value: /*`${APIresponse.ip}:${APIresponse.port}`*/ minecraftIP },
 						//{ name: 'Version', value: APIresponse.version },
 						//{ name: `Online Users: ${userCount}`, value: playerList },
 						//{ name: 'Server status:', value: `${downStatus}` },

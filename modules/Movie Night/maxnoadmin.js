@@ -6,7 +6,7 @@ module.exports = {
 	name: 'maxnoadmin',
 	helpTitle: 'Max No Admin',
 	category: 'Movie Night',
-	usage: 'maxnoadnin [#channel] [message]',
+	usage: 'maxnoadnin (invite) [#channel] [message]',
 	description: 'Because Max doesn\'t have perms to ping movie night AAAAAAAAAAAA',
 	isDMAllowed: false,
 	isDeprecated: false,
@@ -36,16 +36,8 @@ module.exports = {
 		}
 		//if (message.deletable) message.delete();
 
-		if (!args.slice(1).join(' ')) {
-			try {
-				return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
-			} catch (e) {
-				//return handleError(client, 'maxnoadmin.js', 'Error on sending no text error', e);
-				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending no text error', e);
-			}
-		}
 
-		try {
+		if (args[1] == 'invite') {
 			let movieNightChannelInvite = await client.guilds.cache.get(jaidenServerID).channels.cache.get(movieNightChannelID).createInvite(
 				{
 					maxAge: 3600, // maximum time for the invite, in seconds
@@ -54,13 +46,41 @@ module.exports = {
 				'Movie Night invite'
 			);
 
-			console.log(movieNightChannelInvite);
+			if (!args.slice(2).join(' ')) {
+				try {
+					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')
+				} catch (e) {
+					//return handleError(client, 'maxnoadmin.js', 'Error on sending no message error', e);
+					throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending no message error', e);
+				}
+			}
 
-			channel.send(`<@&${movieNightRoleID}>\n${args.slice(1).join(' ')}\n${movieNightChannelInvite}`);
-			message.react('✅');
-		} catch (e) {
-			//return handleError(client, 'maxnoadmin.js', 'Error on sending announcement', e);
-			throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending announcement', e);
+			try {
+
+				channel.send(`<@&${movieNightRoleID}>\n${args.slice(2).join(' ')}\n${movieNightChannelInvite}`);
+				message.react('✅');
+			} catch (e) {
+				//return handleError(client, 'maxnoadmin.js', 'Error on sending message', e);
+				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);
+			}
+		}
+		else {
+			if (!args.slice(1).join(' ')) {
+				try {
+					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
+				} catch (e) {
+					//return handleError(client, 'maxnoadmin.js', 'Error on sending no message error', e);
+					throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending no message error', e);
+				}
+			}
+			try {
+
+				channel.send(`<@&${movieNightRoleID}>\n${args.slice(1).join(' ')}`);
+				message.react('✅');
+			} catch (e) {
+				//return handleError(client, 'maxnoadmin.js', 'Error on sending message', e);
+				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);
+			}
 		}
 	},
 };

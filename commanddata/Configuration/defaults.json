@@ -4,6 +4,7 @@
     "aliTrust": true,
     "randomStatus": true,
     "blackListing": true,
+    "minecraftMaintenance": false,
     "disabledCommands": [
         "movienight"
     ]

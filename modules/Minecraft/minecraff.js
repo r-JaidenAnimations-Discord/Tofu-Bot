@@ -1,13 +1,14 @@
 const { minecraftIP, tofuGreen, botProfile, maxID, tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const https = require('https');
+const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'minecraft',
 	helpTitle: 'Minecraft',
-	category: 'Fun',
+	category: 'Minecraft',
 	usage: 'minecraft',
 	description: 'Show info about our minecraft server!',
 	isDMAllowed: false,
@@ -16,6 +17,11 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		message.channel.startTyping();
+
+		// Load the settings file
+		const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+		var settingsFile = JSON.parse(data);
+
 		var url = `https://api.mcsrvstat.us/2/${minecraftIP}`;
 
 		https.get(url, function(res) {
@@ -35,6 +41,9 @@ module.exports = {
 				var userCount = 0;
 				var downStatus = `${APIresponse.online === true ? 'The server is currently working' : '⚠️ **The server is down**'}`
 
+				// Set the status to maintenance in case of maintenance
+				if (settingsFile.minecraftMaintenance === true) downStatus = '🛠️ **The server is currently undergoing maintenance.**';
+
 				const attachment = new Discord.MessageAttachment('./commanddata/minecraff.png', 'minecraff.png');
 				const minecraftEmbed = new Discord.MessageEmbed()
 					.setColor(tofuGreen)
@@ -49,10 +58,11 @@ module.exports = {
 					)
 					.setTimestamp();
 
-				if (APIresponse.online === true) {
+				if (APIresponse.online === true && settingsFile.minecraftMaintenance === false) {
 					minecraftEmbed.addField('Version:', APIresponse.version)
 				}
-				if (APIresponse.online === true) {
+
+				if (APIresponse.online === true && settingsFile.minecraftMaintenance === false) {
 					if (APIresponse.players.online) {
 
 						playerList = '';
@@ -61,7 +71,8 @@ module.exports = {
 						}
 					}
 				}
-				if (APIresponse.online === true) {
+
+				if (APIresponse.online === true && settingsFile.minecraftMaintenance === false) {
 					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
 					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
 				}

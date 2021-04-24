@@ -23,10 +23,10 @@ client.queue = new Map();
 client.login(apiKey);
 
 //if sh!t goes wrong
-client.on('rateLimit', r => {
+/*client.on('rateLimit', r => {
 	console.warn(`${chalk.yellow('[RATELIMIT]')}: ${r}`);
 	console.log(r);
-})
+});*/
 client.on('warn', w => {
 	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);
 	//handleError(client, 'index.js', '[WARN]: Unspecified warning', w);

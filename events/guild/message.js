@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
 	//console.log(settingsFile.disabledCommands);
 
 	// Respond on bot ping
-	if (message.mentions.has(client.user.id)) {
+	/*if (message.mentions.has(client.user.id)) {
 		if (message.content.includes('@here') || message.content.includes('@everyone')) return;
 		try {
 			message.channel.send('Can you not? ;_;');
@@ -26,7 +26,7 @@ module.exports = async (client, message) => {
 			//return handleError(client, 'message.js', 'Error on sending mad ping', e);
 			throw new Tantrum(client, 'message.js', 'Error on sending mad ping', e);
 		}
-	}
+	}*/
 
 	// Bots shall not trigger me
 	if (!message.content.startsWith(prefix) || message.author.bot) return;

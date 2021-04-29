@@ -3,10 +3,12 @@
 //const { handleError } = require('../../functions/errorHandler.js');
 const chalk = require('chalk');
 const { randomStatus } = require('../../functions/statusFunction.js');
+const { remindShrimp } = require('../../functions/shrimpReminder.js');
 //const { staffChatID } = require('../../config.json');
 
 module.exports = client => {
 	randomStatus(client);
+	remindShrimp(client);
 	console.log(chalk.green(`Alive as ${client.user.tag}`));
 
 	/*try {

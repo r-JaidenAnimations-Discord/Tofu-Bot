@@ -7,9 +7,11 @@ const chalk = require('chalk');
 const client = new Discord.Client();
 //const { handleError } = require('./functions/errorHandler.js');
 const { randomStatus } = require('./functions/statusFunction.js');
+const { remindShrimp } = require('./functions/shrimpReminder.js');
 const { apiKey } = require('./config.json');
 
-setInterval(function() { randomStatus(client) }, 60 * 30 * 1000);
+setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
+setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -23,10 +25,10 @@ client.queue = new Map();
 client.login(apiKey);
 
 //if sh!t goes wrong
-client.on('rateLimit', r => {
+/*client.on('rateLimit', r => {
 	console.warn(`${chalk.yellow('[RATELIMIT]')}: ${r}`);
 	console.log(r);
-})
+});*/
 client.on('warn', w => {
 	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);
 	//handleError(client, 'index.js', '[WARN]: Unspecified warning', w);

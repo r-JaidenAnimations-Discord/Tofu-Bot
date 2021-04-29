@@ -1,19 +1,10 @@
-const { STAY_TIME, tofuGreen, tofuOrange } = require('../config.json');
+const { STAY_TIME, tofuGreen, tofuOrange, SOUNDCLOUD_CLIENT_ID } = require('../config.json');
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core-discord');
 const scdl = require('soundcloud-downloader').default;
 
 module.exports = {
 	async play(song, message) {
-		const { SOUNDCLOUD_CLIENT_ID } = require('../config.json');
-
-		let config;
-
-		try {
-			config = require('../config.json');
-		} catch (error) {
-			config = null;
-		}
 
 		const PRUNING = config.PRUNING;
 
@@ -54,7 +45,7 @@ module.exports = {
 			return message.channel.send(`Error: ${error}`);
 		}
 
-		queue.connection.on('disconnect', () => message.client.queue.delete(message.guild.id));
+		queue.connection.on('disconnect', () => console.log('funi log')); //message.client.queue.delete(message.guild.id));
 
 		const dispatcher = queue.connection
 			.play(stream, { type: streamType })

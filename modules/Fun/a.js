@@ -12,7 +12,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID && message.author.id !== shrimpID && message.author.id !== maidID) {
+		if (message.author.id !== shrimpID) {
 			try {
 				return message.channel.send('ahahahhahahah are you shrimp? Only the all mighty shrimp can use this almighty command! **vanish***');
 			} catch (e) {

@@ -26,4 +26,4 @@ deployData/settings.json
 CHANGELOG.md
 
 # The actual blacklist shouldn't be pushed
-commanddata/Blacklist/blacklist.json
+deployData/blacklist.json

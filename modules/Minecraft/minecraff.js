@@ -19,7 +19,7 @@ module.exports = {
 		message.channel.startTyping();
 
 		// Load the settings file
-		const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 		var settingsFile = JSON.parse(data);
 
 		var url = `https://api.mcsrvstat.us/2/${minecraftIP}`;

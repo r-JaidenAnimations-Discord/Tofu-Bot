@@ -11,7 +11,7 @@ module.exports = async (client, message) => {
 	// very
 
 	// Pull the list of disabled commands from the settings JSON file. Man this was a pain to get working
-	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 	//console.log(data);
 	//console.log(settingsFile);

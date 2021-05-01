@@ -69,7 +69,7 @@ async function getCmd(client, message, input) {
 	}
 
 	// Fetch disabled commands
-	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
 	if (cmd.name) embed.setDescription(`**${cmd.helpTitle} command**`);

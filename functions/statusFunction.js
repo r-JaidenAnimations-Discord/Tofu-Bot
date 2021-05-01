@@ -107,7 +107,7 @@ const setSts = (client, message, selectedStatus) => {
 const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser'];
 const randomStatus = async (client, message) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
-	const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
 	if (settingsFile.randomStatus === true) {

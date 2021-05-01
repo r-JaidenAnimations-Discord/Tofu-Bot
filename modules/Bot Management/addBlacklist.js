@@ -18,6 +18,10 @@ module.exports = {
 	execute: async function(client, message, args) {
 		let toBlacklist = false;
 
+		// Pull the blacklist JSON
+		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
+		var blackListJSON = JSON.parse(raw);
+
 		if (message.mentions.members.first()) {
 			toBlacklist = message.mentions.members.first().id;
 		} else if (/^\d{18}$/.test(args[0])) { // regex AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -32,11 +36,21 @@ module.exports = {
 			}
 		}
 
+		if (toBlacklist == message.author.id) {
+			try {
+				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
+			} catch (e) {
+				//return handleError(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+			}
+		}
+
 		if (toBlacklist == maxID) {
 			try {
 				message.channel.send('Oh you sly fox, trying to bamboozle me. Get blacklisted LMAO');
+				console.log(blackListJSON.bamboozle)
 				blackListJSON.bamboozle.push(message.author.id);
-				return writeJSONSync('./commanddata/Blacklist/blacklist.json', blackListJSON, { spaces: 4 });
+				return writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
 			} catch (e) {
 				//return handleError(client, 'addBlacklist.js', 'Error on sending get blacklisted message');
 				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending get blacklisted message');
@@ -49,19 +63,6 @@ module.exports = {
 			} catch (e) {
 				//return handleError(client, 'addBlacklist.js', 'Error on sending permission error', e);
 				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending permission error', e);
-			}
-		}
-
-		// Pull the blacklist JSON
-		const raw = await fs.readFileSync('./commanddata/Blacklist/blacklist.json', 'utf-8');
-		var blackListJSON = JSON.parse(raw);
-
-		if (toBlacklist == message.author.id) {
-			try {
-				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
-			} catch (e) {
-				//return handleError(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
-				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
 			}
 		}
 
@@ -122,7 +123,7 @@ module.exports = {
 		}
 
 		try {
-			writeJSONSync('./commanddata/Blacklist/blacklist.json', blackListJSON, { spaces: 4 });
+			writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
 			const blackListEmbed = new Discord.MessageEmbed()
 				.setTitle('Added to blacklist')
 				.setColor(tofuGreen)

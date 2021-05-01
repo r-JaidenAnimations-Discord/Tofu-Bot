@@ -1,12 +1,10 @@
-const { STAY_TIME, tofuGreen, tofuOrange, SOUNDCLOUD_CLIENT_ID } = require('../config.json');
+const { STAY_TIME, tofuGreen, tofuOrange, SOUNDCLOUD_CLIENT_ID, PRUNING } = require('../config.json');
 const Discord = require('discord.js');
 const ytdl = require('ytdl-core-discord');
 const scdl = require('soundcloud-downloader').default;
 
 module.exports = {
 	async play(song, message) {
-
-		const PRUNING = config.PRUNING;
 
 		const queue = message.client.queue.get(message.guild.id);
 

@@ -55,6 +55,7 @@ module.exports = {
 
 			try {
 				channel.send(embed);
+				message.react('✅');
 			} catch (e) {
 				//return handleError(client, 'say.js', 'Error on sending message', e);
 				throw new Tantrum(client, 'say.js', 'Error on sending message', e);
@@ -71,6 +72,7 @@ module.exports = {
 			}
 			try {
 				channel.send(args.slice(1).join(' '));
+				message.react('✅');
 			} catch (e) {
 				//return handleError(client, 'say.js', 'Error on sending message', e);
 				throw new Tantrum(client, 'say.js', 'Error on sending message', e);

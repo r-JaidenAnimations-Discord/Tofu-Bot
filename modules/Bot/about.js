@@ -15,13 +15,24 @@ module.exports = {
 	execute: async function(client, message, args) {
 		let { heapUsed, heapTotal } = process.memoryUsage();
 
+		// Uptime calculations
+		let seconds = Math.floor(process.uptime()) //Math.floor(message.client.uptime / 1000);
+		let minutes = Math.floor(seconds / 60);
+		let hours = Math.floor(minutes / 60);
+		let days = Math.floor(hours / 24);
+
+		seconds %= 60;
+		minutes %= 60;
+		hours %= 24;
+
 		const aboutEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
 			.setAuthor('About Tofu Bot', botProfile)
 			.addFields(
 				{ name: 'Bot version:', value: botVersion },
 				{ name: 'Bot release date:', value: releaseDate },
-				{ name: 'Uptime', value: `${(process.uptime() / 3600).toFixed(1)} hours` },
+				//{ name: 'Uptime', value: `${(process.uptime() / 3600).toFixed(1)} hours` },
+				{ name: 'Uptime', value: `${days}d ${hours}h ${minutes}m ${seconds}s` },
 				{ name: 'Memory Usage', value: `${(heapUsed / 1024 / 1024).toFixed(1)} MB / ${(heapTotal / 1024 / 1024).toFixed(1)}MB (${(heapUsed / heapTotal * 100).toFixed(2)}%)` },
 				{ name: 'Coding:', value: '<@488064501816492047>, <@558264504736153600>, <@768384164810457128>, <@740491200972193793>, <@472399898885619714>' },
 				{ name: 'Avatar:', value: '<@768384164810457128>' },

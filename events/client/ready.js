@@ -9,7 +9,7 @@ const { remindShrimp } = require('../../functions/shrimpReminder.js');
 module.exports = client => {
 	randomStatus(client);
 	remindShrimp(client);
-	console.log(chalk.green(`Alive as ${client.user.tag}`));
+	console.log(chalk.green(`Alive as ${client.user.tag}\nOn ${client.guilds.cache.size} guilds\nServing ${client.users.cache.size} hoomans`));
 
 	/*try {
 		client.channels.cache.get(staffChdatID).send(`I'm back b!tches!`);

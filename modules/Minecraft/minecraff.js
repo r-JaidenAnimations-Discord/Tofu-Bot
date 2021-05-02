@@ -1,4 +1,4 @@
-const { minecraftIP, tofuGreen, botProfile, maxID, tofuError } = require('../../config.json');
+const { minecraftIP, tofuGreen, botProfile, tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
@@ -19,19 +19,42 @@ module.exports = {
 		message.channel.startTyping();
 
 		// Load the settings file
-		const data = await fs.readFileSync('./commanddata/Configuration/settings.json', 'utf-8');
+		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 		var settingsFile = JSON.parse(data);
 
 		var url = `https://api.mcsrvstat.us/2/${minecraftIP}`;
+
+		var downStatus = null;
+
+		const attachment = new Discord.MessageAttachment('./commanddata/minecraff.png', 'minecraff.png');
+		const minecraftEmbed = new Discord.MessageEmbed()
+			.setColor(tofuGreen)
+			.attachFiles(attachment)
+			.setTitle('Jaiden Animations Minecraft Server'/*, 'attachment://minecraff.png'*/)
+			.setThumbnail('attachment://minecraff.png')
+			.addFields(
+				{ name: 'IP Address:', value: /*`${APIresponse.ip}:${APIresponse.port}`*/ minecraftIP },
+				//{ name: 'Version', value: APIresponse.version },
+				//{ name: `Online Users: ${userCount}`, value: playerList },
+				//{ name: 'Server status:', value: `${downStatus}` },
+			)
+			.setTimestamp();
+
+		// Set the status to maintenance in case of maintenance
+		if (settingsFile.minecraftMaintenance === true) {
+			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
+			minecraftEmbed.addField('Server status:', downStatus);
+			message.channel.stopTyping();
+			message.channel.send(minecraftEmbed);
+			return;
+		}
 
 		https.get(url, function(res) {
 			var body = '';
 
 			res.on('data', function(chunk) {
 				body += chunk;
-			});
 
-			res.on('end', function() {
 				var APIresponse = JSON.parse(body);
 				//console.log('Got a response: ', APIresponse.ip);
 				//console.log(APIresponse.players.list)
@@ -39,30 +62,13 @@ module.exports = {
 				var i;
 				var playerList = 'No online members';
 				var userCount = 0;
-				var downStatus = `${APIresponse.online === true ? 'The server is currently working' : '⚠️ **The server is down**'}`
+				downStatus = `${APIresponse.online === true ? 'The server is currently working' : '⚠️ **The server is down**'}`
 
-				// Set the status to maintenance in case of maintenance
-				if (settingsFile.minecraftMaintenance === true) downStatus = '🛠️ **The server is currently undergoing maintenance.**';
-
-				const attachment = new Discord.MessageAttachment('./commanddata/minecraff.png', 'minecraff.png');
-				const minecraftEmbed = new Discord.MessageEmbed()
-					.setColor(tofuGreen)
-					.attachFiles(attachment)
-					.setTitle('Jaiden Animations Minecraft Server'/*, 'attachment://minecraff.png'*/)
-					.setThumbnail('attachment://minecraff.png')
-					.addFields(
-						{ name: 'IP Address:', value: /*`${APIresponse.ip}:${APIresponse.port}`*/ minecraftIP },
-						//{ name: 'Version', value: APIresponse.version },
-						//{ name: `Online Users: ${userCount}`, value: playerList },
-						//{ name: 'Server status:', value: `${downStatus}` },
-					)
-					.setTimestamp();
-
-				if (APIresponse.online === true && settingsFile.minecraftMaintenance === false) {
+				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
 					minecraftEmbed.addField('Version:', APIresponse.version)
 				}
 
-				if (APIresponse.online === true && settingsFile.minecraftMaintenance === false) {
+				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
 					if (APIresponse.players.online) {
 
 						playerList = '';
@@ -72,7 +78,7 @@ module.exports = {
 					}
 				}
 
-				if (APIresponse.online === true && settingsFile.minecraftMaintenance === false) {
+				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
 					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
 					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
 				}
@@ -85,6 +91,12 @@ module.exports = {
 				} catch (e) {
 					console.log(`kek ${e}`)
 				}
+
+			});
+
+			res.on('end', function() {
+				// prob going to remove this
+				console.log('Request finished');
 			});
 		}).on('error', function(e) {
 			try {

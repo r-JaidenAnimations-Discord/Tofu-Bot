@@ -26,7 +26,7 @@ module.exports = {
 		}
 
 		// Pull the blacklist JSON
-		const raw = await fs.readFileSync('./commanddata/Blacklist/blacklist.json', 'utf-8');
+		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
 		var blackListJSON = JSON.parse(raw);
 
 		let toWhitelist = false;
@@ -49,7 +49,7 @@ module.exports = {
 			if (blackListJSON[blackListCategory].includes(toWhitelist)) {
 				try {
 					blackListJSON[blackListCategory].splice(blackListJSON[blackListCategory].indexOf(toWhitelist), 1);
-					writeJSONSync('./commanddata/Blacklist/blacklist.json', blackListJSON, { spaces: 4 });
+					writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
 					const whitelistEmbed = new Discord.MessageEmbed()
 						.setTitle('Removed from blacklist')
 						.setColor(tofuGreen)

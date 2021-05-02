@@ -18,7 +18,7 @@ module.exports = {
 			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
 		}
 
-		const readData = readJSONSync('./commanddata/Configuration/settings.json', 'utf-8');
+		const readData = readJSONSync('./deployData/settings.json', 'utf-8');
 
 		// Do we have more args?
 		switch (args[0]) {
@@ -42,7 +42,7 @@ module.exports = {
 						.setFooter('Made with love');
 
 					await message.channel.send(embed);
-					writeJSONSync('./commanddata/Configuration/settings.json', readData, { spaces: 4 });
+					writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 				}
 				break;
 			}
@@ -66,7 +66,7 @@ module.exports = {
 						.setFooter('Made with love');
 
 					await message.channel.send(embed);
-					writeJSONSync('./commanddata/Configuration/settings.json', readData, { spaces: 4 });
+					writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 				}
 				break;
 			}

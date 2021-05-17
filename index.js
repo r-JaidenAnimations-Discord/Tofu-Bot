@@ -2,6 +2,7 @@
 // Now, only God knows
 const Discord = require('discord.js');
 const fs = require('fs');
+const { Player } = require('discord-player');
 const Tantrum = require('./functions/tantrum.js');
 const chalk = require('chalk');
 const client = new Discord.Client();
@@ -17,10 +18,15 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync('./modules/');
-//music
-client.queue = new Map();
+client.player = new Player(client, {
+	leaveOnEndCooldown: 300000,
+	leaveOnStopCooldown: 300000,
+	leaveOnEmptyCooldown: 200000,
+	autoSelfDeaf: true,
+	fetchBeforeQueued: false // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
+});
 
-// Config loading
+// Config loading [soon]
 let launchArgs = process.argv.slice(2);
 switch (launchArgs[0]) {
 	case 'debug':
@@ -59,6 +65,6 @@ process.on('unhandledRejection', e => console.error(`${chalk.redBright('[Error]'
 process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}: ${e.stack}`));
 
 // Handlers' modules
-['commands', 'event'].forEach(handler => {
+['commands', 'event', 'music'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });

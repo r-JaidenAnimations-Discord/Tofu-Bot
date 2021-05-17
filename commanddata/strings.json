@@ -5,7 +5,7 @@
 		"MANAGE_MESSAGES": "You fool, more perms lemao"
 
 	},
-	"musicStrings": {
+	"OLDmusicStrings": {
 		"nothingPlaying": "There is nothing playing.",
 		"noQueue": "There is no queue.",
 		"notInChannel": "You need to join a voice channel first!",
@@ -13,5 +13,12 @@
 		"notInSameChannel": "You must be in the same channel as the bot",
 		"connectPerm": "Missing permissions to connect to the voice channel",
 		"speakPerm": "Missing permissions to speak in the voice channel"
+	},
+	"musicStrings": {
+		"inactiveTimeout": "I left the voice channel because I was inactive for too long.",
+		"noMusicPlaying": "No tracks are currently playing.",
+		"notSameVoiceChannel": "Someone else is already listening to music in different channel!",
+		"notInVoiceChannel": "You have to be connected to a voice channel before you can use this command!",
+		"unableToJoin": "I couldn't join your voice channel. Please check the permissions"
 	}
 }

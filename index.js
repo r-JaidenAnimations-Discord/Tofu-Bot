@@ -20,6 +20,21 @@ client.categories = fs.readdirSync('./modules/');
 //music
 client.queue = new Map();
 
+// Config loading
+let launchArgs = process.argv.slice(2);
+switch (launchArgs[0]) {
+	case 'debug':
+		console.log('Debug');
+		break;
+	case 'release':
+		console.log('Release');
+		break;
+	default:
+		console.log('Invalid or no args given');
+		break;
+}
+
+
 
 // Log in
 client.login(apiKey);

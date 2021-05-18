@@ -8,10 +8,10 @@
 /node_modules/
 
 # Token and other secrets
-config.json
+configRelease.json
 
 # Also token and stuff but for dev purposes
-deployConfig.json
+configDebug.json
 
 # yes | We're removing that \ edit, just found out this was my tfix command kekw
 #modules/Bot/ali.js

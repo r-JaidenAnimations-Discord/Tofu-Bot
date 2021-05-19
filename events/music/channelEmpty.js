@@ -1,6 +1,6 @@
 const { tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum');
+const Tantrum = require('../../functions/tantrum.js');
 const { musicStrings } = require('../../commanddata/strings.json');
 
 module.exports = (client, message, queue) => {

@@ -1,4 +1,4 @@
-const { tofuGreen, tofuRed } = require('../../config.json');
+//const { tofuGreen, tofuRed } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
@@ -16,6 +16,8 @@ module.exports = {
 	aliases: ['wl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
+		const { tofuGreen, tofuRed } = client.config;
+
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
 			try {
 				return message.reply('You fool, need more permissions');

@@ -1,4 +1,4 @@
-const { tofuGreen, tofuOrange } = require('../../config.json');
+//const { tofuGreen, tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
@@ -15,6 +15,7 @@ module.exports = {
 	aliases: ['vol'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
+		const { tofuGreen, tofuOrange } = client.config;
 
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			try {

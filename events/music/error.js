@@ -1,9 +1,11 @@
-const { tofuError } = require('../../config.json');
+//const { tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const { musicStrings } = require('../../commanddata/strings.json');
 
 module.exports = (client, error, message, ...args) => {
+	const { tofuError } = client.config;
+
 	let errorEmbed = new Discord.MessageEmbed()
 		.setColor(tofuError)
 		.setTimestamp();

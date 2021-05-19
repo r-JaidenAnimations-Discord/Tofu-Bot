@@ -1,4 +1,4 @@
-const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('../../config.json');
+//const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
@@ -16,6 +16,8 @@ module.exports = {
 	aliases: ['set', 'config'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
+		const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = client.config;
+
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
 		}

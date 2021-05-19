@@ -1,4 +1,4 @@
-const { tofuGreen, tofuRed, maxID } = require('../../config.json');
+//const { tofuGreen, tofuRed, maxID } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
@@ -16,6 +16,8 @@ module.exports = {
 	aliases: ['bl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
+		const { tofuGreen, tofuRed, maxID } = client.config;
+
 		let toBlacklist = false;
 
 		// Pull the blacklist JSON

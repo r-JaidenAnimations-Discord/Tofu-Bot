@@ -1,8 +1,10 @@
-const { tofuOrange } = require('../../config.json');
+//const { tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 
 module.exports = (client, message, query, tracks) => {
+	const { tofuOrange } = client.config;
+
 	const searchCancelEmbed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setDescription('Invalid response, search cancelled.');

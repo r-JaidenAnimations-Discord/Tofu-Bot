@@ -1,4 +1,4 @@
-const { tofuRed, tofuGreen, bugReportChannelID } = require('../../config.json');
+//const { tofuRed, tofuGreen, bugReportChannelID } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
@@ -15,6 +15,8 @@ module.exports = {
 	aliases: ['issue', 'bug', 'bugreport'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
+		const { tofuRed, tofuGreen, bugReportChannelID } = client.config;
+
 		if (!args[0]) {
 			try {
 				return message.channel.send(`You gotta describe the problem ${message.author.username.toLowerCase()}. That's right, your name doesn't deserve to be capitalized you vertical coathanger.`)

@@ -1,8 +1,10 @@
-const { tofuError } = require('../../config.json');
+//const { tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 
 module.exports = (client, message, query) => {
+	const { tofuError } = client.config;
+
 	const noResultsEmbed = new Discord.MessageEmbed()
 		.setColor(tofuError)
 		.setDescription('No matches found!');

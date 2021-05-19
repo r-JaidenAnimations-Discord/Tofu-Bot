@@ -1,4 +1,4 @@
-const { tofuGreen } = require('../../config.json');
+//const { tofuGreen } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
@@ -14,6 +14,7 @@ module.exports = {
 	aliases: ['lp', 'repeat'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
+		const { tofuGreen } = client.config;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

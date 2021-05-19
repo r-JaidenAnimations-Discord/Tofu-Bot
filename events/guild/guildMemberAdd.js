@@ -1,9 +1,11 @@
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
 //const { handleError } = require('../../functions/errorHandler.js');
-const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
+//const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
 
 module.exports = async (client, member) => {
+	const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = client.config;
+
 	if (member.guild.id != jaidenServerID && devMode === false) return console.log('joined but not jaidenserver');
 
 	if (member.id == gradyID) {

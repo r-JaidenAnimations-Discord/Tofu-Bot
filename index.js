@@ -9,7 +9,7 @@ const client = new Discord.Client();
 //const { handleError } = require('./functions/errorHandler.js');
 const { randomStatus } = require('./functions/statusFunction.js');
 const { remindShrimp } = require('./functions/shrimpReminder.js');
-const { apiKey } = require('./config.json');
+//const { apiKey } = require('./config.json');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly
@@ -30,20 +30,21 @@ client.player = new Player(client, {
 let launchArgs = process.argv.slice(2);
 switch (launchArgs[0]) {
 	case 'debug':
-		console.log('Debug');
+		console.log(`${chalk.magenta('[Config]')}: Debug configuration will be loaded.`);
+		client.config = require('./configDebug.json');
 		break;
 	case 'release':
-		console.log('Release');
+		console.log(`${chalk.magenta('[Config]')}: Release configuration will be loaded.`);
+		client.config = require('./configRelease.json');
 		break;
 	default:
-		console.log('Invalid or no args given');
+		console.log(`${chalk.magenta('[Config]')}: ${chalk.yellow('No arguments provided, Release configuration will be loaded.')}`);
+		client.config = require('./configRelease.json');
 		break;
 }
 
-
-
 // Log in
-client.login(apiKey);
+client.login(client.config.apiKey);
 
 //if sh!t goes wrong
 /*client.on('rateLimit', r => {

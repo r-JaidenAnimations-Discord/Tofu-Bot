@@ -1,4 +1,4 @@
-const { prefix, tofuOrange } = require('../../config.json');
+//const { prefix, tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
@@ -16,6 +16,8 @@ module.exports = {
 	aliases: ['commands'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
+		const { prefix, tofuOrange } = client.config;
+
 		//if (message.deletable) message.delete();
 
 		if (args[0]) {

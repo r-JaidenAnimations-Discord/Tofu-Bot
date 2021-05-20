@@ -30,7 +30,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { tofuGreen } = client.config;
 
-		if (args[0] == 'rules') {
+		if (args[0] === 'rules') {
 			//return message.channel.send('Rules and info will be put here');
 			const ruleEmbed = new Discord.MessageEmbed()
 				.setTitle('Trivia Info')

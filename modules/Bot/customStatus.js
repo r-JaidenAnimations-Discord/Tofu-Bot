@@ -25,13 +25,13 @@ module.exports = {
 		let status;
 		let activity;
 
-		if (args[0] == 'online') {
+		if (args[0] === 'online') {
 			status = 'online';
 		}
-		else if (args[0] == 'idle') {
+		else if (args[0] === 'idle') {
 			status = 'idle';
 		}
-		else if (args[0] == 'dnd') {
+		else if (args[0] === 'dnd') {
 			status = 'dnd';
 		}
 		else {
@@ -43,16 +43,16 @@ module.exports = {
 			}
 		}
 
-		if (args[1] == 'watch') {
+		if (args[1] === 'watch') {
 			activity = 'WATCHING';
 		}
 		//else if (args[1] == 'stream') {
 		//	activity = 'STREAMING';
 		//}
-		else if (args[1] == 'play') {
+		else if (args[1] === 'play') {
 			activity = 'PLAYING';
 		}
-		else if (args[1] == 'listen') {
+		else if (args[1] === 'listen') {
 			activity = 'LISTENING';
 		}
 		else {
@@ -64,7 +64,7 @@ module.exports = {
 			}
 		}
 		let textString = args.slice(2).join(' ');
-		if (textString.length == 0) {
+		if (textString.length === 0) {
 			try {
 				return message.channel.send('You must enter text to show');
 			} catch (e) {

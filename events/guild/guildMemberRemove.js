@@ -6,9 +6,9 @@ const Tantrum = require('../../functions/tantrum.js');
 module.exports = async (client, member) => {
 	const { jaidenServerID, generalChannelID, devMode, gradyID, maxID } = client.config;
 
-	if (member.guild.id != jaidenServerID && devMode === false) return console.log('left but not jaidenserver');
+	if (member.guild.id !== jaidenServerID && devMode === false) return console.log('left but not jaidenserver');
 
-	if (member.id == gradyID) {
+	if (member.id === gradyID) {
 		try {
 			client.channels.cache.get(generalChannelID).send('GRADY, NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!');
 			client.users.cache.get(maxID).send('Grady left, noooooooo');
@@ -32,7 +32,6 @@ module.exports = async (client, member) => {
 	try {
 		let randomBye = byes[Math.floor(Math.random() * byes.length)];
 		client.channels.cache.get(generalChannelID).send(randomBye);
-		return;
 	} catch (e) {
 		//return handleError(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
 		throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending cya message', e);

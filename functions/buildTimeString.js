@@ -16,9 +16,9 @@ const humanReadableDuration = (msDuration) => {
 	const minute = m < 10 ? `0${m}m ` : `${m}m `;
 	const hours = h < 10 ? `0${h}h ` : `${h}h `;
 
-	let finalHourString = h == 0 ? '' : hours;
-	let finalMinuteString = m == 0 ? '' : minute;
-	//let finalSecondString = s == 0 ? '' : seconds;
+	let finalHourString = h === 0 ? '' : hours;
+	let finalMinuteString = m === 0 ? '' : minute;
+	//let finalSecondString = s === 0 ? '' : seconds;
 
 	return `${finalHourString}${finalMinuteString}${seconds}`;
 }

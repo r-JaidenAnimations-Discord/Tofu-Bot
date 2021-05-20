@@ -17,8 +17,8 @@ module.exports = {
 		const { tofuGreen } = client.config;
 
 		let channel = message.mentions.channels.first() ||
-			message.guild.channels.cache.find(c => c.id == args[0]) ||
-			message.guild.channels.cache.find(c => c.name == args[0]);
+			message.guild.channels.cache.find(c => c.id === args[0]) ||
+			message.guild.channels.cache.find(c => c.name === args[0]);
 
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			try {
@@ -41,7 +41,7 @@ module.exports = {
 		}
 
 		//if (message.deletable) message.delete();
-		if (args[1] == 'embed') {
+		if (args[1] === 'embed') {
 			if (!args.slice(2).join(' ')) {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')

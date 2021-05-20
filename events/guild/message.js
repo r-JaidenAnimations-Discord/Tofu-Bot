@@ -43,7 +43,7 @@ module.exports = async (client, message) => {
 
 	// Is this command allowed inside DM? || This code is a piece of crap, but i can't fix it
 	if (message.guild === null && !message.author.bot) {
-		if (command.isDMAllowed == false && message.channel.type === 'dm') {
+		if (command.isDMAllowed === false && message.channel.type === 'dm') {
 			try {
 				return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 			} catch (e) {
@@ -74,7 +74,7 @@ module.exports = async (client, message) => {
 	}
 
 	// Kirito trust
-	if (message.author.id == banKirito) {
+	if (message.author.id === banKirito) {
 		if (settingsFile.kiritoTrust === false) {
 			try {
 				return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] });
@@ -86,7 +86,7 @@ module.exports = async (client, message) => {
 	}
 
 	// Ali trust
-	if (message.author.id == banAli) {
+	if (message.author.id === banAli) {
 		if (settingsFile.aliTrust === false) {
 			try {
 				return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] });

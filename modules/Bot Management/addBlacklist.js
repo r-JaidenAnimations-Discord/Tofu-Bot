@@ -38,7 +38,7 @@ module.exports = {
 			}
 		}
 
-		if (toBlacklist == message.author.id) {
+		if (toBlacklist === message.author.id) {
 			try {
 				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
 			} catch (e) {
@@ -47,7 +47,7 @@ module.exports = {
 			}
 		}
 
-		if (toBlacklist == maxID) {
+		if (toBlacklist === maxID) {
 			try {
 				message.channel.send('Oh you sly fox, trying to bamboozle me. Get blacklisted LMAO');
 				console.log(blackListJSON.bamboozle)
@@ -116,7 +116,6 @@ module.exports = {
 						.setTimestamp();
 
 					message.channel.send(invalidCategoryEmbed);
-					return;
 				} catch (e) {
 					//return handleError(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
 					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
@@ -133,7 +132,6 @@ module.exports = {
 				.setTimestamp();
 
 			message.channel.send(blackListEmbed);
-			return;
 		} catch (e) {
 			//return handleError(client, 'addBlacklist.js', 'Error on saving blacklist settings', e);
 			throw new Tantrum(client, 'addBlacklist.js', 'Error on saving blacklist settings', e);

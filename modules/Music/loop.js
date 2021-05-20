@@ -41,7 +41,7 @@ module.exports = {
 				} catch (e) {
 					throw new Tantrum(client, 'loop.js', 'Error on looping queue', e);
 				}
-			};
+			}
 		} else {
 			if (client.player.getQueue(message).repeatMode) {
 				try {
@@ -61,7 +61,7 @@ module.exports = {
 				} catch (e) {
 					throw new Tantrum(client, 'loop.js', 'Error on looping song', e);
 				}
-			};
-		};
+			}
+		}
 	},
 };

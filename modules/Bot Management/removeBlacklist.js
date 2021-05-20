@@ -75,7 +75,6 @@ module.exports = {
 				.setTimestamp();
 
 			message.channel.send(memberNotFoundEmbed);
-			return;
 		} catch (e) {
 			//return handleError(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
 			throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);

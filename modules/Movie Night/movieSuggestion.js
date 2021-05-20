@@ -34,7 +34,6 @@ module.exports = {
 			});
 			await message.react('✅');
 			message.channel.send('Your movie suggestion was registered, thank you!');
-			return;
 		} catch (e) {
 			//return handleError(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
 			throw new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);

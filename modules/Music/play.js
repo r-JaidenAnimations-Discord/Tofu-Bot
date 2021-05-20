@@ -52,6 +52,6 @@ module.exports = {
 			throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);
 		}
 
-		client.player.play(message, args.join(' '), { firstResult: true });
+		await client.player.play(message, args.join(' '), { firstResult: true });
 	},
 };

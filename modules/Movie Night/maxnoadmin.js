@@ -16,8 +16,8 @@ module.exports = {
 		const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;
 
 		let channel = message.mentions.channels.first() ||
-			message.guild.channels.cache.find(c => c.id == args[0]) ||
-			message.guild.channels.cache.find(c => c.name == args[0]);
+			message.guild.channels.cache.find(c => c.id === args[0]) ||
+			message.guild.channels.cache.find(c => c.name === args[0]);
 
 		if (message.author.id !== maxID) {
 			try {
@@ -39,7 +39,7 @@ module.exports = {
 		//if (message.deletable) message.delete();
 
 
-		if (args[1] == 'invite') {
+		if (args[1] === 'invite') {
 			let movieNightChannelInvite = await client.guilds.cache.get(jaidenServerID).channels.cache.get(movieNightChannelID).createInvite(
 				{
 					maxAge: 3600, // maximum time for the invite, in seconds

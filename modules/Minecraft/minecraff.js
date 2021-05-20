@@ -18,7 +18,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { minecraftIP, tofuGreen, botProfile, tofuError } = client.config;
 
-		message.channel.startTyping();
+		await message.channel.startTyping();
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -46,7 +46,7 @@ module.exports = {
 		if (settingsFile.minecraftMaintenance === true) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
-			message.channel.stopTyping();
+			await message.channel.stopTyping();
 			message.channel.send(minecraftEmbed);
 			return;
 		}
@@ -88,7 +88,7 @@ module.exports = {
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				try {
-					message.channel.stopTyping();
+					await message.channel.stopTyping();
 					message.channel.send(minecraftEmbed);
 				} catch (e) {
 					console.log(`kek ${e}`)
@@ -102,7 +102,7 @@ module.exports = {
 			});
 		}).on('error', function(e) {
 			try {
-				message.channel.stopTyping();
+				await message.channel.stopTyping();
 				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
 				//handleError(client, 'minecraff.js', 'API did not respond', e);
 				new Tantrum(client, 'minecraff.js', 'API did not respond', e);

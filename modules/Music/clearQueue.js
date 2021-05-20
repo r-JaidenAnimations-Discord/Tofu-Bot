@@ -28,7 +28,7 @@ module.exports = {
 		client.player.clearQueue(message);
 
 		try {
-			message.react('👌');
+			await message.react('👌');
 		} catch (e) {
 			throw new Tantrum(client, 'clearQueue.js', 'Error on reacting queue cleared', e);
 		}

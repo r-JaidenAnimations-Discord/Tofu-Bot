@@ -21,7 +21,7 @@ module.exports = {
 
 		if (success) {
 			try {
-				message.react('👋');
+				await message.react('👋');
 			} catch (e) {
 				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);
 			}

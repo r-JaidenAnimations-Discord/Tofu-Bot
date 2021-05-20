@@ -29,7 +29,7 @@ module.exports = {
 
 				if (success) {
 					try {
-						return message.react('👌');
+						return await message.react('👌');
 					} catch (e) {
 						throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
 					}

@@ -183,7 +183,7 @@ module.exports = async (client, message) => {
 		if (now < expirationTime) {
 			const timeLeft = (expirationTime - now) / 1000;
 			try {
-				message.react('⏳');
+				await message.react('⏳');
 				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${timeLeft.toFixed(1)} second(s) before reusing \`${command.name}\`?`);
 				return;
 			} catch (e) {

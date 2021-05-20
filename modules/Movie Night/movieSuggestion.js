@@ -29,10 +29,10 @@ module.exports = {
 
 		try {
 			client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {
-				suggestionEmbed.react(fingerupvote);
-				suggestionEmbed.react(fingerdownvote);
+				await suggestionEmbed.react(fingerupvote);
+				await suggestionEmbed.react(fingerdownvote);
 			});
-			message.react('✅');
+			await message.react('✅');
 			message.channel.send('Your movie suggestion was registered, thank you!');
 			return;
 		} catch (e) {

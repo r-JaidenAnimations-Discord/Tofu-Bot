@@ -34,7 +34,7 @@ module.exports = {
 
 		if (success) {
 			try {
-				message.react('⏸');
+				await message.react('⏸');
 			} catch (e) {
 				throw new Tantrum(client, 'pause.js', 'Error on sending paused message', e);
 			}

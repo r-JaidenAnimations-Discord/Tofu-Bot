@@ -60,7 +60,7 @@ module.exports = {
 			try {
 
 				channel.send(`<@&${movieNightRoleID}>\n${args.slice(2).join(' ')}\n${movieNightChannelInvite}`);
-				message.react('✅');
+				await message.react('✅');
 			} catch (e) {
 				//return handleError(client, 'maxnoadmin.js', 'Error on sending message', e);
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);
@@ -78,7 +78,7 @@ module.exports = {
 			try {
 
 				channel.send(`<@&${movieNightRoleID}>\n${args.slice(1).join(' ')}`);
-				message.react('✅');
+				await message.react('✅');
 			} catch (e) {
 				//return handleError(client, 'maxnoadmin.js', 'Error on sending message', e);
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);

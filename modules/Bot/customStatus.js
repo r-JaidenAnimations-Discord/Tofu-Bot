@@ -79,6 +79,6 @@ module.exports = {
 				type: `${activity}`
 			}
 		});
-		message.react('✅');
+		await message.react('✅');
 	},
 };

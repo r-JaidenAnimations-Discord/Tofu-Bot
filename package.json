@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "TeraBaito, MaxTechnics, RetainedEdge, Acama, Paowee",
-  "license": "ISC",
+  "license": "Creative Commons Attribution-NonCommercial 4.0 International",
   "dependencies": {
     "@discord-player/extractor": "^3.0.0",
     "@discordjs/opus": "^0.4.0",

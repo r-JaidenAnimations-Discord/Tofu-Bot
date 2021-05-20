@@ -45,7 +45,7 @@ module.exports = {
 		if (settingsFile.minecraftMaintenance === true) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
-			await message.channel.stopTyping();
+			message.channel.stopTyping();
 			message.channel.send(minecraftEmbed);
 			return;
 		}
@@ -87,7 +87,7 @@ module.exports = {
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				try {
-					await message.channel.stopTyping();
+					message.channel.stopTyping();
 					message.channel.send(minecraftEmbed);
 				} catch (e) {
 					console.log(`kek ${e}`)
@@ -101,7 +101,7 @@ module.exports = {
 			});
 		}).on('error', function(e) {
 			try {
-				await message.channel.stopTyping();
+				message.channel.stopTyping();
 				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
 				new Tantrum(client, 'minecraff.js', 'API did not respond', e);
 

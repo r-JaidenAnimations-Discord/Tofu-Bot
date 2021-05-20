@@ -1,6 +1,5 @@
 // Grady's first command :3
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'vibecheck',
@@ -17,14 +16,12 @@ module.exports = {
 			try {
 				message.reply('is vibin!');
 			} catch (e) {
-				//return handleError(client, 'vibeCheck.js', 'Error on sending is vibin message', e);
 				throw new Tantrum(client, 'vibeCheck.js', 'Error on sending is vibin message', e);
 			}
 		else {
 			try {
 				message.reply('is not vibin!');
 			} catch (e) {
-				//return handleError(client, 'vibeCheck.js', 'Error on sending is not vibin message', e);
 				throw new Tantrum(client, 'vibeCheck.js', 'Error on sending is not vibin message', e);
 			}
 		}

@@ -1,9 +1,8 @@
-const { minecraftIP, tofuGreen, botProfile, tofuError } = require('../../config.json');
+//const { minecraftIP, tofuGreen, botProfile, tofuError } = require('../../config.json');
 const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'minecraft',
@@ -16,7 +15,9 @@ module.exports = {
 	aliases: ['mc', 'minecraff', 'minecrap'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		message.channel.startTyping();
+		const { minecraftIP, tofuGreen, botProfile, tofuError } = client.config;
+
+		await message.channel.startTyping();
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -44,7 +45,7 @@ module.exports = {
 		if (settingsFile.minecraftMaintenance === true) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
-			message.channel.stopTyping();
+			await message.channel.stopTyping();
 			message.channel.send(minecraftEmbed);
 			return;
 		}
@@ -86,7 +87,7 @@ module.exports = {
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				try {
-					message.channel.stopTyping();
+					await message.channel.stopTyping();
 					message.channel.send(minecraftEmbed);
 				} catch (e) {
 					console.log(`kek ${e}`)
@@ -100,13 +101,11 @@ module.exports = {
 			});
 		}).on('error', function(e) {
 			try {
-				message.channel.stopTyping();
+				await message.channel.stopTyping();
 				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
-				//handleError(client, 'minecraff.js', 'API did not respond', e);
 				new Tantrum(client, 'minecraff.js', 'API did not respond', e);
 
 			} catch (f) {
-				//handleError(client, 'minecraff.js', 'Error on sending error embed', f);
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			}
 		});

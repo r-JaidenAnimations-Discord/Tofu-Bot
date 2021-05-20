@@ -1,11 +1,12 @@
 //const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('./tantrum.js');
-//const { handleError } = require('./errorHandler.js');
-const { jaidenServerID, level20RoleID } = require('../config.json');
+//const { jaidenServerID, level20RoleID } = require('../config.json');
 
 // Set the bot's status
 const setSts = (client, message, selectedStatus) => {
+	const { jaidenServerID, level20RoleID } = client.config;
+
 	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/*this.*/selectedStatus) { // lmao, i fucking hate this.
 		case 'online':
@@ -97,7 +98,6 @@ const setSts = (client, message, selectedStatus) => {
 			try {
 				return message.channel.send('Invalid argument given');
 			} catch (e) {
-				//return handleError(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
 				throw new Tantrum(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
 			}
 	}

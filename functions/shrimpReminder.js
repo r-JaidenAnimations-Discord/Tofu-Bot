@@ -1,12 +1,13 @@
-const { shrimpID, devMode } = require('../config.json');
+//const { shrimpID, devMode } = require('../config.json');
 const Tantrum = require('./tantrum.js');
 
 const remindShrimp = (client) => {
-	
+	const { shrimpID, devMode } = client.config;
+
 	let date = new Date();
 	let hour = date.getHours();
 	//console.log(hour);
-	if (hour == '23') {
+	if (hour === '23') {
 		try {
 			// We don't want potential spamming when doing tests.
 			if (devMode === true) {

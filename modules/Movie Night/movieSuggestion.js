@@ -1,7 +1,6 @@
-const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = require('../../config.json');
+//const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'suggestmovie',
@@ -14,6 +13,8 @@ module.exports = {
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {
+		const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = client.config;
+
 		let movie = args.slice(0).join(' ');
 		if (!movie) {
 			return message.reply('So how about sugggesting a movie instead of just sending a useless command?');
@@ -27,14 +28,12 @@ module.exports = {
 
 		try {
 			client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {
-				suggestionEmbed.react(fingerupvote);
-				suggestionEmbed.react(fingerdownvote);
+				await suggestionEmbed.react(fingerupvote);
+				await suggestionEmbed.react(fingerdownvote);
 			});
-			message.react('✅');
+			await message.react('✅');
 			message.channel.send('Your movie suggestion was registered, thank you!');
-			return;
 		} catch (e) {
-			//return handleError(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
 			throw new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
 		}
 	},

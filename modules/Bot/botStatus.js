@@ -17,6 +17,6 @@ module.exports = {
 		// yeah it just does this
 		setSts(client, message, args[0]);
 
-		message.react('✅');
+		await message.react('✅');
 	},
 };

@@ -1,20 +1,22 @@
-const { tofuGreen, tofuError } = require('../../config.json');
+//const { tofuGreen, tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-const { canModifyQueue } = require('../../functions/music.js');
-const { musicStrings, permissionsErrs } = require('../../commanddata/strings.json');
+const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
+const { permissionsErrs } = require('../../commanddata/strings.json');
 
 module.exports = {
 	name: 'volume',
 	helpTitle: 'Volume',
 	category: 'Music',
-	usage: 'volume',
-	description: 'Change the volume',
+	usage: 'volume [number between 0 and 100]',
+	description: 'Change the player\'s volume',
 	isDMAllowed: false,
 	isDeprecated: false,
 	aliases: ['vol'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
+		const { tofuGreen, tofuOrange } = client.config;
+
 		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
 			try {
 				return message.channel.send(permissionsErrs.MANAGE_MESSAGES);
@@ -23,57 +25,43 @@ module.exports = {
 			}
 		}
 
-		const queue = message.client.queue.get(message.guild.id);
+		if (!checkMusic(client, message)) return;
+		if (!checkQueueExists(client, message)) return;
 
-		if (!queue) {
+		let volumeEmbed = new Discord.MessageEmbed();
+
+		if (!args[0] || isNaN(args[0]) || args[0] === 'Infinity') {
+			volumeEmbed.setColor(tofuOrange);
+			volumeEmbed.setDescription('The value you inputted is not a valid number!');
 			try {
-				return message.channel.send(musicStrings.nothingPlaying);
+				return message.channel.send(volumeEmbed);
 			} catch (e) {
-				console.error(e);
-				throw new Tantrum(client, 'volume.js', 'Error on sending nothing playing message', e);
+				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (invalid number)', e);
 			}
 		}
 
-		if (!canModifyQueue(message.member)) {
+		if (Math.round(parseInt(args[0])) < 1 || Math.round(parseInt(args[0])) > 100) {
+			volumeEmbed.setColor(tofuOrange);
+			volumeEmbed.setDescription('Please enter a number between 1 and 100!');
 			try {
-				return message.channel.send(musicStrings.notInChannel);
+				return message.channel.send(volumeEmbed);
 			} catch (e) {
-				console.error(e);
-				throw new Tantrum(client, 'volume.js', 'Error on sending have to be in VC message', e);
+				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (number not between 1 and 100)', e);
 			}
 		}
 
-		if (!args[0]) {
+		const success = client.player.setVolume(message, parseInt(args[0]));
+
+		if (success) {
+			volumeEmbed.setColor(tofuGreen);
+			volumeEmbed.setDescription(`Volume set to **${parseInt(args[0])}%**!`);
 			try {
-				return message.channel.send(new Discord.MessageEmbed().setDescription(`The current volume is: **${queue.volume}%**`).setColor(tofuGreen));
+				message.channel.send(volumeEmbed);
 			} catch (e) {
-				throw new Tantrum(client, 'volume.js', 'Error on sending current volume embed', e);
+				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (volume)', e);
 			}
-		}
-
-		if (isNaN(args[0])) {
-			try {
-				return message.channel.send(new Discord.MessageEmbed().setDescription('That\'s not a number, give me a number.').setColor(tofuError));
-			} catch (e) {
-				throw new Tantrum(client, 'volume.js', 'Error on sending not a number embed', e);
-			}
-		}
-
-		if (Number(args[0]) > 100 || Number(args[0]) < 0) {
-			try {
-				return message.channel.send('Ah yes, very clever. I\'m only accepting values between 0 and 100');
-			} catch (e) {
-				throw new Tantrum(client, 'volume.js', 'Error on sending not a number message', e);
-			}
-		}
-
-		queue.volume = args[0];
-		queue.connection.dispatcher.setVolumeLogarithmic(args[0] / 100);
-
-		try {
-			return queue.textChannel.send(new Discord.MessageEmbed().setDescription(`Volume set to: **${args[0]}%**`).setColor(tofuGreen));
-		} catch (e) {
-			throw new Tantrum(client, 'volume.js', 'Error on sending set volume embed', e);
+		} else {
+			throw new Tantrum(client, 'volume.js', 'Error on setting volume', 'No message');
 		}
 	},
 };

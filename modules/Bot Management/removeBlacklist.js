@@ -1,8 +1,7 @@
-const { tofuGreen, tofuRed } = require('../../config.json');
+//const { tofuGreen, tofuRed } = require('../../config.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 const { writeJSONSync } = require('fs-extra');
 
 module.exports = {
@@ -16,11 +15,12 @@ module.exports = {
 	aliases: ['wl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
+		const { tofuGreen, tofuRed } = client.config;
+
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
 			try {
 				return message.reply('You fool, need more permissions');
 			} catch (e) {
-				//return handleError(client, 'removeBlacklist.js', 'Error on sending permission error', e);
 				throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending permission error', e);
 			}
 		}
@@ -39,7 +39,6 @@ module.exports = {
 			try {
 				return message.channel.send('No member specified');
 			} catch (e) {
-				//return handleError(client, 'removeBlacklist.js', 'Error on sending no user defined message', e);
 				throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending no user defined message', e);
 			}
 		}
@@ -59,7 +58,6 @@ module.exports = {
 					message.channel.send(whitelistEmbed);
 					return;
 				} catch (e) {
-					//return handleError(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
 					throw new Tantrum(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
 				}
 			}
@@ -73,9 +71,7 @@ module.exports = {
 				.setTimestamp();
 
 			message.channel.send(memberNotFoundEmbed);
-			return;
 		} catch (e) {
-			//return handleError(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
 			throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
 		}
 	},

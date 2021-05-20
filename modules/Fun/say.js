@@ -10,6 +10,7 @@ module.exports = {
 	description: 'Mess with members',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {

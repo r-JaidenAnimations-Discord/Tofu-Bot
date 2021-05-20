@@ -11,6 +11,7 @@ module.exports = {
 	description: 'Enable or disable looping',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['lp', 'repeat'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

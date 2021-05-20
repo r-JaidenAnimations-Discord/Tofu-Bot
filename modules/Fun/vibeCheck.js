@@ -9,6 +9,7 @@ module.exports = {
 	description: 'U vibin?',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	//aliases: [],
 	cooldown: 3,
 	execute: async function(client, message, args) {

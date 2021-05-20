@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Done? Stop the music I suppose',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['dc'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

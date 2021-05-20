@@ -12,6 +12,7 @@ module.exports = {
 	description: 'Change the player\'s volume',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['vol'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

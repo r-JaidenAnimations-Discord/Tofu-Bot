@@ -11,6 +11,7 @@ module.exports = {
 	description: 'Play some choons',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

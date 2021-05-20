@@ -11,6 +11,7 @@ module.exports = {
 	description: 'Alr back, go on',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {

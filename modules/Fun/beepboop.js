@@ -8,6 +8,7 @@ module.exports = {
 	description: 'Beep boop?',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {

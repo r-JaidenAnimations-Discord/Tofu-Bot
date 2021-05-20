@@ -12,6 +12,7 @@ module.exports = {
 	description: 'blacklist',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	aliases: ['wl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

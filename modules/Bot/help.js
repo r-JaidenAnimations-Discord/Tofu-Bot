@@ -12,6 +12,7 @@ module.exports = {
 	description: 'Stop, get help',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['commands'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

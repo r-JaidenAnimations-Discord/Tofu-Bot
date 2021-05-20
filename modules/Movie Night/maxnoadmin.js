@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Because Max doesn\'t have perms to ping movie night AAAAAAAAAAAA',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {

@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Set the client\'s status',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	aliases: ['sts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {

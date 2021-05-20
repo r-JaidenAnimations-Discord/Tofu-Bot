@@ -12,6 +12,7 @@ module.exports = {
 	description: 'Show info about our minecraft server!',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['mc', 'minecraff', 'minecrap'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

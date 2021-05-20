@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Shrimp',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {

@@ -13,6 +13,7 @@ module.exports = {
 	description: 'Check what\'s that vibing choon',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

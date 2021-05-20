@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Clear the queue.',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['clear-queue', 'cq', 'clear'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

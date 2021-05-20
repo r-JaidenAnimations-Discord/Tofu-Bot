@@ -12,6 +12,7 @@ module.exports = {
 	description: 'Change bot settings.',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	aliases: ['set', 'config'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

@@ -194,7 +194,7 @@ module.exports = async (client, message) => {
 		}
 
 		// Warn when a command is executed from the devserver to the main deploy
-		if (message.guild.id !== jaidenServerID && devMode === false) {
+		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true) {
 
 			const warnEmbed = new Discord.MessageEmbed()
 				.setColor(tofuRed)

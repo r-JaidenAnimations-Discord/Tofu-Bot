@@ -49,7 +49,6 @@ module.exports = {
 		try {
 			message.channel.send(aboutEmbed);
 		} catch (e) {
-			//return handleError(client, 'about.js', 'Error on sending aboutEmbed', e);
 			throw new Tantrum(client, 'about.js', 'Error on sending aboutEmbed', e);
 		}
 	},

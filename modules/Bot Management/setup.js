@@ -1,7 +1,6 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 const { stripIndents } = require('common-tags');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 
@@ -43,7 +42,6 @@ module.exports = {
 							try {
 								return message.channel.send('The welcomer is already `enabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending welcomer already enabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending welcomer already enabled message.', e);
 							}
 						} else {
@@ -68,7 +66,6 @@ module.exports = {
 							try {
 								return message.channel.send('The welcomer is already `disabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending welcomer already disabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending welcomer already disabled message.', e);
 							}
 						} else {
@@ -96,7 +93,6 @@ module.exports = {
 						try {
 							message.channel.send(welcomerStateEmbed);
 						} catch (e) {
-							//return handleError(client, 'setup.js', 'Error on sending WelcomerStateEmbed', e);
 							throw new Tantrum(client, 'setup.js', 'Error on sending WelcomerStateEmbed', e);
 						}
 						break;
@@ -120,7 +116,6 @@ module.exports = {
 							try {
 								return message.channel.send('Kiritotrust is already `enabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending kiritotrust already enabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrust already enabled message.', e);
 							}
 						} else {
@@ -145,7 +140,6 @@ module.exports = {
 							try {
 								return message.channel.send('Kiritotrust is already `disabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending kiritotrust already disabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrust already disabled message.', e);
 							}
 						} else {
@@ -173,7 +167,6 @@ module.exports = {
 						try {
 							message.channel.send(kiritotrustStateEmbed);
 						} catch (e) {
-							//return handleError(client, 'setup.js', 'Error on sending kiritotrustStateEmbed', e);
 							throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrustStateEmbed', e);
 						}
 						break;
@@ -196,7 +189,6 @@ module.exports = {
 							try {
 								return message.channel.send('Alitrust is already `enabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending alitrust already enabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending alitrust already enabled message.', e);
 							}
 						} else {
@@ -221,7 +213,6 @@ module.exports = {
 							try {
 								return message.channel.send('Alitrust is already `disabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending alitrust already disabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending alitrust already disabled message.', e);
 							}
 						} else {
@@ -249,7 +240,6 @@ module.exports = {
 						try {
 							message.channel.send(alitrustStateEmbed);
 						} catch (e) {
-							//return handleError(client, 'setup.js', 'Error on sending alitrustStateEmbed', e);
 							throw new Tantrum(client, 'setup.js', 'Error on sending alitrustStateEmbed', e);
 						}
 						break;
@@ -274,7 +264,6 @@ module.exports = {
 							try {
 								return message.channel.send('Random status is already `enabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending random status already enabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending random status already enabled message.', e);
 							}
 						} else {
@@ -299,7 +288,6 @@ module.exports = {
 							try {
 								return message.channel.send('Random status is already `disabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending random status already disabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending random status already disabled message.', e);
 							}
 						} else {
@@ -327,7 +315,6 @@ module.exports = {
 						try {
 							message.channel.send(randomStatusStateEmbed);
 						} catch (e) {
-							//return handleError(client, 'setup.js', 'Error on sending randomStatusStateEmbed', e);
 							throw new Tantrum(client, 'setup.js', 'Error on sending randomStatusStateEmbed', e);
 						}
 						break;
@@ -350,7 +337,6 @@ module.exports = {
 							try {
 								return message.channel.send('Blacklisting is already `enabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending blacklisting already enabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending blacklisting already enabled message.', e);
 							}
 						} else {
@@ -375,7 +361,6 @@ module.exports = {
 							try {
 								return message.channel.send('Blacklisting is already `disabled`');
 							} catch (e) {
-								//return handleError(client, 'setup.js', 'Error on sending blacklisting already disabled message.', e);
 								throw new Tantrum(client, 'setup.js', 'Error on sending blacklisting already disabled message.', e);
 							}
 						} else {
@@ -403,7 +388,6 @@ module.exports = {
 						try {
 							message.channel.send(blackListingStateEmbed);
 						} catch (e) {
-							//return handleError(client, 'setup.js', 'Error on sending blackListingStateEmbed', e);
 							throw new Tantrum(client, 'setup.js', 'Error on sending blackListingStateEmbed', e);
 						}
 						break;
@@ -497,7 +481,6 @@ module.exports = {
 				try {
 					message.channel.send(embed);
 				} catch (e) {
-					//handleError(client, 'setup.js', 'Error on sending settings list', e);
 					new Tantrum(client, 'setup.js', 'Error on sending settings list', e);
 				}
 			}

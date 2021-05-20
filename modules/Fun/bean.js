@@ -1,5 +1,4 @@
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'bean',
@@ -16,7 +15,6 @@ module.exports = {
 			try {
 				return message.channel.send('You got some beans and ate them with your rice, ah yes...');
 			} catch (e) {
-				//return handleError(client, 'bean.js', 'Error on sending \'got some beans and ate em\'', e);
 				throw new Tantrum(client, 'bean.js', 'Error on sending \'got some beans and ate em\'', e);
 			}
 		}
@@ -25,7 +23,6 @@ module.exports = {
 			try {
 				return message.channel.send(`${message.mentions.users.first()} was beaned!`);
 			} catch (e) {
-				//return handleError(client, 'bean.js', 'Error on sending firstping was beaned', e);
 				throw new Tantrum(client, 'bean.js', 'Error on sending firstping was beaned', e);
 			}
 		}
@@ -34,7 +31,6 @@ module.exports = {
 			try {
 				return message.channel.send(`<@!${args[0]}> was beaned!`);
 			} catch (e) {
-				//return handleError(client, 'bean.js', 'args[0] was beaned', e);
 				throw new Tantrum(client, 'bean.js', 'args[0] was beaned', e);
 			}
 		}
@@ -43,7 +39,6 @@ module.exports = {
 			try {
 				return message.channel.send(`${args.join(' ')} was beaned!`);
 			} catch (e) {
-				//return handleError(client, 'bean.js', 'Error on sending args.join was beaned', e);
 				throw new Tantrum(client, 'bean.js', 'Error on sending args.join was beaned', e);
 			}
 		}

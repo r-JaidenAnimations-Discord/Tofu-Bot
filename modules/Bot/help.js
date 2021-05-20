@@ -2,7 +2,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 const { stripIndents } = require('common-tags');
 
 module.exports = {
@@ -49,7 +48,6 @@ async function getAll(client, message) {
 		return message.channel.send(embed.setDescription(info));
 
 	} catch (e) {
-		//return handleError(client, 'help.js', 'Error sending help embed', e);
 		throw new Tantrum(client, 'help.js', 'Error sending help embed', e);
 	}
 }
@@ -65,7 +63,6 @@ async function getCmd(client, message, input) {
 		try {
 			return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
 		} catch (e) {
-			//return handleError(client, 'help.js', 'Error on sending not a command error.');
 			throw new Tantrum(client, 'help.js', 'Error on sending not a command error.');
 		}
 	}

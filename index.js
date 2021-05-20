@@ -6,7 +6,6 @@ const { Player } = require('discord-player');
 const Tantrum = require('./functions/tantrum.js');
 const chalk = require('chalk');
 const client = new Discord.Client();
-//const { handleError } = require('./functions/errorHandler.js');
 const { randomStatus } = require('./functions/statusFunction.js');
 const { remindShrimp } = require('./functions/shrimpReminder.js');
 //const { apiKey } = require('./config.json');
@@ -53,12 +52,10 @@ client.login(client.config.apiKey);
 });*/
 client.on('warn', w => {
 	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);
-	//handleError(client, 'index.js', '[WARN]: Unspecified warning', w);
 	new Tantrum(client, 'index.js', '[WARN]: Unspecified warning', w);
 });
 client.on('error', e => {
 	console.error(`${chalk.redBright('[ERROR]')}: ${e.stack}`);
-	//handleError(client, 'index.js', `[ERROR]: Unspecified error: ${e.stack}`, e);
 	new Tantrum(client, 'index.js', `[ERROR]: Unspecified error: ${e.stack}`, e);
 });
 process.on('uncaughtException', e => console.error(`${chalk.redBright('[Error]')}: ${e.stack}`));

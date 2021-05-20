@@ -25,7 +25,6 @@ module.exports = {
 		try {
 			message.channel.send('a.');
 		} catch (e) {
-			//return handleError(client, 'a.js', 'Error on sending a', e);
 			throw new Tantrum(client, 'a.js', 'Error on sending a', e);
 		}
 	},

@@ -1,6 +1,5 @@
 //const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = require('../../config.json');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'maxnoadmin',
@@ -23,7 +22,6 @@ module.exports = {
 			try {
 				return message.reply('Are you Maxim? I don\'t think so. Why are you trying to use my command. You should be ashamed of yourself. I hope you stub your toe on your chair. I hope you get aneurysm after aneurysm after aneurysm after aneurysm after aneurysm. Get one of those Dyson vacuums and see if it\'s strong enough to suck the stupid out of you. Don\'t EVER use this command again. Do you understand me? DO YOU UNDERSTAND ME?');
 			} catch (e) {
-				//return handleError(client, 'maxnoadmin.js', 'Error on sending are you maxim reply', e);
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending are you maxim reply', e);
 			}
 		}
@@ -32,7 +30,6 @@ module.exports = {
 			try {
 				return message.channel.send('Where the actual F*CK do you want me to place that?');
 			} catch (e) {
-				//return handleError(client, 'maxnoadmin.js', 'Error on sending channel error', e);
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending channel error', e);
 			}
 		}
@@ -52,7 +49,6 @@ module.exports = {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?')
 				} catch (e) {
-					//return handleError(client, 'maxnoadmin.js', 'Error on sending no message error', e);
 					throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending no message error', e);
 				}
 			}
@@ -62,7 +58,6 @@ module.exports = {
 				channel.send(`<@&${movieNightRoleID}>\n${args.slice(2).join(' ')}\n${movieNightChannelInvite}`);
 				await message.react('✅');
 			} catch (e) {
-				//return handleError(client, 'maxnoadmin.js', 'Error on sending message', e);
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);
 			}
 		}
@@ -71,7 +66,6 @@ module.exports = {
 				try {
 					return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
 				} catch (e) {
-					//return handleError(client, 'maxnoadmin.js', 'Error on sending no message error', e);
 					throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending no message error', e);
 				}
 			}
@@ -80,7 +74,6 @@ module.exports = {
 				channel.send(`<@&${movieNightRoleID}>\n${args.slice(1).join(' ')}`);
 				await message.react('✅');
 			} catch (e) {
-				//return handleError(client, 'maxnoadmin.js', 'Error on sending message', e);
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);
 			}
 		}

@@ -1,7 +1,6 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 const beautify = require('beautify');
 // NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
@@ -25,7 +24,6 @@ module.exports = {
 				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`));
 				return;
 			} catch (e) {
-				//return handleError(client, 'eval.js', 'Error on sending only masters error', e);
 				throw new Tantrum(client, 'eval.js', 'Error on sending only masters error', e);
 			}
 		}
@@ -35,7 +33,6 @@ module.exports = {
 				return message.channel.send('Give me something to evaluate tho')
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
 			} catch (e) {
-				//return handleError(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
 				throw new Tantrum(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
 			}
 		}
@@ -65,7 +62,6 @@ module.exports = {
 			try {
 				message.channel.send(embed);
 			} catch (e) {
-				//handleError(client, 'eval.js', 'Error on sending eval embed', e);
 				new Tantrum(client, 'eval.js', 'Error on sending eval embed', e);
 			}
 		} catch (e) {
@@ -78,7 +74,6 @@ module.exports = {
 			try {
 				message.channel.send(embed);
 			} catch (e) {
-				//handleError(client, 'eval.js', 'Error on sending errorEmbed', e);
 				new Tantrum(client, 'eval.js', 'Error on sending errorEmbed', e);
 			}
 		}

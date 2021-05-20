@@ -1,6 +1,5 @@
 //const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'customstatus',
@@ -17,7 +16,6 @@ module.exports = {
 			try {
 				return message.reply('You fool, need more permissions');
 			} catch (e) {
-				//return handleError(client, 'customStatus.js', 'Error on sending permission error', e);
 				throw new Tantrum(client, 'customStatus.js', 'Error on sending permission error', e);
 			}
 		}
@@ -38,7 +36,6 @@ module.exports = {
 			try {
 				return message.channel.send('You must enter the proper status.');
 			} catch (e) {
-				//return handleError(client, 'customStatus.js', 'Error on sending \'Enter proper status\' message');
 				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper status\' message');
 			}
 		}
@@ -59,7 +56,6 @@ module.exports = {
 			try {
 				return message.channel.send('You must enter the proper activity.');
 			} catch (e) {
-				//return handleError(client, 'customStatus.js', 'Error on sending \'Enter proper activity\' message');
 				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper activity\' message');
 			}
 		}
@@ -68,7 +64,6 @@ module.exports = {
 			try {
 				return message.channel.send('You must enter text to show');
 			} catch (e) {
-				//return handleError(client, 'customStatus.js', 'Error on sending \'Enter text to show\' message');
 				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter text to show\' message');
 			}
 		}

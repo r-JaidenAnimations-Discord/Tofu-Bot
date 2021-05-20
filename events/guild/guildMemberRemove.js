@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
+const { leaveMessages } = require('../../commanddata/greetings.json');
 //const { jaidenServerID, generalChannelID, devMode, gradyID, maxID } = require('../../config.json');
 
 module.exports = async (client, member) => {
@@ -20,16 +21,11 @@ module.exports = async (client, member) => {
 	var settingsFile = JSON.parse(data);
 	var welcomerState = settingsFile.welcome;
 
-	// tried it in a separate file, didn't work, this is my botch
-	const byes = [
-		`Welps, guess like **${member.displayName}** couldn't stand to be around us, adiós.`,
-		`**${member.displayName}** is hanging up now, bye.`
-	];
-
 	if (welcomerState === false) return;
 	try {
-		let randomBye = byes[Math.floor(Math.random() * byes.length)];
-		client.channels.cache.get(generalChannelID).send(randomBye);
+		let randomBye = leaveMessages[Math.floor(Math.random() * leaveMessages.length)];
+		let formatBye = randomBye.replace('{user}', `**${member.displayName}**`);
+		client.channels.cache.get(generalChannelID).send(formatBye);
 	} catch (e) {
 		throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
 	}

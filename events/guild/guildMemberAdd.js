@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
+const { joinMessages } = require('../../commanddata/greetings.json');
 //const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
 
 module.exports = async (client, member) => {
@@ -20,18 +21,12 @@ module.exports = async (client, member) => {
 	var settingsFile = JSON.parse(data);
 	var welcomerState = settingsFile.welcome;
 
-	// tried it in a separate file, didn't work, this is my botch
-	const welcomes = [
-		`<@${member.id}> burst through the window for welcome!`,
-		`Hello, <@${member.id}>. Welcome to r/JaidenAnimations!`,
-		`Hello, <@${member.id}>, still waiting for plont...`,
-		`Hello <@${member.id}> grab a cup o' water and talk with us`
-	];
-
 	if (welcomerState === false) return;
 	try {
-		let randomWelc = welcomes[Math.floor(Math.random() * welcomes.length)];
-		client.channels.cache.get(generalChannelID).send(`${randomWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
+		//let randomWelc = welcomes[Math.floor(Math.random() * welcomes.length)];
+		let randomWelc = joinMessages[Math.floor(Math.random() * joinMessages.length)];
+		let formatWelc = randomWelc.replace('{user}', `<@${member.id}>`);
+		client.channels.cache.get(generalChannelID).send(`${formatWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
 	} catch (e) {
 		throw new Tantrum(client, 'guildMemberAdd.js', 'Error on sending welcome message', e)
 	}

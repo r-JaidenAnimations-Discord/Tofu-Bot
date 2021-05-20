@@ -4,8 +4,8 @@ const fs = require('fs'); // fs is the package we need to read all files which a
 
 const ascii = require('ascii-table');
 
-let table = new ascii('Commands');
-table.setHeading('Command', 'Load Status');
+let table = new ascii('Events');
+table.setHeading('Event', 'Load Status');
 
 module.exports = client => {
 	const load = dirs => {

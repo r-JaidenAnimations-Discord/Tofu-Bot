@@ -2,30 +2,31 @@ const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js
 const Tantrum = require('../../functions/tantrum.js');
 
 module.exports = {
-	name: 'shuffle',
-	helpTitle: 'Shuffle',
+	name: 'disconnect',
+	helpTitle: 'Disconnect',
 	category: 'Music',
-	usage: 'shuffle',
-	description: 'Feelin\' random?',
+	usage: 'disconnect',
+	description: 'Done? Stop the music I suppose',
 	isDMAllowed: false,
 	isDeprecated: false,
-	aliases: ['randomize'],
+	aliases: ['dc'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		const success = client.player.shuffle(message);
+		client.player.setRepeatMode(message, false);
+		const success = client.player.stop(message);
 
 		if (success) {
 			try {
-				await message.react('🔀');
+				await message.react('👋');
 			} catch (e) {
-				throw new Tantrum(client, 'shuffle.js', 'Error sending shuffled message', e);
+				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);
 			}
 		} else {
-			throw new Tantrum(client, 'shuffle.js', 'Error on shuffling music', 'No message');
+			throw new Tantrum(client, 'disconnect.js', 'Error on disconnecting', 'No message');
 		}
 	},
 };

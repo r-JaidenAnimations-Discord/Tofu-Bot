@@ -1,46 +1,45 @@
+//const { tofuOrange } = require('../../config.json');
+const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-const { canModifyQueue } = require('../../functions/music.js');
-const { musicStrings } = require('../../commanddata/strings.json');
+const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
 
 module.exports = {
 	name: 'pause',
 	helpTitle: 'Pause',
 	category: 'Music',
 	usage: 'pause',
-	description: 'Pause the music',
+	description: 'brb hold on',
 	isDMAllowed: false,
 	isDeprecated: false,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const queue = message.client.queue.get(message.guild.id);
+		const { tofuOrange } = client.config;
 
-		if (!queue) {
+		if (!checkMusic(client, message)) return;
+		if (!checkQueueExists(client, message)) return;
+
+		if (client.player.getQueue(message).paused) {
+			let alreadyPausedEmbed = new Discord.MessageEmbed()
+				.setColor(tofuOrange)
+				.setDescription('The music is already paused!');
 			try {
-				return message.channel.send(musicStrings.nothingPlaying);
+				return message.channel.send(alreadyPausedEmbed);
 			} catch (e) {
-				throw new Tantrum(client, 'pause.js', 'Error on sending nothing playing message', e);
+				throw new Tantrum(client, 'pause.js', 'Error on sending alreadyPausedEmbed', e);
 			}
 		}
 
-		if (!canModifyQueue(message.member)) {
-			try {
-				return message.reply(musicStrings.notInChannel);
-			} catch (e) {
-				console.error(e);
-				throw new Tantrum(client, 'pause.js', 'Error on sending have to be in VC message', e);
-			}
-		}
+		const success = client.player.pause(message);
 
-		if (queue.playing) {
+		if (success) {
 			try {
-				queue.playing = false;
-				queue.connection.dispatcher.pause(true);
 				await message.react('⏸');
 			} catch (e) {
-				throw new Tantrum(client, 'pause.js', 'Error on pausing music', e);
+				throw new Tantrum(client, 'pause.js', 'Error on sending paused message', e);
 			}
-
+		} else {
+			throw new Tantrum(client, 'pause.js', 'Error on pausing music', 'No message');
 		}
 	},
 };

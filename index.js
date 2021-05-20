@@ -2,13 +2,13 @@
 // Now, only God knows
 const Discord = require('discord.js');
 const fs = require('fs');
+const { Player } = require('discord-player');
 const Tantrum = require('./functions/tantrum.js');
 const chalk = require('chalk');
 const client = new Discord.Client();
-//const { handleError } = require('./functions/errorHandler.js');
 const { randomStatus } = require('./functions/statusFunction.js');
 const { remindShrimp } = require('./functions/shrimpReminder.js');
-const { apiKey } = require('./config.json');
+//const { apiKey } = require('./config.json');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly
@@ -17,12 +17,33 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync('./modules/');
-//music
-client.queue = new Map();
+client.player = new Player(client, {
+	leaveOnEndCooldown: 300000,
+	leaveOnStopCooldown: 300000,
+	leaveOnEmptyCooldown: 200000,
+	autoSelfDeaf: true,
+	fetchBeforeQueued: false // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
+});
 
+// Config loading [soon]
+let launchArgs = process.argv.slice(2);
+switch (launchArgs[0]) {
+	case 'debug':
+		console.log(`${chalk.magenta('[Config]')}: Debug configuration will be loaded.`);
+		client.config = require('./configDebug.json');
+		break;
+	case 'release':
+		console.log(`${chalk.magenta('[Config]')}: Release configuration will be loaded.`);
+		client.config = require('./configRelease.json');
+		break;
+	default:
+		console.log(`${chalk.magenta('[Config]')}: ${chalk.yellow('No arguments provided, Release configuration will be loaded.')}`);
+		client.config = require('./configRelease.json');
+		break;
+}
 
 // Log in
-client.login(apiKey);
+client.login(client.config.apiKey);
 
 //if sh!t goes wrong
 /*client.on('rateLimit', r => {
@@ -31,12 +52,10 @@ client.login(apiKey);
 });*/
 client.on('warn', w => {
 	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);
-	//handleError(client, 'index.js', '[WARN]: Unspecified warning', w);
 	new Tantrum(client, 'index.js', '[WARN]: Unspecified warning', w);
 });
 client.on('error', e => {
 	console.error(`${chalk.redBright('[ERROR]')}: ${e.stack}`);
-	//handleError(client, 'index.js', `[ERROR]: Unspecified error: ${e.stack}`, e);
 	new Tantrum(client, 'index.js', `[ERROR]: Unspecified error: ${e.stack}`, e);
 });
 process.on('uncaughtException', e => console.error(`${chalk.redBright('[Error]')}: ${e.stack}`));
@@ -44,6 +63,6 @@ process.on('unhandledRejection', e => console.error(`${chalk.redBright('[Error]'
 process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}: ${e.stack}`));
 
 // Handlers' modules
-['commands', 'event'].forEach(handler => {
+['commands', 'event', 'music'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });

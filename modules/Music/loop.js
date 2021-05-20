@@ -1,45 +1,67 @@
+//const { tofuGreen } = require('../../config.json');
+const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-const { canModifyQueue } = require('../../functions/music.js');
-const { musicStrings } = require('../../commanddata/strings.json');
+const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
 
 module.exports = {
 	name: 'loop',
 	helpTitle: 'Loop',
 	category: 'Music',
-	usage: 'loop',
-	description: 'Toggle looping',
+	usage: 'loop (queue)',
+	description: 'Enable or disable looping',
 	isDMAllowed: false,
 	isDeprecated: false,
-	//aliases: [],
+	aliases: ['lp', 'repeat'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const queue = message.client.queue.get(message.guild.id);
+		const { tofuGreen } = client.config;
 
-		if (!queue) {
-			try {
-				return message.channel.send(musicStrings.nothingPlaying);
-			} catch (e) {
-				console.error(e);
-				throw new Tantrum(client, 'loop.js', 'Error on sending nothing playing message', e);
+		if (!checkMusic(client, message)) return;
+		if (!checkQueueExists(client, message)) return;
+
+		let loopEmbed = new Discord.MessageEmbed()
+			.setColor(tofuGreen);
+
+		if (args.join(' ').toLowerCase() === 'queue') {
+			if (client.player.getQueue(message).loopMode) {
+				try {
+					client.player.setLoopMode(message, false);
+					loopEmbed.setDescription('Looping is now **disabled.**');
+					message.channel.send(loopEmbed);
+					return;
+				} catch (e) {
+					throw new Tantrum(client, 'loop.js', 'Error on disabling loop', e);
+				}
+			} else {
+				try {
+					client.player.setLoopMode(message, true);
+					loopEmbed.setDescription('Now looping the **queue.**');
+					message.channel.send(loopEmbed);
+					return;
+				} catch (e) {
+					throw new Tantrum(client, 'loop.js', 'Error on looping queue', e);
+				}
 			}
-		}
-
-		if (!canModifyQueue(message.member)) {
-			try {
-				return message.reply(musicStrings.notInChannel);
-			} catch (e) {
-				console.error(e);
-				throw new Tantrum(client, 'loop.js', 'Error on sending have to be in VC message', e);
+		} else {
+			if (client.player.getQueue(message).repeatMode) {
+				try {
+					client.player.setRepeatMode(message, false);
+					loopEmbed.setDescription('Looping is now **disabled.**');
+					message.channel.send(loopEmbed);
+					return;
+				} catch (e) {
+					throw new Tantrum(client, 'loop.js', 'Error on disabling loop', e);
+				}
+			} else {
+				try {
+					client.player.setRepeatMode(message, true);
+					loopEmbed.setDescription('Now looping the **current track.**');
+					message.channel.send(loopEmbed);
+					return;
+				} catch (e) {
+					throw new Tantrum(client, 'loop.js', 'Error on looping song', e);
+				}
 			}
-		}
-
-		// toggle
-		queue.loop = !queue.loop;
-		try {
-			return queue.textChannel.send(`${queue.loop ? 'Enabled' : 'Disabled'} looping`);
-		} catch (e) {
-			console.error(e);
-			throw new Tantrum(client, 'loop.js', 'Error on sending toggled loop message', e);
 		}
 	},
 };

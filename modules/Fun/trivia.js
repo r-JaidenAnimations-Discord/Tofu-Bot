@@ -1,7 +1,6 @@
-const { tofuGreen } = require('../../config.json');
+//const { tofuGreen } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 const { promptMessage } = require('../../functions/promptMessage.js');
 const { trivia } = require('../../commanddata/jaidenTriviaList.js');
 
@@ -28,7 +27,9 @@ module.exports = {
 	aliases: ['jaidentrivia', 'jtrivia'],
 	cooldown: 30,
 	execute: async function(client, message, args) {
-		if (args[0] == 'rules') {
+		const { tofuGreen } = client.config;
+
+		if (args[0] === 'rules') {
 			//return message.channel.send('Rules and info will be put here');
 			const ruleEmbed = new Discord.MessageEmbed()
 				.setTitle('Trivia Info')
@@ -38,7 +39,6 @@ module.exports = {
 			try {
 				return message.channel.send(ruleEmbed);
 			} catch (e) {
-				//return handleError(client, 'trivia.js', 'Error on sending ruleEmbed', e);
 				throw new Tantrum(client, 'trivia.js', 'Error on sending ruleEmbed', e);
 			}
 		}
@@ -74,7 +74,6 @@ module.exports = {
 					try {
 						await sentEmbed.react(`${numberReactions.get(count + 1)}`);
 					} catch (e) {
-						//return handleError(client, 'trivia.js', 'Error on reacting to embed', e);
 						throw new Tantrum(client, 'trivia.js', 'Error on reacting to embed', e);
 					}
 				}
@@ -88,7 +87,6 @@ module.exports = {
 						try {
 							sentEmbed.edit(correctedEmbed);
 						} catch (e) {
-							//return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 							throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 						}
 					}
@@ -98,14 +96,12 @@ module.exports = {
 						try {
 							sentEmbed.edit(correctedEmbed);
 						} catch (e) {
-							//return handleError(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 							throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 						}
 					}
 				}, 15000);
 			});
 		} catch (e) {
-			//return handleError(client, 'trivia.js', 'Error on sending mainEmbed', e);
 			throw new Tantrum(client, 'trivia.js', 'Error on sending mainEmbed', e);
 		}
 

@@ -1,5 +1,4 @@
 const Tantrum = require('../../functions/tantrum.js');
-//const { handleError } = require('../../functions/errorHandler.js');
 
 module.exports = {
 	name: 'beep',
@@ -15,7 +14,6 @@ module.exports = {
 		try {
 			message.channel.send('boop');
 		} catch (e) {
-			//return handleError(client, 'beepboop,js', 'Error on sending boop', e);
 			throw new Tantrum(client, 'beepboop,js', 'Error on sending boop', e);
 		}
 	},

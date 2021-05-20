@@ -1,4 +1,6 @@
-const { botVersion, releaseDate, botProfile, tofuGreen } = require('../../config.json');
+//const { releaseDate, botProfile, tofuGreen } = require('../../config.json');
+
+const { version } = require('../../package.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 
@@ -13,6 +15,8 @@ module.exports = {
 	aliases: ['bot', 'botinfo', 'info'],
 	cooldown: 20,
 	execute: async function(client, message, args) {
+		const { releaseDate, botProfile, tofuGreen } = client.config;
+
 		let { heapUsed, heapTotal } = process.memoryUsage();
 
 		// Uptime calculations
@@ -29,7 +33,7 @@ module.exports = {
 			.setColor(tofuGreen)
 			.setAuthor('About Tofu Bot', botProfile)
 			.addFields(
-				{ name: 'Bot version:', value: botVersion },
+				{ name: 'Bot version:', value: version },
 				{ name: 'Bot release date:', value: releaseDate },
 				//{ name: 'Uptime', value: `${(process.uptime() / 3600).toFixed(1)} hours` },
 				{ name: 'Uptime', value: `${days}d ${hours}h ${minutes}m ${seconds}s` },
@@ -45,7 +49,6 @@ module.exports = {
 		try {
 			message.channel.send(aboutEmbed);
 		} catch (e) {
-			//return handleError(client, 'about.js', 'Error on sending aboutEmbed', e);
 			throw new Tantrum(client, 'about.js', 'Error on sending aboutEmbed', e);
 		}
 	},

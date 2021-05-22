@@ -18,7 +18,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { minecraftIP, tofuGreen, botProfile, tofuError } = client.config;
 
-		await message.channel.startTyping();
+		message.channel.startTyping();
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -57,10 +57,14 @@ module.exports = {
 			res.on('data', function(chunk) {
 				body += chunk;
 
+
+			});
+			res.on('close', () => {
+				console.log(body)
 				var APIresponse = JSON.parse(body);
-				//console.log('Got a response: ', APIresponse.ip);
+				console.log('Got a response: ', APIresponse.ip);
 				//console.log(APIresponse.players.list)
-				//console.log(APIresponse)
+				console.log(APIresponse)
 				var i;
 				var playerList = 'No online members';
 				var userCount = 0;
@@ -71,11 +75,13 @@ module.exports = {
 				}
 
 				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
+					playerList = 'Memberlist not available';
 					if (APIresponse.players.online) {
-
-						playerList = '';
-						for (i = 0; i < APIresponse.players.list.length; i++) {
-							playerList += APIresponse.players.list[i] + '\n';
+						if (APIresponse.players.list) {
+							playerList = '';
+							for (i = 0; i < APIresponse.players.list.length; i++) {
+								playerList += APIresponse.players.list[i] + '\n';
+							}
 						}
 					}
 				}
@@ -95,7 +101,6 @@ module.exports = {
 				}
 
 			});
-
 			res.on('end', function() {
 				// prob going to remove this
 				console.log('Request finished');

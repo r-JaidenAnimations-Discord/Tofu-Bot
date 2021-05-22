@@ -7,3 +7,7 @@ Make sure when pushing or pull requesting changes, to push them to the [developm
 
 ## Important notice
 While Tofu Bot is on GitHub, it is **NOT** open source yet. It is only shared in small groups and to trusted people.
+
+## Legal Stuff
+Tofu Bot has been licensed under the [Creative Commons Attribution-NonCommercial 4.0 International](https://creativecommons.org/licenses/by-nc/4.0/legalcode) license.  
+tl;dr: Do whatever you want as long as I get credited and you aren't using it for commercial purposes.

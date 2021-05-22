@@ -16,8 +16,6 @@ module.exports = {
 	aliases: ['commands'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { prefix, tofuOrange } = client.config;
-
 		//if (message.deletable) message.delete();
 
 		if (args[0]) {
@@ -30,6 +28,8 @@ module.exports = {
 };
 
 async function getAll(client, message) {
+	const { tofuOrange } = client.config;
+
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
@@ -54,6 +54,8 @@ async function getAll(client, message) {
 }
 
 async function getCmd(client, message, input) {
+	const { prefix, tofuOrange } = client.config;
+
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional; [] = required; {a, b} = choose between a or b');

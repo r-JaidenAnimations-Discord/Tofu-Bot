@@ -17,7 +17,7 @@ module.exports = {
 
 		if (message.author.id !== shrimpID) {
 			try {
-				return message.channel.send('ahahahhahahah are you shrimp? Only the all mighty shrimp can use this almighty command! **vanish***');
+				return message.channel.send('ahahahhahahah are you shrimp? Only the all mighty shrimp can use this almighty command! **vanish**');
 			} catch (e) {
 				throw new Tantrum(client, 'a.js', 'Error on sending are you shrimp message', e);
 			}

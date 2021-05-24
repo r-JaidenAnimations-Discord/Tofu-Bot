@@ -474,7 +474,7 @@ module.exports = {
 					.setDescription(
 						stripIndents`Welcome Messages: \`${formatBool(readData.welcome)}\`
 					Kirito Trust: \`${formatBool(readData.kiritoTrust)}\`
-					Ali Trust: \`${formatBool(readData.kiritoTrust)}\`
+					Ali Trust: \`${formatBool(readData.aliTrust)}\`
 					Random status: \`${formatBool(readData.randomStatus)}\`
 					Blacklisting: \`${formatBool(readData.blackListing)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);

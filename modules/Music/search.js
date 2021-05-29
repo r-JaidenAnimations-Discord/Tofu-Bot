@@ -11,6 +11,7 @@ module.exports = {
 	description: 'Don\'t know the exact thing? Search and choose the one you want.',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['src', 'find'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Ping!',
 	isDMAllowed: true,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['delay', 'latency'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

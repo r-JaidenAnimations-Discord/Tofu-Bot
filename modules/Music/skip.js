@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Skip what\'s playing. Maybe the cringe factor was too high',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['sk', 'next'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

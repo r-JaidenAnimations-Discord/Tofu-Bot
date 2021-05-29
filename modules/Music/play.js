@@ -1,3 +1,6 @@
+/**
+ * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
+ */
 //const { tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
@@ -11,6 +14,7 @@ module.exports = {
 	description: 'Play some choons',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

@@ -11,6 +11,7 @@ module.exports = {
 	description: 'Send a random quote from Jaiden',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['jaidenquote', 'jquote'],
 	cooldown: 3,
 	execute: async function(client, message, args) {

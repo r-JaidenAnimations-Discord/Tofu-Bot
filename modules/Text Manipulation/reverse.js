@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Reverse text.',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {

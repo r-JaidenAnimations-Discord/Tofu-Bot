@@ -10,6 +10,7 @@ module.exports = {
 	description: 'Suggest a movie to play at movie night',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {

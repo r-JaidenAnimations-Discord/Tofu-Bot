@@ -12,6 +12,7 @@ module.exports = {
 	description: 'Change bot settings.',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: true,
 	aliases: ['set', 'config'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
@@ -473,7 +474,7 @@ module.exports = {
 					.setDescription(
 						stripIndents`Welcome Messages: \`${formatBool(readData.welcome)}\`
 					Kirito Trust: \`${formatBool(readData.kiritoTrust)}\`
-					Ali Trust: \`${formatBool(readData.kiritoTrust)}\`
+					Ali Trust: \`${formatBool(readData.aliTrust)}\`
 					Random status: \`${formatBool(readData.randomStatus)}\`
 					Blacklisting: \`${formatBool(readData.blackListing)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);

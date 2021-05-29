@@ -9,6 +9,7 @@ module.exports = {
 	description: 'See the upcoming choons',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['q'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

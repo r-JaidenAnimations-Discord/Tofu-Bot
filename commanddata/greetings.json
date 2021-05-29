@@ -1,0 +1,12 @@
+{
+    "joinMessages": [
+        "{user} burst through the window for welcome!",
+		"Hello, {user}. Welcome to r/JaidenAnimations!",
+		"Hello, {user}, still waiting for plont...",
+		"Hello {user} grab a cup o' water and talk with us"
+    ],
+    "leaveMessages": [
+		"Welps, guess like {user} couldn't stand to be around us, adiós.",
+		"{user} is hanging up now, bye."
+    ]
+}

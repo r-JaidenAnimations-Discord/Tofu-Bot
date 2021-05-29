@@ -12,11 +12,10 @@ module.exports = {
 	description: 'Stop, get help',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['commands'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { prefix, tofuOrange } = client.config;
-
 		//if (message.deletable) message.delete();
 
 		if (args[0]) {
@@ -29,6 +28,8 @@ module.exports = {
 };
 
 async function getAll(client, message) {
+	const { tofuOrange } = client.config;
+
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
@@ -53,6 +54,8 @@ async function getAll(client, message) {
 }
 
 async function getCmd(client, message, input) {
+	const { prefix, tofuOrange } = client.config;
+
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional; [] = required; {a, b} = choose between a or b');
@@ -75,7 +78,7 @@ async function getCmd(client, message, input) {
 	if (cmd.aliases) embed.addField('**Aliases**', `${cmd.aliases.map(a => `\`${a}\``).join(' ')}`);
 	/*if (cmd.isEnabled)*/ embed.addField('**Status:**', `${settingsFile.disabledCommands.includes(cmd.name) || settingsFile.disabledCommands.includes(cmd.aliases) ? '⚠️ Command has been disabled' : 'Command is currently enabled'}`);
 	if (cmd.category) embed.addField('**Category**', cmd.category);
-	/*if (cmd.isDMAllowed)*/ embed.addField('**Is allowed trough DM**', `${cmd.isDMAllowed === true ? '\`yes\`' : '\`no\`'}`);
+	/*if (cmd.isDMAllowed)*/ embed.addField('**Is allowed through DM**', `${cmd.isDMAllowed === true ? '\`yes\`' : '\`no\`'}`);
 	if (cmd.description) embed.addField('**Command Description**', `${cmd.description}`);
 	if (cmd.usage) embed.addField('**Command Structure**', `\`${prefix}${cmd.usage}\``);
 

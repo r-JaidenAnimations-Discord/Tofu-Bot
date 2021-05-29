@@ -9,6 +9,7 @@ module.exports = {
 	description: 'Feelin\' random?',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['randomize'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

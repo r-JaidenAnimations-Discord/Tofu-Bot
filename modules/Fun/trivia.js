@@ -24,6 +24,7 @@ module.exports = {
 	description: 'Play some trivia.',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['jaidentrivia', 'jtrivia'],
 	cooldown: 30,
 	execute: async function(client, message, args) {

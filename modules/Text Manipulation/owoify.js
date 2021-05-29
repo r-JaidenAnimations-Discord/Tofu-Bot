@@ -9,6 +9,7 @@ module.exports = {
 	description: 'OwO what\'s this',
 	isDMAllowed: false,
 	isDeprecated: false,
+	isDangerous: false,
 	aliases: ['owofy'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

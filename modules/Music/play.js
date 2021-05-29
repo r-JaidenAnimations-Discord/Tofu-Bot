@@ -1,3 +1,6 @@
+/**
+ * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
+ */
 //const { tofuOrange } = require('../../config.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');

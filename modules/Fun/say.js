@@ -1,4 +1,5 @@
 //const { tofuGreen } = require('../../config.json');
+const { tofuGreen } = require('../../commanddata/colors.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 
@@ -14,7 +15,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { tofuGreen } = client.config;
+		// const { tofuGreen } = client.config;
 
 		let channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||

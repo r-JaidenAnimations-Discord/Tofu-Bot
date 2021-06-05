@@ -1,10 +1,11 @@
 //const { tofuOrange } = require('../../config.json');
+const { tofuOrange } = require('../../commanddata/colors.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const { musicStrings } = require('../../commanddata/strings.json');
 
 module.exports = (client, message, queue) => {
-	const { tofuOrange } = client.config;
+	// const { tofuOrange } = client.config;
 
 	const timeOutEmbed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)

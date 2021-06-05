@@ -1,4 +1,5 @@
 //const { tofuGreen } = require('../../config.json');
+const { tofuGreen } = require('../../commanddata/colors.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const { promptMessage } = require('../../functions/promptMessage.js');
@@ -28,7 +29,7 @@ module.exports = {
 	aliases: ['jaidentrivia', 'jtrivia'],
 	cooldown: 30,
 	execute: async function(client, message, args) {
-		const { tofuGreen } = client.config;
+		// const { tofuGreen } = client.config;
 
 		if (args[0] === 'rules') {
 			//return message.channel.send('Rules and info will be put here');

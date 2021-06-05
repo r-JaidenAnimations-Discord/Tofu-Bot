@@ -1,4 +1,5 @@
 //const { prefix, tofuOrange } = require('../../config.json');
+const { tofuOrange } = require('../../commanddata/colors.json');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('../../functions/tantrum.js');
@@ -28,7 +29,7 @@ module.exports = {
 };
 
 async function getAll(client, message) {
-	const { tofuOrange } = client.config;
+	// const { tofuOrange } = client.config;
 
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
@@ -54,7 +55,7 @@ async function getAll(client, message) {
 }
 
 async function getCmd(client, message, input) {
-	const { prefix, tofuOrange } = client.config;
+	const { prefix/*, tofuOrange*/ } = client.config;
 
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)

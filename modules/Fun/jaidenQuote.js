@@ -1,4 +1,5 @@
 //const { tofuGreen } = require('../../config.json');
+const { tofuGreen } = require('../../commanddata/colors.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 const { quotes } = require('../../commanddata/jaidenQuoteList.js');
@@ -15,7 +16,7 @@ module.exports = {
 	aliases: ['jaidenquote', 'jquote'],
 	cooldown: 3,
 	execute: async function(client, message, args) {
-		const { tofuGreen } = client.config;
+		// const { tofuGreen } = client.config;
 
 		const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 

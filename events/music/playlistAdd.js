@@ -1,9 +1,10 @@
 //const { tofuGreen } = require('../../config.json');
+const { tofuGreen } = require('../../commanddata/colors.json');
 const Discord = require('discord.js');
 const Tantrum = require('../../functions/tantrum.js');
 
 module.exports = (client, message, queue, playlist) => {
-	const { tofuGreen } = client.config;
+	// const { tofuGreen } = client.config;
 
 	const queuedEmbed = new Discord.MessageEmbed()
 		.setColor(tofuGreen)

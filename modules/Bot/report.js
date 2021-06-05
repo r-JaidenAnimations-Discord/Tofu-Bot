@@ -1,8 +1,8 @@
 //const { tofuRed, tofuGreen, bugReportChannelID } = require('../../config.json');
-const { tofuRed, tofuGreen } = require('../../commanddata/colors.json');
+const { tofuRed, tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { promptMessage } = require('../../functions/promptMessage.js');
+const Tantrum = require('#tantrum');
+const { promptMessage } = require('#functions/promptMessage.js');
 
 module.exports = {
 	name: 'report',

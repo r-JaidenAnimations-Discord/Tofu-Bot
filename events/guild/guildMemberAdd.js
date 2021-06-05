@@ -1,6 +1,6 @@
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
-const { joinMessages } = require('../../commanddata/greetings.json');
+const Tantrum = require('#tantrum');
+const { joinMessages } = require('#commandData/greetings.json');
 //const { jaidenServerID, generalChannelID, rulesChannelID, devMode, gradyID, maxID } = require('../../config.json');
 
 module.exports = async (client, member) => {

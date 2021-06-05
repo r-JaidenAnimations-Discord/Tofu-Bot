@@ -1,7 +1,7 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuBlue } = require('../../config.json');
-const { tofuGreen, tofuBlue } = require('../../commanddata/colors.json');
+const { tofuGreen, tofuBlue } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 
 module.exports = {

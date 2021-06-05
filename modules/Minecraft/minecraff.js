@@ -1,9 +1,9 @@
 //const { minecraftIP, tofuGreen, botProfile, tofuError } = require('../../config.json');
-const { tofuGreen, tofuError } = require('../../commanddata/colors.json');
+const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'minecraft',

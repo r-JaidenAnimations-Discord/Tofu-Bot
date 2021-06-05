@@ -1,8 +1,8 @@
 //const { tofuGreen, tofuRed } = require('../../config.json');
-const { tofuGreen, tofuRed } = require('../../commanddata/colors.json');
+const { tofuGreen, tofuRed } = require('#colors');
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
 
 module.exports = {

@@ -1,8 +1,8 @@
 //const { tofuGreen } = require('../../config.json');
-const { tofuGreen } = require('../../commanddata/colors.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { quotes } = require('../../commanddata/jaidenQuoteList.js');
+const Tantrum = require('#tantrum');
+const { quotes } = require('#commandData/jaidenQuoteList.js');
 
 module.exports = {
 	name: 'quote',

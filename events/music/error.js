@@ -1,8 +1,8 @@
 //const { tofuError } = require('../../config.json');
-const { tofuError } = require('../../commanddata/colors.json');
+const { tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { musicStrings } = require('../../commanddata/strings.json');
+const Tantrum = require('#tantrum');
+const { musicStrings } = require('#commandData/strings.json');
 
 module.exports = (client, error, message, ...args) => {
 	// const { tofuError } = client.config;

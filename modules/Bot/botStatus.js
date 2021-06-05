@@ -1,5 +1,5 @@
 //const Discord = require('discord.js');
-const { setSts } = require('../../functions/statusFunction.js');
+const { setSts } = require('#functions/statusFunction.js');
 
 module.exports = {
 	name: 'status',

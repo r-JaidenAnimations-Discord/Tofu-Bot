@@ -1,6 +1,6 @@
 //const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('./tantrum.js');
+const Tantrum = require('#tantrum');
 //const { jaidenServerID, level20RoleID } = require('../config.json');
 
 // Set the bot's status

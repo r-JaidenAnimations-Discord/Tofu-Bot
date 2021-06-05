@@ -1,7 +1,7 @@
 //const { tofuGreen } = require('../../config.json');
-const { tofuGreen } = require('../../commanddata/colors.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'say',

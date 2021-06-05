@@ -1,5 +1,5 @@
 //const { shrimpID } = require('../../config.json');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
     name: 'imnotshrimp',

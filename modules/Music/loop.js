@@ -1,8 +1,8 @@
 //const { tofuGreen } = require('../../config.json');
-const { tofuGreen } = require('../../commanddata/colors.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
 
 module.exports = {
 	name: 'loop',

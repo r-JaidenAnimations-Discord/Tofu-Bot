@@ -2,10 +2,10 @@
  * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
  */
 //const { tofuOrange } = require('../../config.json');
-const { tofuOrange } = require('../../commanddata/colors.json');
+const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic } = require('../../functions/musicChecks.js');
+const Tantrum = require('#tantrum');
+const { checkMusic } = require('#functions/musicChecks.js');
 
 module.exports = {
 	name: 'play',

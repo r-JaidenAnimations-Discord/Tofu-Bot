@@ -1,7 +1,7 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
-const { tofuGreen, tofuError, tofuRed } = require('../../commanddata/colors.json');
+const { tofuGreen, tofuError, tofuRed } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const beautify = require('beautify');
 // NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 

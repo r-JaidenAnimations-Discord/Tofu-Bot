@@ -1,5 +1,5 @@
 //const { shrimpID, devMode } = require('../config.json');
-const Tantrum = require('./tantrum.js');
+const Tantrum = require('#tantrum');
 
 const remindShrimp = (client) => {
 	const { shrimpID, devMode } = client.config;

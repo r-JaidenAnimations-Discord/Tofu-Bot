@@ -1,9 +1,9 @@
 //const { tofuGreen } = require('../../config.json');
-const { tofuGreen } = require('../../commanddata/colors.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { promptMessage } = require('../../functions/promptMessage.js');
-const { trivia } = require('../../commanddata/jaidenTriviaList.js');
+const Tantrum = require('#tantrum');
+const { promptMessage } = require('#functions/promptMessage.js');
+const { trivia } = require('#commandData/jaidenTriviaList.js');
 
 let numberReactions = new Map([
 	[1, '1️⃣'],

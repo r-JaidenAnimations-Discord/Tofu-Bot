@@ -1,8 +1,8 @@
 //const { releaseDate, botProfile, tofuGreen } = require('../../config.json');
-const { tofuGreen } = require('../../commanddata/colors.json');
+const { tofuGreen } = require('#colors');
 const { version } = require('../../package.json');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'about',

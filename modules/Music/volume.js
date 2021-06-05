@@ -1,9 +1,9 @@
 //const { tofuGreen, tofuOrange } = require('../../config.json');
-const { tofuGreen, tofuOrange } = require('../../commanddata/colors.json');
+const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
-const { permissionsErrs } = require('../../commanddata/strings.json');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
+const { permissionsErrs } = require('#commandData/strings.json');
 
 module.exports = {
 	name: 'volume',

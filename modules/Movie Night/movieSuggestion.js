@@ -1,7 +1,7 @@
 //const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = require('../../config.json');
-const { tofuBlue } = require('../../commanddata/colors.json');
+const { tofuBlue } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'suggestmovie',

@@ -1,10 +1,10 @@
 //const { tofuGreen } = require('../../config.json');
-const { tofuGreen } = require('../../commanddata/colors.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
-const createBar = require('../../functions/createBar.js');
-const { humanReadableDuration } = require('../../functions/buildTimeString.js');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
+const createBar = require('#functions/createBar.js');
+const { humanReadableDuration } = require('#functions/buildTimeString.js');
 
 module.exports = {
 	name: 'nowplaying',

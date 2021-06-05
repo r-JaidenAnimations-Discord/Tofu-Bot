@@ -1,8 +1,8 @@
 //const { prefix, tofuOrange } = require('../../config.json');
-const { tofuOrange } = require('../../commanddata/colors.json');
+const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { stripIndents } = require('common-tags');
 
 module.exports = {

@@ -26,5 +26,11 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
+  },
+  "imports": {
+    "#functions/*": "./functions/*",
+    "#commandData/*": "./commanddata/*",
+    "#tantrum": "./functions/tantrum.js",
+    "#colors": "./commanddata/colors.json"
   }
 }

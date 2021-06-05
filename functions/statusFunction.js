@@ -73,6 +73,16 @@ const setSts = (client, message, selectedStatus) => {
 				}
 			});
 			break;
+		case 'walle':
+		case 'wall-e':
+			client.user.setPresence({
+				status: 'online',
+				activity: {
+					name: 'Wall-E',
+					type: 'WATCHING'
+				}
+			});
+			break;
 		case 'next':
 			const nextState = states[Math.floor(Math.random() * states.length)];
 			setSts(client, message, nextState);
@@ -104,7 +114,7 @@ const setSts = (client, message, selectedStatus) => {
 }
 
 // We don't want to have the bot appear offline
-const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser'];
+const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e'];
 const randomStatus = async (client, message) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');

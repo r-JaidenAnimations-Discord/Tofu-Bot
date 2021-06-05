@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: true,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {

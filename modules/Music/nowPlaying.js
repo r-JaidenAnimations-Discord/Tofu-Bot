@@ -15,6 +15,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

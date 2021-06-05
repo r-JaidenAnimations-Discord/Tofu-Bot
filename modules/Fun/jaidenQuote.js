@@ -13,6 +13,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['jaidenquote', 'jquote'],
 	cooldown: 3,
 	execute: async function(client, message, args) {

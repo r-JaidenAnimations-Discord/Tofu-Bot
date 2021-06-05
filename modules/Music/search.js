@@ -13,6 +13,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['src', 'find'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

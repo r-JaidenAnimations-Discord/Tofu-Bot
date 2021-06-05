@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['csts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {

@@ -12,6 +12,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {

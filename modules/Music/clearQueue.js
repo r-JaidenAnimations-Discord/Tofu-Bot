@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['clear-queue', 'cq', 'clear'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

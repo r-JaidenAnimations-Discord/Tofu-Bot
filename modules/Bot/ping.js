@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: true,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['delay', 'latency'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

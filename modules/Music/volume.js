@@ -14,6 +14,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['vol'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

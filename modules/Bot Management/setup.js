@@ -14,6 +14,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['set', 'config'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

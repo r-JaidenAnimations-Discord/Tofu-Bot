@@ -19,8 +19,8 @@ module.exports = {
         if (message.author.id !== gradyID && message.author.id !== retainedID && message.author.id !== maxID) return;
 
         try {
-            message.channel.send('💨');
-            // message.react('💨');
+            // message.channel.send('💨');
+            message.react('💨');
         } catch (e) {
             throw new Tantrum(client, 'fart,js', 'Error on sending fart', e);
         }

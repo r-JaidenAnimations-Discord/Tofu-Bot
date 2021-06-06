@@ -59,7 +59,7 @@ module.exports = {
 				.setTimestamp()
 				.setTitle('Eval')
 				.addField('To Evaluate', `\`\`\`js\n${beautify(toEval, { format: 'js' })}\n\`\`\``)
-				.addField('Evaluated', evaluated.replace(client.config.apiKey, 'Aahhahahah you think you\'re smart now buddy? yeah i figured so, but look at that. We have outsmarted you. **Perish**'))
+				.addField('Evaluated', evaluated.replace(client.token, 'Aahhahahah you think you\'re smart now buddy? yeah i figured so, but look at that. We have outsmarted you. **Perish**'))
 				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 

@@ -3,7 +3,7 @@ const { banKirito, banAli, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
-const { promptMessage } = require('#functions/promptMessage.js');
+const { dangerCommandPrompt } = require('#functions/dangerPrompt.js');
 //const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
 
 module.exports = async (client, message) => {
@@ -19,16 +19,6 @@ module.exports = async (client, message) => {
 	//console.log(data);
 	//console.log(settingsFile);
 	//console.log(settingsFile.disabledCommands);
-
-	// Respond on bot ping
-	/*if (message.mentions.has(client.user.id)) {
-		if (message.content.includes('@here') || message.content.includes('@everyone')) return;
-		try {
-			message.channel.send('Can you not? ;_;');
-		} catch (e) {
-			throw new Tantrum(client, 'message.js', 'Error on sending mad ping', e);
-		}
-	}*/
 
 	// Bots shall not trigger me
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -154,7 +144,6 @@ module.exports = async (client, message) => {
 				throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e);
 			}
 		}
-
 	}
 
 	// No DMs
@@ -196,43 +185,7 @@ module.exports = async (client, message) => {
 		}
 
 		// Warn when a command is executed from the devserver to the main deploy
-		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true) {
-
-			const warnEmbed = new Discord.MessageEmbed()
-				.setColor(tofuRed)
-				.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
-				.setTitle('HOLD UP')
-				.setDescription('This is a **__dangerous__** command. It affects the main server, are you absolutely sure you want to continue?')
-				.setTimestamp();
-
-			return message.channel.send(warnEmbed).then(async msg => {
-				const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
-
-				if (emoji === '✅') {
-					msg.delete();
-					message.channel.send('Done, you were warned');
-					if (settingsFile.disabledCommands.includes(command.name)) {
-						try {
-							return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] });
-							//return message.channel.send('HYikes, looks like this command has been disabled.\n*(Maxim probably broke it)*\nSo uhhhhh if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
-						} catch (e) {
-							throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
-						}
-					}
-
-					// All requirements are met, try running the command
-					try {
-						command.execute(client, message, args);
-					} catch (e) {
-						throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
-					}
-
-				} else if (emoji === '❌') {
-					msg.delete();
-					message.channel.send('Okay');
-				}
-			});
-		}
+		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true && await dangerCommandPrompt(client, message) === false) return;
 	}
 
 	// Is this command enabled?

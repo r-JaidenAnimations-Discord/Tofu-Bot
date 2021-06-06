@@ -1,7 +1,5 @@
-//const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
-//const { jaidenServerID, level20RoleID } = require('../config.json');
 
 // Set the bot's status
 const setSts = (client, message, selectedStatus) => {
@@ -10,40 +8,16 @@ const setSts = (client, message, selectedStatus) => {
 	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/*this.*/selectedStatus) { // lmao, i fucking hate this.
 		case 'online':
-			client.user.setPresence({
-				status: 'online',
-				activity: {
-					name: youOrJaiden,
-					type: 'WATCHING'
-				}
-			});
+			setRPC(client, 'online', youOrJaiden, 'WATCHING');
 			break;
 		case 'idle':
-			client.user.setPresence({
-				status: 'idle',
-				activity: {
-					name: `${youOrJaiden} but half asleep`,
-					type: 'WATCHING'
-				}
-			});
+			setRPC(client, 'idle', `${youOrJaiden} but half asleep`, 'WATCHING');
 			break;
 		case 'dnd':
-			client.user.setPresence({
-				status: 'dnd',
-				activity: {
-					name: `${youOrJaiden} but in a meeting`,
-					type: 'WATCHING'
-				}
-			});
+			setRPC(client, 'dnd', `${youOrJaiden} but in a meeting`, 'WATCHING');
 			break;
 		case 'gone':
-			client.user.setPresence({
-				status: 'invisible',
-				activity: {
-					name: 'or am i?',
-					type: 'WATCHING'
-				}
-			});
+			setRPC(client, 'invisible', 'or am i?', 'WATCHING');
 			break;
 		case 'stream':
 			client.user.setPresence({
@@ -56,32 +30,14 @@ const setSts = (client, message, selectedStatus) => {
 			});
 			break;
 		case 'play':
-			client.user.setPresence({
-				status: 'online',
-				activity: {
-					name: 'with Ari Bot',
-					type: 'PLAYING'
-				}
-			});
+			setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
 			break;
 		case 'listen':
-			client.user.setPresence({
-				status: 'online',
-				activity: {
-					name: 'Grady\'s Playlist',
-					type: 'LISTENING'
-				}
-			});
+			setRPC(client, 'online', 'Grady\'s Playlist', 'LISTENING');
 			break;
 		case 'walle':
 		case 'wall-e':
-			client.user.setPresence({
-				status: 'online',
-				activity: {
-					name: 'Wall-E',
-					type: 'WATCHING'
-				}
-			});
+			setRPC(client, 'online', 'Wall-E', 'WATCHING');
 			break;
 		case 'next':
 			const nextState = states[Math.floor(Math.random() * states.length)];
@@ -96,13 +52,7 @@ const setSts = (client, message, selectedStatus) => {
 			const simpleStates = ['online', 'idle', 'dnd'];
 			let randomSimpleState = simpleStates[Math.floor(Math.random() * simpleStates.length)];
 
-			client.user.setPresence({
-				status: randomSimpleState,
-				activity: {
-					name: randomMember,
-					type: 'WATCHING'
-				}
-			});
+			setRPC(client, randomSimpleState, randomMember, 'WATCHING');
 			break;
 		default:
 			try {
@@ -113,8 +63,17 @@ const setSts = (client, message, selectedStatus) => {
 	}
 }
 
-// We don't want to have the bot appear offline
-const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e'];
+const setRPC = async (client, activityStatus, activityName, activityType) => {
+	client.user.setPresence({
+		status: activityStatus,
+		activity: {
+			name: activityName,
+			type: activityType
+		}
+	})
+}
+
+const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e']; // We don't want to have the bot appear offline
 const randomStatus = async (client, message) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -123,11 +82,7 @@ const randomStatus = async (client, message) => {
 	if (settingsFile.randomStatus === true) {
 		const nextState = states[Math.floor(Math.random() * states.length)];
 		setSts(client, message, nextState);
-		//console.log('[RAND] Enabled, set');
 	}
-	/*else {
-		console.log('[RAND] Disabled');
-	}*/
 }
 
 module.exports = {

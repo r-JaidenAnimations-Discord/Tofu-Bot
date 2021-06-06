@@ -1,4 +1,5 @@
 //const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = require('../../config.json');
+const { maxID } = require('#memberIDs');
 const Tantrum = require('#tantrum');
 
 module.exports = {
@@ -14,7 +15,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;
+		const {/* maxID,*/ movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;
 
 		let channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||

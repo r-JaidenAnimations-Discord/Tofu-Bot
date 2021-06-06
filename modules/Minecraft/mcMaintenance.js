@@ -1,5 +1,6 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuBlue } = require('../../config.json');
 const { tofuGreen, tofuBlue } = require('#colors');
+const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
@@ -17,7 +18,7 @@ module.exports = {
 	aliases: ['mcm', 'minecraffmaintenance', 'minecrapmaintenance'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { teraID, retainedID, maxID/*, tofuGreen, tofuBlue*/ } = client.config;
+		// const { teraID, retainedID, maxID/*, tofuGreen, tofuBlue*/ } = client.config;
 
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');

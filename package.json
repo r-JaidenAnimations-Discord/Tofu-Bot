@@ -31,6 +31,7 @@
     "#functions/*": "./functions/*",
     "#commandData/*": "./commanddata/*",
     "#tantrum": "./functions/tantrum.js",
-    "#colors": "./commanddata/colors.json"
+    "#colors": "./commanddata/colors.json",
+    "#memberIDs": "./commanddata/memberIDs.json"
   }
 }

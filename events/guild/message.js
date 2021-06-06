@@ -1,4 +1,5 @@
-const { tofuRed, tofuError } = require('#colors')
+const { tofuRed, tofuError } = require('#colors');
+const { banKirito, banAli, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
@@ -6,7 +7,7 @@ const { promptMessage } = require('#functions/promptMessage.js');
 //const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
 
 module.exports = async (client, message) => {
-	const { prefix, banKirito, banAli/*, tofuRed, tofuError*/, maxID, devMode, jaidenServerID, trustedServers } = client.config;
+	const { prefix, /*banKirito, banAli, tofuRed, tofuError, maxID,*/ devMode, jaidenServerID, trustedServers } = client.config;
 
 	let cooldowns = client.cooldowns;
 	// nothing get fucked lmao

@@ -1,5 +1,6 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
 const { tofuGreen, tofuError, tofuRed } = require('#colors');
+const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const beautify = require('beautify');
@@ -18,7 +19,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { teraID, retainedID, maxID/*, tofuGreen, tofuError, tofuRed*/ } = client.config;
+		// const { teraID, retainedID, maxID/*, tofuGreen, tofuError, tofuRed*/ } = client.config;
 
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			try {

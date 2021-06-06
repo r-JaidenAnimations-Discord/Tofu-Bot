@@ -1,10 +1,11 @@
+const { gradyID, maxID } = require('#memberIDs');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { leaveMessages } = require('#commandData/greetings.json');
 //const { jaidenServerID, generalChannelID, devMode, gradyID, maxID } = require('../../config.json');
 
 module.exports = async (client, member) => {
-	const { jaidenServerID, generalChannelID, devMode, gradyID, maxID } = client.config;
+	const { jaidenServerID, generalChannelID, devMode/*, gradyID, maxID*/ } = client.config;
 
 	if (member.guild.id !== jaidenServerID && devMode === false) return console.log('left but not jaidenserver');
 

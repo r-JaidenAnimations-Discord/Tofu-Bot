@@ -33,7 +33,7 @@ const checkMusic = (client, message) => {
 }
 
 const checkQueueExists = (client, message) => {
-	const { tofuOrange } = client.config;
+	// const { tofuOrange } = client.config;
 
 	if (!client.player.getQueue(message)) {
 		musicCheckEmbed.setColor(tofuOrange);

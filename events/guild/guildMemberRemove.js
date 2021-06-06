@@ -1,5 +1,5 @@
 const fs = require('fs');
-const Tantrum = require('#functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { leaveMessages } = require('#commandData/greetings.json');
 //const { jaidenServerID, generalChannelID, devMode, gradyID, maxID } = require('../../config.json');
 

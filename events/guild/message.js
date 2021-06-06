@@ -1,7 +1,7 @@
 const { tofuRed, tofuError } = require('#colors')
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('#functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { promptMessage } = require('#functions/promptMessage.js');
 //const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
 

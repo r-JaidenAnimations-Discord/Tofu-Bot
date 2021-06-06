@@ -1,9 +1,10 @@
 //const { tofuGreen } = require('../../config.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
-const createBar = require('../../functions/createBar.js');
-const { humanReadableDuration } = require('../../functions/buildTimeString.js');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
+const createBar = require('#functions/createBar.js');
+const { humanReadableDuration } = require('#functions/buildTimeString.js');
 
 module.exports = {
 	name: 'nowplaying',
@@ -14,10 +15,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { tofuGreen } = client.config;
+		// const { tofuGreen } = client.config;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

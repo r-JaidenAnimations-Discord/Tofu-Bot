@@ -1,7 +1,8 @@
 //const { tofuOrange } = require('../../config.json');
+const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
 
 module.exports = {
 	name: 'resume',
@@ -12,10 +13,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { tofuOrange } = client.config;
+		// const { tofuOrange } = client.config;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

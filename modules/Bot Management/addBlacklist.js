@@ -1,7 +1,9 @@
 //const { tofuGreen, tofuRed, maxID } = require('../../config.json');
+const { tofuGreen, tofuRed } = require('#colors');
+const { maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
 
 module.exports = {
@@ -13,10 +15,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['bl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { tofuGreen, tofuRed, maxID } = client.config;
+		// const { /*tofuGreen, tofuRed,*/ maxID } = client.config;
 
 		let toBlacklist = false;
 

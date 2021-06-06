@@ -1,5 +1,6 @@
 //const { shrimpID } = require('../../config.json');
-const Tantrum = require('../../functions/tantrum.js');
+const { shrimpID } = require('#memberIDs');
+const Tantrum = require('#tantrum');
 
 module.exports = {
     name: 'imnotshrimp',
@@ -10,10 +11,11 @@ module.exports = {
     isDMAllowed: false,
     isDeprecated: false,
     isDangerous: false,
+    isHidden: false,
     aliases: ['notshrimp'],
     cooldown: 0,
     execute: async function(client, message, args) {
-        const { shrimpID } = client.config;
+        // const { shrimpID } = client.config;
 
         if (message.author.id !== shrimpID) {
             try {

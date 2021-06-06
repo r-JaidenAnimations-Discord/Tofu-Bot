@@ -1,6 +1,8 @@
 //const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
+const { tofuGreen, tofuError, tofuRed } = require('#colors');
+const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const beautify = require('beautify');
 // NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
@@ -13,10 +15,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: true,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = client.config;
+		// const { teraID, retainedID, maxID/*, tofuGreen, tofuError, tofuRed*/ } = client.config;
 
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			try {

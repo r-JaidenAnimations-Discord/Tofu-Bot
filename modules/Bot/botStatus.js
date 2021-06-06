@@ -1,5 +1,5 @@
 //const Discord = require('discord.js');
-const { setSts } = require('../../functions/statusFunction.js');
+const { setSts } = require('#functions/statusFunction.js');
 
 module.exports = {
 	name: 'status',
@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['sts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {

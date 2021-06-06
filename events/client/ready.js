@@ -1,8 +1,8 @@
-//const Discord = require('discord.js');
-//const Tantrum = require('../../functions/tantrum.js');
+// const Discord = require('discord.js');
+// const Tantrum = require('#tantrum');
 const chalk = require('chalk');
-const { randomStatus } = require('../../functions/statusFunction.js');
-const { remindShrimp } = require('../../functions/shrimpReminder.js');
+const { randomStatus } = require('#functions/statusFunction.js');
+const { remindShrimp } = require('#functions/shrimpReminder.js');
 //const { staffChatID } = require('../../config.json');
 
 module.exports = client => {

@@ -1,5 +1,5 @@
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
 
 module.exports = {
 	name: 'queue',
@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['q'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

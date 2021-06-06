@@ -1,11 +1,13 @@
+const { tofuRed, tofuError } = require('#colors');
+const { banKirito, banAli, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
-const { promptMessage } = require('../../functions/promptMessage.js');
+const Tantrum = require('#tantrum');
+const { promptMessage } = require('#functions/promptMessage.js');
 //const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = require('../../config.json');
 
 module.exports = async (client, message) => {
-	const { prefix, banKirito, banAli, tofuRed, tofuError, maxID, devMode, jaidenServerID, trustedServers } = client.config;
+	const { prefix, /*banKirito, banAli, tofuRed, tofuError, maxID,*/ devMode, jaidenServerID, trustedServers } = client.config;
 
 	let cooldowns = client.cooldowns;
 	// nothing get fucked lmao
@@ -185,8 +187,8 @@ module.exports = async (client, message) => {
 		// Check if bot is used in unauthorized server
 		if (!trustedServers.includes(message.guild.id)) {
 			try {
-				message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
 				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
+				message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
 				return;
 			} catch (e) {
 				throw new Tantrum(client, 'message.js', 'Error on sending untrusted server message', e);
@@ -200,7 +202,7 @@ module.exports = async (client, message) => {
 				.setColor(tofuRed)
 				.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
 				.setTitle('HOLD UP')
-				.setDescription('You are about to execute a command that could affect the bot in the main server. Are you absolutely sure you want to do this?')
+				.setDescription('This is a **__dangerous__** command. It affects the main server, are you absolutely sure you want to continue?')
 				.setTimestamp();
 
 			return message.channel.send(warnEmbed).then(async msg => {
@@ -211,7 +213,8 @@ module.exports = async (client, message) => {
 					message.channel.send('Done, you were warned');
 					if (settingsFile.disabledCommands.includes(command.name)) {
 						try {
-							return message.channel.send('Yikes, looks like this command has been disabled.\n*(Maxim probably broke it)*\nSo uhhhhh if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
+							return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] });
+							//return message.channel.send('HYikes, looks like this command has been disabled.\n*(Maxim probably broke it)*\nSo uhhhhh if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
 						} catch (e) {
 							throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 						}
@@ -235,7 +238,7 @@ module.exports = async (client, message) => {
 	// Is this command enabled?
 	if (settingsFile.disabledCommands.includes(command.name)) {
 		try {
-			return message.channel.send('Yikes, looks like this command has been disabled.\n*(Maxim probably broke it)*\nSo uhhhhh if you could try again later, that would be grrrreat. mkay?', { files: ['./commanddata/Configuration/commandDisabled.gif'] });
+			return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] });
 		} catch (e) {
 			throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 		}

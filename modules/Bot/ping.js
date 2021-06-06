@@ -1,5 +1,5 @@
 //const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'ping',
@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: true,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['delay', 'latency'],
 	cooldown: 5,
 	execute: async function(client, message, args) {

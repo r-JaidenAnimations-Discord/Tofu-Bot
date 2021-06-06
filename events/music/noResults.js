@@ -1,9 +1,10 @@
 //const { tofuError } = require('../../config.json');
+const { tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = (client, message, query) => {
-	const { tofuError } = client.config;
+	// const { tofuError } = client.config;
 
 	const noResultsEmbed = new Discord.MessageEmbed()
 		.setColor(tofuError)

@@ -1,7 +1,8 @@
 //const { tofuGreen, tofuRed } = require('../../config.json');
+const { tofuGreen, tofuRed } = require('#colors');
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
 
 module.exports = {
@@ -13,10 +14,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['wl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { tofuGreen, tofuRed } = client.config;
+		// const { tofuGreen, tofuRed } = client.config;
 
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
 			try {

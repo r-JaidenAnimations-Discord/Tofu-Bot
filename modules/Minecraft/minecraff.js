@@ -1,8 +1,9 @@
 //const { minecraftIP, tofuGreen, botProfile, tofuError } = require('../../config.json');
+const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'minecraft',
@@ -13,10 +14,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['mc', 'minecraff', 'minecrap'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { minecraftIP, tofuGreen, botProfile, tofuError } = client.config;
+		const { minecraftIP/*, tofuGreen, botProfile, tofuError*/ } = client.config;
 
 		message.channel.startTyping();
 

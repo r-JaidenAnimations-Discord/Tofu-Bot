@@ -1,5 +1,5 @@
 //const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'customstatus',
@@ -10,6 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['csts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {

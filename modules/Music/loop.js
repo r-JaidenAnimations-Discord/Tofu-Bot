@@ -1,7 +1,8 @@
 //const { tofuGreen } = require('../../config.json');
+const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
-const { checkMusic, checkQueueExists } = require('../../functions/musicChecks.js');
+const Tantrum = require('#tantrum');
+const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
 
 module.exports = {
 	name: 'loop',
@@ -12,10 +13,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	isHidden: false,
 	aliases: ['lp', 'repeat'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const { tofuGreen } = client.config;
+		// const { tofuGreen } = client.config;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

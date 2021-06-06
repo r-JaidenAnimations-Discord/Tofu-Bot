@@ -1,6 +1,7 @@
 //const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = require('../../config.json');
+const { tofuBlue } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('../../functions/tantrum.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'suggestmovie',
@@ -11,10 +12,11 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	isHidden: false,
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {
-		const { movieNightSuggestionChannelID, tofuBlue, fingerupvote, fingerdownvote } = client.config;
+		const { movieNightSuggestionChannelID/*, tofuBlue*/, fingerupvote, fingerdownvote } = client.config;
 
 		let movie = args.slice(0).join(' ');
 		if (!movie) {

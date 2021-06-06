@@ -22,7 +22,7 @@ module.exports = {
 
 		if (message.author.id !== maxID) {
 			try {
-				return message.reply('Are you Maxim? I don\'t think so. Why are you trying to use my command. You should be ashamed of yourself. I hope you stub your toe on your chair. I hope you get aneurysm after aneurysm after aneurysm after aneurysm after aneurysm. Get one of those Dyson vacuums and see if it\'s strong enough to suck the stupid out of you. Don\'t EVER use this command again. Do you understand me? DO YOU UNDERSTAND ME?');
+				return message.reply('Are you Maxim? I don\'t think so. Why are you trying to use my command. You should be ashamed of yourself. I hope you stub your toe on your chair. I hope you get aneurysm after aneurysm after aneurysm after aneurysm after aneurysm. I hope your teeth itch. Get one of those Dyson vacuums and see if it\'s strong enough to suck the stupid out of you. Don\'t EVER use this command again. Do you understand me? DO YOU UNDERSTAND ME?');
 			} catch (e) {
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending are you maxim reply', e);
 			}
@@ -57,7 +57,7 @@ module.exports = {
 
 			try {
 
-				channel.send(`<@&${movieNightRoleID}>\n${args.slice(2).join(' ')}\n${movieNightChannelInvite}`);
+				channel.send(`<@&${movieNightRoleID}>\n${args.slice(2).join(' ')}\n${movieNightChannelInvite}\n*This automatic invite is valid for 1 hour, check the voice channels if you are joining later*`);
 				await message.react('✅');
 			} catch (e) {
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending message', e);

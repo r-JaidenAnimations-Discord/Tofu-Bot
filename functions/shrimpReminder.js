@@ -1,9 +1,8 @@
-//const { shrimpID, devMode } = require('../config.json');
 const { shrimpID } = require('#memberIDs');
 const Tantrum = require('#tantrum');
 
 const remindShrimp = (client) => {
-	const { /*shrimpID, */devMode } = client.config;
+	const { devMode } = client.config;
 
 	let date = new Date();
 	let hour = date.getHours();

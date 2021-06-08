@@ -1,4 +1,3 @@
-//const { tofuOrange } = require('../config.json');
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
@@ -7,7 +6,6 @@ const { musicStrings } = require('#commandData/strings.json');
 let musicCheckEmbed = new Discord.MessageEmbed();
 
 const checkMusic = (client, message) => {
-	// const { tofuOrange } = client.config;
 
 	if (!message.member.voice.channel) {
 		musicCheckEmbed.setColor(tofuOrange);
@@ -33,7 +31,6 @@ const checkMusic = (client, message) => {
 }
 
 const checkQueueExists = (client, message) => {
-	// const { tofuOrange } = client.config;
 
 	if (!client.player.getQueue(message)) {
 		musicCheckEmbed.setColor(tofuOrange);

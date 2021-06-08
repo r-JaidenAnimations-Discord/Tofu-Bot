@@ -1,4 +1,3 @@
-//const { minecraftIP, tofuGreen, botProfile, tofuError } = require('../../config.json');
 const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const https = require('https');
@@ -18,7 +17,7 @@ module.exports = {
 	aliases: ['mc', 'minecraff', 'minecrap'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { minecraftIP/*, tofuGreen, botProfile, tofuError*/ } = client.config;
+		const { minecraftIP } = client.config;
 
 		message.channel.startTyping();
 

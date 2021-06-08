@@ -1,4 +1,3 @@
-//const { tofuGreen, tofuRed } = require('../../config.json');
 const { tofuGreen, tofuRed } = require('#colors');
 const Discord = require('discord.js');
 const fs = require('fs');
@@ -18,7 +17,6 @@ module.exports = {
 	aliases: ['wl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		// const { tofuGreen, tofuRed } = client.config;
 
 		if (!message.member.hasPermission('BAN_MEMBERS')) {
 			try {

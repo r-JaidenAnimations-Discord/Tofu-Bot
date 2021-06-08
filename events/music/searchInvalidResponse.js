@@ -1,10 +1,8 @@
-//const { tofuOrange } = require('../../config.json');
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 
 module.exports = (client, message, query, tracks, content, collector) => {
-	// const { tofuOrange } = client.config;
 
 	let searchInvalidResponseEmbed = new Discord.MessageEmbed()
 		.setColor(tofuOrange);

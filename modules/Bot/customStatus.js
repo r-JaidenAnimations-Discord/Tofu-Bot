@@ -1,4 +1,3 @@
-//const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 
 module.exports = {
@@ -21,6 +20,8 @@ module.exports = {
 				throw new Tantrum(client, 'customStatus.js', 'Error on sending permission error', e);
 			}
 		}
+
+		// TODO: Refactor this stuff
 
 		let status;
 		let activity;

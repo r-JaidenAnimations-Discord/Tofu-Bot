@@ -3,10 +3,8 @@
 const chalk = require('chalk');
 const { randomStatus } = require('#functions/statusFunction.js');
 const { remindShrimp } = require('#functions/shrimpReminder.js');
-//const { staffChatID } = require('../../config.json');
 
 module.exports = client => {
-	//const { staffChatID } = client.config;
 
 	randomStatus(client);
 	remindShrimp(client);

@@ -1,4 +1,3 @@
-//const Discord = require('discord.js');
 const { setSts } = require('#functions/statusFunction.js');
 
 module.exports = {

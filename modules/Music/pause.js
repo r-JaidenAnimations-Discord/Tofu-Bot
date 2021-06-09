@@ -1,4 +1,3 @@
-//const { tofuOrange } = require('../../config.json');
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
@@ -17,7 +16,6 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		// const { tofuOrange } = client.config;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

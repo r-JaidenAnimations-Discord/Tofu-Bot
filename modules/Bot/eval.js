@@ -1,4 +1,3 @@
-//const { teraID, retainedID, maxID, tofuGreen, tofuError, tofuRed } = require('../../config.json');
 const { tofuGreen, tofuError, tofuRed } = require('#colors');
 const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
@@ -14,12 +13,11 @@ module.exports = {
 	description: 'Evaluates JavaScript code inputed from args.\nOnwer Only Command\nSelfnote: don\'t use this next to many people idk they could take your token i guess lmao',
 	isDMAllowed: false,
 	isDeprecated: false,
-	isDangerous: false,
+	isDangerous: true,
 	isHidden: true,
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		// const { teraID, retainedID, maxID/*, tofuGreen, tofuError, tofuRed*/ } = client.config;
 
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			try {
@@ -59,7 +57,7 @@ module.exports = {
 				.setTimestamp()
 				.setTitle('Eval')
 				.addField('To Evaluate', `\`\`\`js\n${beautify(toEval, { format: 'js' })}\n\`\`\``)
-				.addField('Evaluated', evaluated)
+				.addField('Evaluated', evaluated.replace(client.token, 'Aahhahahah you think you\'re smart now buddy? yeah i figured so, but look at that. We have outsmarted you. **Perish**'))
 				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 

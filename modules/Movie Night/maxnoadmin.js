@@ -1,4 +1,3 @@
-//const { maxID, movieNightRoleID, jaidenServerID, movieNightChannelID } = require('../../config.json');
 const { maxID } = require('#memberIDs');
 const Tantrum = require('#tantrum');
 
@@ -15,7 +14,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const {/* maxID,*/ movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;
+		const { movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;
 
 		let channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
@@ -36,8 +35,6 @@ module.exports = {
 				throw new Tantrum(client, 'maxnoadmin.js', 'Error on sending channel error', e);
 			}
 		}
-		//if (message.deletable) message.delete();
-
 
 		if (args[1] === 'invite') {
 			let movieNightChannelInvite = await client.guilds.cache.get(jaidenServerID).channels.cache.get(movieNightChannelID).createInvite(

@@ -1,4 +1,3 @@
-//const { tofuGreen, tofuRed, maxID } = require('../../config.json');
 const { tofuGreen, tofuRed } = require('#colors');
 const { maxID } = require('#memberIDs');
 const Discord = require('discord.js');
@@ -19,7 +18,6 @@ module.exports = {
 	aliases: ['bl'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		// const { /*tofuGreen, tofuRed,*/ maxID } = client.config;
 
 		let toBlacklist = false;
 

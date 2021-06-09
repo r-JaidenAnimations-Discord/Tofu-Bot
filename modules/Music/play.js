@@ -1,7 +1,6 @@
 /**
  * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
  */
-//const { tofuOrange } = require('../../config.json');
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
@@ -20,7 +19,6 @@ module.exports = {
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		// const { tofuOrange } = client.config;
 
 		if (!checkMusic(client, message)) return;
 

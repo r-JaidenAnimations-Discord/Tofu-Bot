@@ -1,4 +1,3 @@
-//const { releaseDate, botProfile, tofuGreen } = require('../../config.json');
 const { tofuGreen } = require('#colors');
 const { version } = require('../../package.json');
 const Discord = require('discord.js');
@@ -17,7 +16,7 @@ module.exports = {
 	aliases: ['bot', 'botinfo', 'info'],
 	cooldown: 20,
 	execute: async function(client, message, args) {
-		const { releaseDate, botProfile/*, tofuGreen*/ } = client.config;
+		const { releaseDate, botProfile } = client.config;
 
 		let { heapUsed, heapTotal } = process.memoryUsage();
 
@@ -37,7 +36,6 @@ module.exports = {
 			.addFields(
 				{ name: 'Bot version:', value: version },
 				{ name: 'Bot release date:', value: releaseDate },
-				//{ name: 'Uptime', value: `${(process.uptime() / 3600).toFixed(1)} hours` },
 				{ name: 'Uptime', value: `${days}d ${hours}h ${minutes}m ${seconds}s` },
 				{ name: 'Memory Usage', value: `${(heapUsed / 1024 / 1024).toFixed(1)} MB / ${(heapTotal / 1024 / 1024).toFixed(1)}MB (${(heapUsed / heapTotal * 100).toFixed(2)}%)` },
 				{ name: 'Coding:', value: '<@488064501816492047>, <@558264504736153600>, <@768384164810457128>, <@740491200972193793>, <@472399898885619714>' },

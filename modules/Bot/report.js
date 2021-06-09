@@ -1,4 +1,3 @@
-//const { tofuRed, tofuGreen, bugReportChannelID } = require('../../config.json');
 const { tofuRed, tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
@@ -17,7 +16,7 @@ module.exports = {
 	aliases: ['issue', 'bug', 'bugreport'],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const { /*tofuRed, tofuGreen,*/ bugReportChannelID } = client.config;
+		const { bugReportChannelID } = client.config;
 
 		if (!args[0]) {
 			try {

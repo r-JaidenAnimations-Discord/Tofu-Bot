@@ -14,7 +14,6 @@ module.exports = {
     //aliases: [],
     cooldown: 5,
     execute: async function(client, message, args) {
-        // const { gradyID, retainedID, maxID } = client.config;
 
         ///if (!message.member.hasPermission('BAN_MEMBERS')) return;
         if (message.author.id !== gradyID && message.author.id !== retainedID && message.author.id !== maxID) return;

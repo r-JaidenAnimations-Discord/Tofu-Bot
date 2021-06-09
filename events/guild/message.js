@@ -6,7 +6,7 @@ const Tantrum = require('#tantrum');
 const { dangerCommandPrompt } = require('#functions/dangerPrompt.js');
 
 module.exports = async (client, message) => {
-	const { prefix, devMode, jaidenServerID, trustedServers } = client.config;
+	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers } = client.config;
 
 	let cooldowns = client.cooldowns;
 	// nothing get fucked lmao
@@ -24,6 +24,12 @@ module.exports = async (client, message) => {
 	// List up all commands
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
+
+
+	// TEMPORARY
+	if (message.channel === generalChannelID && message.author.id === maxID) {
+		return message.channel.send('Buddy, go back to work, you have exams');
+	}
 
 	// Include aliases
 	const command = client.commands.get(commandName)

@@ -30,3 +30,6 @@ deployData/blacklist.json
 
 # Databases
 /db/
+
+# Spotlight
+.DS_Store*

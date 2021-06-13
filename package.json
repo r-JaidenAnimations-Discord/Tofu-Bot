@@ -22,7 +22,9 @@
     "ffmpeg-static": "^4.3.0",
     "fs-extra": "^9.1.0",
     "opusscript": "0.0.8",
-    "owofy": "^1.0.2"
+    "owofy": "^1.0.2",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {},
   "imports": {

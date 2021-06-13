@@ -27,3 +27,6 @@ CHANGELOG.md
 
 # The actual blacklist shouldn't be pushed
 deployData/blacklist.json
+
+# Databases
+/db/

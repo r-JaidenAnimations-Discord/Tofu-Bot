@@ -14,7 +14,7 @@ module.exports = {
 	isDangerous: true,
 	isHidden: false,
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
-	cooldown: 0, //86400,
+	cooldown: 86400,
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;
 
@@ -27,42 +27,38 @@ module.exports = {
 		const suggestionEmbed = new Discord.MessageEmbed()
 			.setColor(suggestionOpen)
 			.setTitle('Loading Suggestion')
-			// .setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
-			// .setTitle(movie)
 			.setTimestamp();
 
 		try {
-			client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed).then(async suggestionEmbed => {
-				await client.movieSuggestions.create({
-					movie: movie,
-					suggester: message.author.id,
-					status: 'Pending Approval',
-					suggestionMessageID: suggestionEmbed.id,
-					verdictReason: 'null',
-					verdicter: 'null'
-				});
-
-				const suggestion = await client.movieSuggestions.findOne({ where: { suggestionMessageID: suggestionEmbed.id } });
-				if (suggestion) {
-					const populatedEmbed = new Discord.MessageEmbed()
-						.setColor(suggestionOpen)
-						.setTitle(`**${suggestion.get('movie')}**`)
-						.setDescription(`Suggested by <@${suggestion.get('suggester')}>`)
-						.addField('Status:', suggestion.get('status'))
-						.setFooter(`Suggestion #${suggestion.id}`)
-						.setTimestamp();
-
-					suggestionEmbed.edit(populatedEmbed);
-					await message.react('✅');
-					message.channel.send('Your movie suggestion was registered, thank you!');
-					await suggestionEmbed.react(fingerupvote);
-					await suggestionEmbed.react(fingerdownvote);
-				} else {
-					await message.react('❌');
-					message.channel.send('Something went wrong, please try again later.');
-					return suggestionEmbed.delete();
-				}
+			const { id: suggestionMessageID } = await client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed);
+			const suggestion = await client.movieSuggestions.create({
+				movie: movie,
+				suggester: message.author.id,
+				status: 'Pending Approval',
+				suggestionMessageID,
+				verdictReason: 'null',
+				verdicter: 'null'
 			});
+			
+			if (suggestion) {
+				const populatedEmbed = new Discord.MessageEmbed()
+					.setColor(suggestionOpen)
+					.setTitle(`**${suggestion.get('movie')}**`)
+					.setDescription(`Suggested by <@${suggestion.get('suggester')}>`)
+					.addField('Status:', suggestion.get('status'))
+					.setFooter(`Suggestion #${suggestion.id}`)
+					.setTimestamp();
+
+				suggestionEmbed.edit(populatedEmbed);
+				await message.react('✅');
+				message.channel.send('Your movie suggestion was registered, thank you!');
+				await suggestionEmbed.react(fingerupvote);
+				await suggestionEmbed.react(fingerdownvote);
+			} else {
+				await message.react('❌');
+				message.channel.send('Something went wrong, please try again later.');
+				return suggestionEmbed.delete();
+			}
 		} catch (e) {
 			throw new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
 		}

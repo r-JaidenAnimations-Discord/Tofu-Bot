@@ -1,4 +1,5 @@
 const Tantrum = require('#tantrum');
+const { checkBanStaff } = require('#functions/staffChecks.js');
 
 module.exports = {
 	name: 'customstatus',
@@ -13,13 +14,7 @@ module.exports = {
 	aliases: ['csts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {
-		if (!message.member.hasPermission('BAN_MEMBERS')) {
-			try {
-				return message.reply('You fool, need more permissions');
-			} catch (e) {
-				throw new Tantrum(client, 'customStatus.js', 'Error on sending permission error', e);
-			}
-		}
+		if (!checkBanStaff(client, message)) return;
 
 		// TODO: Refactor this stuff
 

@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
+const { checkBanStaff } = require('#functions/staffChecks.js');
 
 module.exports = {
 	name: 'blacklist',
@@ -57,13 +58,7 @@ module.exports = {
 			}
 		}
 
-		if (!message.member.hasPermission('BAN_MEMBERS')) {
-			try {
-				return message.reply('You fool, need more permissions');
-			} catch (e) {
-				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending permission error', e);
-			}
-		}
+		if (!checkBanStaff(client, message)) return;
 
 		let category = args[1];
 		if (!category) {

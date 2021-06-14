@@ -2,7 +2,7 @@ const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
-const { permissionsErrs } = require('#commandData/strings.json');
+const { checkMessageStaff } = require('#functions/staffChecks.js');
 
 module.exports = {
 	name: 'volume',
@@ -18,13 +18,7 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 
-		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-			try {
-				return message.channel.send(permissionsErrs.MANAGE_MESSAGES);
-			} catch (e) {
-				throw new Tantrum(client, 'volume.js', 'Error on sending permission error', e);
-			}
-		}
+		if (!checkMessageStaff(client, message)) return;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

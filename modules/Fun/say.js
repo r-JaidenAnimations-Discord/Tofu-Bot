@@ -1,6 +1,7 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
+const { checkMessageStaff } = require('#functions/staffChecks.js');
 
 module.exports = {
 	name: 'say',
@@ -20,13 +21,7 @@ module.exports = {
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
 			message.guild.channels.cache.find(c => c.name === args[0]);
 
-		if (!message.member.hasPermission('MANAGE_MESSAGES')) {
-			try {
-				return message.reply('You fool, need more permissions');
-			} catch (e) {
-				throw new Tantrum(client, 'say.js', 'Error on sending permission error', e);
-			}
-		}
+		if (!checkMessageStaff(client, message)) return;
 
 		//if (message.author.id == '725836730846019644') return message.channel.send('Get F\'ed pent');
 

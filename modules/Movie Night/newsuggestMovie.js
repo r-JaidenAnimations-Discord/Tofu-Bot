@@ -30,12 +30,12 @@ module.exports = {
 			.setTimestamp();
 
 		try {
-			const { id: suggestionMessageID } = await client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed);
+			const suggestionEmbed = await client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed);
 			const suggestion = await client.movieSuggestions.create({
 				movie: movie,
 				suggester: message.author.id,
 				status: 'Pending Approval',
-				suggestionMessageID,
+				suggestionMessageID: suggestionEmbed.id,
 				verdictReason: 'null',
 				verdicter: 'null'
 			});

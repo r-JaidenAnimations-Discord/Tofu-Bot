@@ -39,7 +39,7 @@ client.player = new Player(client, {
 client.tags = require('./handlers/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/movieNightSuggestions.js')(movieSuggestionSequelize);
 
-// Config loading [soon]
+// Config loading
 let launchArgs = process.argv.slice(2);
 switch (launchArgs[0]) {
 	case 'debug':

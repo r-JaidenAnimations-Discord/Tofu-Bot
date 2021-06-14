@@ -19,26 +19,23 @@ module.exports = {
 
 		if (!checkBanStaff(client, message)) return;
 
-		let movieID = args[0];
-		let reason = args.slice(1).join(' ');
-		if (!movieID) return message.channel.send('Invalid arguments');
-		if (!reason) reason = 'No reason specified';
+		const id = parseInt(args[0]);
+        if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');
+        const reason = args.slice(1).join(' ');
 
-		let suggestionItem = await client.movieSuggestions.findOne({ where: { id: movieID } });
+		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
+		if (!suggestion) return message.channel.send(`Looks like an invalid ID, check your spelling.`);
 
-		if (!suggestionItem) return message.channel.send('Looks like an invalid ID, check your spelling');
-		let suggestionMessageID = await suggestionItem.suggestionMessageID;
+		let suggestionMessageID = await suggestion.suggestionMessageID;
 
-		const affectedRows = await client.movieSuggestions.update({
+		let newData = {
 			status: 'Approved',
-			verdicter: message.author.username,
-			verdicterID: message.author.id,
-			verdictReason: reason
-		}, { where: { id: movieID } });
-		if (affectedRows > 0) {
-			// I have to refetch the suggestion to get it's new info
-			let suggestion = await client.movieSuggestions.findOne({ where: { id: movieID } });
+			verdicter: message.author.username
+		};
+		if (reason) newData.reason = reason;
+		const affectedRows = await suggestion.update(newData);
 
+		if (affectedRows > 0) {
 			const approvalEmbed = new Discord.MessageEmbed()
 				.setColor(suggestionApproved)
 				.setTitle(`**${await suggestion.movie}**`)

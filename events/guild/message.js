@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { dangerCommandPrompt } = require('#functions/dangerPrompt.js');
+const { humanReadableDuration } = require('#functions/buildTimeString.js');
 
 module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers } = client.config;
@@ -167,7 +168,7 @@ module.exports = async (client, message) => {
 			const timeLeft = (expirationTime - now) / 1000;
 			try {
 				await message.react('⏳');
-				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${timeLeft.toFixed(1)} second(s) before reusing \`${command.name}\`?`);
+				message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${/*timeLeft.toFixed(1)*/humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`);
 				return;
 			} catch (e) {
 				throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);

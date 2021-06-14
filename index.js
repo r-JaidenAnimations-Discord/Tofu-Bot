@@ -19,6 +19,12 @@ const tagSequelize = new Sequelize({
 	storage: 'db/tags.sqlite'
 });
 
+const movieSuggestionSequelize = new Sequelize({
+	dialect: 'sqlite',
+	logging: false,
+	storage: 'db/movieNightSuggestions.sqlite'
+});
+
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
@@ -31,6 +37,7 @@ client.player = new Player(client, {
 	fetchBeforeQueued: false // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
 });
 client.tags = require('./handlers/tags.js')(tagSequelize);
+client.movieSuggestions = require('./handlers/movieNightSuggestions.js')(movieSuggestionSequelize);
 
 // Config loading [soon]
 let launchArgs = process.argv.slice(2);

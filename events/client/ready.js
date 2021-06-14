@@ -12,6 +12,8 @@ module.exports = client => {
 	console.log(chalk.green(`Alive as ${client.user.tag}\nOn ${pluralizeWithNumber('guild', client.guilds.cache.size)}\nAnnoying ${pluralizeWithNumber('hooman', client.users.cache.size)}`));
 
 	client.tags.sync();
+	client.movieSuggestions.sync();
+
 	/*try {
 		client.channels.cache.get(staffChdatID).send(`I'm back b!tches!`);
 	} catch (e) {

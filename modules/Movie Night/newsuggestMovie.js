@@ -30,12 +30,12 @@ module.exports = {
 			.setTimestamp();
 
 		try {
-			const suggestionEmbed = await client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed);
+			const suggestionMsg = await client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed);
 			const suggestion = await client.movieSuggestions.create({
 				movie: movie,
 				suggester: message.author.id,
 				status: 'Pending Approval',
-				suggestionMessageID: suggestionEmbed.id,
+				suggestionMessageID: suggestionMsg.id,
 				verdictReason: 'null',
 				verdicter: 'null'
 			});
@@ -49,15 +49,15 @@ module.exports = {
 					.setFooter(`Suggestion #${suggestion.id}`)
 					.setTimestamp();
 
-				suggestionEmbed.edit(populatedEmbed);
+				suggestionMsg.edit(populatedEmbed);
 				await message.react('✅');
 				message.channel.send('Your movie suggestion was registered, thank you!');
-				await suggestionEmbed.react(fingerupvote);
-				await suggestionEmbed.react(fingerdownvote);
+				await suggestionMsg.react(fingerupvote);
+				await suggestionMsg.react(fingerdownvote);
 			} else {
 				await message.react('❌');
 				message.channel.send('Something went wrong, please try again later.');
-				return suggestionEmbed.delete();
+				return suggestionMsg.delete();
 			}
 		} catch (e) {
 			throw new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);

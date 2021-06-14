@@ -39,7 +39,6 @@ module.exports = {
 				verdictReason: 'null',
 				verdicter: 'null'
 			});
-			
 			if (suggestion) {
 				const populatedEmbed = new Discord.MessageEmbed()
 					.setColor(suggestionOpen)

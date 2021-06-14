@@ -65,7 +65,6 @@ module.exports = {
 				var APIresponse = JSON.parse(body);
 				console.log('Got a response: ', APIresponse.ip);
 				//console.log(APIresponse.players.list)
-				console.log(APIresponse)
 				var i;
 				var playerList = 'No online members';
 				var userCount = 0;
@@ -102,10 +101,10 @@ module.exports = {
 				}
 
 			});
-			res.on('end', function() {
+			/*res.on('end', function() {
 				// prob going to remove this
 				console.log('Request finished');
-			});
+			});*/
 		}).on('error', function(e) {
 			try {
 				message.channel.stopTyping();

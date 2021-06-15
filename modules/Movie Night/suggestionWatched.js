@@ -25,7 +25,7 @@ module.exports = {
 		let suggestionItem = await client.movieSuggestions.findOne({ where: { id: movieID } });
 
 		if (!suggestionItem) return message.channel.send('Looks like an invalid ID, check your spelling');
-		let suggestionMessageID = await suggestionItem.get('suggestionMessageID');
+		let suggestionMessageID = await suggestionItem.suggestionMessageID;
 
 		const affectedRows = await client.movieSuggestions.update({
 			status: 'Watched',
@@ -38,11 +38,11 @@ module.exports = {
 
 			const watchedEmbed = new Discord.MessageEmbed()
 				.setColor(suggestionWatched)
-				.setTitle(`**${await suggestion.get('movie')}**`)
-				.setDescription(`Suggested by <@${suggestion.get('suggester')}>`)
+				.setTitle(`**${await suggestion.movie}**`)
+				.setDescription(`Suggested by <@${suggestion.suggester}>`)
 				.addFields(
-					{ name: 'Status:', value: suggestion.get('status') },
-					{ name: 'Marked by:', value: suggestion.get('verdicter') }
+					{ name: 'Status:', value: suggestion.status },
+					{ name: 'Marked by:', value: suggestion.verdicter }
 				)
 				.setFooter(`Suggestion #${suggestion.id}`)
 				.setTimestamp();

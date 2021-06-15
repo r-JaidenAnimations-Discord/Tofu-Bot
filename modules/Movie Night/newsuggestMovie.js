@@ -42,9 +42,9 @@ module.exports = {
 			if (suggestion) {
 				const populatedEmbed = new Discord.MessageEmbed()
 					.setColor(suggestionOpen)
-					.setTitle(`**${suggestion.get('movie')}**`)
-					.setDescription(`Suggested by <@${suggestion.get('suggester')}>`)
-					.addField('Status:', suggestion.get('status'))
+					.setTitle(`**${suggestion.movie}**`)
+					.setDescription(`Suggested by <@${suggestion.suggester}>`)
+					.addField('Status:', suggestion.status)
 					.setFooter(`Suggestion #${suggestion.id}`)
 					.setTimestamp();
 

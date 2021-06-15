@@ -27,7 +27,7 @@ module.exports = {
 		let suggestionItem = await client.movieSuggestions.findOne({ where: { id: movieID } });
 
 		if (!suggestionItem) return message.channel.send('Looks like an invalid ID, check your spelling');
-		let suggestionMessageID = await suggestionItem.get('suggestionMessageID');
+		let suggestionMessageID = await suggestionItem.suggestionMessageID;
 
 		const affectedRows = await client.movieSuggestions.update({
 			status: 'Denied',
@@ -41,11 +41,11 @@ module.exports = {
 
 			const denialEmbed = new Discord.MessageEmbed()
 				.setColor(suggestionDenied)
-				.setTitle(`**${await suggestion.get('movie')}**`)
-				.setDescription(`Suggested by <@${suggestion.get('suggester')}>`)
+				.setTitle(`**${await suggestion.movie}**`)
+				.setDescription(`Suggested by <@${suggestion.suggester}>`)
 				.addFields(
-					{ name: 'Status:', value: suggestion.get('status') },
-					{ name: `Reason from ${suggestion.get('verdicter')}`, value: suggestion.get('verdictReason') }
+					{ name: 'Status:', value: suggestion.status },
+					{ name: `Reason from ${suggestion.verdicter}`, value: suggestion.verdictReason }
 				)
 				.setFooter(`Suggestion #${suggestion.id}`)
 				.setTimestamp();

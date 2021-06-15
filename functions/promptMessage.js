@@ -2,7 +2,6 @@
 
 /**
 * Sends a message (prompt) with X reactions, the bot will take action depending on the chosen reaction.
-* 
 * @param {Discord.Message} message The Message object to perform actions using message
 * @param {Discord.User|Discord.GuildMember} author The author of the message, so that actions only perform based on theirs
 * @param {Number} time Prompt message expiration time in seconds

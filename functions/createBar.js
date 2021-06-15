@@ -1,4 +1,5 @@
 /**
+ * Creates a progress bar where the bar and indicator are custom
  * @param {Number} total Total value of the bar (maximum value)
  * @param {Number} current Current value of the bar
  * @param {String} size Length of the bar

@@ -1,7 +1,14 @@
+// TODO: refactor the entire presence system to not require the message object
+
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 
-// Set the bot's status
+/**
+ * Set the bot's status
+ * @param {Client} client Discord client
+ * @param {Object} message Message object
+ * @param {String} selectedStatus Status that has to be set
+ */
 const setSts = (client, message, selectedStatus) => {
 	const { jaidenServerID, level20RoleID } = client.config;
 
@@ -63,6 +70,13 @@ const setSts = (client, message, selectedStatus) => {
 	}
 }
 
+/**
+ * Actually does the DJS API call to set the client status
+ * @param {Client} client Discord client 
+ * @param {String} activityStatus Presence status (idle, dnd, online, invisible)
+ * @param {String} activityName Custom status, what goes behind the 'playing, watching,...'
+ * @param {String} activityType Type of activity (playing, watching, streaming,...)
+ */
 const setRPC = async (client, activityStatus, activityName, activityType) => {
 	client.user.setPresence({
 		status: activityStatus,
@@ -74,6 +88,11 @@ const setRPC = async (client, activityStatus, activityName, activityType) => {
 }
 
 const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e']; // We don't want to have the bot appear offline
+/**
+ * Pick a random status and set it
+ * @param {Client} client Discord client
+ * @param {Object} message Message object
+ */
 const randomStatus = async (client, message) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');

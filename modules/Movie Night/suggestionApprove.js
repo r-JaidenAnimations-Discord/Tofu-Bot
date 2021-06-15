@@ -32,6 +32,7 @@ module.exports = {
 		const affectedRows = await client.movieSuggestions.update({
 			status: 'Approved',
 			verdicter: message.author.username,
+			verdicterID: message.author.id,
 			verdictReason: reason
 		}, { where: { id: movieID } });
 		if (affectedRows > 0) {

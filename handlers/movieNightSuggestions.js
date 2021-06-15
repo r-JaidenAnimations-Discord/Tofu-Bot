@@ -9,7 +9,8 @@ module.exports = (sequelize) => sequelize.define('movieNightSuggestion', {
 	status: Sequelize.STRING,
 	suggestionMessageID: Sequelize.STRING,
 	verdictReason: Sequelize.TEXT,
-	verdicter: Sequelize.TEXT
+	verdicter: Sequelize.TEXT,
+	verdicterID: Sequelize.TEXT,
 	// usage_count: {
 	// 	type: Sequelize.INTEGER,
 	// 	defaultValue: 0,

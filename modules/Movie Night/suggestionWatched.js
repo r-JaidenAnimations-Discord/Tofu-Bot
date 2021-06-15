@@ -30,6 +30,7 @@ module.exports = {
 		const affectedRows = await client.movieSuggestions.update({
 			status: 'Watched',
 			verdicter: message.author.username,
+			verdicterID: message.author.id,
 		}, { where: { id: movieID } });
 		if (affectedRows > 0) {
 			// I have to refetch the suggestion to get it's new info

@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const { version } = require('../../package.json');
+const { version, releaseDate } = require('../../package.json');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 
@@ -16,7 +16,7 @@ module.exports = {
 	aliases: ['bot', 'botinfo', 'info'],
 	cooldown: 20,
 	execute: async function(client, message, args) {
-		const { releaseDate, botProfile } = client.config;
+		const { botProfile } = client.config;
 
 		let { heapUsed, heapTotal } = process.memoryUsage();
 

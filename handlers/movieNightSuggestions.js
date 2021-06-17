@@ -4,23 +4,6 @@ const { Sequelize, DataTypes } = require('sequelize');
  * @param { Sequelize } sequelize
  */
 module.exports = (sequelize) => sequelize.define('movieNightSuggestion', {
-<<<<<<< Updated upstream
-=======
-<<<<<<< Updated upstream
-	movie: Sequelize.STRING,
-	suggester: Sequelize.STRING,
-	status: Sequelize.STRING,
-	suggestionMessageID: Sequelize.STRING,
-	verdictReason: Sequelize.TEXT,
-	verdicter: Sequelize.TEXT,
-	verdicterID: Sequelize.TEXT,
-	// usage_count: {
-	// 	type: Sequelize.INTEGER,
-	// 	defaultValue: 0,
-	// 	autoNull: false
-	// }
-=======
->>>>>>> Stashed changes
 	movie: DataTypes.STRING,
 	suggester: DataTypes.STRING,
 	status: {
@@ -33,11 +16,6 @@ module.exports = (sequelize) => sequelize.define('movieNightSuggestion', {
 		defaultValue: 'No reason specified',
 		allowNull: false
 	},
-<<<<<<< Updated upstream
-	verdicter: DataTypes.STRING
-=======
 	verdicter: DataTypes.STRING,
 	verdicterID: DataTypes.STRING
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 });

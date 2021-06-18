@@ -18,8 +18,6 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;
 
-		if (!checkBanStaff(client, message)) return;
-
 		let movie = args.slice(0).join(' ');
 		if (!movie) {
 			return message.reply('So how about sugggesting a movie instead of just sending a useless command?');

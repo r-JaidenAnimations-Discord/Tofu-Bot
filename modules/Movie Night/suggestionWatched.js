@@ -21,7 +21,6 @@ module.exports = {
 
 		const id = parseInt(args[0]);
 		if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');
-		// const verdictReason = args.slice(1).join(' ') || 'No reason specified';
 
 		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
 		if (!suggestion) return message.channel.send(`Looks like an invalid ID, check your spelling.`);
@@ -32,7 +31,6 @@ module.exports = {
 			status: 'Watched',
 			verdicter: message.author.username,
 			verdicterID: message.author.id,
-			// verdictReason
 		};
 		try {
 			await suggestion.update(newData);
@@ -42,7 +40,6 @@ module.exports = {
 				.setDescription(`Suggested by <@${suggestion.suggester}>`)
 				.addFields(
 					{ name: 'Status:', value: suggestion.status },
-					// { name: `Reason from ${suggestion.verdicter}`, value: suggestion.verdictReason }
 					{ name: 'Marked by:', value: suggestion.verdicter }
 				)
 				.setFooter(`Suggestion #${suggestion.id}`)

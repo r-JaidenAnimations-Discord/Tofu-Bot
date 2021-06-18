@@ -1,6 +1,10 @@
 const { shrimpID } = require('#memberIDs');
 const Tantrum = require('#tantrum');
 
+/**
+ * Sends a DM to shrimp when it is 11PM
+ * @param {Client} client Discord client
+ */
 const remindShrimp = (client) => {
 	const { devMode } = client.config;
 

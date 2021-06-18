@@ -1,4 +1,5 @@
 const { setSts } = require('#functions/statusFunction.js');
+const { checkBanStaff } = require('#functions/staffChecks.js');
 
 module.exports = {
 	name: 'status',
@@ -13,7 +14,7 @@ module.exports = {
 	aliases: ['sts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {
-		if (!message.member.hasPermission('BAN_MEMBERS')) return message.reply('You fool, need more permissions');
+		if (!checkBanStaff(client, message)) return;
 
 		// yeah it just does this
 		setSts(client, message, args[0]);

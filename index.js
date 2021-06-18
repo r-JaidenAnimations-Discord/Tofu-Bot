@@ -3,6 +3,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const { Player } = require('discord-player');
+const { Sequelize } = require('sequelize');
 const Tantrum = require('#tantrum');
 const chalk = require('chalk');
 const client = new Discord.Client();
@@ -11,6 +12,18 @@ const { remindShrimp } = require('#functions/shrimpReminder.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly
+
+const tagSequelize = new Sequelize({
+	dialect: 'sqlite',
+	logging: false,
+	storage: 'db/tags.sqlite'
+});
+
+const movieSuggestionSequelize = new Sequelize({
+	dialect: 'sqlite',
+	logging: false,
+	storage: 'db/movieNightSuggestions.sqlite'
+});
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -23,8 +36,10 @@ client.player = new Player(client, {
 	autoSelfDeaf: true,
 	fetchBeforeQueued: false // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
 });
+client.tags = require('./handlers/tags.js')(tagSequelize);
+client.movieSuggestions = require('./handlers/movieNightSuggestions.js')(movieSuggestionSequelize);
 
-// Config loading [soon]
+// Config loading
 let launchArgs = process.argv.slice(2);
 switch (launchArgs[0]) {
 	case 'debug':

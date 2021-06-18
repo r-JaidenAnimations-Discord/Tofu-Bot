@@ -5,6 +5,12 @@ const { musicStrings } = require('#commandData/strings.json');
 
 let musicCheckEmbed = new Discord.MessageEmbed();
 
+/**
+ * Check if the message author is in a voice channel (that is also the same one)
+ * @param {Client} client Discord client 
+ * @param {Object} message Message object
+ * @returns {Boolean} Author is (not) in (same) voice channel
+ */
 const checkMusic = (client, message) => {
 
 	if (!message.member.voice.channel) {
@@ -30,6 +36,12 @@ const checkMusic = (client, message) => {
 	return true;
 }
 
+/**
+ * Checks if music is being played 
+ * @param {Client} client Discord client
+ * @param {Object} message Message object
+ * @returns {Boolean} Music playing state
+ */
 const checkQueueExists = (client, message) => {
 
 	if (!client.player.getQueue(message)) {

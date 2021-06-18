@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
+const { checkBanStaff } = require('#functions/staffChecks.js');
 
 module.exports = {
 	name: 'whitelist',
@@ -18,13 +19,7 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 
-		if (!message.member.hasPermission('BAN_MEMBERS')) {
-			try {
-				return message.reply('You fool, need more permissions');
-			} catch (e) {
-				throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending permission error', e);
-			}
-		}
+		if (!checkBanStaff(client, message)) return;
 
 		// Pull the blacklist JSON
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');

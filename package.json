@@ -1,6 +1,7 @@
 {
   "name": "tofubot",
   "version": "1.10.1",
+  "releaseDate": "06/17/2021",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +23,9 @@
     "ffmpeg-static": "^4.3.0",
     "fs-extra": "^9.1.0",
     "opusscript": "0.0.8",
-    "owofy": "^1.0.2"
+    "owofy": "^1.0.2",
+    "sequelize": "^6.6.2",
+    "sqlite3": "^5.0.2"
   },
   "devDependencies": {},
   "imports": {

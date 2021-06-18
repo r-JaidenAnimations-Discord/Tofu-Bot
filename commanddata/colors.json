@@ -3,5 +3,10 @@
     "tofuGreen": "#4aa428",
     "tofuBlue": "#3a94ff",
     "tofuOrange": "#eb8334",
-    "tofuError": "#FF0000"
+    "tofuError": "#FF0000",
+
+    "suggestionOpen": "#7289DA",
+    "suggestionApproved": "#43B581",
+    "suggestionDenied": "#F04747",
+    "suggestionWatched": "#A758F5"
 }

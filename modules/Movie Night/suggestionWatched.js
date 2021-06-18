@@ -12,30 +12,28 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,
-	aliases: ['watchmv'],
+	aliases: ['watchmv', 'watchedmv'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID } = client.config;
 
 		if (!checkBanStaff(client, message)) return;
 
-		let movieID = args[0];
-		if (!movieID) return message.channel.send('Invalid arguments');
+		const id = parseInt(args[0]);
+		if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');
 
-		let suggestionItem = await client.movieSuggestions.findOne({ where: { id: movieID } });
+		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
+		if (!suggestion) return message.channel.send(`Looks like an invalid ID, check your spelling.`);
 
-		if (!suggestionItem) return message.channel.send('Looks like an invalid ID, check your spelling');
-		let suggestionMessageID = await suggestionItem.suggestionMessageID;
+		let suggestionMessageID = await suggestion.suggestionMessageID;
 
-		const affectedRows = await client.movieSuggestions.update({
+		let newData = {
 			status: 'Watched',
 			verdicter: message.author.username,
 			verdicterID: message.author.id,
-		}, { where: { id: movieID } });
-		if (affectedRows > 0) {
-			// I have to refetch the suggestion to get it's new info
-			let suggestion = await client.movieSuggestions.findOne({ where: { id: movieID } });
-
+		};
+		try {
+			await suggestion.update(newData);
 			const watchedEmbed = new Discord.MessageEmbed()
 				.setColor(suggestionWatched)
 				.setTitle(`**${await suggestion.movie}**`)
@@ -54,7 +52,8 @@ module.exports = {
 			} catch (e) {
 				message.channel.send('Couldn\'t update the suggestion message, maybe it was deleted?');
 			}
-		} else {
+		} catch (e) { // If you need to log any error put (e) as param and console.error(e) before returning
+			console.error(e);
 			return message.channel.send('Something went wrong while updating the database.');
 		}
 	},

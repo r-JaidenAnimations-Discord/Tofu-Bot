@@ -36,9 +36,8 @@ module.exports = {
 				suggester: message.author.id,
 				status: 'Pending Approval',
 				suggestionMessageID: suggestionMsg.id,
-				verdictReason: 'null',
-				verdicter: 'null'
 			});
+
 			if (suggestion) {
 				const populatedEmbed = new Discord.MessageEmbed()
 					.setColor(suggestionOpen)
@@ -51,6 +50,7 @@ module.exports = {
 				suggestionMsg.edit(populatedEmbed);
 				await message.react('✅');
 				message.channel.send('Your movie suggestion was registered, thank you!');
+
 				await suggestionMsg.react(fingerupvote);
 				await suggestionMsg.react(fingerdownvote);
 			} else {

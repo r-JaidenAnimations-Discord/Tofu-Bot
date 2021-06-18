@@ -12,7 +12,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,
-	aliases: ['watchmv'],
+	aliases: ['watchmv', 'watchedmv'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID } = client.config;

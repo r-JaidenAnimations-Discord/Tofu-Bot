@@ -1,31 +1,24 @@
-// TODO: refactor the entire presence system to not require the message object
-
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 
 /**
  * Set the bot's status
  * @param {Client} client Discord client
- * @param {Object} message Message object
  * @param {String} selectedStatus Status that has to be set
  */
-const setSts = (client, message, selectedStatus) => {
+const setSts = (client, selectedStatus) => {
 	const { jaidenServerID, level20RoleID } = client.config;
 
 	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/*this.*/selectedStatus) { // lmao, i fucking hate this.
 		case 'online':
-			setRPC(client, 'online', youOrJaiden, 'WATCHING');
-			break;
+			return setRPC(client, 'online', youOrJaiden, 'WATCHING');
 		case 'idle':
-			setRPC(client, 'idle', `${youOrJaiden} but half asleep`, 'WATCHING');
-			break;
+			return setRPC(client, 'idle', `${youOrJaiden} but half asleep`, 'WATCHING');
 		case 'dnd':
-			setRPC(client, 'dnd', `${youOrJaiden} but in a meeting`, 'WATCHING');
-			break;
+			return setRPC(client, 'dnd', `${youOrJaiden} but in a meeting`, 'WATCHING');
 		case 'gone':
-			setRPC(client, 'invisible', 'or am i?', 'WATCHING');
-			break;
+			return setRPC(client, 'invisible', 'or am i?', 'WATCHING');
 		case 'stream':
 			client.user.setPresence({
 				status: 'online',
@@ -35,21 +28,17 @@ const setSts = (client, message, selectedStatus) => {
 					url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
 				}
 			});
-			break;
+			return true;
 		case 'play':
-			setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
-			break;
+			return setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
 		case 'listen':
-			setRPC(client, 'online', 'Grady\'s Playlist', 'LISTENING');
-			break;
+			return setRPC(client, 'online', 'Grady\'s Playlist', 'LISTENING');
 		case 'walle':
 		case 'wall-e':
-			setRPC(client, 'online', 'Wall-E', 'WATCHING');
-			break;
+			return setRPC(client, 'online', 'Wall-E', 'WATCHING');
 		case 'next':
 			const nextState = states[Math.floor(Math.random() * states.length)];
-			setSts(client, message, nextState);
-			break;
+			return setSts(client, nextState);
 		case 'randomuser':
 
 			let memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
@@ -59,14 +48,9 @@ const setSts = (client, message, selectedStatus) => {
 			const simpleStates = ['online', 'idle', 'dnd'];
 			let randomSimpleState = simpleStates[Math.floor(Math.random() * simpleStates.length)];
 
-			setRPC(client, randomSimpleState, randomMember, 'WATCHING');
-			break;
+			return setRPC(client, randomSimpleState, randomMember, 'WATCHING');
 		default:
-			try {
-				return message.channel.send('Invalid argument given');
-			} catch (e) {
-				throw new Tantrum(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
-			}
+			return false;
 	}
 }
 
@@ -84,23 +68,23 @@ const setRPC = async (client, activityStatus, activityName, activityType) => {
 			name: activityName,
 			type: activityType
 		}
-	})
+	});
+	return true;
 }
 
 const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e']; // We don't want to have the bot appear offline
 /**
  * Pick a random status and set it
  * @param {Client} client Discord client
- * @param {Object} message Message object
  */
-const randomStatus = async (client, message) => {
+const randomStatus = async (client) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
 	if (settingsFile.randomStatus === true) {
 		const nextState = states[Math.floor(Math.random() * states.length)];
-		setSts(client, message, nextState);
+		setSts(client, nextState);
 	}
 }
 

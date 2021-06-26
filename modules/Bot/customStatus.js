@@ -16,54 +16,42 @@ module.exports = {
 	execute: async function(client, message, args) {
 		if (!checkBanStaff(client, message)) return;
 
-		// TODO: Refactor this stuff
-
 		let status;
 		let activity;
 
-		if (args[0] === 'online') {
-			status = 'online';
-		}
-		else if (args[0] === 'idle') {
-			status = 'idle';
-		}
-		else if (args[0] === 'dnd') {
-			status = 'dnd';
-		}
-		else {
-			try {
-				return message.channel.send('You must enter the proper status.');
-			} catch (e) {
-				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper status\' message');
-			}
+		switch (args[0]) {
+			case 'online':
+			case 'idle':
+			case 'dnd':
+				status = args[0];
+				break;
+			default:
+				return message.channel.send('You must enter the proper status.').catch(e => {
+					throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper status\' message', e);
+				});
 		}
 
-		if (args[1] === 'watch') {
-			activity = 'WATCHING';
+		switch (args[1]) {
+			case 'watch':
+				activity = 'WATCHING';
+				break;
+			case 'play':
+				activity = 'PLAYING';
+				break;
+			case 'listen':
+				activity = 'LISTENING';
+				break;
+			default:
+				return message.channel.send('You must enter the proper activity.').catch(e => {
+					throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper activity\' message', e);
+				});
 		}
-		//else if (args[1] == 'stream') {
-		//	activity = 'STREAMING';
-		//}
-		else if (args[1] === 'play') {
-			activity = 'PLAYING';
-		}
-		else if (args[1] === 'listen') {
-			activity = 'LISTENING';
-		}
-		else {
-			try {
-				return message.channel.send('You must enter the proper activity.');
-			} catch (e) {
-				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper activity\' message');
-			}
-		}
+
 		let textString = args.slice(2).join(' ');
 		if (textString.length === 0) {
-			try {
-				return message.channel.send('You must enter text to show');
-			} catch (e) {
+			return message.channel.send('You must enter text to show').catch(e => {
 				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter text to show\' message');
-			}
+			});
 		}
 		client.user.setPresence({
 			status: `${status}`,

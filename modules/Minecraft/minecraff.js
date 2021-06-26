@@ -25,6 +25,7 @@ module.exports = {
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 		var settingsFile = JSON.parse(data);
 
+		// API endpoint
 		var url = `https://api.mcsrvstat.us/2/${minecraftIP}`;
 
 		var downStatus = null;
@@ -33,14 +34,9 @@ module.exports = {
 		const minecraftEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
 			.attachFiles(attachment)
-			.setTitle('Jaiden Animations Minecraft Server'/*, 'attachment://minecraff.png'*/)
+			.setTitle('Jaiden Animations Minecraft Server')
 			.setThumbnail('attachment://minecraff.png')
-			.addFields(
-				{ name: 'IP Address:', value: /*`${APIresponse.ip}:${APIresponse.port}`*/ minecraftIP },
-				//{ name: 'Version', value: APIresponse.version },
-				//{ name: `Online Users: ${userCount}`, value: playerList },
-				//{ name: 'Server status:', value: `${downStatus}` },
-			)
+			.addField('IP Address:', minecraftIP)
 			.setTimestamp();
 
 		// Set the status to maintenance in case of maintenance
@@ -57,25 +53,21 @@ module.exports = {
 
 			res.on('data', function(chunk) {
 				body += chunk;
-
-
 			});
+
 			res.on('close', () => {
-				console.log(body)
 				var APIresponse = JSON.parse(body);
 				console.log('Got a response: ', APIresponse.ip);
-				//console.log(APIresponse.players.list)
 				var i;
-				var playerList = 'No online members';
+				var playerList = 'Sadly, no online members';
 				var userCount = 0;
 				downStatus = `${APIresponse.online === true ? 'The server is currently working' : '⚠️ **The server is down**'}`
 
-				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
+				if (APIresponse.online === true) {
 					minecraftEmbed.addField('Version:', APIresponse.version)
 				}
 
-				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
-					playerList = 'Memberlist not available';
+				if (APIresponse.online === true) {
 					if (APIresponse.players.online) {
 						if (APIresponse.players.list) {
 							playerList = '';
@@ -86,7 +78,7 @@ module.exports = {
 					}
 				}
 
-				if (APIresponse.online === true /*&& settingsFile.minecraftMaintenance === false*/) {
+				if (APIresponse.online === true) {
 					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
 					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
 				}

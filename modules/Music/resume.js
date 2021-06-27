@@ -1,7 +1,7 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
+const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 
 module.exports = {
 	name: 'resume',

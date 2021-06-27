@@ -7,8 +7,8 @@ const { Sequelize } = require('sequelize');
 const Tantrum = require('#tantrum');
 const chalk = require('chalk');
 const client = new Discord.Client();
-const { randomStatus } = require('#functions/statusFunction.js');
-const { remindShrimp } = require('#functions/shrimpReminder.js');
+const { randomStatus } = require('#utils/statusFunction.js');
+const { remindShrimp } = require('#utils/shrimpReminder.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly

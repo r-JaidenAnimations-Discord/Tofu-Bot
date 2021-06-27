@@ -1,5 +1,5 @@
-const { setSts } = require('#functions/statusFunction.js');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { setSts } = require('#utils/statusFunction.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'status',

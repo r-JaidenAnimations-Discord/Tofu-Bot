@@ -1,9 +1,9 @@
 // const Discord = require('discord.js');
 // const Tantrum = require('#tantrum');
 const chalk = require('chalk');
-const { pluralizeWithNumber } = require('#functions/pluralize.js');
-const { randomStatus } = require('#functions/statusFunction.js');
-const { remindShrimp } = require('#functions/shrimpReminder.js');
+const { pluralizeWithNumber } = require('#utils/pluralize.js');
+const { randomStatus } = require('#utils/statusFunction.js');
+const { remindShrimp } = require('#utils/shrimpReminder.js');
 
 module.exports = client => {
 

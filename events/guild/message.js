@@ -3,8 +3,8 @@ const { banKirito, banAli, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
-const { dangerCommandPrompt } = require('#functions/dangerPrompt.js');
-const { humanReadableDuration } = require('#functions/buildTimeString.js');
+const { dangerCommandPrompt } = require('#utils/dangerPrompt.js');
+const { humanReadableDuration } = require('#utils/buildTimeString.js');
 
 module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers } = client.config;

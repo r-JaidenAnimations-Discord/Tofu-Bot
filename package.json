@@ -29,9 +29,9 @@
   },
   "devDependencies": {},
   "imports": {
-    "#functions/*": "./functions/*",
+    "#utils/*": "./utils/*",
     "#commandData/*": "./commanddata/*",
-    "#tantrum": "./functions/tantrum.js",
+    "#tantrum": "./utils/tantrum.js",
     "#colors": "./commanddata/colors.json",
     "#memberIDs": "./commanddata/memberIDs.json"
   }

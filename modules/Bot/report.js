@@ -1,7 +1,7 @@
 const { tofuRed, tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { promptMessage } = require('#functions/promptMessage.js');
+const { promptMessage } = require('#utils/promptMessage.js');
 
 module.exports = {
 	name: 'report',

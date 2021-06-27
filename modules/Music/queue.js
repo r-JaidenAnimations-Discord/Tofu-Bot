@@ -1,5 +1,5 @@
 const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
+const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 
 module.exports = {
 	name: 'queue',

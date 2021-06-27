@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'blacklist',

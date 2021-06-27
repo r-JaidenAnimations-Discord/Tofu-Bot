@@ -1,6 +1,6 @@
 const { tofuRed } = require('#colors');
 const Discord = require('discord.js');
-const { promptMessage } = require('#functions/promptMessage.js');
+const { promptMessage } = require('#utils/promptMessage.js');
 
 const dangerCommandPrompt = (client, message) => {
 	const warnEmbed = new Discord.MessageEmbed()

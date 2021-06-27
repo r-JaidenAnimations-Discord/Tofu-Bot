@@ -190,7 +190,7 @@ module.exports = async (client, message) => {
 		}
 
 		// Warn when a command is executed from the devserver to the main deploy
-		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true && await dangerCommandPrompt(client, message) === false) return;
+		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true && await dangerCommandPrompt(message) === false) return;
 	}
 
 	// Is this command enabled?

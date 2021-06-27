@@ -1,6 +1,3 @@
-// Note to self: buildTimeCode and parseMS can be removed probably as they are part of the previous humanReadable timecode generator iteration
-
-
 /**
  * Builds a time code in h m s format, omitting h and m if they are 0
  * @param {Int} msDuration Timestamp/timecode in milliseconds

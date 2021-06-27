@@ -34,7 +34,8 @@ client.player = new Player(client, {
 	leaveOnStopCooldown: 300000,
 	leaveOnEmptyCooldown: 200000,
 	autoSelfDeaf: true,
-	fetchBeforeQueued: false // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
+	fetchBeforeQueued: false, // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
+	enableLive: true
 });
 client.tags = require('./handlers/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/movieNightSuggestions.js')(movieSuggestionSequelize);

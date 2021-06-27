@@ -4,6 +4,13 @@ const Discord = require('discord.js');
 const chalk = require('chalk');
 
 class Tantrum {
+	/**
+	 * Handles errors by DM notifying and console logging
+	 * @param {Client} client Discord client
+	 * @param {String} file File name
+	 * @param {String} message Error message
+	 * @param {String} err Error output
+	 */
 	constructor(client, file, message, err) {
 		this.client = client;
 		this.file = file;

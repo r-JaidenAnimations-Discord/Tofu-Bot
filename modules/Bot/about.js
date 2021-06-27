@@ -1,7 +1,9 @@
 const { tofuGreen } = require('#colors');
+const { maxID, teraID, retainedID, gradyID, maidID, memeID, alphenID, paoweeID } = require('#memberIDs');
 const { version, releaseDate } = require('../../package.json');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
+const { formatDate } = require('#utils/formatDate.js');
 
 module.exports = {
 	name: 'about',
@@ -35,14 +37,15 @@ module.exports = {
 			.setAuthor('About Tofu Bot', botProfile)
 			.addFields(
 				{ name: 'Bot version:', value: version },
-				{ name: 'Bot release date:', value: releaseDate },
-				{ name: 'Uptime', value: `${days}d ${hours}h ${minutes}m ${seconds}s` },
-				{ name: 'Memory Usage', value: `${(heapUsed / 1024 / 1024).toFixed(1)} MB / ${(heapTotal / 1024 / 1024).toFixed(1)}MB (${(heapUsed / heapTotal * 100).toFixed(2)}%)` },
-				{ name: 'Coding:', value: '<@488064501816492047>, <@558264504736153600>, <@768384164810457128>, <@740491200972193793>, <@472399898885619714>' },
-				{ name: 'Avatar:', value: '<@768384164810457128>' },
-				{ name: 'Testing:', value: '<@740491200972193793>, <@558264504736153600>, <@768384164810457128>, <@722786367821578311>' },
-				{ name: 'Quotes:', value: '<@768384164810457128>, <@740491200972193793>, <@392632687782789121>' },
-				{ name: 'Trivia:', value: '<@768384164810457128>, <@740491200972193793>, <@392632687782789121>, <@595217918917345283>' }
+				{ name: 'Version release date:', value: releaseDate },
+				{ name: 'Uptime:', value: `${days}d ${hours}h ${minutes}m ${seconds}s` },
+				{ name: 'Memory Usage:', value: `${(heapUsed / 1024 / 1024).toFixed(1)} MB / ${(heapTotal / 1024 / 1024).toFixed(1)}MB (${(heapUsed / heapTotal * 100).toFixed(2)}%)` },
+				{ name: 'Coding:', value: `<@${maxID}>, <@${teraID}>, <@${retainedID}>, <@${gradyID}>, <@${paoweeID}>` },
+				{ name: 'Avatar:', value: `<@${retainedID}>` },
+				{ name: 'Testing:', value: `<@${gradyID}>, <@${teraID}>, <@${retainedID}>, <@${alphenID}>` },
+				{ name: 'Quotes:', value: `<@${retainedID}>, <@${gradyID}>, <@${maidID}>` },
+				{ name: 'Trivia:', value: `<@${retainedID}>, <@${gradyID}>, <@${maidID}>, <@${memeID}>` },
+				{ name: 'Initial release:', value: formatDate(client.user.createdAt) }
 			)
 			.setFooter('Made with ☕, without swear words');
 

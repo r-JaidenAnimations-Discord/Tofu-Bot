@@ -26,12 +26,6 @@ module.exports = async (client, message) => {
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
 
-
-	// TEMPORARY
-	if (message.channel === generalChannelID && message.author.id === maxID) {
-		return message.channel.send('Buddy, go back to work, you have exams');
-	}
-
 	// Include aliases
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

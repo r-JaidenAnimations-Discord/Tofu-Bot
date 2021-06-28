@@ -18,13 +18,9 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { bugReportChannelID } = client.config;
 
-		if (!args[0]) {
-			try {
-				return message.channel.send(`You gotta describe the problem ${message.author.username.toLowerCase()}. That's right, your name doesn't deserve to be capitalized you vertical coathanger.`)
-			} catch (e) {
-				throw new Tantrum(client, 'report.js', 'Error on sending \'no problem given\' message');
-			}
-		}
+		if (!args[0]) return message.channel.send(`You gotta describe the problem ${message.author.username.toLowerCase()}. That's right, your name doesn't deserve to be capitalized you vertical coathanger.`).catch(e => {
+			throw new Tantrum(client, 'report.js', 'Error on sending \'no problem given\' message');
+		});
 		const warnEmbed = new Discord.MessageEmbed()
 			.setColor(tofuRed)
 			//.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))

@@ -49,10 +49,8 @@ module.exports = {
 			)
 			.setFooter('Made with ☕, without swear words');
 
-		try {
-			message.channel.send(aboutEmbed);
-		} catch (e) {
+		message.channel.send(aboutEmbed).catch(e => {
 			throw new Tantrum(client, 'about.js', 'Error on sending aboutEmbed', e);
-		}
+		});
 	},
 };

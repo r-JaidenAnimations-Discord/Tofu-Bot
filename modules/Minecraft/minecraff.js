@@ -89,7 +89,7 @@ module.exports = {
 					message.channel.stopTyping();
 					message.channel.send(minecraftEmbed);
 				} catch (e) {
-					console.log(`kek ${e}`)
+					console.log(`kek ${e}`);
 				}
 
 			});
@@ -102,7 +102,6 @@ module.exports = {
 				message.channel.stopTyping();
 				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
 				new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-
 			} catch (f) {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			}

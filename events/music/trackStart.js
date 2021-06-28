@@ -9,9 +9,7 @@ module.exports = (client, message, track) => {
 		.setTitle('Now playing')
 		.setDescription(`[${track.title}](${track.url}) [${track.requestedBy}]`);
 
-	try {
-		message.channel.send(nowPlayingEmbed);
-	} catch (e) {
+	message.channel.send(nowPlayingEmbed).catch(e => {
 		throw new Tantrum(client, 'trackStart.js', 'Error sending nowPlayingEmbed', e);
-	}
+	});
 };

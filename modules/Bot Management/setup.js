@@ -19,9 +19,9 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 
-		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
-			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
-		}
+		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...').catch(e => {
+			throw new Tantrum(client, 'setup.js', 'Error on sending permission message', e);
+		});
 
 		const readData = readJSONSync('./deployData/settings.json', 'utf-8');
 		let { disabledCommands } = readData;
@@ -41,11 +41,9 @@ module.exports = {
 					case 'true':
 					case 'on': {
 						if (readData.welcome === true) {
-							try {
-								return message.channel.send('The welcomer is already `enabled`');
-							} catch (e) {
+							return message.channel.send('The welcomer is already `enabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending welcomer already enabled message.', e);
-							}
+							});
 						} else {
 							readData.welcome = true; // Enable the welcome thing
 
@@ -65,11 +63,9 @@ module.exports = {
 					case 'false':
 					case 'off': {
 						if (readData.welcome === false) {
-							try {
-								return message.channel.send('The welcomer is already `disabled`');
-							} catch (e) {
+							return message.channel.send('The welcomer is already `disabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending welcomer already disabled message.', e);
-							}
+							});
 						} else {
 							readData.welcome = false; // Disable the welcome thing
 
@@ -92,11 +88,9 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Welcome messages are currently \`${formatBool(readData.welcome)}\`.`);
 
-						try {
-							message.channel.send(welcomerStateEmbed);
-						} catch (e) {
+						message.channel.send(welcomerStateEmbed).catch(e => {
 							throw new Tantrum(client, 'setup.js', 'Error on sending WelcomerStateEmbed', e);
-						}
+						});
 						break;
 					}
 					//end of inner switchcase
@@ -115,11 +109,9 @@ module.exports = {
 					case 'true':
 					case 'on': {
 						if (readData.kiritoTrust === true) {
-							try {
-								return message.channel.send('Kiritotrust is already `enabled`');
-							} catch (e) {
+							return message.channel.send('Kiritotrust is already `enabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrust already enabled message.', e);
-							}
+							});
 						} else {
 							readData.kiritoTrust = true; // Enable the kiritotrust thing
 
@@ -139,11 +131,9 @@ module.exports = {
 					case 'false':
 					case 'off': {
 						if (readData.kiritoTrust === false) {
-							try {
-								return message.channel.send('Kiritotrust is already `disabled`');
-							} catch (e) {
+							return message.channel.send('Kiritotrust is already `disabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrust already disabled message.', e);
-							}
+							});
 						} else {
 							readData.kiritoTrust = false; // Disable the kiritotrust thing
 
@@ -166,11 +156,9 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Kirito trust currently \`${formatBool(readData.kiritoTrust)}\`.`);
 
-						try {
-							message.channel.send(kiritotrustStateEmbed);
-						} catch (e) {
+						message.channel.send(kiritotrustStateEmbed).catch(e => {
 							throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrustStateEmbed', e);
-						}
+						});
 						break;
 					}
 					//end of inner switchcase
@@ -188,11 +176,9 @@ module.exports = {
 					case 'true':
 					case 'on': {
 						if (readData.aliTrust === true) {
-							try {
-								return message.channel.send('Alitrust is already `enabled`');
-							} catch (e) {
+							return message.channel.send('Alitrust is already `enabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending alitrust already enabled message.', e);
-							}
+							});
 						} else {
 							readData.aliTrust = true; // Enable the alitrust thing
 
@@ -212,11 +198,9 @@ module.exports = {
 					case 'false':
 					case 'off': {
 						if (readData.aliTrust === false) {
-							try {
-								return message.channel.send('Alitrust is already `disabled`');
-							} catch (e) {
+							return message.channel.send('Alitrust is already `disabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending alitrust already disabled message.', e);
-							}
+							});
 						} else {
 							readData.aliTrust = false; // Disable the alitrust thing
 
@@ -239,11 +223,9 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Ali trust currently \`${formatBool(readData.aliTrust)}\`.`);
 
-						try {
-							message.channel.send(alitrustStateEmbed);
-						} catch (e) {
+						message.channel.send(alitrustStateEmbed).catch(e => {
 							throw new Tantrum(client, 'setup.js', 'Error on sending alitrustStateEmbed', e);
-						}
+						});
 						break;
 					}
 					//end of inner switchcase
@@ -263,11 +245,9 @@ module.exports = {
 					case 'true':
 					case 'on': {
 						if (readData.randomStatus === true) {
-							try {
-								return message.channel.send('Random status is already `enabled`');
-							} catch (e) {
+							return message.channel.send('Random status is already `enabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending random status already enabled message.', e);
-							}
+							});
 						} else {
 							readData.randomStatus = true; // Enable the randomStatus thing
 
@@ -287,11 +267,9 @@ module.exports = {
 					case 'false':
 					case 'off': {
 						if (readData.randomStatus === false) {
-							try {
-								return message.channel.send('Random status is already `disabled`');
-							} catch (e) {
+							return message.channel.send('Random status is already `disabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending random status already disabled message.', e);
-							}
+							});
 						} else {
 							readData.randomStatus = false; // Disable the randomStatus thing
 
@@ -314,11 +292,9 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Random status currently \`${formatBool(readData.randomStatus)}\`.`);
 
-						try {
-							message.channel.send(randomStatusStateEmbed);
-						} catch (e) {
+						message.channel.send(randomStatusStateEmbed).catch(e => {
 							throw new Tantrum(client, 'setup.js', 'Error on sending randomStatusStateEmbed', e);
-						}
+						});
 						break;
 					}
 					//end of inner switchcase
@@ -336,11 +312,9 @@ module.exports = {
 					case 'true':
 					case 'on': {
 						if (readData.blackListing === true) {
-							try {
-								return message.channel.send('Blacklisting is already `enabled`');
-							} catch (e) {
+							return message.channel.send('Blacklisting is already `enabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending blacklisting already enabled message.', e);
-							}
+							});
 						} else {
 							readData.blackListing = true; // Enable the blacklisting thing
 
@@ -360,11 +334,9 @@ module.exports = {
 					case 'false':
 					case 'off': {
 						if (readData.blackListing === false) {
-							try {
-								return message.channel.send('Blacklisting is already `disabled`');
-							} catch (e) {
+							return message.channel.send('Blacklisting is already `disabled`').catch(e => {
 								throw new Tantrum(client, 'setup.js', 'Error on sending blacklisting already disabled message.', e);
-							}
+							});
 						} else {
 							readData.blackListing = false; // Disable the blacklisting thing
 
@@ -387,11 +359,9 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Blacklisting currently \`${formatBool(readData.blackListing)}\`.`);
 
-						try {
-							message.channel.send(blackListingStateEmbed);
-						} catch (e) {
+						message.channel.send(blackListingStateEmbed).catch(e => {
 							throw new Tantrum(client, 'setup.js', 'Error on sending blackListingStateEmbed', e);
-						}
+						});
 						break;
 					}
 					//end of inner switchcase
@@ -480,11 +450,9 @@ module.exports = {
 					Blacklisting: \`${formatBool(readData.blackListing)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
-				try {
-					message.channel.send(embed);
-				} catch (e) {
+				message.channel.send(embed).catch(e => {
 					new Tantrum(client, 'setup.js', 'Error on sending settings list', e);
-				}
+				});
 			}
 		}
 	},

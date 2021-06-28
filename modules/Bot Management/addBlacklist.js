@@ -1,5 +1,5 @@
-const { tofuGreen, tofuRed } = require('#colors');
 const { maxID } = require('#memberIDs');
+const { tofuGreen, tofuRed } = require('#colors');
 const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
@@ -32,20 +32,14 @@ module.exports = {
 			toBlacklist = args[0];
 		}
 		else {
-			try {
-				return message.channel.send('No member specified');
-			} catch (e) {
+			return message.channel.send('No member specified').catch(e => {
 				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no user defined message', e);
-			}
+			});
 		}
 
-		if (toBlacklist === message.author.id) {
-			try {
-				return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
-			} catch (e) {
-				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
-			}
-		}
+		if (toBlacklist === message.author.id) return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?').catch(e => {
+			throw new Tantrum(client, 'addBlacklist.js', 'Error on sending can\'t blacklist yourself message');
+		});
 
 		if (toBlacklist === maxID) {
 			try {
@@ -61,29 +55,22 @@ module.exports = {
 		if (!checkBanStaff(client, message)) return;
 
 		let category = args[1];
-		if (!category) {
-			try {
-				return message.channel.send('Give me a category to put them in though');
-			} catch (e) {
-				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
-			}
-		}
+		if (!category) return message.channel.send('Give me a category to put them in though').catch(e => {
+			throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
+		});
 
 		const categories = ['python', 'bamboozle', 'hate', 'wrongchannel', 'bloop', 'other'];
 		for (category of categories) {
 			if (blackListJSON[category].includes(toBlacklist)) {
-				try {
-					const alreadyBlacklistedEmbed = new Discord.MessageEmbed()
-						.setTitle('Error')
-						.setColor(tofuRed)
-						.setDescription(`This member is already blacklisted in the \`${category}\` list.`)
-						.setTimestamp();
+				const alreadyBlacklistedEmbed = new Discord.MessageEmbed()
+					.setTitle('Error')
+					.setColor(tofuRed)
+					.setDescription(`This member is already blacklisted in the \`${category}\` list.`)
+					.setTimestamp();
 
-					message.channel.send(alreadyBlacklistedEmbed);
-					return;
-				} catch (e) {
+				return message.channel.send(alreadyBlacklistedEmbed).catch(e => {
 					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending member already in blacklist category message.', e);
-				}
+				});
 			}
 		}
 
@@ -98,17 +85,15 @@ module.exports = {
 				blackListJSON[args[1]].push(toBlacklist);
 				break;
 			default:
-				try {
-					const invalidCategoryEmbed = new Discord.MessageEmbed()
-						.setTitle('Error')
-						.setColor(tofuRed)
-						.setDescription(`\`${args[1]}\` is not a valid category.\nConsider checking the help command.`)
-						.setTimestamp();
+				const invalidCategoryEmbed = new Discord.MessageEmbed()
+					.setTitle('Error')
+					.setColor(tofuRed)
+					.setDescription(`\`${args[1]}\` is not a valid category.\nConsider checking the help command.`)
+					.setTimestamp();
 
-					message.channel.send(invalidCategoryEmbed);
-				} catch (e) {
+				message.channel.send(invalidCategoryEmbed).catch(e => {
 					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
-				}
+				});
 				break;
 		}
 

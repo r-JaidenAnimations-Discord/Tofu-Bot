@@ -26,10 +26,8 @@ module.exports = {
 		}).slice(0, 8).join('\n') // For now, only the first 8 tracks get pulled
 		let footer = `${queue.tracks.length > 8 ? `${queue.tracks.length - 8} more track(s)` : '     This is the end of the queue!'}`;
 
-		try {
-			message.channel.send(`\`\`\`nim\n${currtr}\n\n${trlist}\n${footer}\n\`\`\``); //TODO: pagination
-		} catch (e) {
+		message.channel.send(`\`\`\`nim\n${currtr}\n\n${trlist}\n${footer}\n\`\`\``).catch(e => {
 			throw new Tantrum(client, 'queue.js', 'Error on sending queue', e);
-		}
+		}); //TODO: pagination
 	},
 };

@@ -22,11 +22,9 @@ module.exports = {
 		const success = client.player.stop(message);
 
 		if (success) {
-			try {
-				await message.react('👋');
-			} catch (e) {
+			await message.react('👋').catch(e => {
 				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);
-			}
+			});
 		} else {
 			throw new Tantrum(client, 'disconnect.js', 'Error on disconnecting', 'No message');
 		}

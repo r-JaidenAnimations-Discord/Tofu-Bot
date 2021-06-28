@@ -16,13 +16,10 @@ module.exports = {
     execute: async function(client, message, args) {
 
         ///if (!message.member.hasPermission('BAN_MEMBERS')) return;
-        if (message.author.id !== gradyID && message.author.id !== retainedID && message.author.id !== maxID) return;
+        if (message.author.id !== gradyID && message.author.id !== maxID) return;
 
-        try {
-            // message.channel.send('💨');
-            message.react('💨');
-        } catch (e) {
+        message.react('💨').catch(e => {
             throw new Tantrum(client, 'fart,js', 'Error on sending fart', e);
-        }
+        });
     },
 };

@@ -21,11 +21,9 @@ module.exports = {
 		const success = client.player.skip(message);
 
 		if (success) {
-			try {
-				await message.react('👌');
-			} catch (e) {
+			await message.react('👌').catch(e => {
 				throw new Tantrum(client, 'skip.js', 'Error on sending skip message', e);
-			}
+			});
 		} else {
 			throw new Tantrum(client, 'skip.js', 'Error on skipping music', 'No message');
 		}

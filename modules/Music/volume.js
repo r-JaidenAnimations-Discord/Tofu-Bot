@@ -38,11 +38,9 @@ module.exports = {
 		if (Math.round(parseInt(args[0])) < 1 || Math.round(parseInt(args[0])) > 100) {
 			volumeEmbed.setColor(tofuOrange);
 			volumeEmbed.setDescription('Please enter a number between 1 and 100!');
-			try {
-				return message.channel.send(volumeEmbed);
-			} catch (e) {
+			return message.channel.send(volumeEmbed).catch(e => {
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (number not between 1 and 100)', e);
-			}
+			});
 		}
 
 		const success = client.player.setVolume(message, parseInt(args[0]));
@@ -50,11 +48,9 @@ module.exports = {
 		if (success) {
 			volumeEmbed.setColor(tofuGreen);
 			volumeEmbed.setDescription(`Volume set to **${parseInt(args[0])}%**!`);
-			try {
-				message.channel.send(volumeEmbed);
-			} catch (e) {
+			message.channel.send(volumeEmbed).catch(e => {
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (volume)', e);
-			}
+			});
 		} else {
 			throw new Tantrum(client, 'volume.js', 'Error on setting volume', 'No message');
 		}

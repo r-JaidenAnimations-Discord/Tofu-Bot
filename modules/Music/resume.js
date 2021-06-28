@@ -25,11 +25,9 @@ module.exports = {
 				.setColor(tofuOrange)
 				.setDescription('The music is already playing!');
 
-			try {
-				return message.channel.send(alreadyPlayingEmbed);
-			} catch (e) {
-				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e);
-			}
+			return message.channel.send(alreadyPlayingEmbed).catch(e => {
+				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e)
+			});
 		}
 
 		const success = client.player.resume(message);
@@ -40,11 +38,9 @@ module.exports = {
 		client.player.resume(message);
 
 		if (success) {
-			try {
-				await message.react('▶️');
-			} catch (e) {
-				throw new Tantrum(client, 'resume.js', 'Error on reacting resume', e);
-			}
+			await message.react('▶️').catch(e => {
+				throw new Tantrum(client, 'resume.js', 'Error on reacting resume', e)
+			});
 		} else {
 			throw new Tantrum(client, 'resume.js', 'Error on resuming', 'No message');
 		}

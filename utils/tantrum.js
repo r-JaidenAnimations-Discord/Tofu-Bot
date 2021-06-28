@@ -19,14 +19,12 @@ class Tantrum {
 		this.handle();
 	}
 	handle() {
-		try {
-			console.log(`${chalk.yellow('[ERROR]')}: ${this.file}: ${this.message}: ${this.err}`);
-			// How did i even write this without having a freaking aneurysm
-			return this.client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`WAAAH: ${this.file}: ${this.message} \n\`\`${this.err}\`\``).setColor(tofuError));
-		} catch (f) {
+		console.log(`${chalk.yellow('[ERROR]')}: ${this.file}: ${this.message}: ${this.err}`);
+		// How did i even write this without having a freaking aneurysm
+		return this.client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`WAAAH: ${this.file}: ${this.message} \n\`\`${this.err}\`\``).setColor(tofuError)).catch(e => {
 			throw new Error(`Sending error DM ${chalk.redBright('failed')}! DMError: ${f}`);
+		});
 
-		}
 	}
 }
 

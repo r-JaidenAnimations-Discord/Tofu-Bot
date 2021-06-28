@@ -32,11 +32,9 @@ module.exports = {
 				client.player.resume(message);
 
 				if (success) {
-					try {
-						return await message.react('👌');
-					} catch (e) {
+					return await message.react('👌').catch(e => {
 						throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
-					}
+					});
 				} else {
 					throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
 				}
@@ -49,8 +47,7 @@ module.exports = {
 					.setColor(tofuOrange)
 					.setDescription('To play a song, you need to specify which song you want to play!');
 
-				message.channel.send(noQueryEmbed);
-				return;
+				return message.channel.send(noQueryEmbed);
 			}
 		} catch (e) {
 			throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);

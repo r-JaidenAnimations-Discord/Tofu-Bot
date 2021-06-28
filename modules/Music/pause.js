@@ -24,21 +24,17 @@ module.exports = {
 			let alreadyPausedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('The music is already paused!');
-			try {
-				return message.channel.send(alreadyPausedEmbed);
-			} catch (e) {
+			return message.channel.send(alreadyPausedEmbed).catch(e => {
 				throw new Tantrum(client, 'pause.js', 'Error on sending alreadyPausedEmbed', e);
-			}
+			});
 		}
 
 		const success = client.player.pause(message);
 
 		if (success) {
-			try {
-				await message.react('⏸');
-			} catch (e) {
+			await message.react('⏸').catch(e => {
 				throw new Tantrum(client, 'pause.js', 'Error on sending paused message', e);
-			}
+			});
 		} else {
 			throw new Tantrum(client, 'pause.js', 'Error on pausing music', 'No message');
 		}

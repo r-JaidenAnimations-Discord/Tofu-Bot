@@ -30,11 +30,9 @@ module.exports = {
 			case 'true':
 			case 'on': {
 				if (readData.minecraftMaintenance === true) {
-					try {
-						return message.channel.send('Minecraft maintenance mode already `enabled`');
-					} catch (e) {
+					return message.channel.send('Minecraft maintenance mode already `enabled`').catch(e => {
 						throw new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance already enabled message.', e);
-					}
+					});
 				} else {
 					readData.minecraftMaintenance = true; // Enable the maintenance thing
 
@@ -54,11 +52,9 @@ module.exports = {
 			case 'false':
 			case 'off': {
 				if (readData.minecraftMaintenance === false) {
-					try {
-						return message.channel.send('Minecraft maintenance mode already `disabled`');
-					} catch (e) {
+					return message.channel.send('Minecraft maintenance mode already `disabled`').catch(e => {
 						throw new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance already disabled message.', e);
-					}
+					});
 				} else {
 					readData.minecraftMaintenance = false; // Disable the maintenance thing
 
@@ -83,11 +79,9 @@ module.exports = {
 					.setTimestamp()
 					.setFooter('Made with love');
 
-				try {
-					message.channel.send(embed);
-				} catch (e) {
+				message.channel.send(embed).catch(e => {
 					new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance mode status', e);
-				}
+				});
 			}
 		}
 	},

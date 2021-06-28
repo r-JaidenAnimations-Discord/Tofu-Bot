@@ -59,93 +59,93 @@ module.exports = async (client, message) => {
 			throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
 		});
 	}
-}
 
-if (settingsFile.blackListing === true) {
-	// Member Blacklisting
-	const blackListRawData = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
-	var blackListData = JSON.parse(blackListRawData);
+	if (settingsFile.blackListing === true) {
+		// Member Blacklisting
+		const blackListRawData = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
+		var blackListData = JSON.parse(blackListRawData);
 
-	if (blackListData.python.includes(message.author.id)) {
-		return message.channel.send('Come back when you stop using Python').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e)
-		});
-	}
-	else if (blackListData.bamboozle.includes(message.author.id)) {
-		return message.channel.send('Ahahahahahahah get f\'ed you foul piece of $h!t', { files: ['./commanddata/lemao.png'] }).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e)
-		});
-	}
-	else if (blackListData.hate.includes(message.author.id)) {
-		return message.channel.send('I hate you too').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e)
-		});
-	}
-	else if (blackListData.wrongchannel.includes(message.author.id)) {
-		return message.channel.send('Come back when you learn to use commands in the right place').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e)
-		});
-	}
-	else if (blackListData.bloop.includes(message.author.id)) {
-		return message.channel.send('Haha, queen mush', { files: ['./commanddata/lemao.png'] }).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e)
-		});
-	}
-	else if (blackListData.other.includes(message.author.id)) {
-		return message.channel.send('Nope, not listening to you').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e)
-		});
-	}
-}
-
-// No DMs
-//if (message.channel.type === 'dm') return;
-
-// Cooldown?
-if (!cooldowns.has(command.name)) {
-	cooldowns.set(command.name, new Discord.Collection());
-}
-const now = Date.now();
-const timestamps = cooldowns.get(command.name);
-const cooldownAmount = (command.cooldown || 3) * 1000;
-if (timestamps.has(message.author.id)) {
-	const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-	if (now < expirationTime) {
-		try {
-			await message.react('⏳');
-			return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${/*timeLeft.toFixed(1)*/humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`);
-		} catch (e) {
-			throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
+		if (blackListData.python.includes(message.author.id)) {
+			return message.channel.send('Come back when you stop using Python').catch(e => {
+				throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e)
+			});
 		}
-	}
-}
-timestamps.set(message.author.id, now);
-setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
-if (message.guild) {
-	// Check if bot is used in unauthorized server
-	if (!trustedServers.includes(message.guild.id)) {
-		try {
-			client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
-			return message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
-		} catch (e) {
-			throw new Tantrum(client, 'message.js', 'Error on sending untrusted server message', e);
+		else if (blackListData.bamboozle.includes(message.author.id)) {
+			return message.channel.send('Ahahahahahahah get f\'ed you foul piece of $h!t', { files: ['./commanddata/lemao.png'] }).catch(e => {
+				throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e)
+			});
+		}
+		else if (blackListData.hate.includes(message.author.id)) {
+			return message.channel.send('I hate you too').catch(e => {
+				throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e)
+			});
+		}
+		else if (blackListData.wrongchannel.includes(message.author.id)) {
+			return message.channel.send('Come back when you learn to use commands in the right place').catch(e => {
+				throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e)
+			});
+		}
+		else if (blackListData.bloop.includes(message.author.id)) {
+			return message.channel.send('Haha, queen mush', { files: ['./commanddata/lemao.png'] }).catch(e => {
+				throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e)
+			});
+		}
+		else if (blackListData.other.includes(message.author.id)) {
+			return message.channel.send('Nope, not listening to you').catch(e => {
+				throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e)
+			});
 		}
 	}
 
-	// Warn when a command is executed from the devserver to the main deploy
-	if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true && await dangerCommandPrompt(message) === false) return;
-}
+	// No DMs
+	//if (message.channel.type === 'dm') return;
 
-// Is this command enabled?
-if (settingsFile.disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
-	throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e)
-});
+	// Cooldown?
+	if (!cooldowns.has(command.name)) {
+		cooldowns.set(command.name, new Discord.Collection());
+	}
+	const now = Date.now();
+	const timestamps = cooldowns.get(command.name);
+	const cooldownAmount = (command.cooldown || 3) * 1000;
+	if (timestamps.has(message.author.id)) {
+		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+		if (now < expirationTime) {
+			try {
+				await message.react('⏳');
+				return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${/*timeLeft.toFixed(1)*/humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`);
+			} catch (e) {
+				throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
+			}
+		}
+	}
+	timestamps.set(message.author.id, now);
+	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-// All requirements are met, try running the command
-try {
-	command.execute(client, message, args);
-} catch (e) {
-	throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
-	//message.reply('Sooo i like um broke');
+	if (message.guild) {
+		// Check if bot is used in unauthorized server
+		if (!trustedServers.includes(message.guild.id)) {
+			try {
+				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError));
+				return message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
+			} catch (e) {
+				throw new Tantrum(client, 'message.js', 'Error on sending untrusted server message', e);
+			}
+		}
+
+		// Warn when a command is executed from the devserver to the main deploy
+		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true && await dangerCommandPrompt(message) === false) return;
+	}
+
+	// Is this command enabled?
+	if (settingsFile.disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
+		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e)
+	});
+
+	// All requirements are met, try running the command
+	try {
+		command.execute(client, message, args);
+	} catch (e) {
+		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+		//message.reply('Sooo i like um broke');
+	}
 }

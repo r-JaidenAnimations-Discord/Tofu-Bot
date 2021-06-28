@@ -1,3 +1,4 @@
+const { teraID, maxID, gradyID, retainedID } = require('../commanddata/memberIDs.json');
 const Tantrum = require('#tantrum');
 
 /**
@@ -27,7 +28,24 @@ const checkMessageStaff = (client, message) => {
 	}
 	return true;
 }
+
+/**
+ * Check if the message author is one of the masters
+ * @param {Client} client Discord client
+ * @param {*} message Message object
+ * @returns {Boolean} Returns true if message.author is one of the masters
+ */
+const masterCheck = (client, message) => {
+	if (message.author.id !== teraID && message.author.id !== maxID && message.author.id !== gradyID && message.author.id !== retainedID) {
+		message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...').catch(e => {
+			throw new Tantrum(client, 'staffChecks.js', 'Error while sending master permission message', e);
+		});
+		return false;
+	}
+	return true;
+}
 module.exports = {
 	checkBanStaff,
-	checkMessageStaff
+	checkMessageStaff,
+	masterCheck
 }

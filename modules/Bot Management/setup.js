@@ -1,9 +1,9 @@
 const { tofuGreen, tofuError, tofuRed, tofuBlue, tofuOrange } = require('#colors');
-const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { stripIndents } = require('common-tags');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
+const { masterCheck } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'settings',
@@ -19,9 +19,7 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 
-		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...').catch(e => {
-			throw new Tantrum(client, 'setup.js', 'Error on sending permission message', e);
-		});
+		if (!masterCheck(client, message)) return;
 
 		const readData = readJSONSync('./deployData/settings.json', 'utf-8');
 		let { disabledCommands } = readData;
@@ -94,7 +92,7 @@ module.exports = {
 						break;
 					}
 					//end of inner switchcase
-				}//Point of dev || WORKS UNTIL HERE
+				}
 				break;
 			}
 

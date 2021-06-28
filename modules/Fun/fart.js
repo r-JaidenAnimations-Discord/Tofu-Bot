@@ -1,5 +1,5 @@
-const { gradyID, retainedID, maxID } = require('#memberIDs');
 const Tantrum = require('#tantrum');
+const { masterCheck } = require('#utils/staffChecks.js');
 
 module.exports = {
     name: 'fart',
@@ -15,7 +15,7 @@ module.exports = {
     cooldown: 5,
     execute: async function(client, message, args) {
 
-        if (message.author.id !== gradyID && message.author.id !== maxID) return;
+        if (!masterCheck(client, message)) return;
 
         await message.react('💨').catch(e => {
             throw new Tantrum(client, 'fart,js', 'Error on sending fart', e);

@@ -32,7 +32,12 @@ module.exports = {
 		}
 		else {
 			if (message.deletable) message.delete();
-			return message.channel.send(`${args.join(' ')} was beaned!`).catch(e => {
+			// Supress @everyone, @here and pinging roles
+			let input = args.join(' ');
+			[/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+				input = input.replace(ping, 'haha funny ping');
+			});
+			return message.channel.send(`${input} was beaned!`).catch(e => {
 				throw new Tantrum(client, 'bean.js', 'Error on sending args.join was beaned', e);
 			});
 		}

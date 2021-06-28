@@ -55,6 +55,8 @@ module.exports = {
 			} else if (emoji === '❌') {
 				msg.delete();
 			}
+		}).catch(e => {
+			throw new Tantrum(client, 'report.js', 'Error on sending bug report', e);
 		});
 	},
 };

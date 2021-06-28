@@ -15,10 +15,9 @@ module.exports = {
     cooldown: 5,
     execute: async function(client, message, args) {
 
-        ///if (!message.member.hasPermission('BAN_MEMBERS')) return;
         if (message.author.id !== gradyID && message.author.id !== maxID) return;
 
-        message.react('💨').catch(e => {
+        await message.react('💨').catch(e => {
             throw new Tantrum(client, 'fart,js', 'Error on sending fart', e);
         });
     },

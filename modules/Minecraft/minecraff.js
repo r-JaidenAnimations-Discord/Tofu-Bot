@@ -85,26 +85,21 @@ module.exports = {
 
 				minecraftEmbed.addField('Server status:', downStatus);
 
-				try {
-					message.channel.stopTyping();
-					message.channel.send(minecraftEmbed);
-				} catch (e) {
+				message.channel.stopTyping();
+				message.channel.send(minecraftEmbed).catch(e => {
 					console.log(`kek ${e}`);
-				}
-
+				});
 			});
 			/*res.on('end', function() {
 				// prob going to remove this
 				console.log('Request finished');
 			});*/
 		}).on('error', function(e) {
-			try {
-				message.channel.stopTyping();
-				message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError));
-				new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-			} catch (f) {
+			message.channel.stopTyping();
+			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
+			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
-			}
+			});
 		});
 	},
 };

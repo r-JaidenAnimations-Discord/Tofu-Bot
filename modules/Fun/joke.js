@@ -23,7 +23,7 @@ module.exports = {
 
 		const jokeEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
-			.setTimestamp();
+			.setFooter('The API does not have good jokes, don\'t get your hopes up');
 
 		https.get(url, function(res) {
 			var body = '';

@@ -35,6 +35,7 @@ module.exports = {
 			res.on('close', () => {
 				var APIresponse = JSON.parse(body);
 
+				if (!APIresponse.setup || !APIresponse.punchline) return sendError('API reponse invalid');
 				jokeEmbed.setTitle(APIresponse.setup)
 				jokeEmbed.setDescription(`||${APIresponse.punchline}||`)
 
@@ -44,12 +45,15 @@ module.exports = {
 				});
 			});
 		}).on('error', function(e) {
-			message.channel.stopTyping();
+			sendError(e);
+		});
 
+		function sendError(e) {
+			message.channel.stopTyping();
 			new Tantrum(client, 'joke.js', 'API did not respond', e);
 			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => {
 				new Tantrum(client, 'joke.js', 'Error on sending error embed', f);
 			});
-		});
+		}
 	},
 };

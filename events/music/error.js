@@ -47,5 +47,5 @@ module.exports = (client, error, message, ...args) => {
 				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (choke)', e);
 			});
 			new Tantrum(client, 'error.js', 'Tofu choked', error);
-	};
+	}
 };

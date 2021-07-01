@@ -26,7 +26,7 @@ module.exports = {
 		var settingsFile = JSON.parse(data);
 
 		// API endpoint
-		var url = `https://api.mcsrvstat.us/2/${minecraftIP}`;
+		const url = `https://api.mcsrvstat.us/2/${minecraftIP}`;
 
 		var downStatus = null;
 
@@ -40,12 +40,11 @@ module.exports = {
 			.setTimestamp();
 
 		// Set the status to maintenance in case of maintenance
-		if (settingsFile.minecraftMaintenance === true) {
+		if (settingsFile.minecraftMaintenance) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
 			message.channel.stopTyping();
-			message.channel.send(minecraftEmbed);
-			return;
+			return message.channel.send(minecraftEmbed);
 		}
 
 		https.get(url, function(res) {
@@ -58,27 +57,20 @@ module.exports = {
 			res.on('close', () => {
 				var APIresponse = JSON.parse(body);
 				console.log('Got a response: ', APIresponse.ip);
-				var i;
 				var playerList = 'Sadly, no online members';
 				var userCount = 0;
-				downStatus = `${APIresponse.online === true ? 'The server is currently working' : '⚠️ **The server is down**'}`
+				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server is down**'}`
 
-				if (APIresponse.online === true) {
-					minecraftEmbed.addField('Version:', APIresponse.version)
+				if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);
+
+				if (APIresponse.online && APIresponse.players.online && APIresponse.players.list) {
+					playerList = '';
+					for (let i = 0; i < APIresponse.players.list.length; i++) playerList += APIresponse.players.list[i] + '\n';
 				}
 
-				if (APIresponse.online === true) {
-					if (APIresponse.players.online) {
-						if (APIresponse.players.list) {
-							playerList = '';
-							for (i = 0; i < APIresponse.players.list.length; i++) {
-								playerList += APIresponse.players.list[i] + '\n';
-							}
-						}
-					}
-				}
+				if (APIresponse.online && APIresponse.players.online && !APIresponse.players.list) playerList = 'Member list not available';
 
-				if (APIresponse.online === true) {
+				if (APIresponse.online) {
 					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
 					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
 				}

@@ -408,7 +408,9 @@ module.exports = {
             fixes: [
                 'Restructured database handling',
                 'Fixed mass ping vulnerability on bean command',
-                'Refactored error handling'
+                'Refactored error handling',
+                'Code cleanups',
+                'Refactored minecraft command'
             ],
             removals: [
                 'Removed Max focus aid'

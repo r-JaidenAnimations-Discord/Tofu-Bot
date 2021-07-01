@@ -410,7 +410,8 @@ module.exports = {
                 'Fixed mass ping vulnerability on bean command',
                 'Refactored error handling',
                 'Code cleanups',
-                'Refactored minecraft command'
+                'Refactored minecraft command',
+                'Mildly refactored kirito and ali trust'
             ],
             removals: [
                 'Removed Max focus aid'

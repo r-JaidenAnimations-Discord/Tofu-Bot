@@ -55,8 +55,8 @@ module.exports = {
 			});
 
 			res.on('close', () => {
-				var APIresponse = JSON.parse(body);
-				console.log('Got a response: ', APIresponse.ip);
+				const APIresponse = JSON.parse(body);
+				// console.log('Got a response: ', APIresponse.ip);
 				var playerList = 'Sadly, no online members';
 				var userCount = 0;
 				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server is down**'}`

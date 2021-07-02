@@ -391,8 +391,8 @@ module.exports = {
             removals: []
         },
         {
-            version: 'NEXT',
-            aliases: [],
+            version: '1.12.0',
+            aliases: ['1.12'],
             additions: [
                 'Added joke command',
                 'Added dog command',

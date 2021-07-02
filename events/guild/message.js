@@ -47,18 +47,16 @@ module.exports = async (client, message) => {
 	});
 
 	// Kirito trust
-	if (message.author.id === banKirito) {
-		if (settingsFile.kiritoTrust === false) return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] }).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
-		});
-	}
+	if (message.author.id === banKirito && settingsFile.kiritoTrust === false) return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] }).catch(e => {
+		throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
+	});
+
 
 	// Ali trust
-	if (message.author.id === banAli) {
-		if (settingsFile.aliTrust === false) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
-		});
-	}
+	if (message.author.id === banAli && settingsFile.aliTrust === false) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {
+		throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
+	});
+
 
 	if (settingsFile.blackListing === true) {
 		// Member Blacklisting

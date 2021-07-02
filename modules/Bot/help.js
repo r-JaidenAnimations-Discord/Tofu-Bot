@@ -53,12 +53,9 @@ function getAll(client, message) {
 	});
 
 	// After they're all added, send it
-	try {
-		return message.channel.send(embed);
-
-	} catch (e) {
+	return message.channel.send(embed).catch(e => {
 		throw new Tantrum(client, 'help.js', 'Error sending help embed', e);
-	}
+	});
 }
 
 function getCmd(client, message, input) {
@@ -72,13 +69,9 @@ function getCmd(client, message, input) {
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
 	// If the command isn't found (likely doesn't exist)
-	if (!cmd) {
-		try {
-			return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
-		} catch (e) {
-			throw new Tantrum(client, 'help.js', 'Error on sending not a command error.');
-		}
-	}
+	if (!cmd) return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`).catch(e => {
+		throw new Tantrum(client, 'help.js', 'Error on sending not a command error.');
+	});
 
 	// Adds its name based on helpName || uppercase name
 	if (cmd.name) embed.setDescription(`**${cmd.helpName ? cmd.helpName : cmd.name[0].toUpperCase() + cmd.name.slice(1)} Command**`);
@@ -91,9 +84,7 @@ function getCmd(client, message, input) {
 	// The usage
 	if (cmd.usage) embed.addField('**Usage**', `\`${prefix}${cmd.usage}\``);
 
-	try {
-		return message.channel.send(embed);
-	} catch (e) {
+	return message.channel.send(embed).catch(e => {
 		throw new Tantrum(client, 'help.js', 'Error on sending command help embed', e);
-	}
+	});
 }

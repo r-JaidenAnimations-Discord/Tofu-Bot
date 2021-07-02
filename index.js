@@ -3,27 +3,15 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const { Player } = require('discord-player');
-const { Sequelize } = require('sequelize');
 const Tantrum = require('#tantrum');
 const chalk = require('chalk');
 const client = new Discord.Client();
-const { randomStatus } = require('#functions/statusFunction.js');
-const { remindShrimp } = require('#functions/shrimpReminder.js');
+const { randomStatus } = require('#utils/statusFunction.js');
+const { remindShrimp } = require('#utils/shrimpReminder.js');
+const { tagSequelize, movieSuggestionSequelize } = require('./handlers/databases.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly
-
-const tagSequelize = new Sequelize({
-	dialect: 'sqlite',
-	logging: false,
-	storage: 'db/tags.sqlite'
-});
-
-const movieSuggestionSequelize = new Sequelize({
-	dialect: 'sqlite',
-	logging: false,
-	storage: 'db/movieNightSuggestions.sqlite'
-});
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
@@ -34,10 +22,11 @@ client.player = new Player(client, {
 	leaveOnStopCooldown: 300000,
 	leaveOnEmptyCooldown: 200000,
 	autoSelfDeaf: true,
-	fetchBeforeQueued: false // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
+	fetchBeforeQueued: false, // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
+	enableLive: true
 });
-client.tags = require('./handlers/tags.js')(tagSequelize);
-client.movieSuggestions = require('./handlers/movieNightSuggestions.js')(movieSuggestionSequelize);
+client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
+client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 
 // Config loading
 let launchArgs = process.argv.slice(2);

@@ -22,11 +22,10 @@ module.exports = async (client, member) => {
 	var welcomerState = settingsFile.welcome;
 
 	if (welcomerState === false) return;
-	try {
-		let randomBye = leaveMessages[Math.floor(Math.random() * leaveMessages.length)];
-		let formatBye = randomBye.replace('{user}', `**${member.displayName}**`);
-		client.channels.cache.get(generalChannelID).send(formatBye);
-	} catch (e) {
+	let randomBye = leaveMessages[Math.floor(Math.random() * leaveMessages.length)];
+	let formatBye = randomBye.replace('{user}', `**${member.displayName}**`);
+	client.channels.cache.get(generalChannelID).send(formatBye).catch(e => {
 		throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending cya message', e);
-	}
+	});
+
 };

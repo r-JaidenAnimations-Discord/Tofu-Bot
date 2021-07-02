@@ -30,14 +30,10 @@ module.exports = {
 			}
 		}
 
-		if (!args[0]) {
-			try {
-				return message.channel.send('Give me something to evaluate tho')
-				//.then(m => setTimeout(() => { m.delete(); }, 5000));
-			} catch (e) {
-				throw new Tantrum(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
-			}
-		}
+		if (!args[0]) return message.channel.send('Give me something to evaluate tho').catch(e => {
+			throw new Tantrum(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
+		});
+		//.then(m => setTimeout(() => { m.delete(); }, 5000));
 
 		try {
 			if (args.join(' ').toLowerCase().includes('token')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
@@ -45,7 +41,7 @@ module.exports = {
 
 
 			const toEval = args.join(' ');
-			const evaluated = eval(toEval);
+			const evaluated = eval(toEval).replace(client.token, 'funny token time');
 
 			console.log(typeof evaluated);
 
@@ -61,11 +57,9 @@ module.exports = {
 				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			try {
-				message.channel.send(embed);
-			} catch (e) {
+			message.channel.send(embed).catch(e => {
 				new Tantrum(client, 'eval.js', 'Error on sending eval embed', e);
-			}
+			});
 		} catch (e) {
 			let embed = new Discord.MessageEmbed()
 				.setColor(tofuError)
@@ -73,11 +67,9 @@ module.exports = {
 				.setDescription(e)
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			try {
-				message.channel.send(embed);
-			} catch (e) {
+			message.channel.send(embed).catch(e => {
 				new Tantrum(client, 'eval.js', 'Error on sending errorEmbed', e);
-			}
+			});
 		}
 
 		// ... all your eval shit

@@ -22,11 +22,10 @@ module.exports = async (client, member) => {
 	var welcomerState = settingsFile.welcome;
 
 	if (welcomerState === false) return;
-	try {
-		let randomWelc = joinMessages[Math.floor(Math.random() * joinMessages.length)];
-		let formatWelc = randomWelc.replace('{user}', `<@${member.id}>`);
-		client.channels.cache.get(generalChannelID).send(`${formatWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
-	} catch (e) {
+	let formatWelc = randomWelc.replace('{user}', `<@${member.id}>`);
+	let randomWelc = joinMessages[Math.floor(Math.random() * joinMessages.length)];
+
+	client.channels.cache.get(generalChannelID).send(`${formatWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`).catch(e => {
 		throw new Tantrum(client, 'guildMemberAdd.js', 'Error on sending welcome message', e)
-	}
+	});
 };

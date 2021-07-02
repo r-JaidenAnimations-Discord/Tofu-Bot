@@ -1,7 +1,7 @@
 const { suggestionOpen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'suggestmovie',
@@ -19,9 +19,8 @@ module.exports = {
 		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;
 
 		let movie = args.slice(0).join(' ');
-		if (!movie) {
-			return message.reply('So how about sugggesting a movie instead of just sending a useless command?');
-		}
+		if (!movie) return message.reply('So how about sugggesting a movie instead of just sending a useless command?');
+
 		const suggestionEmbed = new Discord.MessageEmbed()
 			.setColor(suggestionOpen)
 			.setTitle('Loading Suggestion')

@@ -1,4 +1,4 @@
-const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
+const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 const Tantrum = require('#tantrum');
 
 module.exports = {
@@ -21,11 +21,9 @@ module.exports = {
 		const success = client.player.shuffle(message);
 
 		if (success) {
-			try {
-				await message.react('🔀');
-			} catch (e) {
+			await message.react('🔀').catch(e => {
 				throw new Tantrum(client, 'shuffle.js', 'Error sending shuffled message', e);
-			}
+			});
 		} else {
 			throw new Tantrum(client, 'shuffle.js', 'Error on shuffling music', 'No message');
 		}

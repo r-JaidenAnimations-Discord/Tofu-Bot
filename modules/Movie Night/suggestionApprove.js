@@ -1,6 +1,6 @@
 const { suggestionApproved } = require('#colors');
 const Discord = require('discord.js');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'approvemovie',

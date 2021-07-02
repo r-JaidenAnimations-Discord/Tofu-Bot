@@ -27,7 +27,7 @@ const setSts = (client, selectedStatus) => {
 					type: 'STREAMING',
 					url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
 				}
-			});
+			}).catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at streaming', e) });
 			return true;
 		case 'play':
 			return setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
@@ -68,7 +68,7 @@ const setRPC = async (client, activityStatus, activityName, activityType) => {
 			name: activityName,
 			type: activityType
 		}
-	});
+	}).catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at setRPC', e) });
 	return true;
 }
 

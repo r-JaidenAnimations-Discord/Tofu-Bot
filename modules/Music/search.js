@@ -1,7 +1,7 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkMusic } = require('#functions/musicChecks.js');
+const { checkMusic } = require('#utils/musicChecks.js');
 
 module.exports = {
 	name: 'search',
@@ -25,8 +25,7 @@ module.exports = {
 					.setColor(tofuOrange)
 					.setDescription('To find a song to play, you need to specify which song you want to play!');
 
-				message.channel.send(noQueryEmbed);
-				return;
+				return essage.channel.send(noQueryEmbed);
 			}
 		} catch (e) {
 			throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);

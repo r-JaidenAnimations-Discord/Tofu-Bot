@@ -1,6 +1,6 @@
 const { suggestionOpen, suggestionApproved, suggestionDenied, suggestionWatched } = require('#colors');
 const Discord = require('discord.js');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'movieinfo',

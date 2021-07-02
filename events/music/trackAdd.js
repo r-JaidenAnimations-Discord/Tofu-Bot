@@ -8,9 +8,7 @@ module.exports = (client, message, queue, track) => {
 		.setColor(tofuGreen)
 		.setDescription(`Queued [${track.title}](${track.url}) [${track.requestedBy}]`);
 
-	try {
-		message.channel.send(trackQueuedEmbed);
-	} catch (e) {
+	message.channel.send(trackQueuedEmbed).catch(e => {
 		throw new Tantrum(client, 'trackAdd.js', 'Error on sending trackQueuedEmbed', e);
-	}
+	});
 };

@@ -1,8 +1,8 @@
 const { tofuGreen, tofuBlue } = require('#colors');
-const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
+const { masterCheck } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'minecraftmaintenance',
@@ -18,9 +18,7 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 
-		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
-			return message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
-		}
+		if (!masterCheck(client, message)) return;
 
 		const readData = readJSONSync('./deployData/settings.json', 'utf-8');
 
@@ -30,11 +28,9 @@ module.exports = {
 			case 'true':
 			case 'on': {
 				if (readData.minecraftMaintenance === true) {
-					try {
-						return message.channel.send('Minecraft maintenance mode already `enabled`');
-					} catch (e) {
+					return message.channel.send('Minecraft maintenance mode already `enabled`').catch(e => {
 						throw new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance already enabled message.', e);
-					}
+					});
 				} else {
 					readData.minecraftMaintenance = true; // Enable the maintenance thing
 
@@ -54,11 +50,9 @@ module.exports = {
 			case 'false':
 			case 'off': {
 				if (readData.minecraftMaintenance === false) {
-					try {
-						return message.channel.send('Minecraft maintenance mode already `disabled`');
-					} catch (e) {
+					return message.channel.send('Minecraft maintenance mode already `disabled`').catch(e => {
 						throw new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance already disabled message.', e);
-					}
+					});
 				} else {
 					readData.minecraftMaintenance = false; // Disable the maintenance thing
 
@@ -83,11 +77,9 @@ module.exports = {
 					.setTimestamp()
 					.setFooter('Made with love');
 
-				try {
-					message.channel.send(embed);
-				} catch (e) {
+				message.channel.send(embed).catch(e => {
 					new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance mode status', e);
-				}
+				});
 			}
 		}
 	},

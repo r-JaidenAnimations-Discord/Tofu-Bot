@@ -1,9 +1,9 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#functions/musicChecks.js');
-const createBar = require('#functions/createBar.js');
-const { humanReadableDuration } = require('#functions/buildTimeString.js');
+const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
+const createBar = require('#utils/createBar.js');
+const { humanReadableDuration } = require('#utils/buildTimeString.js');
 
 module.exports = {
 	name: 'nowplaying',
@@ -46,10 +46,8 @@ module.exports = {
 			//.setFooter(client.player.createProgressBar(message, { timecodes: true, length: 20 }));
 			.setFooter(`${createBar(totalTrackTime, currentTime, 20)[0]} ${humanCurrentTime} / ${humanTotalTime}`)
 
-		try {
-			message.channel.send(nowPlayingEmbed);
-		} catch (e) {
+		message.channel.send(nowPlayingEmbed).catch(e => {
 			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);
-		}
+		});
 	},
 };

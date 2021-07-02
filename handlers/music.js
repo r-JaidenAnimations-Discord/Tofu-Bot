@@ -12,8 +12,7 @@ module.exports = client => {
 		const event = require(`../events/music/${file}`);
 		client.player.on(file.split('.')[0], event.bind(null, client));
 		table.addRow(file, '✔   Loaded');
-	};
+	}
 
 	console.log(table.toString());
 };
-

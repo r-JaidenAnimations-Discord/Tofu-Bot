@@ -8,9 +8,7 @@ module.exports = (client, message, query) => {
 		.setColor(tofuError)
 		.setDescription('No matches found!');
 
-	try {
-		message.channel.send(noResultsEmbed);
-	} catch (e) {
+	message.channel.send(noResultsEmbed).catch(e => {
 		throw new Tantrum(client, 'noResults.js', 'Error on sending noResultsEmbed', e);
-	}
+	});
 };

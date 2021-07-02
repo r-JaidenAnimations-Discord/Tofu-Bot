@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'whitelist',
@@ -32,11 +32,9 @@ module.exports = {
 			toWhitelist = args[0];
 		}
 		else {
-			try {
-				return message.channel.send('No member specified');
-			} catch (e) {
+			return message.channel.send('No member specified').catch(e => {
 				throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending no user defined message', e);
-			}
+			});
 		}
 
 		const categories = ['python', 'bamboozle', 'hate', 'wrongchannel', 'bloop', 'other'];
@@ -59,16 +57,14 @@ module.exports = {
 			}
 		}
 
-		try {
-			const memberNotFoundEmbed = new Discord.MessageEmbed()
-				.setTitle('Error')
-				.setColor(tofuRed)
-				.setDescription(`Couldn't find <@${toWhitelist}> anywhere in the blacklist.`)
-				.setTimestamp();
+		const memberNotFoundEmbed = new Discord.MessageEmbed()
+			.setTitle('Error')
+			.setColor(tofuRed)
+			.setDescription(`Couldn't find <@${toWhitelist}> anywhere in the blacklist.`)
+			.setTimestamp();
 
-			message.channel.send(memberNotFoundEmbed);
-		} catch (e) {
+		message.channel.send(memberNotFoundEmbed).catch(e => {
 			throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
-		}
+		});
 	},
 };

@@ -1,5 +1,5 @@
 const Tantrum = require('#tantrum');
-const { checkBanStaff } = require('#functions/staffChecks.js');
+const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'customstatus',

@@ -55,10 +55,10 @@ module.exports = {
 		}
 		client.user.setPresence({
 			status: `${status}`,
-			activity: {
+			activities: [{
 				name: `${textString}`,
 				type: `${activity}`
-			}
+			}]
 		});
 		await message.react('✅');
 	},

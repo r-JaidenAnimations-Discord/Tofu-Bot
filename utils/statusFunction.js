@@ -22,11 +22,11 @@ const setSts = (client, selectedStatus) => {
 		case 'stream':
 			client.user.setPresence({
 				status: 'online',
-				activity: {
+				activities: [{
 					name: 'something',
 					type: 'STREAMING',
 					url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
-				}
+				}]
 			}).catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at streaming', e) });
 			return true;
 		case 'play':
@@ -64,11 +64,11 @@ const setSts = (client, selectedStatus) => {
 const setRPC = async (client, activityStatus, activityName, activityType) => {
 	client.user.setPresence({
 		status: activityStatus,
-		activity: {
+		activities: [{
 			name: activityName,
 			type: activityType
-		}
-	}).catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at setRPC', e) });
+		}]
+	})//.catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at setRPC', e) });
 	return true;
 }
 

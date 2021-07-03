@@ -5,7 +5,9 @@ const fs = require('fs');
 const { Player } = require('discord-player');
 const Tantrum = require('#tantrum');
 const chalk = require('chalk');
-const client = new Discord.Client();
+const client = new Discord.Client({
+	intents: [Discord.Intents.ALL] //TODO: Properly Intent
+});
 const { randomStatus } = require('#utils/statusFunction.js');
 const { remindShrimp } = require('#utils/shrimpReminder.js');
 const { tagSequelize, movieSuggestionSequelize } = require('./handlers/databases.js');

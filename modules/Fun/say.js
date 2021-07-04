@@ -40,7 +40,7 @@ module.exports = {
 				.setDescription(args.slice(2).join(' '));
 
 			try {
-				channel.send(embed);
+				channel.send(embed); // TODO: Embedify and test
 				await message.react('✅');
 			} catch (e) {
 				throw new Tantrum(client, 'say.js', 'Error on sending message', e);

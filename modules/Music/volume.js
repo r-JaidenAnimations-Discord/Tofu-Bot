@@ -29,7 +29,7 @@ module.exports = {
 			volumeEmbed.setColor(tofuOrange);
 			volumeEmbed.setDescription('The value you inputted is not a valid number!');
 			try {
-				return message.channel.send(volumeEmbed);
+				return message.channel.send(volumeEmbed); // TODO: Embedify and test
 			} catch (e) {
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (invalid number)', e);
 			}
@@ -38,7 +38,7 @@ module.exports = {
 		if (Math.round(parseInt(args[0])) < 1 || Math.round(parseInt(args[0])) > 100) {
 			volumeEmbed.setColor(tofuOrange);
 			volumeEmbed.setDescription('Please enter a number between 1 and 100!');
-			return message.channel.send(volumeEmbed).catch(e => {
+			return message.channel.send(volumeEmbed).catch(e => { // TODO: Embedify and test
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (number not between 1 and 100)', e);
 			});
 		}
@@ -48,7 +48,7 @@ module.exports = {
 		if (success) {
 			volumeEmbed.setColor(tofuGreen);
 			volumeEmbed.setDescription(`Volume set to **${parseInt(args[0])}%**!`);
-			message.channel.send(volumeEmbed).catch(e => {
+			message.channel.send(volumeEmbed).catch(e => { // TODO: Embedify and test
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (volume)', e);
 			});
 		} else {

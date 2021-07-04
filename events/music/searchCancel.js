@@ -8,7 +8,7 @@ module.exports = (client, message, query, tracks) => {
 		.setColor(tofuOrange)
 		.setDescription('Invalid response, search cancelled.');
 
-	message.channel.send(searchCancelEmbed).catch(e => {
+	message.channel.send(searchCancelEmbed).catch(e => { // TODO: Embedify and test
 		throw new Tantrum(client, 'searchCancel.js', 'Error on sending searchCancelEmbed', e);
 	});
 };

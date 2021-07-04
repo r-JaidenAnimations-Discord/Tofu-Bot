@@ -21,7 +21,7 @@ class Tantrum {
 	handle() {
 		console.log(`${chalk.yellow('[ERROR]')}: ${this.file}: ${this.message}: ${this.err}`);
 		// How did i even write this without having a freaking aneurysm
-		return this.client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`WAAAH: ${this.file}: ${this.message} \n\`\`${this.err}\`\``).setColor(tofuError)).catch(f => {
+		return this.client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`WAAAH: ${this.file}: ${this.message} \n\`\`${this.err}\`\``).setColor(tofuError)] }).catch(f => {
 			throw new Error(`Sending error DM ${chalk.redBright('failed')}! DMError: ${f}`);
 		});
 	}

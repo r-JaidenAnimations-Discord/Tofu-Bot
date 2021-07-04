@@ -47,7 +47,7 @@ module.exports = {
 					.setColor(tofuOrange)
 					.setDescription('To play a song, you need to specify which song you want to play!');
 
-				return message.channel.send(noQueryEmbed);
+				return message.channel.send(noQueryEmbed); // TODO: Embedify and test
 			}
 		} catch (e) {
 			throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);

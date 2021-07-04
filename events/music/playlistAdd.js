@@ -8,7 +8,7 @@ module.exports = (client, message, queue, playlist) => {
 		.setColor(tofuGreen)
 		.setDescription(`Queued ${playlist.tracks.length} tracks`);
 
-	message.channel.send(queuedEmbed).catch(e => {
+	message.channel.send(queuedEmbed).catch(e => { // TODO: Embedify and test
 		throw new Tantrum(client, 'playlistAdd.js', 'Error on sending queuedEmbed', e);
 	});
 };

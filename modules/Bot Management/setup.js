@@ -52,7 +52,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -74,7 +74,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -86,7 +86,7 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Welcome messages are currently \`${formatBool(readData.welcome)}\`.`);
 
-						message.channel.send(welcomerStateEmbed).catch(e => {
+						message.channel.send(welcomerStateEmbed).catch(e => { // TODO: Embedify and test
 							throw new Tantrum(client, 'setup.js', 'Error on sending WelcomerStateEmbed', e);
 						});
 						break;
@@ -120,7 +120,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -142,7 +142,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -154,7 +154,7 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Kirito trust currently \`${formatBool(readData.kiritoTrust)}\`.`);
 
-						message.channel.send(kiritotrustStateEmbed).catch(e => {
+						message.channel.send(kiritotrustStateEmbed).catch(e => { // TODO: Embedify and test
 							throw new Tantrum(client, 'setup.js', 'Error on sending kiritotrustStateEmbed', e);
 						});
 						break;
@@ -187,7 +187,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -209,7 +209,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -221,7 +221,7 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Ali trust currently \`${formatBool(readData.aliTrust)}\`.`);
 
-						message.channel.send(alitrustStateEmbed).catch(e => {
+						message.channel.send(alitrustStateEmbed).catch(e => { // TODO: Embedify and test
 							throw new Tantrum(client, 'setup.js', 'Error on sending alitrustStateEmbed', e);
 						});
 						break;
@@ -256,7 +256,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -278,7 +278,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -290,7 +290,7 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Random status currently \`${formatBool(readData.randomStatus)}\`.`);
 
-						message.channel.send(randomStatusStateEmbed).catch(e => {
+						message.channel.send(randomStatusStateEmbed).catch(e => { // TODO: Embedify and test
 							throw new Tantrum(client, 'setup.js', 'Error on sending randomStatusStateEmbed', e);
 						});
 						break;
@@ -323,7 +323,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -345,7 +345,7 @@ module.exports = {
 								.setTimestamp()
 								.setFooter('Made with love');
 
-							await message.channel.send(embed);
+							await message.channel.send(embed); // TODO: Embedify and test
 							writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 						}
 						break;
@@ -357,7 +357,7 @@ module.exports = {
 							.setColor(tofuGreen)
 							.setDescription(`Blacklisting currently \`${formatBool(readData.blackListing)}\`.`);
 
-						message.channel.send(blackListingStateEmbed).catch(e => {
+						message.channel.send(blackListingStateEmbed).catch(e => { // TODO: Embedify and test
 							throw new Tantrum(client, 'setup.js', 'Error on sending blackListingStateEmbed', e);
 						});
 						break;
@@ -371,7 +371,7 @@ module.exports = {
 			case 'enable': {
 				if (input === 'all') {
 					disabledCommands.splice(0, disabledCommands.length);
-					await message.channel.send(
+					await message.channel.send( // TODO: Embedify and test
 						new Discord.MessageEmbed()
 							.setColor(tofuBlue)
 							.setDescription('Enabled all previously disabled commands')
@@ -391,7 +391,7 @@ module.exports = {
 					.setFooter('Made with love');
 
 				disabledCommands.splice(disabledCommands.indexOf(input), 1); // Set
-				await message.channel.send(embed);
+				await message.channel.send(embed); // TODO: Embedify and test
 				writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 				break;
 			}
@@ -408,7 +408,7 @@ module.exports = {
 					.setFooter('Made with love');
 
 				disabledCommands.push(input); // Set
-				await message.channel.send(embed);
+				await message.channel.send(embed); // TODO: Embedify and test
 				writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 				break;
 			}
@@ -430,7 +430,7 @@ module.exports = {
 					.setTimestamp()
 					.setFooter('Made with love');
 
-				await message.channel.send(embed);
+				await message.channel.send(embed); // TODO: Embedify and test
 				writeJSONSync('./deployData/settings.json', defaults, { spaces: 4 });
 				break;
 			}
@@ -448,7 +448,7 @@ module.exports = {
 					Blacklisting: \`${formatBool(readData.blackListing)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
-				message.channel.send(embed).catch(e => {
+				message.channel.send(embed).catch(e => { // TODO: Embedify and test
 					new Tantrum(client, 'setup.js', 'Error on sending settings list', e);
 				});
 			}

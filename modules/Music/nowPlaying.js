@@ -46,7 +46,7 @@ module.exports = {
 			//.setFooter(client.player.createProgressBar(message, { timecodes: true, length: 20 }));
 			.setFooter(`${createBar(totalTrackTime, currentTime, 20)[0]} ${humanCurrentTime} / ${humanTotalTime}`)
 
-		message.channel.send(nowPlayingEmbed).catch(e => {
+		message.channel.send(nowPlayingEmbed).catch(e => { // TODO: Embedify and test
 			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);
 		});
 	},

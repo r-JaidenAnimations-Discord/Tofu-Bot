@@ -9,7 +9,7 @@ module.exports = (client, message, queue) => {
 		.setColor(tofuOrange)
 		.setDescription(musicStrings.inactiveTimeout);
 
-	message.channel.send(timeOutEmbed).catch(e => {
+	message.channel.send(timeOutEmbed).catch(e => { // TODO: Embedify and test
 		throw new Tantrum(client, 'channelEmpty', 'Error on sending timeOutEmbed', e);
 	});
 };

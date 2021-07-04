@@ -37,7 +37,7 @@ module.exports = {
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
 				.setColor(tofuGreen);
 
-			return message.channel.send(ruleEmbed).catch(e => {
+			return message.channel.send(ruleEmbed).catch(e => { // TODO: Embedify and test
 				throw new Tantrum(client, 'trivia.js', 'Error on sending ruleEmbed', e);
 			});
 		}
@@ -65,7 +65,7 @@ module.exports = {
 			.setColor(tofuGreen)
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
-		message.channel.send(Embed).then(async sentEmbed => {
+		message.channel.send(Embed).then(async sentEmbed => { // TODO: Embedify and test
 			let count;
 			for (count = 0; count < q.answers.length; count++) {
 				//console.log(`${numberReactions.get(count + 1)}`);
@@ -82,14 +82,14 @@ module.exports = {
 				if (correct === '✅') {
 					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
 					correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
-					sentEmbed.edit(correctedEmbed).catch(e => {
+					sentEmbed.edit(correctedEmbed).catch(e => { // TODO: Embedify and test????
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 					});
 				}
 				else {
 					//message.channel.send('k')
 					correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
-					sentEmbed.edit(correctedEmbed).catch(e => {
+					sentEmbed.edit(correctedEmbed).catch(e => { // TODO: Embedify and test ????
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 					});
 				}

@@ -41,7 +41,7 @@ module.exports = {
 						.setTimestamp()
 						.setFooter('Made with love');
 
-					await message.channel.send(embed);
+					await message.channel.send(embed); // TODO: Embedify and test
 					writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 				}
 				break;
@@ -63,7 +63,7 @@ module.exports = {
 						.setTimestamp()
 						.setFooter('Made with love');
 
-					await message.channel.send(embed);
+					await message.channel.send(embed); // TODO: Embedify and test
 					writeJSONSync('./deployData/settings.json', readData, { spaces: 4 });
 				}
 				break;
@@ -77,7 +77,7 @@ module.exports = {
 					.setTimestamp()
 					.setFooter('Made with love');
 
-				message.channel.send(embed).catch(e => {
+				message.channel.send(embed).catch(e => { // TODO: Embedify and test
 					new Tantrum(client, 'mcMaintenance.js', 'Error on sending maintenance mode status', e);
 				});
 			}

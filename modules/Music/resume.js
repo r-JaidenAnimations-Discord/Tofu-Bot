@@ -25,7 +25,7 @@ module.exports = {
 				.setColor(tofuOrange)
 				.setDescription('The music is already playing!');
 
-			return message.channel.send(alreadyPlayingEmbed).catch(e => {
+			return message.channel.send(alreadyPlayingEmbed).catch(e => { // TODO: Embedify and test
 				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e)
 			});
 		}

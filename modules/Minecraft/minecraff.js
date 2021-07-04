@@ -44,7 +44,7 @@ module.exports = {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
 			message.channel.stopTyping();
-			return message.channel.send(minecraftEmbed);
+			return message.channel.send(minecraftEmbed); // TODO: Embedify and test
 		}
 
 		https.get(url, function(res) {
@@ -78,7 +78,7 @@ module.exports = {
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				message.channel.stopTyping();
-				message.channel.send(minecraftEmbed).catch(e => {
+				message.channel.send(minecraftEmbed).catch(e => { // TODO: Embedify and test
 					console.log(`kek ${e}`);
 				});
 			});
@@ -89,7 +89,7 @@ module.exports = {
 		}).on('error', function(e) {
 			message.channel.stopTyping();
 			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => {
+			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => { // TODO: Embedify and test
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			});
 		});

@@ -40,7 +40,7 @@ module.exports = {
 				jokeEmbed.setDescription(`||${APIresponse.punchline}||`)
 
 				message.channel.stopTyping();
-				message.channel.send(jokeEmbed).catch(e => {
+				message.channel.send(jokeEmbed).catch(e => { // TODO: Embedify and test
 					console.log(`kek ${e}`)
 				});
 			});
@@ -51,7 +51,7 @@ module.exports = {
 		function sendError(e) {
 			message.channel.stopTyping();
 			new Tantrum(client, 'joke.js', 'API did not respond', e);
-			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => {
+			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => { // TODO: Embedify and test
 				new Tantrum(client, 'joke.js', 'Error on sending error embed', f);
 			});
 		}

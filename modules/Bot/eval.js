@@ -23,7 +23,7 @@ module.exports = {
 			try {
 				message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
-				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`));
+				client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`)] }); // TODO: test
 				return;
 			} catch (e) {
 				throw new Tantrum(client, 'eval.js', 'Error on sending only masters error', e);
@@ -57,17 +57,17 @@ module.exports = {
 				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			message.channel.send(embed).catch(e => {
+			message.channel.send({ embeds: [embed] }).catch(e => { // TODO: Embedify
 				new Tantrum(client, 'eval.js', 'Error on sending eval embed', e);
 			});
 		} catch (e) {
 			let embed = new Discord.MessageEmbed()
 				.setColor(tofuError)
 				.setTitle('Error')
-				.setDescription(e)
+				.setDescription(e.toString())
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			message.channel.send(embed).catch(e => {
+			message.channel.send({ embeds: [embed] }).catch(e => { // TODO: test
 				new Tantrum(client, 'eval.js', 'Error on sending errorEmbed', e);
 			});
 		}

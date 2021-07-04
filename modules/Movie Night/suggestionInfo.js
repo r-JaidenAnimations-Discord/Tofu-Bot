@@ -61,7 +61,7 @@ module.exports = {
 
 		embed.addField('Message Link', `[Jump](https://discord.com/channels/${jaidenServerID}/${movieNightSuggestionChannelID}/${suggestion.suggestionMessageID})`);
 		try {
-			return message.channel.send(embed);
+			return message.channel.send(embed); // TODO: Embedify and test
 		} catch (e) { // If you need to log any error put (e) as param and console.error(e) before returning
 			console.error(e);
 			return message.channel.send('Something went wrong while updating the database.');

@@ -26,7 +26,7 @@ module.exports = {
 					{ name: 'Uses', value: tag.usage_count },
 					{ name: 'Created at', value: formatDate(tag.createdAt) }
 				);
-			return message.channel.send(embed);
+			return message.channel.send(embed); // TODO: Embedify and test
 		}
 		return message.channel.send(`Couldn't find tag \`${args[0]}\`.`);
 

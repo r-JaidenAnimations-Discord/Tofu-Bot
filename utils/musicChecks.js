@@ -16,7 +16,7 @@ const checkMusic = (client, message) => {
 	if (!message.member.voice.channel) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.notInVoiceChannel);
-		message.channel.send(musicCheckEmbed).catch(e => {
+		message.channel.send(musicCheckEmbed).catch(e => { // TODO: Embedify and test
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (notInVoiceChannel)', e);
 		});
 		return false;
@@ -24,7 +24,7 @@ const checkMusic = (client, message) => {
 
 	if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) {
 		musicCheckEmbed.setDescription(musicStrings.notSameVoiceChannel);
-		message.channel.send(musicCheckEmbed).catch(e => {
+		message.channel.send(musicCheckEmbed).catch(e => { // TODO: Embedify and test
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (notSameVoiceChannel)', e);
 		});
 		return false;
@@ -43,7 +43,7 @@ const checkQueueExists = (client, message) => {
 	if (!client.player.getQueue(message)) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.noMusicPlaying);
-		message.channel.send(musicCheckEmbed).catch(e => {
+		message.channel.send(musicCheckEmbed).catch(e => { // TODO: Embedify and test
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (noMusicPlaying)', e);
 		});
 		return false;

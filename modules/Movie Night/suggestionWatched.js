@@ -47,7 +47,7 @@ module.exports = {
 
 			try {
 				let suggestionEmbed = await client.channels.cache.get(movieNightSuggestionChannelID).messages.fetch(suggestionMessageID);
-				if (suggestionEmbed) suggestionEmbed.edit(watchedEmbed);
+				if (suggestionEmbed) suggestionEmbed.edit(watchedEmbed); // TODO: Embedify and test????
 				await message.react('✅');
 			} catch (e) {
 				message.channel.send('Couldn\'t update the suggestion message, maybe it was deleted?');

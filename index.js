@@ -64,10 +64,13 @@ client.on('error', e => {
 	new Tantrum(client, 'index.js', `[ERROR]: Unspecified error: ${e.stack}`, e);
 });
 process.on('uncaughtException', e => console.error(`${chalk.redBright('[Error]')}: ${e.stack}`));
-process.on('unhandledRejection', e => console.error(`${chalk.redBright('[Error]')}: ${e.stack}`));
+process.on('unhandledRejection', e => {
+	console.error(`${chalk.redBright('[Error]')}: ${e.stack}`);
+	//new Tantrum(client, 'index.js', `[ERROR]: unhanled rejection: ${e}`, e.stack);
+});
 process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}: ${e.stack}`));
 
 // Handlers' modules
-['commands', 'event', 'music'].forEach(handler => {
+['commands', 'event', 'music', 'slashCommands'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });

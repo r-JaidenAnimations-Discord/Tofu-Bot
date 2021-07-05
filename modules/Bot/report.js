@@ -30,7 +30,7 @@ module.exports = {
 			.setTimestamp();
 
 		return message.channel.send({ embeds: [warnEmbed] }).then(async msg => {
-			const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
+			const emoji = await promptMessage(msg, message.author, 30, '✅', '❌');
 
 			if (emoji === '✅') {
 				const reportEmbed = new Discord.MessageEmbed()
@@ -42,7 +42,7 @@ module.exports = {
 
 				msg.delete();
 				try {
-					client.channels.cache.get({ embeds: [bugReportChannelID] }).send(reportEmbed); // TODO: test
+					client.channels.cache.get(bugReportChannelID).send({ embeds: [reportEmbed] });
 					message.channel.send('Your report was posted sucessfully, thank you.\nWe may contact you for more information.');
 				} catch (e) {
 					try {

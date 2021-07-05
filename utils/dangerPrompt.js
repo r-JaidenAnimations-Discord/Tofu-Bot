@@ -10,8 +10,8 @@ const dangerCommandPrompt = (message) => {
 		.setDescription('This is a **__dangerous__** command. It affects the main server, are you absolutely sure you want to continue?')
 		.setTimestamp();
 
-	return message.channel.send({ embeds: [warnEmbed] }).then(async msg => { // TODO: test
-		const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
+	return message.channel.send({ embeds: [warnEmbed] }).then(async msg => {
+		const emoji = await promptMessage(msg, message.author, 30, '✅', '❌');
 
 		if (emoji === '✅') {
 			msg.delete();

@@ -84,7 +84,7 @@ module.exports = {
 			}
 			setTimeout(async () => {
 				//sentEmbed.react('✅');
-				const correct = await promptMessage(sentEmbed, message.author, 45, ['✅']);
+				const correct = await promptMessage(sentEmbed, message.author, 45, '✅'); // TODO: test
 
 				if (correct === '✅') {
 					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');

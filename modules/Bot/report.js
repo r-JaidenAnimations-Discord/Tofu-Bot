@@ -29,7 +29,7 @@ module.exports = {
 			.setFooter('This is also a good moment to check your report before posting just in case you missed something.')
 			.setTimestamp();
 
-		return message.channel.send({ embeds: [warnEmbed] }).then(async msg => { // TODO: test
+		return message.channel.send({ embeds: [warnEmbed] }).then(async msg => {
 			const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
 
 			if (emoji === '✅') {

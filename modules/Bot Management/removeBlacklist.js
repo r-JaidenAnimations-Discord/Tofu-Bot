@@ -49,7 +49,7 @@ module.exports = {
 						.setDescription(`Removed <@${toWhitelist}> from the \`${blackListCategory}\` list.`)
 						.setTimestamp();
 
-					message.channel.send({ embeds: [whitelistEmbed] }); // TODO: test
+					message.channel.send({ embeds: [whitelistEmbed] });
 					return;
 				} catch (e) {
 					throw new Tantrum(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
@@ -63,7 +63,7 @@ module.exports = {
 			.setDescription(`Couldn't find <@${toWhitelist}> anywhere in the blacklist.`)
 			.setTimestamp();
 
-		message.channel.send({ embeds: [memberNotFoundEmbed] }).catch(e => { // TODO: test
+		message.channel.send({ embeds: [memberNotFoundEmbed] }).catch(e => {
 			throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
 		});
 	},

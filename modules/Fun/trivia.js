@@ -47,22 +47,28 @@ module.exports = {
 		let i = 0;
 		let correctedEmbed = new Discord.MessageEmbed()
 			.setTitle(q.question)
-			.setDescription(
-				q.answers.map((answer, i) =>
-					`${i === q.correct ? '✅ **' : '❌ '}${numberReactions.get(i + 1)}: ${answer}${i === q.correct ? '**' : ''}\n`
-				)
-			)
+			// .setDescription(
+			// 	q.answers.map((answer, i) =>
+			// 		`${i === q.correct ? '✅ **' : '❌ '}${numberReactions.get(i + 1)}: ${answer}${i === q.correct ? '**' : ''}\n`
+			// 	)
+			// )
 			.setColor(tofuGreen)
-		//.setFooter(`The correct answer has been marked.`);
+			.setFooter(`The correct answer has been marked.`);
+
+		let embedDescription = q.answers.map((opt) => {
+			i++;
+			return `${numberReactions.get(i)}: ${opt}\n`;
+		})
 		const Embed = new Discord.MessageEmbed()
 			.setTitle(q.question)
-			.setDescription(
-				// q.answers.map((opt) => {
-				// 	i++;
-				// 	return `${numberReactions.get(i)}: ${opt}\n`;
-				// })
-				q.answers.map((opt, i) => `${numberReactions.get(i).toString()}: ${opt.toString()}`).join('\n')
-			)
+			// .setDescription(
+			// 	// q.answers.map((opt) => {
+			// 	// 	i++;
+			// 	// 	return `${numberReactions.get(i)}: ${opt}\n`;
+			// 	// })
+
+			// 	q.answers.map((opt, i) => `${numberReactions.get(i)}: ${opt}`).join('\n')
+			// )
 			.setColor(tofuGreen)
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
@@ -83,14 +89,14 @@ module.exports = {
 				if (correct === '✅') {
 					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
 					correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
-					sentEmbed.edit(correctedEmbed).catch(e => { // TODO: Embedify and test????
+					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => { // TODO: Embedify and test????
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 					});
 				}
 				else {
 					//message.channel.send('k')
 					correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
-					sentEmbed.edit(correctedEmbed).catch(e => { // TODO: Embedify and test ????
+					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => { // TODO: Embedify and test ????
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 					});
 				}

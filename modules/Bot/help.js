@@ -53,7 +53,7 @@ function getAll(client, message) {
 	});
 
 	// After they're all added, send it
-	return message.channel.send({ embeds: [embed] }).catch(e => { // TODO: test
+	return message.channel.send({ embeds: [embed] }).catch(e => {
 		throw new Tantrum(client, 'help.js', 'Error sending help embed', e);
 	});
 }
@@ -84,7 +84,7 @@ function getCmd(client, message, input) {
 	// The usage
 	if (cmd.usage) embed.addField('**Usage**', `\`${prefix}${cmd.usage}\``);
 
-	return message.channel.send({ embeds: [embed] }).catch(e => { // TODO: Embedify and test
+	return message.channel.send({ embeds: [embed] }).catch(e => {
 		throw new Tantrum(client, 'help.js', 'Error on sending command help embed', e);
 	});
 }

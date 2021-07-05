@@ -39,7 +39,7 @@ module.exports = {
 				if (APIresponse.status === 'success') {
 					dogEmbed.setImage(APIresponse.message);
 					message.channel.stopTyping();
-					return message.channel.send(dogEmbed).catch(e => { // TODO: Embedify and test
+					return message.channel.send({ embeds: [dogEmbed] }).catch(e => { // TODO: test
 						console.log(`kek ${e}`);
 					});
 				}
@@ -52,7 +52,7 @@ module.exports = {
 		function sendError(e) {
 			message.channel.stopTyping();
 			new Tantrum(client, 'doggoPic.js', 'API did not respond', e);
-			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => { // TODO: Embedify and test
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => { // TODO: test
 				new Tantrum(client, 'doggoPic.js', 'Error on sending error embed', f);
 			});
 		}

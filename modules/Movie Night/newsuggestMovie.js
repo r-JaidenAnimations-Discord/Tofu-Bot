@@ -27,7 +27,7 @@ module.exports = {
 			.setTimestamp();
 
 		try {
-			const suggestionMsg = await client.channels.cache.get(movieNightSuggestionChannelID).send(suggestionEmbed); // TODO: Embedify and test
+			const suggestionMsg = await client.channels.cache.get(movieNightSuggestionChannelID).send({ embeds: [suggestionEmbed] }); // TODO: test
 			const suggestion = await client.movieSuggestions.create({
 				movie: movie,
 				suggester: message.author.id,

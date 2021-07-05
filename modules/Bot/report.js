@@ -29,7 +29,7 @@ module.exports = {
 			.setFooter('This is also a good moment to check your report before posting just in case you missed something.')
 			.setTimestamp();
 
-		return message.channel.send(warnEmbed).then(async msg => { // TODO: Embedify and test
+		return message.channel.send({ embeds: [warnEmbed] }).then(async msg => { // TODO: test
 			const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
 
 			if (emoji === '✅') {
@@ -42,7 +42,7 @@ module.exports = {
 
 				msg.delete();
 				try {
-					client.channels.cache.get(bugReportChannelID).send(reportEmbed); // TODO: Embedify and test
+					client.channels.cache.get({ embeds: [bugReportChannelID] }).send(reportEmbed); // TODO: test
 					message.channel.send('Your report was posted sucessfully, thank you.\nWe may contact you for more information.');
 				} catch (e) {
 					try {

@@ -9,7 +9,9 @@ module.exports = (client, message, queue) => {
 		.setColor(tofuOrange)
 		.setDescription(musicStrings.inactiveTimeout);
 
-	message.channel.send(timeOutEmbed).catch(e => { // TODO: Embedify and test
+
+	console.log('Timeoutembed channelempty test executed')
+	message.channel.send({ embeds: [timeOutEmbed] }).catch(e => { // TODO: test
 		throw new Tantrum(client, 'channelEmpty', 'Error on sending timeOutEmbed', e);
 	});
 };

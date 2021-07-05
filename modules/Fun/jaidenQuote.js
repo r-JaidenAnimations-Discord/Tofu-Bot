@@ -23,7 +23,7 @@ module.exports = {
 			.setColor(tofuGreen)
 			.setDescription(randomQuote);
 
-		message.channel.send(randomQuoteEmbed).catch(e => { // TODO: Embedify and test
+		message.channel.send({ embeds: [randomQuoteEmbed] }).catch(e => { // TODO: test
 			throw new Tantrum(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
 		});
 	},

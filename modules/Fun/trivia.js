@@ -37,7 +37,7 @@ module.exports = {
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
 				.setColor(tofuGreen);
 
-			return message.channel.send(ruleEmbed).catch(e => { // TODO: Embedify and test
+			return message.channel.send({ embeds: [ruleEmbed] }).catch(e => {
 				throw new Tantrum(client, 'trivia.js', 'Error on sending ruleEmbed', e);
 			});
 		}
@@ -57,15 +57,16 @@ module.exports = {
 		const Embed = new Discord.MessageEmbed()
 			.setTitle(q.question)
 			.setDescription(
-				q.answers.map((opt) => {
-					i++;
-					return `${numberReactions.get(i)}: ${opt}\n`;
-				})
+				// q.answers.map((opt) => {
+				// 	i++;
+				// 	return `${numberReactions.get(i)}: ${opt}\n`;
+				// })
+				q.answers.map((opt, i) => `${numberReactions.get(i).toString()}: ${opt.toString()}`).join('\n')
 			)
 			.setColor(tofuGreen)
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
-		message.channel.send(Embed).then(async sentEmbed => { // TODO: Embedify and test
+		message.channel.send({ embdes: [Embed] }).then(async sentEmbed => { // TODO: test
 			let count;
 			for (count = 0; count < q.answers.length; count++) {
 				//console.log(`${numberReactions.get(count + 1)}`);

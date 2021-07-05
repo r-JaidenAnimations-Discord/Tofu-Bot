@@ -28,7 +28,7 @@ module.exports = {
 				try {
 					client.player.setLoopMode(message, false);
 					loopEmbed.setDescription('Looping is now **disabled.**');
-					return message.channel.send(loopEmbed); // TODO: Embedify and test
+					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
 				} catch (e) {
 					throw new Tantrum(client, 'loop.js', 'Error on disabling loop', e);
 				}
@@ -36,7 +36,7 @@ module.exports = {
 				try {
 					client.player.setLoopMode(message, true);
 					loopEmbed.setDescription('Now looping the **queue.**');
-					return message.channel.send(loopEmbed); // TODO: Embedify and test
+					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
 				} catch (e) {
 					throw new Tantrum(client, 'loop.js', 'Error on looping queue', e);
 				}
@@ -46,7 +46,7 @@ module.exports = {
 				try {
 					client.player.setRepeatMode(message, false);
 					loopEmbed.setDescription('Looping is now **disabled.**');
-					return message.channel.send(loopEmbed); // TODO: Embedify and test
+					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
 				} catch (e) {
 					throw new Tantrum(client, 'loop.js', 'Error on disabling loop', e);
 				}
@@ -54,7 +54,7 @@ module.exports = {
 				try {
 					client.player.setRepeatMode(message, true);
 					loopEmbed.setDescription('Now looping the **current track.**');
-					return message.channel.send(loopEmbed); // TODO: Embedify and test
+					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
 				} catch (e) {
 					throw new Tantrum(client, 'loop.js', 'Error on looping song', e);
 				}

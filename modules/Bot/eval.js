@@ -57,7 +57,7 @@ module.exports = {
 				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
-			message.channel.send({ embeds: [embed] }).catch(e => { // TODO: Embedify
+			message.channel.send({ embeds: [embed] }).catch(e => { // TODO: test
 				new Tantrum(client, 'eval.js', 'Error on sending eval embed', e);
 			});
 		} catch (e) {

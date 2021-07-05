@@ -68,7 +68,7 @@ module.exports = {
 					.setDescription(`This member is already blacklisted in the \`${category}\` list.`)
 					.setTimestamp();
 
-				return message.channel.send(alreadyBlacklistedEmbed).catch(e => { // TODO: Embedify and test
+				return message.channel.send({ embeds: [alreadyBlacklistedEmbed] }).catch(e => { // TODO: test
 					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending member already in blacklist category message.', e);
 				});
 			}
@@ -91,7 +91,7 @@ module.exports = {
 					.setDescription(`\`${args[1]}\` is not a valid category.\nConsider checking the help command.`)
 					.setTimestamp();
 
-				message.channel.send(invalidCategoryEmbed).catch(e => { // TODO: Embedify and test
+				message.channel.send({ embeds: [invalidCategoryEmbed] }).catch(e => { // TODO: test
 					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
 				});
 				break;
@@ -105,7 +105,7 @@ module.exports = {
 				.setDescription(`Added <@${toBlacklist}> to the \`${args[1]}\` list.`)
 				.setTimestamp();
 
-			message.channel.send(blackListEmbed); // TODO: Embedify and test
+			message.channel.send({ embdes: [blackListEmbed] }); // TODO: test
 		} catch (e) {
 			throw new Tantrum(client, 'addBlacklist.js', 'Error on saving blacklist settings', e);
 		}

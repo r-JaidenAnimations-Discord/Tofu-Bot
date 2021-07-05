@@ -37,7 +37,7 @@ module.exports = {
 			const removedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)
 				.setDescription(`Removed [${success.title}](${success.url}) [${success.requestedBy}]`);
-			message.channel.send(removedEmbed).catch(e => { // TODO: Embedify and test
+			message.channel.send({ embeds: [removedEmbed] }).catch(e => { // TODO: test
 				throw new Tantrum(client, 'remove.js', 'Error on sending removedEmbed', e)
 			});
 		} catch (e) {

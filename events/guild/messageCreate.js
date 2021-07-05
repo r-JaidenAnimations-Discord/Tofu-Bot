@@ -123,7 +123,7 @@ module.exports = async (client, message) => {
 		// Check if bot is used in unauthorized server
 		if (!trustedServers.includes(message.guild.id)) {
 			try {
-				client.users.cache.get(maxID).send(new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError)); // TODO: Embedify and test
+				client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError)] });
 				return message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
 			} catch (e) {
 				throw new Tantrum(client, 'message.js', 'Error on sending untrusted server message', e);

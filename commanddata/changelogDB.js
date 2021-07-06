@@ -417,5 +417,14 @@ module.exports = {
                 'Removed Max focus aid'
             ]
         },
+        {
+            version: '12.5.1',
+            aliases: [],
+            additions: [],
+            fixes: [
+                'Fixed error when using search command'
+            ],
+            removals: []
+        },
     ]
 }

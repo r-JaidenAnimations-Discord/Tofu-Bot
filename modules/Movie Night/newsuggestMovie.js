@@ -27,7 +27,7 @@ module.exports = {
 			.setTimestamp();
 
 		try {
-			const suggestionMsg = await client.channels.cache.get(movieNightSuggestionChannelID).send({ embeds: [suggestionEmbed] }); // TODO: test
+			const suggestionMsg = await client.channels.cache.get(movieNightSuggestionChannelID).send({ embeds: [suggestionEmbed] });
 			const suggestion = await client.movieSuggestions.create({
 				movie: movie,
 				suggester: message.author.id,
@@ -44,7 +44,7 @@ module.exports = {
 					.setFooter(`Suggestion #${suggestion.id}`)
 					.setTimestamp();
 
-				suggestionMsg.edit(populatedEmbed); // TODO: Embedify and test????
+				suggestionMsg.edit({ embeds: [populatedEmbed] });
 				await message.react('✅');
 				message.channel.send('Your movie suggestion was registered, thank you!');
 

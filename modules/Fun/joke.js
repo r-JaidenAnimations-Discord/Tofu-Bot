@@ -51,7 +51,7 @@ module.exports = {
 		function sendError(e) {
 			message.channel.stopTyping();
 			new Tantrum(client, 'joke.js', 'API did not respond', e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => { // TODO: test
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'joke.js', 'Error on sending error embed', f);
 			});
 		}

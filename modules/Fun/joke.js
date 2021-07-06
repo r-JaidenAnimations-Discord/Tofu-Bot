@@ -40,7 +40,7 @@ module.exports = {
 				jokeEmbed.setDescription(`||${APIresponse.punchline}||`)
 
 				message.channel.stopTyping();
-				message.channel.send({ embeds: [jokeEmbed] }).catch(e => { // TODO: test
+				message.channel.send({ embeds: [jokeEmbed] }).catch(e => {
 					console.log(`kek ${e}`)
 				});
 			});

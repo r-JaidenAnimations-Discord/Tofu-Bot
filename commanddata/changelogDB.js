@@ -418,7 +418,7 @@ module.exports = {
             ]
         },
         {
-            version: '12.5.1',
+            version: '1.12.1',
             aliases: [],
             additions: [],
             fixes: [

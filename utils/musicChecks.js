@@ -16,7 +16,7 @@ const checkMusic = (client, message) => {
 	if (!message.member.voice.channel) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.notInVoiceChannel);
-		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => { // TODO: test
+		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (notInVoiceChannel)', e);
 		});
 		return false;
@@ -43,7 +43,7 @@ const checkQueueExists = (client, message) => {
 	if (!client.player.getQueue(message)) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.noMusicPlaying);
-		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => { // TODO: test
+		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (noMusicPlaying)', e);
 		});
 		return false;

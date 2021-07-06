@@ -24,6 +24,21 @@ async function promptMessage(message, author, time, ...validReactions) {
 		.then(collected => collected.first() && collected.first().emoji.name);
 }
 
+/**
+ * Makes a buttons collector and returns its interaction
+ * @param {Message} message The message that was just sent (NOT the user's command)
+ * @param {String} authorID The ID of the person who triggered this command
+ * @param {Number} time The time in which the collector would be available in seconds
+ */
+async function promptButtons(message, authorID, time) {
+	time *= 1000;
+
+	return await message.awaitMessageComponent({
+		filter: i => i.user.id == authorID, time
+	}).catch(() => {/*void*/ });
+}
+
 module.exports = {
-	promptMessage
+	promptMessage,
+	promptButtons
 };

@@ -20,39 +20,51 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 
-		if (!checkMusic(client, message)) return;
+		// if (!checkMusic(client, message)) return;
 
-		if (client.player.getQueue(message)) {
-			if (client.player.getQueue(message).paused && !args[0]) {
-				const success = client.player.resume(message);
+		// TODO: Refactor and update for resume
+		// if (client.player.getQueue(message)) {
+		// 	if (client.player.getQueue(message).paused && !args[0]) {
+		// 		const success = client.player.resume(message);
 
-				// We have to do this because of a bug in discord.js
-				//client.player.resume(message);
-				client.player.pause(message);
-				client.player.resume(message);
+		// 		// We have to do this because of a bug in discord.js
+		// 		//client.player.resume(message);
+		// 		client.player.pause(message);
+		// 		client.player.resume(message);
 
-				if (success) {
-					return await message.react('👌').catch(e => {
-						throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
-					});
-				} else {
-					throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
-				}
-			}
+		// 		if (success) {
+		// 			return await message.react('👌').catch(e => {
+		// 				throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
+		// 			});
+		// 		} else {
+		// 			throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
+		// 		}
+		// 	}
+		// }
+
+		if (!args[0]) {
+			const noQueryEmbed = new Discord.MessageEmbed()
+				.setColor(tofuOrange)
+				.setDescription('To play a song, you need to specify which song you want to play!');
+
+			return message.channel.send({ embeds: [noQueryEmbed] }).catch(e => {
+				throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);
+			});
 		}
 
-		try {
-			if (!args[0]) {
-				let noQueryEmbed = new Discord.MessageEmbed()
-					.setColor(tofuOrange)
-					.setDescription('To play a song, you need to specify which song you want to play!');
+		// await client.player.play(message, args.join(' '), { firstResult: true });
+		const queue = client.player.createQueue(message.guild);
+		const song = await client.player.search(args.join(' '), {
+			requestedBy: message.author
+		});
 
-				return message.channel.send({ embeds: [noQueryEmbed] });
-			}
-		} catch (e) {
-			throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);
-		}
+		await queue.connect(message.member.voice.channel).catch(e => {
+			message.channel.send('Something went wrong when joining').catch(f => {
+				throw new Tantrum(client, 'play.js', 'Error on sending failed to join message', e);
+			})
+		});
 
-		await client.player.play(message, args.join(' '), { firstResult: true });
+		queue.addTrack(song.tracks[0]);
+		queue.play();
 	},
 };

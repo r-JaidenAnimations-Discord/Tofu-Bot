@@ -426,5 +426,14 @@ module.exports = {
             ],
             removals: []
         },
+        {
+            version: 'NEXT',
+            aliases: [],
+            additions: [],
+            fixes: [
+                'Complete overhaul to DJS master branch (upcoming DJS 13)'
+            ],
+            removals: []
+        },
     ]
 }

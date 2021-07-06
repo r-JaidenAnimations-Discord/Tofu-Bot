@@ -422,7 +422,8 @@ module.exports = {
             aliases: [],
             additions: [],
             fixes: [
-                'Fixed error when using search command'
+                'Fixed error when using search command',
+                'Fixed taginfo not working'
             ],
             removals: []
         },

@@ -423,7 +423,8 @@ module.exports = {
             additions: [],
             fixes: [
                 'Fixed error when using search command',
-                'Fixed taginfo not working'
+                'Fixed taginfo not working',
+                'Cleaned up joke and dog pic command'
             ],
             removals: []
         },

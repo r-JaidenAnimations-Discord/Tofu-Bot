@@ -33,7 +33,6 @@ module.exports = {
 		const attachment = new Discord.MessageAttachment('./commanddata/minecraff.png', 'minecraff.png');
 		const minecraftEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
-			.attachFiles(attachment)
 			.setTitle('Jaiden Animations Minecraft Server')
 			.setThumbnail('attachment://minecraff.png')
 			.addField('IP Address:', minecraftIP)
@@ -44,7 +43,7 @@ module.exports = {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
 			message.channel.stopTyping();
-			return message.channel.send({ embeds: [minecraftEmbed] }); // TODO: test
+			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] });
 		}
 
 		https.get(url, function(res) {
@@ -78,18 +77,14 @@ module.exports = {
 				minecraftEmbed.addField('Server status:', downStatus);
 
 				message.channel.stopTyping();
-				message.channel.send({ embeds: [minecraftEmbed] }).catch(e => { // TODO: test
+				message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {
 					console.log(`kek ${e}`);
 				});
 			});
-			/*res.on('end', function() {
-				// prob going to remove this
-				console.log('Request finished');
-			});*/
 		}).on('error', function(e) {
 			message.channel.stopTyping();
 			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => { // TODO: test
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			});
 		});

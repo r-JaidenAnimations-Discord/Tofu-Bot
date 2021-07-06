@@ -19,7 +19,7 @@ module.exports = {
 		message.channel.startTyping();
 
 		// API endpoint
-		var url = `https://official-joke-api.appspot.com/random_joke`;
+		const url = `https://official-joke-api.appspot.com/random_joke`;
 
 		const jokeEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)

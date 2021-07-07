@@ -431,7 +431,10 @@ module.exports = {
         {
             version: 'NEXT',
             aliases: [],
-            additions: [],
+            additions: [
+                'Interactive buttons',
+                'Slash commands'
+            ],
             fixes: [
                 'Complete overhaul to DJS master branch (upcoming DJS 13) *(This is a single line but really took days of work so yes)*',
                 'Refactored trivia',

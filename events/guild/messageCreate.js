@@ -99,22 +99,17 @@ module.exports = async (client, message) => {
 	//if (message.channel.type === 'dm') return;
 
 	// Cooldown?
-	if (!cooldowns.has(command.name)) {
-		cooldowns.set(command.name, new Discord.Collection());
-	}
+	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
+
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
-	const cooldownAmount = (command.cooldown || 3) * 1000;
+	const cooldownAmount = command.cooldown * 1000;
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-		if (now < expirationTime) {
-			try {
-				await message.react('⏳');
-				return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${/*timeLeft.toFixed(1)*/humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`);
-			} catch (e) {
-				throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
-			}
-		}
+		
+		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
+		});
 	}
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);

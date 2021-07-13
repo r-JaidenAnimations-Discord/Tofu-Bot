@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "#utils/*": ["./utils/*"],
+            "#commandData/*": ["./commanddata/*"],
+            "#tantrum": ["./utils/tantrum.js"],
+            "#colors": ["./commanddata/colors.json"],
+            "#memberIDs": ["./commanddata/memberIDs.json"]
+        },
+        "allowJs": true,
+    },
+    "include": [
+        "configDebug.json"
+    ],
+    "exclude": [
+        "node_modules",
+        "."
+    ]
+}

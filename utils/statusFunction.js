@@ -82,7 +82,7 @@ const randomStatus = async (client) => {
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
-	if (settingsFile.randomStatus === true) {
+	if (settingsFile.randomStatus.state === true) {
 		const nextState = states[Math.floor(Math.random() * states.length)];
 		setSts(client, nextState);
 	}

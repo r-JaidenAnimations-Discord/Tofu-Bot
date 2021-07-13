@@ -39,7 +39,7 @@ module.exports = {
 			.setTimestamp();
 
 		// Set the status to maintenance in case of maintenance
-		if (settingsFile.minecraftMaintenance) {
+		if (settingsFile.minecraftMaintenance.state) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
 			message.channel.stopTyping();

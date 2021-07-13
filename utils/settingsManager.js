@@ -7,27 +7,27 @@ const { readJSONSync, writeJSONSync } = require('fs-extra');
  * Either enables or disables a setting depending on 
  * @param {Object} message Message object
  * @param {String} setting The setting to change
- * @param {String} state Argument to either enable or disable the setting
+ * @param {String} selectedState Argument to either enable or disable the setting
  */
-const updateSetting = async (client, message, setting, state) => {
+const updateSetting = async (client, message, setting, selectedState) => {
 
 	const readData = readJSONSync('./deployData/settings.json', 'utf-8');
 
-	switch (state) {
+	switch (selectedState) {
 		case 'enable':
 		case 'true':
 		case 'on': {
-			if (readData[setting] === true) {
-				return message.channel.send(`${setting} is already \`enabled\``).catch(e => {
+			if (readData[setting].state === true) {
+				return message.channel.send(`${readData[setting].humanizedString} setting is already \`enabled\``).catch(e => {
 					throw new Tantrum(client, 'settingsManager.js', 'Error on sending setting already enabled message.', e);
 				});
 			} else {
-				readData[setting] = true; // Enable the setting thing
+				readData[setting].state = true; // Enable the setting thing
 
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
 				const embed = new Discord.MessageEmbed()
 					.setColor(tofuGreen)
-					.setDescription(`\`${formatBool(readData[setting])}\` ${setting} settings`)
+					.setDescription(`\`${formatBool(readData[setting].state)}\` ${readData[setting].humanizedString} settings`)
 					.setTimestamp()
 					.setFooter('Made with love');
 
@@ -39,17 +39,17 @@ const updateSetting = async (client, message, setting, state) => {
 		case 'disable':
 		case 'false':
 		case 'off': {
-			if (readData[setting] === false) {
-				return message.channel.send(`${setting} is already \`disabled\``).catch(e => {
+			if (readData[setting].state === false) {
+				return message.channel.send(`${readData[setting].humanizedString} is already \`disabled\``).catch(e => {
 					throw new Tantrum(client, 'settingsManager.js', 'Error on sending setting already disabled message.', e);
 				});
 			} else {
-				readData[setting] = false; // Disable the setting thing
+				readData[setting].state = false; // Disable the setting thing
 
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
 				const embed = new Discord.MessageEmbed()
 					.setColor(tofuGreen)
-					.setDescription(`\`${formatBool(readData[setting])}\` ${setting} settings`)
+					.setDescription(`\`${formatBool(readData[setting].state)}\` ${readData[setting].humanizedString} settings`)
 					.setTimestamp()
 					.setFooter('Made with love');
 
@@ -63,7 +63,7 @@ const updateSetting = async (client, message, setting, state) => {
 
 			const stateEmbed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)
-				.setDescription(`${setting} settings are currently \`${formatBool(readData[setting])}\`.`);
+				.setDescription(`${readData[setting].humanizedString} settings are currently \`${formatBool(readData[setting].state)}\`.`);
 
 			message.channel.send({ embeds: [stateEmbed] }).catch(e => {
 				throw new Tantrum(client, 'settingsManager.js', 'Error on sending stateEmbed', e);

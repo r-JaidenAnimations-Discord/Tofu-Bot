@@ -1,9 +1,27 @@
 {
-    "welcome": false,
-    "kiritoTrust": true,
-    "aliTrust": true,
-    "randomStatus": true,
-    "blackListing": true,
-    "minecraftMaintenance": false,
+    "welcome": {
+        "state": false,
+        "humanizedString": "welcomer"
+    },
+    "kiritoTrust": {
+        "state": true,
+        "humanizedString": "kirito trust"
+    },
+    "aliTrust": {
+        "state": true,
+        "humanizedString": "ali trust"
+    },
+    "randomStatus": {
+        "state": true,
+        "humanizedString": "random status"
+    },
+    "blackListing": {
+        "state": true,
+        "humanizedString": "blacklisting"
+    },
+    "minecraftMaintenance": {
+        "state": false,
+        "humanizedString": "Minecraft maintenance mode"
+    },
     "disabledCommands": []
 }

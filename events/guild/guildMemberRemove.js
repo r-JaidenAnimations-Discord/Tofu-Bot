@@ -18,8 +18,8 @@ module.exports = async (client, member) => {
 	}
 
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
-	var settingsFile = JSON.parse(data);
-	var welcomerState = settingsFile.welcome;
+	const settingsFile = JSON.parse(data);
+	const welcomerState = settingsFile.welcome.state;
 
 	if (welcomerState === false) return;
 	let randomBye = leaveMessages[Math.floor(Math.random() * leaveMessages.length)];

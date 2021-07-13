@@ -6,6 +6,7 @@ const { readJSONSync, writeJSONSync } = require('fs-extra');
 const { masterCheck } = require('#utils/staffChecks.js');
 const { updateSetting } = require('#utils/settingsManager.js');
 
+
 module.exports = {
 	name: 'settings',
 	helpTitle: 'Settings',
@@ -141,12 +142,12 @@ module.exports = {
 				const embed = new Discord.MessageEmbed()
 					.setColor(tofuBlue)
 					.setDescription(
-						stripIndents`Welcome Messages: \`${formatBool(readData.welcome)}\`
-					Kirito Trust: \`${formatBool(readData.kiritoTrust)}\`
-					Ali Trust: \`${formatBool(readData.aliTrust)}\`
-					Random status: \`${formatBool(readData.randomStatus)}\`
-					Blacklisting: \`${formatBool(readData.blackListing)}\`
-					Minecraft Maintenance: \`${formatBool(readData.minecraftMaintenance)}\`
+						stripIndents`Welcome Messages: \`${formatBool(readData.welcome.state)}\`
+					Kirito Trust: \`${formatBool(readData.kiritoTrust.state)}\`
+					Ali Trust: \`${formatBool(readData.aliTrust.state)}\`
+					Random status: \`${formatBool(readData.randomStatus.state)}\`
+					Blacklisting: \`${formatBool(readData.blackListing.state)}\`
+					Minecraft Maintenance: \`${formatBool(readData.minecraftMaintenance.state)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
 				message.channel.send({ embeds: [embed] }).catch(e => {

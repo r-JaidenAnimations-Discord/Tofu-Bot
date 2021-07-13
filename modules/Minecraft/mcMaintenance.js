@@ -1,5 +1,5 @@
 const { masterCheck } = require('#utils/staffChecks.js');
-const { updateSetting } = require('../../utils/settingsManager.js');
+const { updateSetting } = require('#utils/settingsManager.js');
 
 module.exports = {
 	name: 'minecraftmaintenance',

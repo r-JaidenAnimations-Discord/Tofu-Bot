@@ -1,5 +1,4 @@
 const fs = require('fs');
-const Tantrum = require('#tantrum');
 
 /**
  * Set the bot's status

@@ -11,10 +11,10 @@ module.exports = async (client, message) => {
 
 	let cooldowns = client.cooldowns;
 
-	const { 
-		blacklisting: { state: bl },
-		kiritoTrust:  { state: kt },
-		aliTrust:     { state: at },
+	const {
+		blackListing: { state: bl },
+		kiritoTrust: { state: kt },
+		aliTrust: { state: at },
 		disabledCommands
 	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
 
@@ -31,7 +31,7 @@ module.exports = async (client, message) => {
 
 	// Is this command allowed inside DM? || This code is a piece of crap, but i can't fix it
 	if (message.channel.type === 'dm' && !command?.isDMAllowed) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
 	});
 
 	// Is this command deprecated?
@@ -54,30 +54,31 @@ module.exports = async (client, message) => {
 	if (bl) {
 		// Member Blacklisting
 		const { python, bamboozle, hate, wrongchannel, bloop, other } = await fs.readJSONSync('./deployData/blacklist.json', 'utf-8');
-		
-		if (python.includes(message.author.id)) return message.channel.send('Come back when you stop using Python').catch(e =>
-			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e))
-		
-		else if (bamboozle.includes(message.author.id)) return message.channel.send({ content: 'Ahahahahahahah get fucked you foul piece of shit' files: ['./commanddata/lemao.png'] }).catch(e =>
-			throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e)
-		)
-	
-		else if (hate.includes(message.author.id)) return message.channel.send('I hate you too').catch(e => 
-			throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e)
-		)
-		
-		else if (wrongchannel.includes(message.author.id)) return message.channel.send('Come back when you learn to use commands in the right place').catch(e => 
-			throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e)
-		)
-		
-		else if (bloop.includes(message.author.id)) return message.channel.send({ content: 'Haha, queen mush', files: ['./commanddata/lemao.png'] }).catch(e => 
-			throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e)
-		)
-		
-		else if (other.includes(message.author.id)) return message.channel.send('Nope, not listening to you').catch(e => 
-			throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e)
-		)
-	};
+
+		if (python.includes(message.author.id)) return message.channel.send('Come back when you stop using Python').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e);
+		});
+
+		else if (bamboozle.includes(message.author.id)) return message.channel.send({ content: 'Ahahahahahahah get fucked you foul piece of shit', files: ['./commanddata/lemao.png'] }).catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
+		});
+
+		else if (hate.includes(message.author.id)) return message.channel.send('I hate you too').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e);
+		});
+
+		else if (wrongchannel.includes(message.author.id)) return message.channel.send('Come back when you learn to use commands in the right place').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e);
+		});
+
+		else if (bloop.includes(message.author.id)) return message.channel.send({ content: 'Haha, queen mush', files: ['./commanddata/lemao.png'] }).catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e);
+		});
+
+		else if (other.includes(message.author.id)) return message.channel.send('Nope, not listening to you').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e);
+		});
+	}
 
 	// Cooldown?
 	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
@@ -87,10 +88,10 @@ module.exports = async (client, message) => {
 	const cooldownAmount = command.cooldown * 1000;
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-		
-		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => 
+
+		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
-		);
+		});
 	}
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
@@ -111,14 +112,15 @@ module.exports = async (client, message) => {
 	}
 
 	// Is this command enabled?
-	if (disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => 
+	if (disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e)
-	);
+	});
 
 	// All requirements are met, try running the command
 	try {
 		command.execute(client, message, args);
 	} catch (e) {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+		//message.reply('Sooo i like um broke');
 	}
 }

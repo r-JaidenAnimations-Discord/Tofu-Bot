@@ -34,6 +34,9 @@ module.exports = async (client, message) => {
 		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
 	});
 
+	// Is this not a command?
+	if (!command) return;
+
 	// Is this command deprecated?
 	if (command.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e)

@@ -435,7 +435,8 @@ module.exports = {
                 'Interactive buttons',
                 'Slash commands',
                 'Intents and partials',
-                'jsconfig.json for subpath import intellisense'
+                'jsconfig.json for subpath import intellisense',
+                'Settings manager'
             ],
             fixes: [
                 'Complete overhaul to DJS master branch (upcoming DJS 13) *(This is a single line but really took days of work so yes)*',
@@ -443,7 +444,9 @@ module.exports = {
                 'Cleaned up minecraft command',
                 'Refactored messageCreate event',
                 'Refactored cooldowns',
-                'Refactor buildTimeString'
+                'Refactor buildTimeString',
+                'Reworked settings with settings manager',
+                'Fixed \'Can\'t talk\' DM message'
             ],
             removals: [
                 'DMable commands'

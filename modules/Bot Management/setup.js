@@ -13,7 +13,6 @@ module.exports = {
 	category: 'Bot Management',
 	usage: 'settings {[{enable, disable}] [command], [{welcomer, announce, welcome, greeting, alitrust, ali, kirito, kiritotrust, bankirito}] [{enable, disable}]}',
 	description: 'Change bot settings.',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,

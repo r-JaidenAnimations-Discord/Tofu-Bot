@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'back',
 	description: 'Hello, I was wondering if you could play that song *again*',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

@@ -10,7 +10,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'help (command)',
 	description: 'Stop, get help',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
@@ -77,8 +76,6 @@ function getCmd(client, message, input) {
 	if (cmd.name) embed.setDescription(`**${cmd.helpName ? cmd.helpName : cmd.name[0].toUpperCase() + cmd.name.slice(1)} Command**`);
 	// Adds aliases by mapping them
 	if (cmd.aliases) embed.addField('**Aliases**', `${cmd.aliases.map(a => `\`${a}\``).join(' ')}`);
-	// Adds it's DM usage permission
-	embed.addField('**Is allowed through DM**', `${cmd.isDMAllowed === true ? '\`yes\`' : '\`no\`'}`);
 	// The description
 	if (cmd.description) embed.addField('**Description**', `${cmd.description}`);
 	// The usage

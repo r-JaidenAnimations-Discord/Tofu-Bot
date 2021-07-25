@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'dog',
 	description: 'Get yourself a cute doge pic',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: true,

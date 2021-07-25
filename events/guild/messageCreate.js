@@ -29,13 +29,13 @@ module.exports = async (client, message) => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	// Is this not a command?
-	if (!command) return;
-	
-	// Is this command allowed inside DM? || This code is a piece of crap, but i can't fix it
-	if (message.channel.type === 'dm' && !command?.isDMAllowed) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+	// Is this a DM?
+	if (message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu\n*(DMable commands have been deprecated, you should use a command channel in server instead :3)*').catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
 	});
+
+	// Is this not a command?
+	if (!command) return;
 
 	// Is this command deprecated?
 	if (command?.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {

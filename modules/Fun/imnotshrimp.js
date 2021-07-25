@@ -7,7 +7,6 @@ module.exports = {
     category: 'Fun',
     usage: 'imnotshrimp',
     description: 'Not Shrimp',
-    isDMAllowed: false,
     isDeprecated: false,
     isDangerous: false,
     isHidden: false,

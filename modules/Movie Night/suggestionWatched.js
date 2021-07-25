@@ -8,7 +8,6 @@ module.exports = {
 	category: 'Movie Night',
 	usage: 'watchedmovie [id]',
 	description: 'Mark a movie as watched',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,

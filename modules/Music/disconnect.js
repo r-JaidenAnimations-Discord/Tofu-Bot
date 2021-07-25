@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'disconnect',
 	description: 'Done? Stop the music I suppose',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

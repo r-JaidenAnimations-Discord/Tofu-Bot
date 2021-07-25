@@ -11,7 +11,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'eval [string]',
 	description: 'Evaluates JavaScript code inputed from args.\nOnwer Only Command\nSelfnote: don\'t use this next to many people idk they could take your token i guess lmao',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: true,

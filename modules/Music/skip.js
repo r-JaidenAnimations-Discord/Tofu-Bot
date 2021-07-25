@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'skip',
 	description: 'Skip what\'s playing. Maybe the cringe factor was too high',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

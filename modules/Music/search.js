@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'search [query]',
 	description: 'Don\'t know the exact thing? Search and choose the one you want.',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

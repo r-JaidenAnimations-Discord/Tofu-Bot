@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'queue',
 	description: 'See the upcoming choons',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

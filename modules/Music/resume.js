@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'resume',
 	description: 'Alr back, go on',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

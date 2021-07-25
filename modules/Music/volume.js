@@ -10,7 +10,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'volume [number between 0 and 100]',
 	description: 'Change the player\'s volume',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

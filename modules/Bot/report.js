@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Bot',
 	usage: 'report [problem]',
 	description: 'Report bugs or other issues on Tofu.\nImproper use is punishable!',
-	isDMAllowed: true,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

@@ -12,7 +12,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'play [query]',
 	description: 'Play some choons',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

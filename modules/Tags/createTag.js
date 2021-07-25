@@ -7,7 +7,6 @@ module.exports = {
 	category: 'Tags',
 	usage: 'createtag [name] [content]',
 	description: 'Create your own tag',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

@@ -6,7 +6,6 @@ module.exports = {
 	category: 'Fun',
 	usage: 'bean ({@user, something else})',
 	description: 'Hmmmmm. Beans',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

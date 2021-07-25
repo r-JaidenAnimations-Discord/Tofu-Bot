@@ -9,7 +9,6 @@ module.exports = {
 	category: 'Music',
 	usage: 'loop (queue)',
 	description: 'Enable or disable looping',
-	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

@@ -7,7 +7,6 @@ module.exports = {
     category: 'Fun',
     usage: 'fart',
     description: 'Because Grady be funni.',
-    isDMAllowed: false,
     isDeprecated: false,
     isDangerous: false,
     isHidden: true,

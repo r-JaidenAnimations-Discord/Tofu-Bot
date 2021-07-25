@@ -1,7 +1,7 @@
 const { tofuRed, tofuError } = require('#colors');
 const { banKirito, banAli, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
-const fs = require('fs');
+const fs = require('fs-extra');
 const Tantrum = require('#tantrum');
 const { buttonedDangerCommandPrompt } = require('#utils/dangerPrompt.js');
 const { humanReadableDuration } = require('#utils/buildTimeString.js');
@@ -10,12 +10,13 @@ module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers } = client.config;
 
 	let cooldowns = client.cooldowns;
-	// nothing get fucked lmao
-	// very
 
-	// Pull the list of disabled commands from the settings JSON file. Man this was a pain to get working
-	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
-	var settingsFile = JSON.parse(data);
+	const {
+		blackListing: { state: bl },
+		kiritoTrust: { state: kt },
+		aliTrust: { state: at },
+		disabledCommands
+	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
 
 	// Bots shall not trigger me
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
@@ -28,75 +29,59 @@ module.exports = async (client, message) => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	// Is this command allowed inside DM? || This code is a piece of crap, but i can't fix it
-	if (message.guild === null && !message.author.bot) {
-		if (command.isDMAllowed === false && message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
-		});
-
-		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
-		});
-	}
-
+	// Is this not a command?
 	if (!command) return;
+	
+	// Is this command allowed inside DM? || This code is a piece of crap, but i can't fix it
+	if (message.channel.type === 'dm' && !command?.isDMAllowed) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+	});
 
 	// Is this command deprecated?
-	if (command.isDeprecated === true) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
+	if (command?.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e)
 	});
 
 	// Kirito trust
-	if (message.author.id === banKirito && settingsFile.kiritoTrust.state === false) return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] }).catch(e => {
+	if (message.author.id === banKirito && !kt) return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
 	});
 
 
 	// Ali trust
-	if (message.author.id === banAli && settingsFile.aliTrust.state === false) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {
+	if (message.author.id === banAli && !at) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
 	});
 
 
-	if (settingsFile.blackListing.state === true) {
+	if (bl) {
 		// Member Blacklisting
-		const blackListRawData = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
-		var blackListData = JSON.parse(blackListRawData);
+		const { python, bamboozle, hate, wrongchannel, bloop, other } = await fs.readJSONSync('./deployData/blacklist.json', 'utf-8');
 
-		if (blackListData.python.includes(message.author.id)) {
-			return message.channel.send('Come back when you stop using Python').catch(e => {
-				throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e)
-			});
-		}
-		else if (blackListData.bamboozle.includes(message.author.id)) {
-			return message.channel.send('Ahahahahahahah get f\'ed you foul piece of $h!t', { files: ['./commanddata/lemao.png'] }).catch(e => {
-				throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e)
-			});
-		}
-		else if (blackListData.hate.includes(message.author.id)) {
-			return message.channel.send('I hate you too').catch(e => {
-				throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e)
-			});
-		}
-		else if (blackListData.wrongchannel.includes(message.author.id)) {
-			return message.channel.send('Come back when you learn to use commands in the right place').catch(e => {
-				throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e)
-			});
-		}
-		else if (blackListData.bloop.includes(message.author.id)) {
-			return message.channel.send('Haha, queen mush', { files: ['./commanddata/lemao.png'] }).catch(e => {
-				throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e)
-			});
-		}
-		else if (blackListData.other.includes(message.author.id)) {
-			return message.channel.send('Nope, not listening to you').catch(e => {
-				throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e)
-			});
-		}
+		if (python.includes(message.author.id)) return message.channel.send('Come back when you stop using Python').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e);
+		});
+
+		else if (bamboozle.includes(message.author.id)) return message.channel.send({ content: 'Ahahahahahahah get fucked you foul piece of shit', files: ['./commanddata/lemao.png'] }).catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
+		});
+
+		else if (hate.includes(message.author.id)) return message.channel.send('I hate you too').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e);
+		});
+
+		else if (wrongchannel.includes(message.author.id)) return message.channel.send('Come back when you learn to use commands in the right place').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e);
+		});
+
+		else if (bloop.includes(message.author.id)) return message.channel.send({ content: 'Haha, queen mush', files: ['./commanddata/lemao.png'] }).catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e);
+		});
+
+		else if (other.includes(message.author.id)) return message.channel.send('Nope, not listening to you').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e);
+		});
 	}
-
-	// No DMs
-	//if (message.channel.type === 'dm') return;
 
 	// Cooldown?
 	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
@@ -106,7 +91,7 @@ module.exports = async (client, message) => {
 	const cooldownAmount = command.cooldown * 1000;
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-		
+
 		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
 		});
@@ -126,11 +111,11 @@ module.exports = async (client, message) => {
 		}
 
 		// Warn when a command is executed from the devserver to the main deploy
-		if (message.guild.id !== jaidenServerID && devMode === false && command.isDangerous === true && await buttonedDangerCommandPrompt(message) === false) return;
+		if (message.guild.id !== jaidenServerID && !devMode && command.isDangerous && !(await buttonedDangerCommandPrompt(message))) return;
 	}
 
 	// Is this command enabled?
-	if (settingsFile.disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
+	if (disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e)
 	});
 

@@ -20,6 +20,9 @@ const client = new Discord.Client({
 		// Discord.Intents.FLAGS.GUILD_MESSAGE_TYPING,
 		Discord.Intents.FLAGS.GUILD_PRESENCES,
 		Discord.Intents.FLAGS.GUILD_VOICE_STATES
+	],
+	partials: [
+		'CHANNEL'
 	]
 });
 const { randomStatus } = require('#utils/statusFunction.js');

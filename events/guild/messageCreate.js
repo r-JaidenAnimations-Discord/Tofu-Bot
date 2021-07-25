@@ -9,6 +9,9 @@ const { humanReadableDuration } = require('#utils/buildTimeString.js');
 module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers } = client.config;
 
+	// Bots shall not trigger me
+	if (message.author.bot) return;
+
 	let cooldowns = client.cooldowns;
 
 	const {
@@ -18,8 +21,10 @@ module.exports = async (client, message) => {
 		disabledCommands
 	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
 
-	// Bots shall not trigger me
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	// Is this a DM?
+	if (message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu\n*(DMable commands have been deprecated, you should use a command channel in server instead :3)*').catch(e => {
+		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+	});
 
 	// List up all commands
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -29,13 +34,8 @@ module.exports = async (client, message) => {
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	// Is this a DM?
-	if (message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu\n*(DMable commands have been deprecated, you should use a command channel in server instead :3)*').catch(e => {
-		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
-	});
-
-	// Is this not a command?
-	if (!command) return;
+	// Does the message not start with the prefix or is this not a command?
+	if (!message.content.startsWith(prefix) || !command) return;
 
 	// Is this command deprecated?
 	if (command?.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {

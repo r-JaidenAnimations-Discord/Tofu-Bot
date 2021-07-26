@@ -41,7 +41,8 @@ module.exports = {
 
 
 			const toEval = args.join(' ');
-			const evaluated = eval(toEval).replace(client.token, 'funny token time');
+			let evaluated = eval(toEval);
+			evaluated = (evaluated + '').replace(client.token, 'funny token time');
 
 			console.log(typeof evaluated);
 

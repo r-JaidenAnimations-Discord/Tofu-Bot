@@ -417,5 +417,17 @@ module.exports = {
                 'Removed Max focus aid'
             ]
         },
+        {
+            version: '1.12.1',
+            aliases: [],
+            additions: [],
+            fixes: [
+                'Fixed error when using search command',
+                'Fixed taginfo not working',
+                'Cleaned up joke and dog pic command',
+                'Bumped discord-player'
+            ],
+            removals: []
+        },
     ]
 }

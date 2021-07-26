@@ -424,7 +424,8 @@ module.exports = {
             fixes: [
                 'Fixed error when using search command',
                 'Fixed taginfo not working',
-                'Cleaned up joke and dog pic command'
+                'Cleaned up joke and dog pic command',
+                'Bumped discord-player'
             ],
             removals: []
         },

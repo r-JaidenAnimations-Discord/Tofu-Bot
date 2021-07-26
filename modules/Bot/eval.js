@@ -22,8 +22,7 @@ module.exports = {
 			try {
 				message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
 				//.then(m => setTimeout(() => { m.delete(); }, 5000));
-				client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`)] });
-				return;
+				return client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`)] });
 			} catch (e) {
 				throw new Tantrum(client, 'eval.js', 'Error on sending only masters error', e);
 			}
@@ -38,9 +37,9 @@ module.exports = {
 			if (args.join(' ').toLowerCase().includes('token')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 			if (args.join(' ').toLowerCase().includes('key')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 
-
 			const toEval = args.join(' ');
-			const evaluated = eval(toEval).replace(client.token, 'funny token time');
+			let evaluated = eval(toEval);
+			evaluated = (evaluated + '').replace(client.token, 'funny token time');
 
 			console.log(typeof evaluated);
 

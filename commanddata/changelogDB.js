@@ -446,7 +446,8 @@ module.exports = {
                 'Refactored cooldowns',
                 'Refactor buildTimeString',
                 'Reworked settings with settings manager',
-                'Fixed \'Can\'t talk\' DM message'
+                'Fixed \'Can\'t talk\' DM message',
+                'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval'
             ],
             removals: [
                 'DMable commands'

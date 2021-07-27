@@ -18,7 +18,7 @@ module.exports = async (client, message) => {
 	var settingsFile = JSON.parse(data);
 
 	// Bots shall not trigger me
-	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (message.author.bot) return;
 
 	// List up all commands
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -30,16 +30,16 @@ module.exports = async (client, message) => {
 
 	// Is this command allowed inside DM? || This code is a piece of crap, but i can't fix it
 	if (message.guild === null && !message.author.bot) {
-		if (command.isDMAllowed === false && message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
 		});
 
-		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+		if (command.isDMAllowed === false && message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
 		});
 	}
 
-	if (!command) return;
+	if (!message.content.startsWith(prefix) || !command) return;
 
 	// Is this command deprecated?
 	if (command.isDeprecated === true) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
@@ -50,7 +50,6 @@ module.exports = async (client, message) => {
 	if (message.author.id === banKirito && settingsFile.kiritoTrust === false) return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
 	});
-
 
 	// Ali trust
 	if (message.author.id === banAli && settingsFile.aliTrust === false) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {

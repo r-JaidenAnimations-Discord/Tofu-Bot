@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs-extra');
 const Tantrum = require('#tantrum');
 const { buttonedDangerCommandPrompt } = require('#utils/dangerPrompt.js');
-const { humanReadableDuration } = require('#utils/buildTimeString.js');
+const { simpleDuration } = require('#utils/buildTimeString.js');
 
 module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers } = client.config;
@@ -47,12 +47,10 @@ module.exports = async (client, message) => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
 	});
 
-
 	// Ali trust
 	if (message.author.id === banAli && !at) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
 	});
-
 
 	if (bl) {
 		// Member Blacklisting
@@ -92,7 +90,7 @@ module.exports = async (client, message) => {
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
-		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${humanReadableDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => {
+		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${simpleDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
 		});
 	}

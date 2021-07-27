@@ -15,7 +15,6 @@ module.exports = {
 	aliases: ['doge', 'doggo'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		message.channel.startTyping();
 
 		// API endpoint

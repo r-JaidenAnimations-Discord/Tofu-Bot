@@ -11,8 +11,6 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		//if (message.deletable) message.delete();
-
 		let input = args.join(' ');
 
 		// Supress @everyone, @here and pinging roles
@@ -20,9 +18,8 @@ module.exports = {
 			input = input.replace(ping, 'haha funny ping');
 		});
 
-		if (args.length < 1) {
-			return message.reply(';-; .oht yas ot tahW');
-		}
+		if (args.length < 1) return message.reply(';-; .oht yas ot tahW');
+
 		message.channel.send(input.split('').reverse().join(''));
 	},
 };

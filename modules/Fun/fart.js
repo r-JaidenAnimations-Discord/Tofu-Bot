@@ -13,7 +13,6 @@ module.exports = {
     //aliases: [],
     cooldown: 5,
     execute: async function(client, message, args) {
-
         if (!masterCheck(client, message)) return;
 
         await message.react('💨').catch(e => {

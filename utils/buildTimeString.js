@@ -26,7 +26,6 @@ const simpleDuration = (msDuration) => {
 	const m = Math.floor((msDuration / 1000 / 60 / 60 - h) * 60);
 	const s = Math.ceil(((msDuration / 1000 / 60 / 60 - h) * 60 - m) * 60); // Using ceil to always round up to avoid 'pls wait 0 seconds'
 
-
 	return `${h ? h + 'h' : ''}${m ? m + 'm' : ''}${s}s`;
 }
 

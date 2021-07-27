@@ -13,7 +13,6 @@ module.exports = {
 	aliases: ['mcm', 'minecraffmaintenance', 'minecrapmaintenance'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!masterCheck(client, message)) return;
 
 		updateSetting(client, message, 'minecraftMaintenance', args[0]);

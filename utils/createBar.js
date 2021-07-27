@@ -28,4 +28,6 @@ const createBar = (total, current, size = 40, line = '▬', slider = '🔵') => 
 		return [bar, calculated];
 	}
 };
-module.exports = createBar;
+module.exports = {
+	createBar
+};

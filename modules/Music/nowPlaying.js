@@ -2,7 +2,7 @@ const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
-const createBar = require('#utils/createBar.js');
+const { createBar } = require('#utils/createBar.js');
 const { humanReadableDuration } = require('#utils/buildTimeString.js');
 
 module.exports = {
@@ -17,7 +17,6 @@ module.exports = {
 	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 

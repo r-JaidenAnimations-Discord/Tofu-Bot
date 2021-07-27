@@ -28,7 +28,7 @@ module.exports = {
 	aliases: ['jaidentrivia', 'jtrivia'],
 	cooldown: 30,
 	execute: async function(client, message, args) {
-
+		// If you think reading this is bad, i had to write it
 		if (args[0] === 'rules') {
 			//return message.channel.send('Rules and info will be put here');
 			const ruleEmbed = new Discord.MessageEmbed()

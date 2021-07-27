@@ -15,7 +15,6 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		let channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
 			message.guild.channels.cache.find(c => c.name === args[0]);

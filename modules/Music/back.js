@@ -13,7 +13,6 @@ module.exports = {
 	aliases: ['prev', 'previous'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 

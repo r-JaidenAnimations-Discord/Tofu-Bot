@@ -15,7 +15,6 @@ module.exports = {
 	aliases: ['src', 'find'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 
 		try {

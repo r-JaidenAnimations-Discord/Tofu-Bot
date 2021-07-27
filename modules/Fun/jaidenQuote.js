@@ -15,7 +15,6 @@ module.exports = {
 	aliases: ['jaidenquote', 'jquote'],
 	cooldown: 3,
 	execute: async function(client, message, args) {
-
 		const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 
 		const randomQuoteEmbed = new Discord.MessageEmbed()

@@ -3,6 +3,7 @@
         "baseUrl": ".",
         "paths": {
             "#utils/*": ["./utils/*"],
+            "#handlers/*": ["./handlers/*"],
             "#commandData/*": ["./commanddata/*"],
             "#tantrum": ["./utils/tantrum.js"],
             "#colors": ["./commanddata/colors.json"],

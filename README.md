@@ -4,6 +4,9 @@ Tofu Bot does most 'fun' stuff like trivia, music etc. while Ari does (moderatio
 
 Tofu Bot 2.x makes use of Discord.JS v13, which means system requirements also changed. 
     
+## 🚧 This is early development 🚧
+Things can be added, removed, readded any time without prior notice. 
+
 ## Important notice
 While Tofu Bot is on GitHub, it is **NOT** open source yet. It is only shared in small groups and to trusted people. But as you may be able to see, preparations for open sourcing are being made.
 

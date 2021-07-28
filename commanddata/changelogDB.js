@@ -434,7 +434,8 @@ module.exports = {
             aliases: [],
             additions: [],
             fixes: [
-                'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval'
+                'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval',
+                'Updated deps'
             ],
             removals: []
         }

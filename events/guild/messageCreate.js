@@ -77,12 +77,12 @@ module.exports = async (client, message) => {
 	});
 
 	// Kirito trust
-	if (message.author.id === banKirito && !kt) return message.reply('You know, I really don\'t trust you, like at all. So stop messaging me!', { files: ['./commanddata/banKirito.png'] }).catch(e => {
+	if (message.author.id === banKirito && !kt) return message.reply({ content: 'You know, I really don\'t trust you, like at all. So stop messaging me!', files: ['./commanddata/memberTrust/banKirito.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
 	});
 
 	// Ali trust
-	if (message.author.id === banAli && !at) return message.reply('Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', { files: ['./commanddata/infinitecringe.png'] }).catch(e => {
+	if (message.author.id === banAli && !at) return message.reply({ content: 'Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', files: ['./commanddata/memberTrust/infinitecringe.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
 	});
 
@@ -147,7 +147,7 @@ module.exports = async (client, message) => {
 	}
 
 	// Is this command enabled?
-	if (disabledCommands.includes(command.name)) return message.channel.send(`Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, { files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
+	if (disabledCommands.includes(command.name)) return message.channel.send({ content: `Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, files: ['./commanddata/Configuration/commandDisabled.gif'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e)
 	});
 

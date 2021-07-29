@@ -437,7 +437,8 @@ module.exports = {
                 'Slash commands',
                 'Intents and partials',
                 'jsconfig.json for subpath import intellisense',
-                'Settings manager'
+                'Settings manager',
+                'Autoresponders'
             ],
             fixes: [
                 'Complete overhaul to DJS master branch (upcoming DJS 13) *(This is a single line but really took days of work so yes)*',

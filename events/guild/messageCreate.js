@@ -3,6 +3,7 @@ const { banKirito, banAli, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs-extra');
 const Tantrum = require('#tantrum');
+const { autoResponders } = require('../../handlers/autoResponder.js');
 const { buttonedDangerCommandPrompt } = require('#utils/dangerPrompt.js');
 const { simpleDuration } = require('#utils/buildTimeString.js');
 
@@ -15,9 +16,10 @@ module.exports = async (client, message) => {
 	let cooldowns = client.cooldowns;
 
 	const {
+		autoResponders: { state: ar },
+		aliTrust: { state: at },
 		blackListing: { state: bl },
 		kiritoTrust: { state: kt },
-		aliTrust: { state: at },
 		disabledCommands
 	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
 
@@ -25,6 +27,38 @@ module.exports = async (client, message) => {
 	if (message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu\n*(DMable commands have been deprecated, you should use a command channel in server instead :3)*').catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
 	});
+
+	// Autoresponders
+	// TODO: skip only 1 loop iteration, probably replace the 'return' with continue; equivalent.
+	if (ar) {
+		for (elem of autoResponders) {
+			const { input, output, cooldown, regexp } = elem;
+
+			if (!client.autoResponderCooldowns.has(elem)) client.autoResponderCooldowns.set(elem, new Discord.Collection());
+
+			const ARnow = Date.now();
+			const ARtimestamps = client.autoResponderCooldowns.get(elem);
+			const ARcooldownAmount = cooldown;
+			if (ARtimestamps.has(message.author.id)) {
+				const ARexpirationTime = ARtimestamps.get(message.author.id) + ARcooldownAmount;
+				if (ARnow < ARexpirationTime) return; // if on cooldown, don't do anything
+			}
+
+			if (regexp) {
+				if (input.test(message.content.toLowerCase())) {
+					message.channel.send(output);
+					ARtimestamps.set(message.author.id, ARnow);
+					setTimeout(() => ARtimestamps.delete(message.author.id), ARcooldownAmount);
+				}
+			} else {
+				if (message.content.toLowerCase().includes(input)) {
+					message.channel.send(output);
+					ARtimestamps.set(message.author.id, ARnow);
+					setTimeout(() => ARtimestamps.delete(message.author.id), ARcooldownAmount);
+				}
+			}
+		}
+	}
 
 	// List up all commands
 	const args = message.content.slice(prefix.length).trim().split(/ +/);

@@ -70,6 +70,13 @@ module.exports = {
 				break;
 			}
 
+			// Autoresponders
+			case 'autoresponders':
+			case 'ar': {
+				updateSetting(client, message, 'autoResponders', args[1]);
+				break;
+			}
+
 			// Setting the commands
 			case 'enable': {
 				if (input === 'all') {

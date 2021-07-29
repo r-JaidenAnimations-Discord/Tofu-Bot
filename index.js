@@ -47,6 +47,7 @@ client.player = new Player(client, {
 client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 client.interactions = new Discord.Collection();
+client.autoResponderCooldowns = new Discord.Collection();
 
 // Config loading
 let launchArgs = process.argv.slice(2);

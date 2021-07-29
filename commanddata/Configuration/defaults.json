@@ -23,5 +23,9 @@
         "state": false,
         "humanizedString": "Minecraft maintenance mode"
     },
+    "autoResponders": {
+        "state": true,
+        "humanizedString": "auto responder"
+    },
     "disabledCommands": []
 }

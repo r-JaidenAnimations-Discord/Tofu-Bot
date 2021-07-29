@@ -21,7 +21,6 @@ module.exports = {
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			try {
 				message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
-				//.then(m => setTimeout(() => { m.delete(); }, 5000));
 				return client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`)] });
 			} catch (e) {
 				throw new Tantrum(client, 'eval.js', 'Error on sending only masters error', e);
@@ -31,7 +30,6 @@ module.exports = {
 		if (!args[0]) return message.channel.send('Give me something to evaluate tho').catch(e => {
 			throw new Tantrum(client, 'eval.js', 'Error on sending nothing to evaluate error', e);
 		});
-		//.then(m => setTimeout(() => { m.delete(); }, 5000));
 
 		try {
 			if (args.join(' ').toLowerCase().includes('token')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
@@ -41,7 +39,7 @@ module.exports = {
 			let evaluated = eval(toEval);
 			evaluated = (evaluated + '').replace(client.token, 'funny token time');
 
-			console.log(typeof evaluated);
+			// console.log(typeof evaluated);
 
 			if (toEval.toLowerCase().includes('token')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 			if (toEval.toLowerCase().includes('apikey')) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
@@ -51,7 +49,7 @@ module.exports = {
 				.setTimestamp()
 				.setTitle('Eval')
 				.addField('To Evaluate', `\`\`\`js\n${beautify(toEval, { format: 'js' })}\n\`\`\``)
-				.addField('Evaluated', `${evaluated}`/*.replace(client.token, 'Aahhahahah you think you\'re smart now buddy? yeah i figured so, but look at that. We have outsmarted you. **Perish**')*/)
+				.addField('Evaluated', `${evaluated}`)
 				.addField('Type of', typeof (evaluated))
 				.setFooter(client.user.username, client.user.displayAvatarURL);
 
@@ -59,7 +57,7 @@ module.exports = {
 				new Tantrum(client, 'eval.js', 'Error on sending eval embed', e);
 			});
 		} catch (e) {
-			let embed = new Discord.MessageEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setColor(tofuError)
 				.setTitle('Error')
 				.setDescription(e.toString())
@@ -71,7 +69,5 @@ module.exports = {
 		}
 
 		// ... all your eval shit
-
-		//message.channel.send(eval(args.join(' ').replace(apiKey, 'funny token time')));
 	},
 };

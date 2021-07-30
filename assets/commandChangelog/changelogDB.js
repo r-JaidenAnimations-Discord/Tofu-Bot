@@ -451,7 +451,8 @@ module.exports = {
                 'Fixed \'Can\'t talk\' DM message',
                 'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval',
                 'Embedify already enabled/disabled message in settings',
-                'Restructured files and assets'
+                'Restructured files and assets',
+                'Move databases to deployData'
             ],
             removals: [
                 'DMable commands'

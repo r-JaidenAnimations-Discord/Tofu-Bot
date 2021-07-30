@@ -1,51 +1,15 @@
 const { tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { musicStrings } = require('#assets/global/strings.json');
 
-module.exports = (client, error, message, ...args) => {
-
-	let errorEmbed = new Discord.MessageEmbed()
+module.exports = (client, queue, error, ...args) => {
+	const errorEmbed = new Discord.MessageEmbed()
 		.setColor(tofuError)
+		.setDescription(`Tofu choked :headstone:\n\`${error}\``)
 		.setFooter('This error has been automatically reported to the devs')
 		.setTimestamp();
-
-	switch (error) {
-		case 'NotPlaying':
-			errorEmbed.setDescription(musicStrings.noMusicPlaying);
-			message.channel.send({ embeds: [errorEmbed] }).catch(e => { // TODO: test
-				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (noMusicPlaying)', e);
-			});
-			break;
-		case 'NotConnected':
-			errorEmbed.setDescription(musicStrings.notInVoiceChannel);
-			message.channel.send({ embeds: [errorEmbed] }).catch(e => { // TODO: test
-				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (notInVoiceChannel)', e);
-			});
-			break;
-		case 'UnableToJoin':
-			errorEmbed.setDescription(musicStrings.unableToJoin);
-			message.channel.send({ embeds: [errorEmbed] }).catch(e => { // TODO: test
-				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (unableToJoin)', e);
-			});
-			break;
-		case 'VideoUnavailable':
-			errorEmbed.setDescription(`${args[0].title} is not available and will be skipped.`);
-			message.channel.send({ embeds: [errorEmbed] }).catch(e => { // TODO: test
-				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (item unavailable)', e);
-			});
-			break;
-		case 'MusicStarting':
-			errorEmbed.setDescription('The music is starting... please wait a bit!');
-			message.channel.send({ embeds: [errorEmbed] }).catch(e => { // TODO: test
-				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (stillStarting)', e);
-			});
-			break;
-		default:
-			errorEmbed.setDescription(`Tofu choked...\nError:\`${error}\``);
-			message.channel.send({ embeds: [errorEmbed] }).catch(e => { // TODO: test
-				new Tantrum(client, 'error.js', 'Error on sending errorEmbed (choke)', e);
-			});
-			new Tantrum(client, 'error.js', 'Tofu choked', error);
-	}
+	new Tantrum(client, 'error.js', 'Tofu Choked', `${error}`);
+	queue.metadata.channel.send({ embeds: [errorEmbed] }).catch(e => {
+		new Tantrum(client, 'error.js', 'Error on sending errorEmbed', e);
+	});
 };

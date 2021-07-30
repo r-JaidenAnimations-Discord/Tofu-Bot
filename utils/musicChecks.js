@@ -12,7 +12,6 @@ let musicCheckEmbed = new Discord.MessageEmbed();
  * @returns {Boolean} Author is (not) in (same) voice channel
  */
 const checkMusic = (client, message) => {
-
 	if (!message.member.voice.channel) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.notInVoiceChannel);
@@ -24,7 +23,7 @@ const checkMusic = (client, message) => {
 
 	if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) {
 		musicCheckEmbed.setDescription(musicStrings.notSameVoiceChannel);
-		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => { // TODO: test
+		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (notSameVoiceChannel)', e);
 		});
 		return false;
@@ -39,8 +38,7 @@ const checkMusic = (client, message) => {
  * @returns {Boolean} Music playing state
  */
 const checkQueueExists = (client, message) => {
-
-	if (!client.player.getQueue(message)) {
+	if (!client.player.getQueue(message.guild)) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.noMusicPlaying);
 		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {

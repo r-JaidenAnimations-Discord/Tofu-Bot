@@ -12,3 +12,5 @@ module.exports = (client, message, query, tracks) => {
 		throw new Tantrum(client, 'searchCancel.js', 'Error on sending searchCancelEmbed', e);
 	});
 };
+
+// NOT IN DOCS

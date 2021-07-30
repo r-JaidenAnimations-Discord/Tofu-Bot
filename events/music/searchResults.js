@@ -7,3 +7,5 @@ module.exports = (client, message, query, tracks) => {
 		throw new Tantrum(client, 'searchResults.js', 'Error on sending searchResults', e);
 	});
 };
+
+// NOT IN DOCS

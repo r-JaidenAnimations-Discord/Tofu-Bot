@@ -12,3 +12,5 @@ module.exports = (client, message, queue, playlist) => {
 		throw new Tantrum(client, 'playlistAdd.js', 'Error on sending queuedEmbed', e);
 	});
 };
+
+// NOT IN DOCS

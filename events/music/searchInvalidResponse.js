@@ -20,3 +20,5 @@ module.exports = (client, message, query, tracks, content, collector) => {
 		});
 	}
 };
+
+// NOT IN DOCS

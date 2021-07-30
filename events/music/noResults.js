@@ -2,7 +2,7 @@ const { tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 
-module.exports = (client, message, query) => {
+module.exports = (client, query) => {
 
 	const noResultsEmbed = new Discord.MessageEmbed()
 		.setColor(tofuError)
@@ -12,3 +12,5 @@ module.exports = (client, message, query) => {
 		throw new Tantrum(client, 'noResults.js', 'Error on sending noResultsEmbed', e);
 	});
 };
+
+// NOT IN DOCS

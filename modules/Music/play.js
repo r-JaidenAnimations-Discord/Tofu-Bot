@@ -19,7 +19,7 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 
-		// if (!checkMusic(client, message)) return;
+		if (!checkMusic(client, message)) return;
 
 		// TODO: Refactor and update for resume
 		// if (client.player.getQueue(message)) {
@@ -52,7 +52,9 @@ module.exports = {
 		}
 
 		// await client.player.play(message, args.join(' '), { firstResult: true });
-		const queue = client.player.createQueue(message.guild);
+		const queue = client.player.createQueue(message.guild, {
+			metadata: message
+		});
 		const song = await client.player.search(args.join(' '), {
 			requestedBy: message.author
 		});

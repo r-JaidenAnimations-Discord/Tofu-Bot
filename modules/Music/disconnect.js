@@ -16,15 +16,17 @@ module.exports = {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		client.player.setRepeatMode(message, false);
-		const success = client.player.stop(message);
+		const queue = client.player.getQueue(message.guild);
+		if (!queue) return message.channel.send('no queue exists');
 
-		if (success) {
+		try {
+			queue.setRepeatMode(0);
+			queue.destroy();
 			await message.react('👋').catch(e => {
 				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);
 			});
-		} else {
-			throw new Tantrum(client, 'disconnect.js', 'Error on disconnecting', 'No message');
+		} catch (e) {
+			throw new Tantrum(client, 'disconnect.js', 'Error when disconnecting.', e);
 		}
 	},
 };

@@ -1,4 +1,4 @@
-const { tofuOrange } = require('#colors');
+const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
@@ -29,6 +29,20 @@ module.exports = {
 			throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);
 		}
 
-		client.player.play(message, args.join(' '));
+		// client.player.play(message, args.join(' '));
+		const tracks = (
+			await client.player.search(args.join(" "), {
+				requestedBy: message.author
+			})
+		).tracks;
+
+		const messageBody = tracks.map((track, i) => {
+			return `${i + 1}) ${track.title}    ${track.duration}`;
+		}).slice(0, 8).join('\n');
+		const footer = `${queue.tracks.length > 8 ? `${queue.tracks.length - 8} more track(s)` : '     This is the end of the list!'}`;
+
+		message.channel.send(`\`\`\`nim\n${messageBody}\n${footer}\n\`\`\``).catch(e => {
+			throw new Tantrum(client, 'queue.js', 'Error on sending queue', e);
+		}); //TODO: pagination
 	},
 };

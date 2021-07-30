@@ -455,7 +455,8 @@ module.exports = {
 				'Move databases to deployData'
 			],
 			removals: [
-				'DMable commands'
+				'DMable commands',
+				'Shrimp reminder'
 			]
 		},
 	]

@@ -26,11 +26,9 @@ const client = new Discord.Client({
 	]
 });
 const { randomStatus } = require('#utils/statusFunction.js');
-const { remindShrimp } = require('#utils/shrimpReminder.js');
 const { tagSequelize, movieSuggestionSequelize } = require('./handlers/databases.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
-setInterval(function() { remindShrimp(client) }, 60 * 60 * 1000); // remind Shrimp hourly
 
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();

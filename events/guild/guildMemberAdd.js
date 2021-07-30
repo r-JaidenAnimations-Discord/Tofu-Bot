@@ -1,7 +1,7 @@
 const { devMode, gradyID, maxID } = require('#memberIDs');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
-const { joinMessages } = require('#commandData/greetings.json');
+const { joinMessages } = require('#assets/greeting/greetings.json');
 
 module.exports = async (client, member) => {
 	const { jaidenServerID, generalChannelID, rulesChannelID } = client.config;

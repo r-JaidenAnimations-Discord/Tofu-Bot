@@ -450,7 +450,8 @@ module.exports = {
                 'Reworked settings with settings manager',
                 'Fixed \'Can\'t talk\' DM message',
                 'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval',
-                'Embedify already enabled/disabled message in settings'
+                'Embedify already enabled/disabled message in settings',
+                'Restructured files and assets'
             ],
             removals: [
                 'DMable commands'

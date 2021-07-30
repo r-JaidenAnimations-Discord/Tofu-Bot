@@ -29,7 +29,7 @@ module.exports = {
 
 		var downStatus = null;
 
-		const attachment = new Discord.MessageAttachment('./commanddata/minecraff.png', 'minecraff.png');
+		const attachment = new Discord.MessageAttachment('./assets/commandMinecraft/minecraff.png', 'minecraff.png');
 		const minecraftEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
 			.setTitle('Jaiden Animations Minecraft Server')

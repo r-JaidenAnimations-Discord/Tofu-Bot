@@ -1,8 +1,9 @@
+// TODO: Fix error: numberReactions.get is not a function
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { promptMessage } = require('#utils/promptMessage.js');
-const { trivia } = require('#commandData/jaidenTriviaList.js');
+const { trivia } = require('#assets/commandTrivia/jaidenTriviaList.js');
 
 const numberReactions = {
 	1: '1️⃣',

@@ -127,7 +127,7 @@ module.exports = {
 			}
 
 			case 'reset': {
-				const defaults = readJSONSync('./commanddata/Configuration/defaults.json', 'utf-8');
+				const defaults = readJSONSync('./assets/Configuration/defaults.json', 'utf-8');
 
 				if (JSON.stringify(readData) === JSON.stringify(defaults)) return message.channel.send('The bot is already in its default settings!');
 

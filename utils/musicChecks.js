@@ -1,7 +1,7 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { musicStrings } = require('#commandData/strings.json');
+const { musicStrings } = require('#assets/global/strings.json');
 
 let musicCheckEmbed = new Discord.MessageEmbed();
 

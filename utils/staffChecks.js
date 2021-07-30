@@ -1,4 +1,4 @@
-const { teraID, maxID, gradyID, retainedID } = require('../commanddata/memberIDs.json');
+const { teraID, maxID, gradyID, retainedID } = require('#memberIDs');
 const { Permissions } = require('discord.js');
 const Tantrum = require('#tantrum');
 

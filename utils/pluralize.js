@@ -1,3 +1,5 @@
+// Todo refactor
+
 /**
  * Add an 's' to a word when needed
  * @param {String} word The word to be possibly pluralized

@@ -58,5 +58,13 @@ module.exports = {
 				}
 			}
 		}
+
+		// The queue repeat mode. This can be one of:
+		// export enum QueueRepeatMode {
+		// 	OFF = 0,
+		// 	TRACK = 1,
+		// 	QUEUE = 2,
+		// 	AUTOPLAY = 3
+		// }
 	},
 };

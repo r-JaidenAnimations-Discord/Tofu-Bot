@@ -12,7 +12,6 @@ async function promptMessage(message, author, time, ...validReactions) {
 
 	for (const reaction of validReactions) {
 		message.react(reaction);
-		// eslint-disable-next-line no-inner-declarations
 		const d = async () => new Promise(r => setTimeout(r, 1000));
 		await d();
 	}

@@ -1,7 +1,7 @@
 {
   "name": "tofubot",
-  "version": "1.12.0",
-  "releaseDate": "06/26/2021",
+  "version": "2.0.0",
+  "releaseDate": "TBA",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,18 +14,18 @@
   "dependencies": {
     "@discord-player/extractor": "^3.0.2",
     "@discordjs/opus": "^0.4.0",
-    "@discordjs/voice": "^0.5.1",
+    "@discordjs/voice": "^0.5.5",
     "ascii-table": "0.0.9",
     "beautify": "0.0.8",
     "chalk": "^4.1.1",
     "common-tags": "^1.8.0",
-    "discord-player": "^5.0.0-dev.8ce04b3.1625486509",
+    "discord-player": "^5.0.0-dev.m3",
     "discord.js": "github:r-JaidenAnimations-Discord/discord.js#master",
     "ffmpeg-static": "^4.4.0",
     "fs-extra": "^9.1.0",
     "opusscript": "0.0.8",
     "owofy": "^1.0.2",
-    "sequelize": "^6.6.4",
+    "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2"
   },
   "devDependencies": {},

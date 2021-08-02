@@ -17,10 +17,9 @@ module.exports = {
 		if (!checkQueueExists(client, message)) return;
 
 		const queue = client.player.getQueue(message.guild);
-		if (!queue) return message.channel.send('no queue exists');
 
 		try {
-			queue.setRepeatMode(0);
+			queue.setRepeatMode(0); // Removing this results in a 'cannot use destroyed queue' message, might be a discord-player bug
 			queue.destroy();
 			await message.react('👋').catch(e => {
 				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);

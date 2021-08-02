@@ -438,7 +438,8 @@ module.exports = {
 				'Intents and partials',
 				'jsconfig.json for subpath import intellisense',
 				'Settings manager',
-				'Autoresponders'
+				'Autoresponders',
+				'Both looping current track and queue'
 			],
 			fixes: [
 				'Complete overhaul to DJS master branch (upcoming DJS 13) *(This is a single line but really took days of work so yes)*',

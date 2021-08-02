@@ -7,8 +7,8 @@ module.exports = {
 	name: 'loop',
 	helpTitle: 'Loop',
 	category: 'Music',
-	usage: 'loop (queue)',
-	description: 'Enable or disable looping',
+	usage: 'loop',
+	description: 'Toggle trough the looping modes',
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
@@ -18,53 +18,24 @@ module.exports = {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		let loopEmbed = new Discord.MessageEmbed()
-			.setColor(tofuGreen);
-
-		if (args.join(' ').toLowerCase() === 'queue') {
-			if (client.player.getQueue(message).loopMode) {
-				try {
-					client.player.setLoopMode(message, false);
-					loopEmbed.setDescription('Looping is now **disabled.**');
-					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
-				} catch (e) {
-					throw new Tantrum(client, 'loop.js', 'Error on disabling loop', e);
-				}
-			} else {
-				try {
-					client.player.setLoopMode(message, true);
-					loopEmbed.setDescription('Now looping the **queue.**');
-					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
-				} catch (e) {
-					throw new Tantrum(client, 'loop.js', 'Error on looping queue', e);
-				}
-			}
-		} else {
-			if (client.player.getQueue(message).repeatMode) {
-				try {
-					client.player.setRepeatMode(message, false);
-					loopEmbed.setDescription('Looping is now **disabled.**');
-					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
-				} catch (e) {
-					throw new Tantrum(client, 'loop.js', 'Error on disabling loop', e);
-				}
-			} else {
-				try {
-					client.player.setRepeatMode(message, true);
-					loopEmbed.setDescription('Now looping the **current track.**');
-					return message.channel.send({ embeds: [loopEmbed] }); // TODO: test
-				} catch (e) {
-					throw new Tantrum(client, 'loop.js', 'Error on looping song', e);
-				}
-			}
+		const loopModes = {
+			0: 'Looping is now **disabled**',
+			1: 'Now looping the **current track.**',
+			2: 'Now looping the **queue**'
 		}
 
-		// The queue repeat mode. This can be one of:
-		// export enum QueueRepeatMode {
-		// 	OFF = 0,
-		// 	TRACK = 1,
-		// 	QUEUE = 2,
-		// 	AUTOPLAY = 3
-		// }
+		const queue = client.player.getQueue(message.guild);
+
+		const loopEmbed = new Discord.MessageEmbed()
+			.setColor(tofuGreen);
+
+		let loopMode = queue.repeatMode;
+		loopMode++;
+		if (loopMode > 2) loopMode = 0;
+		loopEmbed.setDescription(`${loopModes[loopMode]}`);
+		if (!queue.setRepeatMode(loopMode)) throw new Tantrum(client, 'loop.js', 'Error on setting loopMode', queue.repeatMode);
+		message.channel.send({ embeds: [loopEmbed] }).catch(e => {
+			throw new Tantrum(client, 'loop.js', 'Error on sending loopEmbed', e);
+		});
 	},
 };

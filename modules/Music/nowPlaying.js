@@ -20,29 +20,21 @@ module.exports = {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		// In between songs, there is no now playing. In that case, return to avoid erroring out.
-		if (!client.player.nowPlaying(message)) return;
+		const queue = client.player.getQueue(message.guild);
 
-		const track = client.player.nowPlaying(message);
-		const queue = client.player.getQueue(message);
+		const track = queue.current;
+		if (!track) return; // In between songs, there is no now playing. In that case, return to avoid erroring out.
 
-		let totalTrackTime = queue.playing.durationMS;
-		let currentTime = queue.currentStreamTime;
+		const totalTrackTime = track.durationMS;
+		const currentTime = queue.streamTime;
 
-		let humanCurrentTime = humanReadableDuration(currentTime);
-		let humanTotalTime = humanReadableDuration(totalTrackTime);
-
-		//const filters = [];
-
-		//Object.keys(client.player.getQueue(message).filters).forEach((filterName) => client.player.getQueue(message).filters[filterName]) ? filters.push(filterName) : false;
-
-		//message.channel.send(track.durationMS)
+		const humanTotalTime = humanReadableDuration(totalTrackTime);
+		const humanCurrentTime = humanReadableDuration(currentTime);
 
 		const nowPlayingEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
 			.setDescription(`[${track.title}](${track.url}) [${track.requestedBy}]`)
-			//.setFooter(client.player.createProgressBar(message, { timecodes: true, length: 20 }));
-			.setFooter(`${createBar(totalTrackTime, currentTime, 20)[0]} ${humanCurrentTime} / ${humanTotalTime}`)
+			.setFooter(`${createBar(totalTrackTime, currentTime, 20)[0]} ${humanCurrentTime} / ${humanTotalTime}`);
 
 		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => { // TODO: test
 			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);

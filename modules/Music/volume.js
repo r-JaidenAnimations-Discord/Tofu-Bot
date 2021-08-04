@@ -30,7 +30,7 @@ module.exports = {
 			volumeEmbed.setDescription('The value you entered is not a number');
 			return message.channel.send({ embeds: [volumeEmbed] }).catch(e => {
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (invalid number)', e);
-			}); // TODO: test
+			});
 		}
 
 		if (Math.round(parseInt(args[0])) < 1 || Math.round(parseInt(args[0])) > 100) {
@@ -40,8 +40,6 @@ module.exports = {
 				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (number not between 1 and 100)', e);
 			});
 		}
-
-		// const success = client.player.setVolume(message, parseInt(args[0]));
 
 		if (queue.setVolume(parseInt(args[0]))) {
 			volumeEmbed.setColor(tofuGreen);

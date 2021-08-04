@@ -18,24 +18,20 @@ module.exports = {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		if (!client.player.getQueue(message).paused) {
-			let alreadyPlayingEmbed = new Discord.MessageEmbed()
-				.setColor(tofuOrange)
-				.setDescription('The music is already playing!');
+		const queue = client.player.getQueue(message.guild);
 
-			return message.channel.send({ embeds: [alreadyPlayingEmbed] }).catch(e => { // TODO: Embedify and test
-				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e)
-			});
-		}
+		// Just like in pause.js, there is no 'paused' property yet
+		// if (!client.player.getQueue(message).paused) {
+		// 	let alreadyPlayingEmbed = new Discord.MessageEmbed()
+		// 		.setColor(tofuOrange)
+		// 		.setDescription('The music is already playing!');
 
-		const success = client.player.resume(message);
+		// 	return message.channel.send({ embeds: [alreadyPlayingEmbed] }).catch(e => { // TODO: Embedify and test
+		// 		throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e)
+		// 	});
+		// }
 
-		// We have to do this because of a bug in discord.js
-		client.player.resume(message);
-		client.player.pause(message);
-		client.player.resume(message);
-
-		if (success) {
+		if (queue.setPaused(false)) {
 			await message.react('▶️').catch(e => {
 				throw new Tantrum(client, 'resume.js', 'Error on reacting resume', e)
 			});

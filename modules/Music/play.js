@@ -1,7 +1,7 @@
 /**
  * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
  */
-const { tofuOrange } = require('#colors');
+const { tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
@@ -41,21 +41,32 @@ module.exports = {
 			});
 		}
 
-		// await client.player.play(message, args.join(' '), { firstResult: true });
 		const queue = client.player.createQueue(message.guild, {
 			metadata: message
 		});
-		const song = await client.player.search(args.join(' '), {
+		const track = await client.player.search(args.join(' '), {
 			requestedBy: message.author
-		});
+		}).then(x => x.tracks[0]);
+
+		if (!track) {
+			const noResultsEmbed = new Discord.MessageEmbed()
+				.setColor(tofuError)
+				.setDescription('No matches found!');
+
+			return message.channel.send({ embeds: [noResultsEmbed] }).catch(e => {
+				throw new Tantrum(client, 'play.js', 'Error on sending noResultsEmbed', e);
+			});
+		}
 
 		await queue.connect(message.member.voice.channel).catch(e => {
+			queue.destroy();
+			new Tantrum(client, 'play.js', 'Error when connecting to vc', e);
 			message.channel.send('Something went wrong when joining').catch(f => {
-				throw new Tantrum(client, 'play.js', 'Error on sending failed to join message', e);
-			})
+				throw new Tantrum(client, 'play.js', 'Error on sending failed to join message', f);
+			});
 		});
 
-		queue.addTrack(song.tracks[0]);
-		queue.play();
+		queue.addTrack(track);
+		if (!queue.playing) queue.play();
 	},
 };

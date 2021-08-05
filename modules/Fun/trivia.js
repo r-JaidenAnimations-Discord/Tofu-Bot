@@ -47,22 +47,22 @@ module.exports = {
 
 		let answersMarkedList = q.answers.map((answer, i) =>
 			i === q.correct ?
-				`'✅${numberReactions[i + 1]}**: ${answer}**` :
-				`'❌${numberReactions[i + 1]}: ${answer}`
+				`✅ ${numberReactions[i + 1]}**: ${answer}**` :
+				`❌ ${numberReactions[i + 1]}: ${answer}`
 		).join('\n\n');
 
-		let correctedEmbed = new Discord.MessageEmbed()
-			.setTitle(q.question)
+		const correctedEmbed = new Discord.MessageEmbed()
+			.setTitle(`${q.question}`)
 			.setDescription(`${answersMarkedList}`)
 			.setColor(tofuGreen);
 
-		const embeds = [new Discord.MessageEmbed()
-			.setTitle(q.question)
-			.setDescription(`${q.answers.map((e, i) => `${numberReactions.get(i)}: ${e}`).join('\n\n')}`)
+		const mainEmbed = new Discord.MessageEmbed()
+			.setTitle(`${q.question}`)
+			.setDescription(`${q.answers.map((e, i) => `${numberReactions[i]}: ${e}`).join('\n\n')}`)
 			.setColor(tofuGreen)
-			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`)];
+			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
-		message.channel.send({ embeds }).then(async sentEmbed => {
+		message.channel.send({ embeds: [mainEmbed] }).then(async sentEmbed => {
 			for (let i = 1; i <= q.answers.length; i++) {
 				//console.log(`${numberReactions.get(i + 1)}`);
 				try {

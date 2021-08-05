@@ -10,7 +10,7 @@ module.exports = async (client, member) => {
 
 	if (member.id === gradyID) {
 		try {
-			client.channels.cache.get(generalChannelID).send('GRADY, you\'re back!!!! omgomgomgomgomg');
+			// client.channels.cache.get(generalChannelID).send('GRADY, you\'re back!!!! omgomgomgomgomg');
 			client.users.cache.get(maxID).send('GRADY IS BACK!!!!');
 		} catch (e) {
 			throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending grady joined message.', e)

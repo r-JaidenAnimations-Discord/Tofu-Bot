@@ -13,4 +13,4 @@ module.exports = (client, query) => {
 	});
 };
 
-// NOT IN DOCS
+// NOT IN DOCS, likely no longer needed

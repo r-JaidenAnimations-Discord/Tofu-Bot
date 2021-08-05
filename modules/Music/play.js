@@ -18,28 +18,18 @@ module.exports = {
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 
-		// TODO: Refactor and update for resume
-		// if (client.player.getQueue(message)) {
-		// 	if (client.player.getQueue(message).paused && !args[0]) {
-		// 		const success = client.player.resume(message);
-
-		// 		// We have to do this because of a bug in discord.js
-		// 		//client.player.resume(message);
-		// 		client.player.pause(message);
-		// 		client.player.resume(message);
-
-		// 		if (success) {
-		// 			return await message.react('👌').catch(e => {
-		// 				throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
-		// 			});
-		// 		} else {
-		// 			throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
-		// 		}
-		// 	}
-		// }
+		const resumeQueue = client.player.getQueue(message.guild);
+		if (resumeQueue && resumeQueue.connection?.paused) {
+			if (resumeQueue.setPaused(false)) {
+				return await message.react('👌').catch(e => {
+					throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
+				});
+			} else {
+				throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
+			}
+		}
 
 		if (!args[0]) {
 			const noQueryEmbed = new Discord.MessageEmbed()

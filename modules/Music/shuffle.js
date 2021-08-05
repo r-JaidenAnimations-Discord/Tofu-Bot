@@ -16,9 +16,9 @@ module.exports = {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		const success = client.player.shuffle(message);
+		const queue = client.player.getQueue(message.guild);
 
-		if (success) {
+		if (queue.shuffle()) { // TODO: test once i figure out adding multiple tracks
 			await message.react('🔀').catch(e => {
 				throw new Tantrum(client, 'shuffle.js', 'Error sending shuffled message', e);
 			});

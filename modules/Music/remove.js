@@ -17,10 +17,13 @@ module.exports = {
 	execute: async function(client, message, args) {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
-		const queue = client.player.getQueue(message);
+
+		const queue = client.player.getQueue(message.guild);
+
 		if (queue.tracks.length < 2) return message.channel.send('There\'s no more music to remove').catch(e => {
 			throw new Tantrum(client, 'remove.js', 'Error on sending nothing to remove message', e)
 		});
+
 		if (!args[0] ||
 			isNaN(args[0]) ||
 			Number(args[0]) === 0 ||
@@ -31,10 +34,12 @@ module.exports = {
 			});
 
 		try {
-			const success = await client.player.remove(message, Number(args[0]) - 1);
+			const success = await queue.remove(Number(args[0]) - 1); // TODO: test with v5 once i fix queue > 1
+
 			const removedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)
 				.setDescription(`Removed [${success.title}](${success.url}) [${success.requestedBy}]`);
+
 			message.channel.send({ embeds: [removedEmbed] }).catch(e => { // TODO: test
 				throw new Tantrum(client, 'remove.js', 'Error on sending removedEmbed', e)
 			});

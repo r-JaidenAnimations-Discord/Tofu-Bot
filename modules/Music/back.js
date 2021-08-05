@@ -16,8 +16,11 @@ module.exports = {
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
+		const queue = client.player.getQueue(message.guild);
+
 		try {
-			client.player.back(message);
+			// client.player.back(message);
+			queue.back(); // TODO: test
 			await message.react('👌');
 		} catch (e) {
 			throw new Tantrum(client, 'back.js', 'Error on going back in queue', e);

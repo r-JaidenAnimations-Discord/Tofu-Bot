@@ -15,6 +15,7 @@ module.exports = {
 	aliases: ['src', 'find'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
+		message.channel.send('Search results will show, but further handling hasn\'t been implemented yet');
 		if (!checkMusic(client, message)) return;
 
 		if (!args[0]) {

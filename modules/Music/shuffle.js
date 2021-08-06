@@ -13,6 +13,7 @@ module.exports = {
 	aliases: ['randomize'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
+		return message.channel.send('Sorry, this isn\'t ready for use yet, check back in later!');
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 

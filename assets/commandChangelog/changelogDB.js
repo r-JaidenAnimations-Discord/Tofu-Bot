@@ -430,8 +430,8 @@ module.exports = {
 			removals: []
 		},
 		{
-			version: 'NEXT',
-			aliases: [],
+			version: '2.0.0-dev Milestone 1',
+			aliases: ['2', '2.0', '2.0.0'],
 			additions: [
 				'Interactive buttons',
 				'Slash commands',
@@ -453,7 +453,9 @@ module.exports = {
 				'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval',
 				'Embedify already enabled/disabled message in settings',
 				'Restructured files and assets',
-				'Move databases to deployData'
+				'Move databases to deployData',
+				'More simple counter in cooldown message',
+				'Embedify command already enabled/disabled message'
 			],
 			removals: [
 				'DMable commands',

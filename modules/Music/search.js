@@ -17,32 +17,26 @@ module.exports = {
 	execute: async function(client, message, args) {
 		if (!checkMusic(client, message)) return;
 
-		try {
-			if (!args[0]) {
-				let noQueryEmbed = new Discord.MessageEmbed()
-					.setColor(tofuOrange)
-					.setDescription('To find a song to play, you need to specify which song you want to play!');
+		if (!args[0]) {
+			const noQueryEmbed = new Discord.MessageEmbed()
+				.setColor(tofuOrange)
+				.setDescription('To find a song to play, you need to specify which song you want to play!');
 
-				return message.channel.send({ embeds: { noQueryEmbed } }); // TODO: test
-			}
-		} catch (e) {
-			throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);
+			return message.channel.send({ embeds: [noQueryEmbed] }).catch(e => {
+				throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);
+			});
 		}
 
-		// client.player.play(message, args.join(' '));
-		const tracks = (
-			await client.player.search(args.join(" "), {
-				requestedBy: message.author
-			})
-		).tracks;
+		const tracks = await client.player.search(args.join(' '), {
+			requestedBy: message.author
+		}).then(x => x.tracks);
+		console.log(tracks)
 
-		const messageBody = tracks.map((track, i) => {
-			return `${i + 1}) ${track.title}    ${track.duration}`;
-		}).slice(0, 8).join('\n');
-		const footer = `${queue.tracks.length > 8 ? `${queue.tracks.length - 8} more track(s)` : '     This is the end of the list!'}`;
+		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.title}`).join('\n');
 
-		message.channel.send(`\`\`\`nim\n${messageBody}\n${footer}\n\`\`\``).catch(e => {
-			throw new Tantrum(client, 'queue.js', 'Error on sending queue', e);
-		}); //TODO: pagination
+		message.channel.send(`\`\`\`nim\n${searchResultString}\n\`\`\``).catch(e => {
+			throw new Tantrum(client, 'searchResults.js', 'Error on sending searchResults', e);
+		});
+
 	},
 };

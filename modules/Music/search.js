@@ -31,7 +31,6 @@ module.exports = {
 		const tracks = await client.player.search(args.join(' '), {
 			requestedBy: message.author
 		}).then(x => x.tracks);
-		console.log(tracks)
 
 		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.title}`).join('\n');
 

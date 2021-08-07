@@ -430,6 +430,16 @@ module.exports = {
 			removals: []
 		},
 		{
+			version: '1.12.2',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Fixed \'TypeError: Cannot read property \'replace\' of undefined\' error in eval',
+				'Updated deps'
+			],
+			removals: []
+		},
+		{
 			version: '2.0.0-dev Milestone 1',
 			aliases: ['2', '2.0', '2.0.0'],
 			additions: [

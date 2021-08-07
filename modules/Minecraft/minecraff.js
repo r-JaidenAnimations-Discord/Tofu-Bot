@@ -58,7 +58,7 @@ module.exports = {
 				// console.log('Got a response: ', APIresponse.ip);
 				var playerList = 'Sadly, no online members';
 				var userCount = 0;
-				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server is down**'}`
+				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`
 
 				if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);
 
@@ -75,6 +75,7 @@ module.exports = {
 				}
 
 				minecraftEmbed.addField('Server status:', downStatus);
+				if (!APIresponse.online) minecraftEmbed.setFooter('This is what the API told me, it might actually be running but there is caching etc.');
 
 				if (msg.deletable) msg.delete();
 				message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {

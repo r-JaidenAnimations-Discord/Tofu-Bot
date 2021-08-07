@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
+const { generalStrings } = require('#assets/global/strings.json');
 
 module.exports = {
 	name: 'minecraft',
@@ -18,7 +19,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { minecraftIP } = client.config;
 
-		message.channel.startTyping();
+		let msg = await message.channel.send(generalStrings.loading);
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -41,7 +42,7 @@ module.exports = {
 		if (settingsFile.minecraftMaintenance.state) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
-			message.channel.stopTyping();
+			if (msg.deletable) msg.delete();
 			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] });
 		}
 
@@ -75,13 +76,13 @@ module.exports = {
 
 				minecraftEmbed.addField('Server status:', downStatus);
 
-				message.channel.stopTyping();
+				if (msg.deletable) msg.delete();
 				message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {
 					console.log(`kek ${e}`);
 				});
 			});
 		}).on('error', function(e) {
-			message.channel.stopTyping();
+			if (msg.deletable) msg.delete();
 			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
 			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);

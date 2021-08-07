@@ -2,6 +2,7 @@ const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const https = require('https');
 const Tantrum = require('#tantrum');
+const { generalStrings } = require('#assets/global/strings.json');
 
 module.exports = {
 	name: 'joke',
@@ -15,7 +16,7 @@ module.exports = {
 	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		message.channel.startTyping();
+		let msg = await message.channel.send(generalStrings.loading);
 
 		// API endpoint
 		const url = `https://official-joke-api.appspot.com/random_joke`;
@@ -38,7 +39,7 @@ module.exports = {
 				jokeEmbed.setTitle(APIresponse.setup)
 				jokeEmbed.setDescription(`||${APIresponse.punchline}||`)
 
-				message.channel.stopTyping();
+				if (msg.deletable) msg.delete();
 				message.channel.send({ embeds: [jokeEmbed] }).catch(e => {
 					console.log(`kek ${e}`)
 				});
@@ -48,9 +49,9 @@ module.exports = {
 		});
 
 		function sendError(e) {
-			message.channel.stopTyping();
+			if (msg.deletable) msg.delete();
 			new Tantrum(client, 'joke.js', 'API did not respond', e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
+			message.channel.send({ content: '', embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'joke.js', 'Error on sending error embed', f);
 			});
 		}

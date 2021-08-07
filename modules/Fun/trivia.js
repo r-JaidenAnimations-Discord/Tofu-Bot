@@ -58,7 +58,7 @@ module.exports = {
 
 		const mainEmbed = new Discord.MessageEmbed()
 			.setTitle(`${q.question}`)
-			.setDescription(`${q.answers.map((e, i) => `${numberReactions[i]}: ${e}`).join('\n\n')}`)
+			.setDescription(`${q.answers.map((e, i) => `${numberReactions[i + 1]}: ${e}`).join('\n\n')}`)
 			.setColor(tofuGreen)
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 

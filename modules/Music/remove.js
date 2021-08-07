@@ -15,7 +15,6 @@ module.exports = {
 	aliases: ['rm', 'delete', 'del'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		return message.channel.send('Sorry, this isn\'t ready for use yet, check back in later!');
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
@@ -34,17 +33,16 @@ module.exports = {
 				throw new Tantrum(client, 'remove.js', 'Error on sending invalid argument message', e)
 			});
 
-		try {
-			const success = await queue.remove(Number(args[0]) - 1); // TODO: test with v5 once i fix queue > 1
-
+		const success = await queue.remove(Number(args[0]) - 1);
+		if (success) {
 			const removedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)
 				.setDescription(`Removed [${success.title}](${success.url}) [${success.requestedBy}]`);
 
-			message.channel.send({ embeds: [removedEmbed] }).catch(e => { // TODO: test
+			message.channel.send({ embeds: [removedEmbed] }).catch(e => {
 				throw new Tantrum(client, 'remove.js', 'Error on sending removedEmbed', e)
 			});
-		} catch (e) {
+		} else {
 			throw new Tantrum(client, 'back.js', 'Error on removing song', e);
 		}
 	},

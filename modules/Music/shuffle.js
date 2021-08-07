@@ -13,13 +13,12 @@ module.exports = {
 	aliases: ['randomize'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		return message.channel.send('Sorry, this isn\'t ready for use yet, check back in later!');
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
 		const queue = client.player.getQueue(message.guild);
 
-		if (queue.shuffle()) { // TODO: test once i figure out adding multiple tracks
+		if (queue.shuffle()) {
 			await message.react('🔀').catch(e => {
 				throw new Tantrum(client, 'shuffle.js', 'Error sending shuffled message', e);
 			});

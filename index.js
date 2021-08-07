@@ -60,11 +60,12 @@ switch (launchArgs[0]) {
 // Log in
 client.login(client.config.apiKey);
 
+
 //if sh!t goes wrong
-/*client.on('rateLimit', r => {
+client.on('rateLimit', r => {
 	console.warn(`${chalk.yellow('[RATELIMIT]')}: ${r}`);
 	console.log(r);
-});*/
+});
 client.on('warn', w => {
 	console.warn(`${chalk.yellow('[Warn]')}: ${w}`);
 	new Tantrum(client, 'index.js', '[WARN]: Unspecified warning', w);

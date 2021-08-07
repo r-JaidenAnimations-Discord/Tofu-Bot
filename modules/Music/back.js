@@ -13,15 +13,13 @@ module.exports = {
 	aliases: ['prev', 'previous'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		return message.channel.send('Sorry, this isn\'t ready for use yet, check back in later!');
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
 		const queue = client.player.getQueue(message.guild);
 
 		try {
-			// client.player.back(message);
-			queue.back(); // TODO: test
+			await queue.back();
 			await message.react('👌');
 		} catch (e) {
 			throw new Tantrum(client, 'back.js', 'Error on going back in queue', e);

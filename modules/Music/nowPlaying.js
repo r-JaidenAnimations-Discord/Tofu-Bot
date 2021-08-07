@@ -36,7 +36,7 @@ module.exports = {
 			.setDescription(`[${track.title}](${track.url}) [${track.requestedBy}]`)
 			.setFooter(`${createBar(totalTrackTime, currentTime, 20)[0]} ${humanCurrentTime} / ${humanTotalTime}`);
 
-		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => { // TODO: test
+		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {
 			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);
 		});
 	},

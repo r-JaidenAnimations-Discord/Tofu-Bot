@@ -46,7 +46,7 @@ module.exports = {
 		});
 		const track = await client.player.search(args.join(' '), {
 			requestedBy: message.author
-		}).then(x => x.tracks[0]);
+		});
 
 		if (!track) {
 			const noResultsEmbed = new Discord.MessageEmbed()
@@ -58,6 +58,8 @@ module.exports = {
 			});
 		}
 
+		track.playlist ? queue.addTracks(track.tracks) : queue.addTrack(track.tracks[0]);
+
 		await queue.connect(message.member.voice.channel).catch(e => {
 			queue.destroy();
 			new Tantrum(client, 'play.js', 'Error when connecting to vc', e);
@@ -66,7 +68,6 @@ module.exports = {
 			});
 		});
 
-		queue.addTrack(track);
-		if (!queue.playing) queue.play();
+		if (!queue.playing) await queue.play();
 	},
 };

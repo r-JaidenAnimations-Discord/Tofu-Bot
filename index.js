@@ -34,14 +34,7 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync('./modules/');
-client.player = new Player(client, {
-	leaveOnEndCooldown: 300000,
-	leaveOnStopCooldown: 300000,
-	leaveOnEmptyCooldown: 200000,
-	autoSelfDeaf: true,
-	fetchBeforeQueued: false, // Default value is false | Property to have all spotify songs fetched before playing. Put in here because i want to experiment with it.
-	enableLive: true
-});
+client.player = new Player(client);
 client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 client.interactions = new Discord.Collection();

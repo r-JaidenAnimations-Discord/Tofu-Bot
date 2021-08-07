@@ -42,6 +42,13 @@ module.exports = {
 		}
 
 		const queue = client.player.createQueue(message.guild, {
+			// i think this is the way
+
+			leaveOnEnd: false,
+			// leaveOnStop: null,
+			// leaveOnEmpty: null,
+			leaveOnEmptyCooldown: 10000,
+			autoSelfDeaf: true,
 			metadata: message
 		});
 		const track = await client.player.search(args.join(' '), {

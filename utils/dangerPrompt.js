@@ -38,12 +38,12 @@ const buttonedDangerCommandPrompt = async (message) => {
 		.setTimestamp();
 
 	const yesButton = new Discord.MessageButton()
-		.setCustomID('yes')
+		.setCustomId('yes')
 		.setLabel('Continue')
 		.setStyle('SUCCESS');
 
 	const noButton = new Discord.MessageButton()
-		.setCustomID('no')
+		.setCustomId('no')
 		.setLabel('k sowwy no continue')
 		.setStyle('DANGER');
 

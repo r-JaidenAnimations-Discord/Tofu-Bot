@@ -4,7 +4,7 @@ const Discord = require('discord.js');
 const fs = require('fs-extra');
 const Tantrum = require('#tantrum');
 const { autoResponders } = require('../../handlers/autoResponder.js');
-const { buttonedDangerCommandPrompt } = require('#utils/dangerPrompt.js');
+const { dangerCommandPrompt } = require('#utils/dangerPrompt.js');
 const { simpleDuration } = require('#utils/buildTimeString.js');
 
 module.exports = async (client, message) => {
@@ -143,7 +143,7 @@ module.exports = async (client, message) => {
 		}
 
 		// Warn when a command is executed from the devserver to the main deploy
-		if (message.guild.id !== jaidenServerID && !devMode && command.isDangerous && !(await buttonedDangerCommandPrompt(message))) return;
+		if (/*message.guild.id !== jaidenServerID && !devMode && */command.isDangerous && !(await dangerCommandPrompt(message))) return;
 	}
 
 	// Is this command enabled?

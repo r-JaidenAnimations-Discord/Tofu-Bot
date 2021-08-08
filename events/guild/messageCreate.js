@@ -82,7 +82,7 @@ module.exports = async (client, message) => {
 	});
 
 	// Ali trust
-	if (message.author.id === banAli && !at) return message.reply({ content: 'Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fucking conceive a thought again.', files: ['./assets/memberTrust/infinitecringe.png'] }).catch(e => {
+	if (message.author.id === banAli && !at) return message.reply({ content: 'Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fscking conceive a thought again.', files: ['./assets/memberTrust/infinitecringe.png'] }).catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
 	});
 
@@ -94,7 +94,7 @@ module.exports = async (client, message) => {
 			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e);
 		});
 
-		else if (bamboozle.includes(message.author.id)) return message.channel.send({ content: 'Ahahahahahahah get fucked you foul piece of shit', files: ['./assets/blacklisting/lemao.png'] }).catch(e => {
+		else if (bamboozle.includes(message.author.id)) return message.channel.send({ content: 'Ahahahahahahah get fscked you foul piece of $h!t', files: ['./assets/blacklisting/lemao.png'] }).catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
 		});
 

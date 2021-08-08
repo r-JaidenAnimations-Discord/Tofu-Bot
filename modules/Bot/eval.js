@@ -3,7 +3,7 @@ const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const beautify = require('beautify');
-// NOTE TO SELF: THIS IS SOME DANGEROUS SHIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
+// NOTE TO SELF: THIS IS SOME DANGEROUS $HIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
 module.exports = {
 	name: 'eval',
@@ -21,7 +21,7 @@ module.exports = {
 		if (message.author.id !== teraID && message.author.id !== retainedID && message.author.id !== maxID) {
 			try {
 				message.channel.send('No dude. I don\'t want anyone but my masters mess with code in the bot...');
-				return client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`**When the shit hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`)] });
+				return client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`**When the sh!t hits the fan**\n${message.author} tried to use eval, get mad`).setColor(tofuRed).setFooter(`ID: ${message.author.id}`)] });
 			} catch (e) {
 				throw new Tantrum(client, 'eval.js', 'Error on sending only masters error', e);
 			}

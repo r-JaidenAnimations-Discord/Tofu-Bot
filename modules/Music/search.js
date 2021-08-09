@@ -2,6 +2,7 @@ const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
+const { constructQueue } = require('#handlers/queueManager.js');
 
 module.exports = {
 	name: 'search',
@@ -41,23 +42,8 @@ module.exports = {
 				if (!isNaN(content) && parseInt(content) >= 1 && parseInt(content) <= tracks.length) {
 					const index = parseInt(content, 10);
 					const track = tracks[index - 1];
-					const queue = client.player.createQueue(message.guild, {
-						// i think this is the way
+					const queue = constructQueue(client, message);
 
-						leaveOnEnd: false,
-						// leaveOnStop: null,
-						// leaveOnEmpty: null,
-						leaveOnEmptyCooldown: 10000,
-						autoSelfDeaf: true,
-						metadata: message
-					});
-					if (!queue.connection) await queue.connect(message.member.voice.channel).catch(e => {
-						queue.destroy();
-						new Tantrum(client, 'play.js', 'Error when connecting to vc', e);
-						message.channel.send('Something went wrong when joining').catch(f => {
-							throw new Tantrum(client, 'play.js', 'Error on sending failed to join message', f);
-						});
-					});
 					queue.addTrack(track);
 					if (!queue.playing) await queue.play();
 					return track;
@@ -67,7 +53,6 @@ module.exports = {
 						.setDescription(`Response has to be a valid number between **1** and **${tracks.length}**! Search cancelled.`);
 					msg.channel.send({ embeds: [searchInvalidResponseEmbed] });
 				}
-
 			}
 			msg.channel.awaitMessages({ filter, max: 1, time: 30000, errors: ['time'] })
 				.then(track => {

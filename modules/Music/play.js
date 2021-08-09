@@ -5,6 +5,7 @@ const { tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
+const { constructQueue } = require('#handlers/queueManager.js');
 
 module.exports = {
 	name: 'play',
@@ -55,23 +56,7 @@ module.exports = {
 			});
 		}
 
-		const queue = await client.player.createQueue(message.guild, {
-			// i think this is the way
-
-			leaveOnEnd: false,
-			// leaveOnStop: null,
-			// leaveOnEmpty: null,
-			leaveOnEmptyCooldown: 10000,
-			autoSelfDeaf: true,
-			metadata: message
-		});
-		if (!queue.connection) await queue.connect(message.member.voice.channel).catch(e => {
-			queue.destroy();
-			new Tantrum(client, 'play.js', 'Error when connecting to vc', e);
-			message.channel.send('Something went wrong when joining').catch(f => {
-				throw new Tantrum(client, 'play.js', 'Error on sending failed to join message', f);
-			});
-		});
+		const queue = await constructQueue(client, message);
 
 		track.playlist ? queue.addTracks(track.tracks) : queue.addTrack(track.tracks[0]);
 

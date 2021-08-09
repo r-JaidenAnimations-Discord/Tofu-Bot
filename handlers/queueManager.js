@@ -1,8 +1,13 @@
+const Tantrum = require('#tantrum');
 
+/**
+ * Creates a discord-player queue.
+ * @param {Client} client Discord client
+ * @param {Message} message Message Object
+ * @returns {Queue|Bool} Returns generated queue if successful, or false if it fails.
+ */
 const constructQueue = async (client, message) => {
 	const queue = await client.player.createQueue(message.guild, {
-		// i think this is the way
-
 		leaveOnEnd: false,
 		// leaveOnStop: null,
 		// leaveOnEmpty: null,

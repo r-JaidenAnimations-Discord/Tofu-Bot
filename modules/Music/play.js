@@ -6,6 +6,7 @@ const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
 const { constructQueue } = require('#handlers/queueManager.js');
+const { generalStrings } = require('#assets/global/strings.json');
 
 module.exports = {
 	name: 'play',
@@ -42,11 +43,14 @@ module.exports = {
 			});
 		}
 
+		const loadMsg = await message.channel.send(generalStrings.loading);
+
 		const track = await client.player.search(args.join(' '), {
 			requestedBy: message.author
 		});
 
 		if (!track.tracks.length) {
+			if (loadMsg.deletable) loadMsg.delete();
 			const noResultsEmbed = new Discord.MessageEmbed()
 				.setColor(tofuError)
 				.setDescription('No matches found!');
@@ -57,6 +61,8 @@ module.exports = {
 		}
 
 		const queue = await constructQueue(client, message);
+
+		if (loadMsg.deletable) loadMsg.delete();
 
 		track.playlist ? queue.addTracks(track.tracks) : queue.addTrack(track.tracks[0]);
 

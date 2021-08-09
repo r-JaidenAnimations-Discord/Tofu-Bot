@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
 const { constructQueue } = require('#handlers/queueManager.js');
+const { generalStrings } = require('#assets/global/strings.json');
 
 module.exports = {
 	name: 'search',
@@ -28,6 +29,7 @@ module.exports = {
 				throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);
 			});
 		}
+		const loadMsg = await message.channel.send(generalStrings.loading);
 
 		const tracks = await client.player.search(args.join(' '), {
 			requestedBy: message.author
@@ -38,6 +40,7 @@ module.exports = {
 				.setColor(tofuError)
 				.setDescription('No matches found!');
 
+			if (loadMsg.deletable) loadMsg.delete();
 			return message.channel.send({ embeds: [noResultsEmbed] }).catch(e => {
 				throw new Tantrum(client, 'play.js', 'Error on sending noResultsEmbed', e);
 			});
@@ -45,6 +48,7 @@ module.exports = {
 
 		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.title}`).join('\n');
 
+		if (loadMsg.deletable) loadMsg.delete();
 		message.channel.send(`\`\`\`nim\n${searchResultString}\n\`\`\``).catch(e => {
 			throw new Tantrum(client, 'searchResults.js', 'Error on sending searchResults', e);
 		}).then(async msg => {

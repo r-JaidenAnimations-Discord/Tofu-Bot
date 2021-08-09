@@ -46,7 +46,7 @@ module.exports = {
 			requestedBy: message.author
 		});
 
-		if (!track) {
+		if (!track.tracks.length) {
 			const noResultsEmbed = new Discord.MessageEmbed()
 				.setColor(tofuError)
 				.setDescription('No matches found!');

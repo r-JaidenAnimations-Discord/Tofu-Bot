@@ -1,4 +1,4 @@
-const { tofuGreen, tofuOrange } = require('#colors');
+const { tofuGreen, tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
@@ -32,6 +32,16 @@ module.exports = {
 		const tracks = await client.player.search(args.join(' '), {
 			requestedBy: message.author
 		}).then(x => x.tracks);
+
+		if (!tracks.length) {
+			const noResultsEmbed = new Discord.MessageEmbed()
+				.setColor(tofuError)
+				.setDescription('No matches found!');
+
+			return message.channel.send({ embeds: [noResultsEmbed] }).catch(e => {
+				throw new Tantrum(client, 'play.js', 'Error on sending noResultsEmbed', e);
+			});
+		}
 
 		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.title}`).join('\n');
 

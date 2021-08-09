@@ -51,7 +51,7 @@ module.exports = {
 						autoSelfDeaf: true,
 						metadata: message
 					});
-					await queue.connect(message.member.voice.channel).catch(e => {
+					if (!queue.connection) await queue.connect(message.member.voice.channel).catch(e => {
 						queue.destroy();
 						new Tantrum(client, 'play.js', 'Error when connecting to vc', e);
 						message.channel.send('Something went wrong when joining').catch(f => {

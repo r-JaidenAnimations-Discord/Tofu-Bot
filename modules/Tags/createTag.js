@@ -13,7 +13,7 @@ module.exports = {
 	//aliases: [''],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		message.channel.send('Tags will be renewed soon, the tag database might be reset later.');
+		if (!client.config.devMode) return message.channel.send('Sorry, creating tags has been disabled until the database overhaul is complete.');
 		if (!args[0]) return message.channel.send('Please specify a tag.');
 		if (!args[1]) return message.channel.send('Please specify the content of the tag.');
 		try {

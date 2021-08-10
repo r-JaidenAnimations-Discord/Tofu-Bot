@@ -67,7 +67,7 @@ module.exports = {
 				//console.log(`${numberReactions.get(i + 1)}`);
 				try {
 					await sentEmbed.react(`${numberReactions[i]}`);
-					const d = async () => new Promise(r => setTimeout(r, 1000));
+					const d = async () => new Promise(r => setTimeout(r, 260));
 					await d();
 				} catch (e) {
 					throw new Tantrum(client, 'trivia.js', 'Error on reacting to embed', e);

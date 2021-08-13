@@ -8,9 +8,9 @@ const Tantrum = require('#tantrum');
  * @param {Object} message Message object
  * @returns {Boolean} Returns true if message.author can ban members
  */
-const checkBanStaff = (client, message) => {
+const checkBanStaff = (client, message, returnMessage) => {
 	if (!message.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
-		message.channel.send('You fool, need more permissions').catch(e => { throw new Tantrum(client, 'staffChecks.js', 'Error while sending ban permission message', e) });
+		if (returnMessage) message.channel.send('You fool, need more permissions').catch(e => { throw new Tantrum(client, 'staffChecks.js', 'Error while sending ban permission message', e) });
 		return false;
 	}
 	return true;
@@ -22,9 +22,9 @@ const checkBanStaff = (client, message) => {
  * @param {Object} message Message object
  * @returns {Boolean} Returns true if message.author can manage messages
  */
-const checkMessageStaff = (client, message) => {
+const checkMessageStaff = (client, message, returnMessage) => {
 	if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-		message.channel.send('You fool, need more permissions').catch(e => { throw new Tantrum(client, 'staffChecks.js', 'Error while sending message permission message', e) });
+		if (returnMessage) message.channel.send('You fool, need more permissions').catch(e => { throw new Tantrum(client, 'staffChecks.js', 'Error while sending message permission message', e) });
 		return false;
 	}
 	return true;

@@ -16,7 +16,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID } = client.config;
 
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		const id = parseInt(args[0]);
 		if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');

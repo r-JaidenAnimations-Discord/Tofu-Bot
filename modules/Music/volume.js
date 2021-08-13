@@ -16,7 +16,7 @@ module.exports = {
 	aliases: ['vol'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!checkMessageStaff(client, message)) return;
+		if (!checkMessageStaff(client, message, true)) return;
 
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;

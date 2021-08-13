@@ -51,7 +51,7 @@ module.exports = {
 			}
 		}
 
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		let category = args[1];
 		if (!category) return message.channel.send('Give me a category to put them in though').catch(e => {

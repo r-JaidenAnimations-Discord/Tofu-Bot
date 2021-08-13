@@ -21,7 +21,7 @@ module.exports = {
 		let name = args[0], desc = args.slice(1).join(' ');
 
 		if (args[0] === 'staff') {
-			if (!checkMessageStaff(client, message)) return;
+			if (!checkMessageStaff(client, message, true)) return;
 			name = args[1]; desc = args.slice(2).join(' ');
 		}
 

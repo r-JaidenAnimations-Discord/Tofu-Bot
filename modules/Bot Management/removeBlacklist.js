@@ -18,7 +18,7 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		// Pull the blacklist JSON
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');

@@ -19,7 +19,7 @@ module.exports = {
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
 			message.guild.channels.cache.find(c => c.name === args[0]);
 
-		if (!checkMessageStaff(client, message)) return;
+		if (!checkMessageStaff(client, message, true)) return;
 
 		//if (message.author.id == '725836730846019644') return message.channel.send('Get F\'ed pent');
 

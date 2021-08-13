@@ -6,9 +6,12 @@ const { Sequelize, DataTypes } = require('sequelize');
 module.exports = (sequelize) => sequelize.define('movieNightSuggestion', {
 	movie: DataTypes.STRING,
 	suggester: DataTypes.STRING,
+	suggesterTag: DataTypes.STRING,
+	suggesterAvatar: DataTypes.STRING,
+	watchedDate: DataTypes.DATE,
 	status: {
 		type: DataTypes.ENUM,
-		values: ['Pending Approval', 'Approved', 'Denied', 'Watched']
+		values: ['Pending Approval', 'Approved', 'Considered', 'Denied', 'Watched']
 	},
 	suggestionMessageID: DataTypes.STRING,
 	verdictReason: {

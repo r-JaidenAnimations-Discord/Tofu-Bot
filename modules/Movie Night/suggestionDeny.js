@@ -38,7 +38,8 @@ module.exports = {
 			const denialEmbed = new Discord.MessageEmbed()
 				.setColor(suggestionDenied)
 				.setTitle(`**${await suggestion.movie}**`)
-				.setDescription(`Suggested by <@${suggestion.suggester}>`)
+				.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)
+				// .setDescription(`Suggested by <@${suggestion.suggester}>`)
 				.addFields(
 					{ name: 'Status:', value: suggestion.status },
 					{ name: `Reason from ${suggestion.verdicter}`, value: suggestion.verdictReason }

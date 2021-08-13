@@ -1,7 +1,6 @@
 const { suggestionOpen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'suggestmovie',
@@ -24,7 +23,7 @@ module.exports = {
 
 		const suggestionEmbed = new Discord.MessageEmbed()
 			.setColor(suggestionOpen)
-			.setTitle('Loading Suggestion')
+			.setTitle('<a:tofuSpin:873583910989205594> Loading Suggestion')
 			.setTimestamp();
 
 		try {
@@ -32,6 +31,8 @@ module.exports = {
 			const suggestion = await client.movieSuggestions.create({
 				movie: movie,
 				suggester: message.author.id,
+				suggesterTag: message.author.tag,
+				suggesterAvatar: message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }),
 				status: 'Pending Approval',
 				suggestionMessageID: suggestionMsg.id,
 			});
@@ -39,8 +40,9 @@ module.exports = {
 			if (suggestion) {
 				const populatedEmbed = new Discord.MessageEmbed()
 					.setColor(suggestionOpen)
+					.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)
 					.setTitle(`**${suggestion.movie}**`)
-					.setDescription(`Suggested by <@${suggestion.suggester}>`)
+					// .setDescription(`Suggested by <@${suggestion.suggester}>`)
 					.addField('Status:', suggestion.status)
 					.setFooter(`Suggestion #${suggestion.id}`)
 					.setTimestamp();
@@ -49,7 +51,10 @@ module.exports = {
 				await message.react('✅');
 				message.channel.send('Your movie suggestion was registered, thank you!');
 
+				const d = async () => new Promise(r => setTimeout(r, 260));
+				await d();
 				await suggestionMsg.react(fingerupvote);
+				await d();
 				await suggestionMsg.react(fingerdownvote);
 			} else {
 				await message.react('❌');
@@ -57,7 +62,9 @@ module.exports = {
 				return suggestionMsg.delete();
 			}
 		} catch (e) {
-			throw new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
+			await message.react('❌');
+			new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
+			return message.channel.send('Something went wrong, please try again later.');
 		}
 	},
 };

@@ -14,7 +14,7 @@ module.exports = {
 		if (!args[1]) return message.channel.send('Please specify the new content of the tag.');
 
 		const tag = await client.tags.findOne({ where: { name: args[0] } });
-		if (/*!checkStaff(message.member) || */tag.username !== message.author.username) return message.channel.send('You can\'t edit this tag.');
+		if (/*!checkStaff(message.member) || */tag.userID !== message.author.id) return message.channel.send('You can\'t edit this tag.');
 
 		const affectedRows = await client.tags.update({ description: args.slice(1).join(' ') }, { where: { name: args[0] } });
 

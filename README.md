@@ -2,6 +2,8 @@
 The Yang to the Ying that is [Ari Bot](https://github.com/TeraBaito/jaidens-discord-utilities).
 Tofu Bot does most 'fun' stuff like trivia, music etc. while Ari does (moderation) tools, and other misc utilities. This is also my main source of copy paste code. I copy while Tera copes.
 
+It was in the server from Dec 14 2020 to Aug 12 2021.
+
 Tofu Bot 2.x makes use of Discord.JS v13, which means system requirements also changed. 
     
 ## 🚧 This is early development 🚧

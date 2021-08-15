@@ -1,3 +1,3 @@
-module.exports = () => {
-	//to fix
+module.exports = (queue, connection) => {
+	// TODO: Implement?
 }

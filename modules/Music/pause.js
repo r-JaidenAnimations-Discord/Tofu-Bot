@@ -24,7 +24,7 @@ module.exports = {
 			const alreadyPausedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('The music is already paused!');
-			return message.channel.send({ embeds: [alreadyPausedEmbed] }).catch(e => { // TODO: test
+			return message.channel.send({ embeds: [alreadyPausedEmbed] }).catch(e => {
 				throw new Tantrum(client, 'pause.js', 'Error on sending alreadyPausedEmbed', e);
 			});
 		}

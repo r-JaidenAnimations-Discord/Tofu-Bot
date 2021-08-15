@@ -13,7 +13,6 @@ module.exports = async (client, message) => {
 	// Bots shall not trigger me
 	if (message.author.bot) return;
 
-	let cooldowns = client.cooldowns;
 
 	const {
 		autoResponders: { state: ar },
@@ -116,6 +115,7 @@ module.exports = async (client, message) => {
 	}
 
 	// Cooldown?
+	let cooldowns = client.cooldowns;
 	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
 
 	const now = Date.now();

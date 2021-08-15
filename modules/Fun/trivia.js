@@ -1,4 +1,3 @@
-// TODO: Fix error: numberReactions.get is not a function
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');

@@ -23,8 +23,7 @@ module.exports = {
 		// throw new Tantrum(client, 'clearQueue.js', 'Error on sending only one song queued message', e);
 		// });
 
-		// client.player.clearQueue(message);
-		queue.clear(); // TODO: test
+		queue.clear();
 
 		await message.react('👌').catch(e => {
 			throw new Tantrum(client, 'clearQueue.js', 'Error on reacting queue cleared', e);

@@ -440,7 +440,7 @@ module.exports = {
 			removals: []
 		},
 		{
-			version: '2.0.0-dev Milestone 1',
+			version: '2.0.0-dev Milestone 4',
 			aliases: ['2', '2.0', '2.0.0'],
 			additions: [
 				'Interactive buttons',
@@ -449,7 +449,11 @@ module.exports = {
 				'jsconfig.json for subpath import intellisense',
 				'Settings manager',
 				'Autoresponders',
-				'Both looping current track and queue'
+				'Both looping current track and queue',
+				'Staff only tags',
+				'Considered option and more info in movie night suggestions',
+				'Button prompt support',
+				'Thread support'
 			],
 			fixes: [
 				'Complete overhaul to DJS master branch (upcoming DJS 13) *(This is a single line but really took days of work so yes)*',

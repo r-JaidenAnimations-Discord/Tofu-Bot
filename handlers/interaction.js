@@ -9,15 +9,15 @@ table.setHeading('Interaction', 'Status');
  */
 function checkData(client, command, fileName) {
 	const
-		success = '✔',
-		err = '✖';
+		success = '✔ Loaded',
+		err = '✖ Failed';
 
-	const { data, run } = command;
+	const { data, execute } = command;
 	if (
 		typeof data == 'object' &&
 		typeof data?.name == 'string' &&
 		typeof data?.description == 'string' &&
-		typeof run == 'function'
+		typeof execute == 'function'
 	) {
 		client.interactions.set(command.data.name.toLowerCase(), command);
 		return table.addRow(fileName, success);
@@ -28,7 +28,7 @@ function checkData(client, command, fileName) {
  * Requires and triggers a command from the ./interactions/ directory when it is inputed by a user next to the prefix.
  * Not included in this file but in `index.js`, but there also is a collection with all commands at the time of node.
  * If a user inputs a wrong command (incorrect command.name) it will not trigger anything.
- * @param {client} client The client as a Client object
+ * @param {Client} client The client as a Client object
  */
 module.exports = client => {
 	const commands = readdirSync('./interactions/').filter(file => file.endsWith('.js'));

@@ -1,7 +1,7 @@
 {
   "name": "tofubot",
-  "version": "2.0.0-dev.m4",
-  "releaseDate": "TBA",
+  "version": "2.0.0",
+  "releaseDate": "08/16/2021",
   "description": "",
   "main": "index.js",
   "scripts": {

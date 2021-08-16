@@ -452,7 +452,8 @@ module.exports = {
 				'Both looping current track and queue',
 				'Staff only tags',
 				'Considered option and more info in movie night suggestions',
-				'Thread support'
+				'Thread support',
+				'Open Sourced at v2 release! (Aug 16 2021)'
 			],
 			fixes: [
 				'Complete overhaul to DJS master branch (upcoming DJS 13) *(This is a single line but really took days of work so yes)*',

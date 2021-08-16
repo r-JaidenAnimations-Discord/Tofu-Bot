@@ -6,10 +6,10 @@ const beautify = require('beautify');
 // NOTE TO SELF: THIS IS SOME DANGEROUS $HIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
 module.exports = {
-	name: 'eval',
-	helpTitle: 'Eval',
+	name: 'evil',
+	helpTitle: 'Evil eval',
 	category: 'Bot',
-	usage: 'eval [string]',
+	usage: 'evil [string]',
 	description: 'Evaluates JavaScript code inputed from args.\nOnwer Only Command\nSelfnote: don\'t use this next to many people idk they could take your token i guess lmao',
 	isDMAllowed: false,
 	isDeprecated: false,

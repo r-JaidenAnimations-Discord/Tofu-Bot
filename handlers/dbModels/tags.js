@@ -1,4 +1,4 @@
-const { Sequelize, datat } = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 /**
  * @param { Sequelize } sequelize

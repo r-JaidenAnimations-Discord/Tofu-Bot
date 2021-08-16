@@ -440,8 +440,8 @@ module.exports = {
 			removals: []
 		},
 		{
-			version: '2.0.0-dev Milestone 4',
-			aliases: ['2', '2.0', '2.0.0'],
+			version: '2.0.0',
+			aliases: ['2', '2.0'],
 			additions: [
 				'Interactive buttons',
 				'Slash commands',
@@ -452,7 +452,6 @@ module.exports = {
 				'Both looping current track and queue',
 				'Staff only tags',
 				'Considered option and more info in movie night suggestions',
-				'Button prompt support',
 				'Thread support'
 			],
 			fixes: [

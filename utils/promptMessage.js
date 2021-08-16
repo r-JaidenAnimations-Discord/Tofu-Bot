@@ -12,7 +12,7 @@ async function promptMessage(message, author, time, ...validReactions) {
 
 	for (const reaction of validReactions) {
 		message.react(reaction);
-		const d = async () => new Promise(r => setTimeout(r, 1000));
+		const d = async () => new Promise(r => setTimeout(r, 260));
 		await d();
 	}
 

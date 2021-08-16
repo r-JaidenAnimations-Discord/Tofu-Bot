@@ -6,6 +6,7 @@ module.exports = {
 	category: 'Bot',
 	usage: 'ping',
 	description: 'Ping!',
+	isDMAllowed: true,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

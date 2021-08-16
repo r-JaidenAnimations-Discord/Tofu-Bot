@@ -9,6 +9,7 @@ module.exports = {
 	category: 'Music',
 	usage: 'remove [id]',
 	description: 'Whoops wrong song',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

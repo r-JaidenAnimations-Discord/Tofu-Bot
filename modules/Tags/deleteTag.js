@@ -4,6 +4,7 @@ module.exports = {
 	category: 'Tags',
 	usage: 'deletetag [name]',
 	description: 'Deletes a tag from the database',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

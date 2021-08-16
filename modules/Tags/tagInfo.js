@@ -8,6 +8,7 @@ module.exports = {
 	category: 'Tags',
 	usage: 'taginfo [name]',
 	description: 'Get a tag\'s info',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

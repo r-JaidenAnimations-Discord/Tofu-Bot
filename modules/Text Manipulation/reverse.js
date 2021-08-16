@@ -4,6 +4,7 @@ module.exports = {
 	category: 'Text Manipulation',
 	usage: 'reverse [text]',
 	description: 'Reverse text.',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

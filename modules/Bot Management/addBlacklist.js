@@ -12,6 +12,7 @@ module.exports = {
 	category: 'Bot Management',
 	usage: 'blacklist {[{id, mention}], [{python, bamboozle, hate, wrongchannel, other}]}',
 	description: 'blacklist',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,

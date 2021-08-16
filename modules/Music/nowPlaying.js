@@ -11,6 +11,7 @@ module.exports = {
 	category: 'Music',
 	usage: 'nowplaying',
 	description: 'Check what\'s that vibing choon',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

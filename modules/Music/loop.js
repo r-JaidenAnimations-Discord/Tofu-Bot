@@ -9,6 +9,7 @@ module.exports = {
 	category: 'Music',
 	usage: 'loop',
 	description: 'Toggle trough the looping modes',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

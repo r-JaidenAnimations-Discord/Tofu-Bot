@@ -4,6 +4,7 @@ module.exports = {
 	category: 'Tags',
 	usage: 'edittag [name] [content]',
 	description: 'Edits a tag\'s content',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

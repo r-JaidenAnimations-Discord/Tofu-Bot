@@ -13,7 +13,6 @@ module.exports = async (client, message) => {
 	// Bots shall not trigger me
 	if (message.author.bot) return;
 
-
 	const {
 		autoResponders: { state: ar },
 		aliTrust: { state: at },
@@ -21,11 +20,6 @@ module.exports = async (client, message) => {
 		kiritoTrust: { state: kt },
 		disabledCommands
 	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
-
-	// Is this a DM?
-	if (message.channel.type === 'dm') return message.channel.send('Can\'t talk right now, I\'m eating tofu\n*(DMable commands have been deprecated, you should use a command channel in server instead :3)*').catch(e => {
-		throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
-	});
 
 	// Autoresponders
 	// TODO: skip only 1 loop iteration, probably replace the 'return' with continue; equivalent.
@@ -66,6 +60,17 @@ module.exports = async (client, message) => {
 	// Include aliases
 	const command = client.commands.get(commandName)
 		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+	// Is this command allowed inside DM?
+	if (message.channel.type === 'DM') {
+		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+		});
+
+		if (command.isDMAllowed === false) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+		});
+	}
 
 	// Does the message not start with the prefix or is this not a command?
 	if (!message.content.startsWith(prefix) || !command) return;

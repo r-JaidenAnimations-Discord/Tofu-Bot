@@ -472,7 +472,6 @@ module.exports = {
 				'Embedify command already enabled/disabled message'
 			],
 			removals: [
-				'DMable commands',
 				'Shrimp reminder'
 			]
 		},

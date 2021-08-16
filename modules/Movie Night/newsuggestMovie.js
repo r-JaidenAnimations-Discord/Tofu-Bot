@@ -8,6 +8,7 @@ module.exports = {
 	category: 'Movie Night',
 	usage: 'suggestmovie [movie]',
 	description: 'Suggest a movie to play at movie night',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,

@@ -6,6 +6,7 @@ module.exports = {
 	category: 'Bot',
 	usage: 'changelog ({specific version, list})',
 	description: 'See what we have been up to',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

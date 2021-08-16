@@ -7,6 +7,7 @@ module.exports = {
 	category: 'Music',
 	usage: 'shuffle',
 	description: 'Feelin\' random?',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

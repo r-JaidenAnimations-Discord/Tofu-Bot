@@ -8,6 +8,7 @@ module.exports = {
 	category: 'Movie Night',
 	usage: 'approvemovie [id] (reason)',
 	description: 'Approve a movie',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,

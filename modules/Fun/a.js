@@ -7,6 +7,7 @@ module.exports = {
 	category: 'Fun',
 	usage: 'a',
 	description: 'Shrimp',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: true,

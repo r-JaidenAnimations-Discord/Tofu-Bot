@@ -7,6 +7,7 @@ module.exports = {
 	category: 'Music',
 	usage: 'clearqueue',
 	description: 'Clear the queue.',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

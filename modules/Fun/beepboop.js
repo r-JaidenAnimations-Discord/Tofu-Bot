@@ -6,6 +6,7 @@ module.exports = {
 	category: 'Fun',
 	usage: 'beep',
 	description: 'Beep boop?',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

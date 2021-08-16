@@ -10,6 +10,7 @@ module.exports = {
 	category: 'Fun',
 	usage: 'joke',
 	description: 'Bad jokes!',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

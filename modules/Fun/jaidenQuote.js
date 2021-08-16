@@ -9,6 +9,7 @@ module.exports = {
 	category: 'Fun',
 	usage: 'quote',
 	description: 'Send a random quote from Jaiden',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

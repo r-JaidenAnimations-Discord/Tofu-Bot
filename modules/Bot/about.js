@@ -11,6 +11,7 @@ module.exports = {
 	category: 'Bot',
 	usage: 'about',
 	description: 'Display the bot\'s information',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

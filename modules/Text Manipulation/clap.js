@@ -4,6 +4,7 @@ module.exports = {
 	category: 'Text Manipulation',
 	usage: 'clap [text]',
 	description: 'Why 👏 did 👏 I 👏 make 👏 this? 👏',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

@@ -4,6 +4,7 @@ module.exports = {
 	category: 'Music',
 	usage: 'not yet',
 	description: 'Coming soon: seek trough the current track!',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

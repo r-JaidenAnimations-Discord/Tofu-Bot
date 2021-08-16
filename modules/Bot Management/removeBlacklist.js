@@ -11,6 +11,7 @@ module.exports = {
 	category: 'Bot Management',
 	usage: 'whitelist [{id, mention}]',
 	description: 'blacklist',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,

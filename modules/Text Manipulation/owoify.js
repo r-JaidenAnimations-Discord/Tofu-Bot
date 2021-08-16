@@ -6,6 +6,7 @@ module.exports = {
 	category: 'Text Manipulation',
 	usage: 'owoify [text]',
 	description: 'OwO what\'s this',
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,

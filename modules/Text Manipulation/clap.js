@@ -11,10 +11,7 @@ module.exports = {
 	//aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-
-		if (args.length < 1) {
-			return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');
-		}
+		if (args.length < 1) return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');
 
 		let input = args.join(' 👏 ');
 
@@ -23,8 +20,6 @@ module.exports = {
 			input = input.replace(ping, 'haha funny ping');
 		});
 
-		//console.log(args)
-		//const clapped = input /*input.join(' 👏 ');*/
 		const clappedEnd = `${input} 👏`;
 		if (clappedEnd.length < 2000) {
 			return message.channel.send(clappedEnd);

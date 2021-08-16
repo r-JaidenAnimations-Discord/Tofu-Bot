@@ -13,23 +13,11 @@ configRelease.json
 # Also token and stuff but for dev purposes
 configDebug.json
 
-# yes | We're removing that \ edit, just found out this was my tfix command kekw
-#modules/Bot/ali.js
-
 # I readded my deleted stuff for later reference, but i'm not pushing them to the repo
 /Z Legacy/
 
-# Settings file
-deployData/settings.json
-
-# Changelog is always out of date, i just keep them locally now. Check the releases tab for changelogs
-CHANGELOG.md
-
-# The actual blacklist shouldn't be pushed
-deployData/blacklist.json
-
-# Databases
-/db/
+# Deploy data, contains blacklist, settings and databases
+/deployData/
 
 # Spotlight
 .DS_Store*

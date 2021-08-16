@@ -14,6 +14,9 @@ module.exports = {
 		if (!args[0]) return message.channel.send('Please specify a tag.');
 
 		const tag = await client.tags.findOne({ where: { name: args[0] } });
+
+		if (tag?.staffOnly) return message.channel.send('You can\'t use a staff only tag.');
+
 		if (tag) {
 			tag.increment('usage_count');
 			return message.channel.send(tag.get('description'));

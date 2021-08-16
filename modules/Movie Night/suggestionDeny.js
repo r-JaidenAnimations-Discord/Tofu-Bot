@@ -17,7 +17,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID } = client.config;
 
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		const id = parseInt(args[0]);
 		if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');
@@ -39,7 +39,8 @@ module.exports = {
 			const denialEmbed = new Discord.MessageEmbed()
 				.setColor(suggestionDenied)
 				.setTitle(`**${await suggestion.movie}**`)
-				.setDescription(`Suggested by <@${suggestion.suggester}>`)
+				.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)
+				// .setDescription(`Suggested by <@${suggestion.suggester}>`)
 				.addFields(
 					{ name: 'Status:', value: suggestion.status },
 					{ name: `Reason from ${suggestion.verdicter}`, value: suggestion.verdictReason }
@@ -49,7 +50,7 @@ module.exports = {
 
 			try {
 				let suggestionEmbed = await client.channels.cache.get(movieNightSuggestionChannelID).messages.fetch(suggestionMessageID);
-				if (suggestionEmbed) suggestionEmbed.edit(denialEmbed);
+				if (suggestionEmbed) suggestionEmbed.edit({ embeds: [denialEmbed] });
 				await message.react('✅');
 			} catch (e) {
 				message.channel.send('Couldn\'t update the suggestion message, maybe it was deleted?');

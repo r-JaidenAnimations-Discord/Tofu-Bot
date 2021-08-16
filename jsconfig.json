@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "#utils/*": ["./utils/*"],
+            "#handlers/*": ["./handlers/*"],
+            "#assets/*": ["./assets/*"],
+            "#tantrum": ["./utils/tantrum.js"],
+            "#colors": ["./assets/global/colors.json"],
+            "#memberIDs": ["./assets/global/memberIDs.json"]
+        }
+    }
+}

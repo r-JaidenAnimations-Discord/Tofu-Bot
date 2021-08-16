@@ -14,17 +14,16 @@ module.exports = {
 	aliases: ['q'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		const queue = client.player.getQueue(message);
+		const queue = client.player.getQueue(message.guild);
 
-		let currtr = `Current track: ${queue.playing.title}`;
-		let trlist = queue.tracks.map((track, i) => {
+		const currtr = `Current track: ${queue.current.title}`;
+		const trlist = queue.tracks.map((track, i) => {
 			return `${i + 1}) ${track.title}    ${track.duration}`;
-		}).slice(0, 8).join('\n') // For now, only the first 8 tracks get pulled
-		let footer = `${queue.tracks.length > 8 ? `${queue.tracks.length - 8} more track(s)` : '     This is the end of the queue!'}`;
+		}).slice(0, 15).join('\n') // For now, only the first 15 tracks get pulled
+		const footer = `${queue.tracks.length > 8 ? `${queue.tracks.length - 8} more track(s)` : '     This is the end of the queue!'}`;
 
 		message.channel.send(`\`\`\`nim\n${currtr}\n\n${trlist}\n${footer}\n\`\`\``).catch(e => {
 			throw new Tantrum(client, 'queue.js', 'Error on sending queue', e);

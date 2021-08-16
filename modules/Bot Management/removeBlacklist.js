@@ -19,7 +19,7 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		// Pull the blacklist JSON
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
@@ -49,7 +49,7 @@ module.exports = {
 						.setDescription(`Removed <@${toWhitelist}> from the \`${blackListCategory}\` list.`)
 						.setTimestamp();
 
-					message.channel.send(whitelistEmbed);
+					message.channel.send({ embeds: [whitelistEmbed] });
 					return;
 				} catch (e) {
 					throw new Tantrum(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
@@ -63,7 +63,7 @@ module.exports = {
 			.setDescription(`Couldn't find <@${toWhitelist}> anywhere in the blacklist.`)
 			.setTimestamp();
 
-		message.channel.send(memberNotFoundEmbed).catch(e => {
+		message.channel.send({ embeds: [memberNotFoundEmbed] }).catch(e => {
 			throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
 		});
 	},

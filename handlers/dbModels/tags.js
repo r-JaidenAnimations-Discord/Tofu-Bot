@@ -1,4 +1,4 @@
-const Sequelize = require('sequelize');
+const { Sequelize } = require('sequelize');
 
 /**
  * @param { Sequelize } sequelize
@@ -10,6 +10,11 @@ module.exports = (sequelize) => sequelize.define('tags', {
 	},
 	description: Sequelize.TEXT,
 	username: Sequelize.STRING,
+	userID: Sequelize.STRING,
+	staffOnly: {
+		type: Sequelize.BOOLEAN,
+		defaultValue: false
+	},
 	usage_count: {
 		type: Sequelize.INTEGER,
 		defaultValue: 0,

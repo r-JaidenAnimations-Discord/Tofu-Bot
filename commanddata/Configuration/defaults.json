@@ -1,9 +1,0 @@
-{
-    "welcome": false,
-    "kiritoTrust": true,
-    "aliTrust": true,
-    "randomStatus": true,
-    "blackListing": true,
-    "minecraftMaintenance": false,
-    "disabledCommands": []
-}

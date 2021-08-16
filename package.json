@@ -1,7 +1,7 @@
 {
   "name": "tofubot",
-  "version": "1.12.2",
-  "releaseDate": "07/28/2021",
+  "version": "2.0.0",
+  "releaseDate": "08/16/2021",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,12 +14,13 @@
   "dependencies": {
     "@discord-player/extractor": "^3.0.2",
     "@discordjs/opus": "^0.4.0",
+    "@discordjs/voice": "^0.5.5",
     "ascii-table": "0.0.9",
     "beautify": "0.0.8",
-    "chalk": "^4.1.1",
+    "chalk": "^4.1.2",
     "common-tags": "^1.8.0",
-    "discord-player": "^4.1.4",
-    "discord.js": "^12.5.3",
+    "discord-player": "^5.0.1",
+    "discord.js": "github:r-JaidenAnimations-Discord/discord.js",
     "ffmpeg-static": "^4.4.0",
     "fs-extra": "^9.1.0",
     "opusscript": "0.0.8",
@@ -30,9 +31,10 @@
   "devDependencies": {},
   "imports": {
     "#utils/*": "./utils/*",
-    "#commandData/*": "./commanddata/*",
+    "#handlers/*": "./handlers/*",
+    "#assets/*": "./assets/*",
     "#tantrum": "./utils/tantrum.js",
-    "#colors": "./commanddata/colors.json",
-    "#memberIDs": "./commanddata/memberIDs.json"
+    "#colors": "./assets/global/colors.json",
+    "#memberIDs": "./assets/global/memberIDs.json"
   }
 }

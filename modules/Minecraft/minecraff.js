@@ -3,6 +3,7 @@ const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
+const { generalStrings } = require('#assets/global/strings.json');
 
 module.exports = {
 	name: 'minecraft',
@@ -19,7 +20,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { minecraftIP } = client.config;
 
-		message.channel.startTyping();
+		let msg = await message.channel.send(generalStrings.loading);
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -30,21 +31,20 @@ module.exports = {
 
 		var downStatus = null;
 
-		const attachment = new Discord.MessageAttachment('./commanddata/minecraff.png', 'minecraff.png');
+		const attachment = new Discord.MessageAttachment('./assets/commandMinecraft/minecraff.png', 'minecraff.png');
 		const minecraftEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
-			.attachFiles(attachment)
 			.setTitle('Jaiden Animations Minecraft Server')
 			.setThumbnail('attachment://minecraff.png')
 			.addField('IP Address:', minecraftIP)
 			.setTimestamp();
 
 		// Set the status to maintenance in case of maintenance
-		if (settingsFile.minecraftMaintenance) {
+		if (settingsFile.minecraftMaintenance.state) {
 			downStatus = '🛠️ **The server is currently undergoing maintenance.**';
 			minecraftEmbed.addField('Server status:', downStatus);
-			message.channel.stopTyping();
-			return message.channel.send(minecraftEmbed);
+			if (msg.deletable) msg.delete();
+			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] });
 		}
 
 		https.get(url, function(res) {
@@ -59,7 +59,7 @@ module.exports = {
 				// console.log('Got a response: ', APIresponse.ip);
 				var playerList = 'Sadly, no online members';
 				var userCount = 0;
-				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server is down**'}`
+				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`
 
 				if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);
 
@@ -76,20 +76,17 @@ module.exports = {
 				}
 
 				minecraftEmbed.addField('Server status:', downStatus);
+				if (!APIresponse.online) minecraftEmbed.setFooter('This is what the API told me, it might actually be running but there is caching etc.');
 
-				message.channel.stopTyping();
-				message.channel.send(minecraftEmbed).catch(e => {
+				if (msg.deletable) msg.delete();
+				message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {
 					console.log(`kek ${e}`);
 				});
 			});
-			/*res.on('end', function() {
-				// prob going to remove this
-				console.log('Request finished');
-			});*/
 		}).on('error', function(e) {
-			message.channel.stopTyping();
+			if (msg.deletable) msg.delete();
 			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-			message.channel.send(new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)).catch(f => {
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			});
 		});

@@ -16,13 +16,15 @@ module.exports = {
 	aliases: ['rm', 'delete', 'del'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
-		const queue = client.player.getQueue(message);
+
+		const queue = client.player.getQueue(message.guild);
+
 		if (queue.tracks.length < 2) return message.channel.send('There\'s no more music to remove').catch(e => {
 			throw new Tantrum(client, 'remove.js', 'Error on sending nothing to remove message', e)
 		});
+
 		if (!args[0] ||
 			isNaN(args[0]) ||
 			Number(args[0]) === 0 ||
@@ -32,15 +34,16 @@ module.exports = {
 				throw new Tantrum(client, 'remove.js', 'Error on sending invalid argument message', e)
 			});
 
-		try {
-			const success = await client.player.remove(message, Number(args[0]) - 1);
+		const success = await queue.remove(Number(args[0]) - 1);
+		if (success) {
 			const removedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)
 				.setDescription(`Removed [${success.title}](${success.url}) [${success.requestedBy}]`);
-			message.channel.send(removedEmbed).catch(e => {
+
+			message.channel.send({ embeds: [removedEmbed] }).catch(e => {
 				throw new Tantrum(client, 'remove.js', 'Error on sending removedEmbed', e)
 			});
-		} catch (e) {
+		} else {
 			throw new Tantrum(client, 'back.js', 'Error on removing song', e);
 		}
 	},

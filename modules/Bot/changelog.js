@@ -1,4 +1,4 @@
-const { releases } = require('../../commanddata/changelogDB.js');
+const { releases } = require('#assets/commandChangelog/changelogDB.js');
 
 module.exports = {
 	name: 'changelog',

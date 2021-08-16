@@ -14,7 +14,7 @@ module.exports = {
 	aliases: ['csts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		let status;
 		let activity;
@@ -55,10 +55,10 @@ module.exports = {
 		}
 		client.user.setPresence({
 			status: `${status}`,
-			activity: {
+			activities: [{
 				name: `${textString}`,
 				type: `${activity}`
-			}
+			}]
 		});
 		await message.react('✅');
 	},

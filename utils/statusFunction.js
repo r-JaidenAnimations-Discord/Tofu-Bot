@@ -1,5 +1,4 @@
 const fs = require('fs');
-const Tantrum = require('#tantrum');
 
 /**
  * Set the bot's status
@@ -22,12 +21,12 @@ const setSts = (client, selectedStatus) => {
 		case 'stream':
 			client.user.setPresence({
 				status: 'online',
-				activity: {
+				activities: [{
 					name: 'something',
 					type: 'STREAMING',
 					url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
-				}
-			}).catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at streaming', e) });
+				}]
+			});
 			return true;
 		case 'play':
 			return setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
@@ -64,11 +63,11 @@ const setSts = (client, selectedStatus) => {
 const setRPC = async (client, activityStatus, activityName, activityType) => {
 	client.user.setPresence({
 		status: activityStatus,
-		activity: {
+		activities: [{
 			name: activityName,
 			type: activityType
-		}
-	}).catch(e => { throw new Tantrum(client, 'statusFunction.js', 'Error while setting status at setRPC', e) });
+		}]
+	});
 	return true;
 }
 
@@ -82,7 +81,7 @@ const randomStatus = async (client) => {
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
-	if (settingsFile.randomStatus === true) {
+	if (settingsFile.randomStatus.state === true) {
 		const nextState = states[Math.floor(Math.random() * states.length)];
 		setSts(client, nextState);
 	}

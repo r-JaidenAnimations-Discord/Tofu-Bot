@@ -16,22 +16,21 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		if (client.player.getQueue(message).paused) {
-			let alreadyPausedEmbed = new Discord.MessageEmbed()
+		const queue = client.player.getQueue(message.guild);
+
+		if (queue.connection?.paused) {
+			const alreadyPausedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('The music is already paused!');
-			return message.channel.send(alreadyPausedEmbed).catch(e => {
+			return message.channel.send({ embeds: [alreadyPausedEmbed] }).catch(e => {
 				throw new Tantrum(client, 'pause.js', 'Error on sending alreadyPausedEmbed', e);
 			});
 		}
 
-		const success = client.player.pause(message);
-
-		if (success) {
+		if (queue.setPaused(true)) {
 			await message.react('⏸').catch(e => {
 				throw new Tantrum(client, 'pause.js', 'Error on sending paused message', e);
 			});

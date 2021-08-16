@@ -1,7 +1,7 @@
 const { gradyID, maxID } = require('#memberIDs');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
-const { leaveMessages } = require('#commandData/greetings.json');
+const { leaveMessages } = require('#assets/greeting/greetings.json');
 
 module.exports = async (client, member) => {
 	const { jaidenServerID, generalChannelID, devMode/*, gradyID, maxID*/ } = client.config;
@@ -10,7 +10,7 @@ module.exports = async (client, member) => {
 
 	if (member.id === gradyID) {
 		try {
-			client.channels.cache.get(generalChannelID).send('GRADY, NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!');
+			// client.channels.cache.get(generalChannelID).send('GRADY, NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO!');
 			client.users.cache.get(maxID).send('Grady left, noooooooo');
 		} catch (e) {
 			throw new Tantrum(client, 'guildMemberRemove.js', 'Error on sending grady left message.', e);
@@ -18,8 +18,8 @@ module.exports = async (client, member) => {
 	}
 
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
-	var settingsFile = JSON.parse(data);
-	var welcomerState = settingsFile.welcome;
+	const settingsFile = JSON.parse(data);
+	const welcomerState = settingsFile.welcome.state;
 
 	if (welcomerState === false) return;
 	let randomBye = leaveMessages[Math.floor(Math.random() * leaveMessages.length)];

@@ -14,13 +14,12 @@ module.exports = {
 	aliases: ['sk', 'next'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		const success = client.player.skip(message);
+		const queue = client.player.getQueue(message.guild);
 
-		if (success) {
+		if (queue.skip()) {
 			await message.react('👌').catch(e => {
 				throw new Tantrum(client, 'skip.js', 'Error on sending skip message', e);
 			});

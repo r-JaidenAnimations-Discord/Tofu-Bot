@@ -3,16 +3,18 @@
 const chalk = require('chalk');
 const { pluralizeWithNumber } = require('#utils/pluralize.js');
 const { randomStatus } = require('#utils/statusFunction.js');
-const { remindShrimp } = require('#utils/shrimpReminder.js');
+const { publishInteractions } = require('#utils/publishInteractions.js');
 
-module.exports = client => {
+module.exports = async (client) => {
 
 	randomStatus(client);
-	remindShrimp(client);
 	console.log(chalk.green(`Alive as ${client.user.tag}\nOn ${pluralizeWithNumber('guild', client.guilds.cache.size)}\nAnnoying ${pluralizeWithNumber('hooman', client.users.cache.size)}`));
 
 	client.tags.sync();
 	client.movieSuggestions.sync();
+
+	// --register slashies
+	if (process.argv.includes('--register')) await publishInteractions(client);
 
 	/*try {
 		client.channels.cache.get(staffChdatID).send(`I'm back b!tches!`);

@@ -1,7 +1,7 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { musicStrings } = require('#commandData/strings.json');
+const { musicStrings } = require('#assets/global/strings.json');
 
 let musicCheckEmbed = new Discord.MessageEmbed();
 
@@ -12,11 +12,10 @@ let musicCheckEmbed = new Discord.MessageEmbed();
  * @returns {Boolean} Author is (not) in (same) voice channel
  */
 const checkMusic = (client, message) => {
-
 	if (!message.member.voice.channel) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.notInVoiceChannel);
-		message.channel.send(musicCheckEmbed).catch(e => {
+		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (notInVoiceChannel)', e);
 		});
 		return false;
@@ -24,7 +23,7 @@ const checkMusic = (client, message) => {
 
 	if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) {
 		musicCheckEmbed.setDescription(musicStrings.notSameVoiceChannel);
-		message.channel.send(musicCheckEmbed).catch(e => {
+		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (notSameVoiceChannel)', e);
 		});
 		return false;
@@ -39,11 +38,10 @@ const checkMusic = (client, message) => {
  * @returns {Boolean} Music playing state
  */
 const checkQueueExists = (client, message) => {
-
-	if (!client.player.getQueue(message)) {
+	if (!client.player.getQueue(message.guild)) {
 		musicCheckEmbed.setColor(tofuOrange);
 		musicCheckEmbed.setDescription(musicStrings.noMusicPlaying);
-		message.channel.send(musicCheckEmbed).catch(e => {
+		message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
 			throw new Tantrum(client, 'musicCheck.js', 'Error on sending musicCheckEmbed (noMusicPlaying)', e);
 		});
 		return false;

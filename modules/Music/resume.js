@@ -16,28 +16,22 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		if (!checkMusic(client, message)) return;
 		if (!checkQueueExists(client, message)) return;
 
-		if (!client.player.getQueue(message).paused) {
-			let alreadyPlayingEmbed = new Discord.MessageEmbed()
+		const queue = client.player.getQueue(message.guild);
+
+		if (!queue.connection?.paused) {
+			const alreadyPlayingEmbed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('The music is already playing!');
 
-			return message.channel.send(alreadyPlayingEmbed).catch(e => {
+			return message.channel.send({ embeds: [alreadyPlayingEmbed] }).catch(e => {
 				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e)
 			});
 		}
 
-		const success = client.player.resume(message);
-
-		// We have to do this because of a bug in discord.js
-		client.player.resume(message);
-		client.player.pause(message);
-		client.player.resume(message);
-
-		if (success) {
+		if (queue.setPaused(false)) {
 			await message.react('▶️').catch(e => {
 				throw new Tantrum(client, 'resume.js', 'Error on reacting resume', e)
 			});

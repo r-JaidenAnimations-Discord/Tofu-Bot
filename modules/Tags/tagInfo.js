@@ -23,11 +23,11 @@ module.exports = {
 				.setTitle(tag.name)
 				.setColor(tofuGreen)
 				.addFields(
-					{ name: 'Created by', value: tag.username, inline: true },
-					{ name: 'Uses', value: tag.usage_count },
-					{ name: 'Created at', value: formatDate(tag.createdAt) }
+					{ name: 'Created by', value: `${tag.username}`, inline: true },
+					{ name: 'Uses', value: `${tag.usage_count}` },
+					{ name: 'Created at', value: `${formatDate(tag.createdAt)}` }
 				);
-			return message.channel.send(embed);
+			return message.channel.send({ embeds: [embed] });
 		}
 		return message.channel.send(`Couldn't find tag \`${args[0]}\`.`);
 

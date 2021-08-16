@@ -16,12 +16,11 @@ module.exports = {
 	//aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-
 		let channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
 			message.guild.channels.cache.find(c => c.name === args[0]);
 
-		if (!checkMessageStaff(client, message)) return;
+		if (!checkMessageStaff(client, message, true)) return;
 
 		//if (message.author.id == '725836730846019644') return message.channel.send('Get F\'ed pent');
 
@@ -40,7 +39,7 @@ module.exports = {
 				.setDescription(args.slice(2).join(' '));
 
 			try {
-				channel.send(embed);
+				channel.send({ embeds: [embed] });
 				await message.react('✅');
 			} catch (e) {
 				throw new Tantrum(client, 'say.js', 'Error on sending message', e);

@@ -15,7 +15,7 @@ module.exports = {
 	aliases: ['sts', 'stat'],
 	cooldown: 1,
 	execute: async function(client, message, args) {
-		if (!checkBanStaff(client, message)) return;
+		if (!checkBanStaff(client, message, true)) return;
 
 		switch (args[0]) {
 			case 'online':

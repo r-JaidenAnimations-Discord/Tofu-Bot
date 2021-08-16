@@ -9,7 +9,7 @@ module.exports = {
 	category: 'Bot',
 	usage: 'report [problem]',
 	description: 'Report bugs or other issues on Tofu.\nImproper use is punishable!',
-	isDMAllowed: true,
+	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
@@ -29,8 +29,8 @@ module.exports = {
 			.setFooter('This is also a good moment to check your report before posting just in case you missed something.')
 			.setTimestamp();
 
-		return message.channel.send(warnEmbed).then(async msg => {
-			const emoji = await promptMessage(msg, message.author, 30, ['✅', '❌']);
+		return message.channel.send({ embeds: [warnEmbed] }).then(async msg => {
+			const emoji = await promptMessage(msg, message.author, 30, '✅', '❌');
 
 			if (emoji === '✅') {
 				const reportEmbed = new Discord.MessageEmbed()
@@ -42,7 +42,7 @@ module.exports = {
 
 				msg.delete();
 				try {
-					client.channels.cache.get(bugReportChannelID).send(reportEmbed);
+					client.channels.cache.get(bugReportChannelID).send({ embeds: [reportEmbed] });
 					message.channel.send('Your report was posted sucessfully, thank you.\nWe may contact you for more information.');
 				} catch (e) {
 					try {

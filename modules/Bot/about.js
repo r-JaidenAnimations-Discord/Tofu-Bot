@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const { maxID, teraID, retainedID, gradyID, maidID, memeID, alphenID, paoweeID } = require('#memberIDs');
+const { maxID, teraID, retainedID } = require('#memberIDs');
 const { version, releaseDate } = require('../../package.json');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
@@ -36,15 +36,14 @@ module.exports = {
 			.setColor(tofuGreen)
 			.setAuthor('About Tofu Bot', botProfile)
 			.addFields(
-				{ name: 'Bot version:', value: version },
-				{ name: 'Version release date:', value: releaseDate },
-				{ name: 'Uptime:', value: `${days}d ${hours}h ${minutes}m ${seconds}s` },
+				{ name: 'Bot version:', value: version, inline: true },
+				{ name: 'Version release date:', value: releaseDate, inline: true },
+				{ name: 'Uptime:', value: `${days}d ${hours}h ${minutes}m ${seconds}s`, inline: true },
 				{ name: 'Memory Usage:', value: `${(heapUsed / 1024 / 1024).toFixed(1)} MB / ${(heapTotal / 1024 / 1024).toFixed(1)}MB (${(heapUsed / heapTotal * 100).toFixed(2)}%)` },
-				{ name: 'Coding:', value: `<@${maxID}>, <@${teraID}>, <@${retainedID}>, <@${gradyID}>, <@${paoweeID}>` },
+				{ name: 'Head devs:', value: `<@${maxID}>, <@${teraID}>` },
 				{ name: 'Avatar:', value: `<@${retainedID}>` },
-				{ name: 'Testing:', value: `<@${gradyID}>, <@${teraID}>, <@${retainedID}>, <@${alphenID}>` },
-				{ name: 'Quotes:', value: `<@${retainedID}>, <@${gradyID}>, <@${maidID}>` },
-				{ name: 'Trivia:', value: `<@${retainedID}>, <@${gradyID}>, <@${maidID}>, <@${memeID}>` },
+				{ name: 'Other acknowledgements', value: '[Available here](https://github.com/r-JaidenAnimations-Discord/Tofu-Bot/blob/master/ACKNOWLEDGEMENTS.md)', inline: true },
+				{ name: 'Tofu Bot is now open source!', value: '[GitHub](https://github.com/r-JaidenAnimations-Discord/Tofu-Bot)', inline: true },
 				{ name: 'Initial release:', value: formatDate(client.user.createdAt) }
 			)
 			.setFooter('Made with ☕, without swear words');

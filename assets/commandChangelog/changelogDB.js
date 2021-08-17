@@ -475,5 +475,29 @@ module.exports = {
 				'Shrimp reminder'
 			]
 		},
+		{
+			version: '2.1.0',
+			aliases: ['2.1'],
+			additions: [
+				'Open source messages',
+				'GitHub sponsor button',
+				'Vibecheck slashie',
+				'Acknowledgements file'
+			],
+			fixes: [
+				'Renamed eval to evil',
+				'Fixed incorrect string when using certain commands without permissions',
+				'Reduced timeout between reactions on promptMessage',
+				'Clean up error handling in index.js',
+				'Refactor pluralize util',
+				'Delete some old commented out code and stuff',
+				'Add guild argument on publishInteractions',
+				'Manually append name on vibecheck command',
+				'Remodeled about embed',
+				'Remove database overhaul return (no wonder noone can create tags)',
+				'Remove \'early dev\' stuff from readme'
+			],
+			removals: []
+		},
 	]
 }

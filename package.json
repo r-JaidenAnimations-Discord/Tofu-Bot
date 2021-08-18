@@ -1,7 +1,7 @@
 {
   "name": "tofubot",
-  "version": "2.1.0",
-  "releaseDate": "08/16/2021",
+  "version": "2.2.0",
+  "releaseDate": "08/18/2021",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -9,7 +9,7 @@
     "start": "nodemon"
   },
   "keywords": [],
-  "author": "TeraBaito, MaxTechnics, RetainedEdge, Acama, Paowee",
+  "author": "TeraBaito, MaxTechnics",
   "license": "Creative Commons Attribution-NonCommercial 4.0 International",
   "dependencies": {
     "@discord-player/extractor": "^3.0.2",

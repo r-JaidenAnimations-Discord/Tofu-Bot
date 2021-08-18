@@ -499,5 +499,16 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.2.0',
+			aliases: ['2.2'],
+			additions: [
+				'Voice Channel activities'
+			],
+			fixes: [
+				'Fixed indentation on vibecheck slashie'
+			],
+			removals: []
+		},
 	]
 }

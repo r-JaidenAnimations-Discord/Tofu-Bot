@@ -20,6 +20,7 @@
     "chalk": "^4.1.2",
     "common-tags": "^1.8.0",
     "discord-player": "^5.0.1",
+    "discord-together": "^1.1.62",
     "discord.js": "github:r-JaidenAnimations-Discord/discord.js",
     "ffmpeg-static": "^4.4.0",
     "fs-extra": "^9.1.0",
@@ -28,7 +29,6 @@
     "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2"
   },
-  "devDependencies": {},
   "imports": {
     "#utils/*": "./utils/*",
     "#handlers/*": "./handlers/*",

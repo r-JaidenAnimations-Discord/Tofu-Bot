@@ -26,6 +26,7 @@ const client = new Discord.Client({
 });
 const { randomStatus } = require('#utils/statusFunction.js');
 const { tagSequelize, movieSuggestionSequelize } = require('./handlers/databases.js');
+const { DiscordTogether } = require('discord-together');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 
@@ -38,6 +39,7 @@ client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 client.interactions = new Discord.Collection();
 client.autoResponderCooldowns = new Discord.Collection();
+client.groupActivities = new DiscordTogether(client);
 
 // Config loading
 let launchArgs = process.argv.slice(2);

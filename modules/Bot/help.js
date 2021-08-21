@@ -13,7 +13,7 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['ncommands'],
+	aliases: ['commands'],
 	cooldown: 0,
 	execute: async (client, message, args) => {
 		if (args[0]) {
@@ -31,9 +31,6 @@ function getAll(client, message) {
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
 
-	/* client.categories is an array
-	Basically, this reads recursively each directory from ./modules
-	Then, for each category, it adds a field to the embed with the name and its commands */
 	client.categories.forEach(category => {
 		let commands = client.commands.filter(cmd => cmd.category == category && !cmd.isHidden); // Hide the hidden commands
 
@@ -61,7 +58,7 @@ function getCmd(client, message, input) {
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
 	// If this is not the main server, and the command is for the main server only, we stop here
-	if (cmd.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return message.channel.send('So that command is not for this server').catch(e => {
+	if (cmd?.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return message.channel.send('So that command is not for this server').catch(e => {
 		throw new Tantrum(client, 'help.js', 'Error on sending not for this server message', e);
 	});
 
@@ -71,7 +68,7 @@ function getCmd(client, message, input) {
 	});
 
 	// Adds its name based on helpName || uppercase name
-	if (cmd.name) embed.setDescription(`**${cmd.helpName ? cmd.helpName : cmd.name[0].toUpperCase() + cmd.name.slice(1)} Command**`);
+	if (cmd.name) embed.setTitle(`**${cmd.helpName ? cmd.helpName : cmd.name[0].toUpperCase() + cmd.name.slice(1)} Command**`);
 	// Adds aliases by mapping them
 	if (cmd.aliases) embed.addField('**Aliases**', `${cmd.aliases.map(a => `\`${a}\``).join(' ')}`);
 	// The description

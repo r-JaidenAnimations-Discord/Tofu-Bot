@@ -33,7 +33,7 @@ setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change stat
 client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
-client.categories = fs.readdirSync('./modules/');
+client.categories = fs.readdirSync('./modules/', { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name);
 client.player = new Player(client);
 client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);

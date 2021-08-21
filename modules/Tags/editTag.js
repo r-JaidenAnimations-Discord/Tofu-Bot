@@ -7,6 +7,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['edit-tag', 'tagedit', 'tag-edit'],
 	cooldown: 0,

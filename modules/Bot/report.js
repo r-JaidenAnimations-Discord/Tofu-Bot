@@ -12,6 +12,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['issue', 'bug', 'bugreport'],
 	cooldown: 5,

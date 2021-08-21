@@ -1,8 +1,6 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-// const fs = require('fs');
 const Tantrum = require('#tantrum');
-// const { stripIndents } = require('common-tags');
 
 module.exports = {
 	name: 'help',
@@ -13,6 +11,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['ncommands'],
 	cooldown: 0,
@@ -26,6 +25,8 @@ module.exports = {
 };
 
 function getAll(client, message) {
+	const { jaidenServerID, tofuBotServerID } = client.config;
+
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
@@ -34,19 +35,10 @@ function getAll(client, message) {
 	Basically, this reads recursively each directory from ./modules
 	Then, for each category, it adds a field to the embed with the name and its commands */
 	client.categories.forEach(category => {
-		/* let filesArr = fs.readdirSync(`./modules/${category}`)
-			.filter(file => file.endsWith('.js')); // Accepts only .js files 
+		let commands = client.commands.filter(cmd => cmd.category == category && !cmd.isHidden);
 
-		console.log(filesArr
-			.map(file => file.substring(0, file.length - 3)))
-		embed.addField(category,
-			filesArr
-				.map(file => file.substring(0, file.length - 3)) // Removes the .js
-				.filter(cmd => !client.commands.get(cmd).isHidden) // Removes the ones with a hidden property
-				.map(str => `\`${str}\``) // Formats the names to include monospace
-				.join(' ')); // Joints them by spaces instead of newlines
-		*/
-		const commands = client.commands.filter(cmd => cmd.category == category && !cmd.isHidden);
+		// If this is not the main server, and the command is for the main server only, we remove those commands from the help list
+		if (![jaidenServerID, tofuBotServerID].includes(message.guild.id)) commands = commands.filter(cmd => cmd.category == category && !cmd.mainServerOnly);
 		embed.addField(category, commands
 			.map(str => `\`${str.name}\``) // Formats the names to include monospace
 			.join(' ')); // Joints them by spaces instead of newlines
@@ -59,7 +51,7 @@ function getAll(client, message) {
 }
 
 function getCmd(client, message, input) {
-	const { prefix } = client.config;
+	const { prefix, jaidenServerID, tofuBotServerID } = client.config;
 
 	const embed = new Discord.MessageEmbed()
 		.setColor(tofuOrange)
@@ -68,9 +60,14 @@ function getCmd(client, message, input) {
 	// Fetching the command data through client.commands or client.aliases
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
+	// If this is not the main server, and the command is for the main server only, we stop here
+	if (cmd.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return message.channel.send('So that command is not for this server').catch(e => {
+		throw new Tantrum(client, 'help.js', 'Error on sending not for this server message', e);
+	});
+
 	// If the command isn't found (likely doesn't exist)
 	if (!cmd) return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`).catch(e => {
-		throw new Tantrum(client, 'help.js', 'Error on sending not a command error.');
+		throw new Tantrum(client, 'help.js', 'Error on sending not a command error.', e);
 	});
 
 	// Adds its name based on helpName || uppercase name

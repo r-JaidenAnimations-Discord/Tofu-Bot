@@ -11,6 +11,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	mainServerOnly: true,
 	isHidden: false,
 	aliases: ['denymv'],
 	cooldown: 0,

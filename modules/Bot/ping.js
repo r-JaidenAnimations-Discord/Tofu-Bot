@@ -9,6 +9,7 @@ module.exports = {
 	isDMAllowed: true,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['delay', 'latency'],
 	cooldown: 5,

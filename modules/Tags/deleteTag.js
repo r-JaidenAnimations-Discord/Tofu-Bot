@@ -7,6 +7,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['deltag', 'delete-tag', 'tagdelete', 'tag-delete'],
 	cooldown: 0,

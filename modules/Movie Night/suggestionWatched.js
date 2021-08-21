@@ -12,6 +12,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
+	mainServerOnly: true,
 	isHidden: false,
 	aliases: ['watchmv', 'watchedmv'],
 	cooldown: 0,

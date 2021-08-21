@@ -12,6 +12,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['rm', 'delete', 'del'],
 	cooldown: 0,
@@ -33,6 +34,7 @@ module.exports = {
 			!queue.tracks[args[0]]) return message.channel.send('Invalid argument, if needed, refer to the help command.').catch(e => {
 				throw new Tantrum(client, 'remove.js', 'Error on sending invalid argument message', e); // eslint-disable-line
 			}); // eslint-disable-line
+		// Be the developer your linter thinks you are
 
 		const success = await queue.remove(Number(args[0]) - 1);
 		if (success) {

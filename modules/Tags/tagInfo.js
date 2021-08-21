@@ -11,6 +11,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['tag-info', 'tagdata', 'tag-data'],
 	cooldown: 0,

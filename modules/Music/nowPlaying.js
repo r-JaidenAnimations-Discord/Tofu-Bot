@@ -14,6 +14,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,

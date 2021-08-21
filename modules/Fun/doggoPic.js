@@ -17,7 +17,7 @@ module.exports = {
 	aliases: ['doge', 'doggo'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		let msg = await message.channel.send('Thinking...');
+		let msg = await message.channel.send(generalStrings.loading);
 
 		// API endpoint
 		const endpoint = 'https://dog.ceo/api/breeds/image/random';

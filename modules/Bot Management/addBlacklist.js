@@ -44,7 +44,6 @@ module.exports = {
 		if (toBlacklist === maxID) {
 			try {
 				message.channel.send('Oh you sly fox, trying to bamboozle me. Get blacklisted LMAO');
-				console.log(blackListJSON.bamboozle)
 				blackListJSON.bamboozle.push(message.author.id);
 				return writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
 			} catch (e) {

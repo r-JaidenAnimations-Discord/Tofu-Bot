@@ -15,4 +15,4 @@ const movieSuggestionSequelize = new Sequelize({
 module.exports = {
 	tagSequelize,
 	movieSuggestionSequelize
-}
+};

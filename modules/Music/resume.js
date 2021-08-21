@@ -27,13 +27,13 @@ module.exports = {
 				.setDescription('The music is already playing!');
 
 			return message.channel.send({ embeds: [alreadyPlayingEmbed] }).catch(e => {
-				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e)
+				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e);
 			});
 		}
 
 		if (queue.setPaused(false)) {
 			await message.react('▶️').catch(e => {
-				throw new Tantrum(client, 'resume.js', 'Error on reacting resume', e)
+				throw new Tantrum(client, 'resume.js', 'Error on reacting resume', e);
 			});
 		} else {
 			throw new Tantrum(client, 'resume.js', 'Error on resuming', 'No message');

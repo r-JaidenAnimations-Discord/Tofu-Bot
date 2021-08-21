@@ -23,7 +23,7 @@ module.exports = {
 		if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');
 
 		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
-		if (!suggestion) return message.channel.send(`Looks like an invalid ID, check your spelling.`);
+		if (!suggestion) return message.channel.send('Looks like an invalid ID, check your spelling.');
 
 		const embed = new Discord.MessageEmbed()
 			.setTitle(suggestion.movie)
@@ -62,7 +62,6 @@ module.exports = {
 					{ name: 'Marked by:', value: `<@${suggestion.verdicterID}> (${suggestion.verdicter})`, inline: true },
 					{ name: 'Watched on:', value: formattedWatchDate, inline: true }
 				);
-
 				break;
 			default:
 				console.log('Error: suggestion.status is not an intended value');

@@ -29,7 +29,7 @@ const checkMusic = (client, message) => {
 		return false;
 	}
 	return true;
-}
+};
 
 /**
  * Checks if music is being played 
@@ -47,7 +47,7 @@ const checkQueueExists = (client, message) => {
 		return false;
 	}
 	return true;
-}
+};
 
 module.exports = {
 	checkMusic,

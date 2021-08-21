@@ -27,7 +27,7 @@ const dangerCommandPrompt = (message) => {
 			return false;
 		}
 	});
-}
+};
 
 const buttonedDangerCommandPrompt = async (message) => {
 	const warnEmbed = new Discord.MessageEmbed()

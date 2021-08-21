@@ -58,17 +58,16 @@ module.exports = async (client, message) => {
 	const commandName = args.shift().toLowerCase();
 
 	// Include aliases
-	const command = client.commands.get(commandName)
-		|| client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	// Is this command allowed inside DM?
 	if (message.channel.type === 'DM') {
 		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
 		});
 
 		if (command.isDMAllowed === false) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e)
+			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
 		});
 	}
 
@@ -77,7 +76,7 @@ module.exports = async (client, message) => {
 
 	// Is this command deprecated?
 	if (command?.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
-		throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e)
+		throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e);
 	});
 
 	// Kirito trust
@@ -153,7 +152,7 @@ module.exports = async (client, message) => {
 
 	// Is this command enabled?
 	if (disabledCommands.includes(command.name)) return message.channel.send({ content: `Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, files: ['./assets/Configuration/commandDisabled.gif'] }).catch(e => {
-		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e)
+		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
 	});
 
 	// All requirements are met, try running the command
@@ -163,4 +162,4 @@ module.exports = async (client, message) => {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
 		//message.reply('Sooo i like um broke');
 	}
-}
+};

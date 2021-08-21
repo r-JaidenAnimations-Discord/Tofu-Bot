@@ -22,7 +22,7 @@ module.exports = {
 		const queue = client.player.getQueue(message.guild);
 
 		if (queue.tracks.length < 2) return message.channel.send('There\'s no more music to remove').catch(e => {
-			throw new Tantrum(client, 'remove.js', 'Error on sending nothing to remove message', e)
+			throw new Tantrum(client, 'remove.js', 'Error on sending nothing to remove message', e);
 		});
 
 		if (!args[0] ||
@@ -31,8 +31,8 @@ module.exports = {
 			Number(args[0]) >= queue.tracks.length ||
 			Number(args[0]) < 1 ||
 			!queue.tracks[args[0]]) return message.channel.send('Invalid argument, if needed, refer to the help command.').catch(e => {
-				throw new Tantrum(client, 'remove.js', 'Error on sending invalid argument message', e)
-			});
+				throw new Tantrum(client, 'remove.js', 'Error on sending invalid argument message', e); // eslint-disable-line
+			}); // eslint-disable-line
 
 		const success = await queue.remove(Number(args[0]) - 1);
 		if (success) {
@@ -41,7 +41,7 @@ module.exports = {
 				.setDescription(`Removed [${success.title}](${success.url}) [${success.requestedBy}]`);
 
 			message.channel.send({ embeds: [removedEmbed] }).catch(e => {
-				throw new Tantrum(client, 'remove.js', 'Error on sending removedEmbed', e)
+				throw new Tantrum(client, 'remove.js', 'Error on sending removedEmbed', e);
 			});
 		} else {
 			throw new Tantrum(client, 'back.js', 'Error on removing song', e);

@@ -9,4 +9,4 @@ module.exports = (client, queue, tracks) => {
 	queue.metadata.channel.send({ embeds: [bulkQueuedEmbed] }).catch(e => {
 		throw new Tantrum(client, 'tracksAdd.js', 'Error sending bulkQueuedEmbed', e);
 	});
-}
+};

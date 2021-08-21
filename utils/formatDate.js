@@ -13,8 +13,8 @@ const formatDate = (date) => {
 		minute: 'numeric',
 		second: 'numeric'
 	}).format(date);
-}
+};
 
 module.exports = {
 	formatDate
-}
+};

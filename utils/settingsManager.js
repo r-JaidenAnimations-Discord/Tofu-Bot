@@ -71,8 +71,8 @@ const updateSetting = async (client, message, setting, selectedState) => {
 			break;
 		}
 	}
-}
+};
 
 module.exports = {
 	updateSetting
-}
+};

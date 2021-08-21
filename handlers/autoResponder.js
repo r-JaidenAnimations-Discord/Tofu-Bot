@@ -18,4 +18,4 @@ const autoResponders = [
 ];
 module.exports = {
 	autoResponders
-}
+};

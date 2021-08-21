@@ -59,7 +59,7 @@ module.exports = {
 				// console.log('Got a response: ', APIresponse.ip);
 				var playerList = 'Sadly, no online members';
 				var userCount = 0;
-				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`
+				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`;
 
 				if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);
 
@@ -86,7 +86,7 @@ module.exports = {
 		}).on('error', function(e) {
 			if (msg.deletable) msg.delete();
 			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			});
 		});

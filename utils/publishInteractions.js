@@ -27,9 +27,8 @@ const publishInteractions = async (client, guild) => {
 	} catch (e) {
 		console.error(e);
 	}
-}
-
+};
 
 module.exports = {
 	publishInteractions
-}
+};

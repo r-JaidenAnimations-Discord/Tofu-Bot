@@ -36,7 +36,7 @@ module.exports = {
 		client.groupActivities.createTogetherCode(interaction.options.get('channel').value, game).then(async invite => {
 			const attachment = new Discord.MessageAttachment(`./assets/commandActivity/${game}.png`, 'activity.png');
 			const activityEmbed = new Discord.MessageEmbed()
-				.setTitle(`Activity launched!`)
+				.setTitle('Activity launched!')
 				.setDescription(`[Click here to start it, after that you can use the invite embed below](${invite.code})`)
 				.setColor(tofuGreen)
 				.setThumbnail('attachment://activity.png')

@@ -14,7 +14,7 @@ const numberReactions = {
 	7: '7️⃣',
 	8: '8️⃣',
 	9: '9️⃣'
-}
+};
 
 module.exports = {
 	name: 'trivia',
@@ -85,7 +85,7 @@ module.exports = {
 				}
 				else {
 					//message.channel.send('k')
-					correctedEmbed.setFooter(`1 minute passed, the answer has been revealed.`);
+					correctedEmbed.setFooter('1 minute passed, the answer has been revealed.');
 					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => {
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 					});

@@ -6,4 +6,4 @@ module.exports = (queue, track) => {
 	 * so how do we get started here..
 	 * I think i need to pass the message id trough something in the queue
 	 */
-}
+};

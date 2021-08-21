@@ -27,4 +27,4 @@ class Tantrum {
 	}
 }
 
-module.exports = Tantrum
+module.exports = Tantrum;

@@ -511,4 +511,4 @@ module.exports = {
 			removals: []
 		},
 	]
-}
+};

@@ -24,7 +24,7 @@ module.exports = {
 		const verdictReason = args.slice(1).join(' ') || 'No reason specified';
 
 		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
-		if (!suggestion) return message.channel.send(`Looks like an invalid ID, check your spelling.`);
+		if (!suggestion) return message.channel.send('Looks like an invalid ID, check your spelling.');
 
 		let suggestionMessageID = await suggestion.suggestionMessageID;
 

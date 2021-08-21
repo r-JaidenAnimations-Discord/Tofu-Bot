@@ -21,7 +21,10 @@
         ],
         "semi": [
             "error",
-            "always"
+            "always",
+            {
+                "omitLastInOneLineBlock": true
+            }
         ],
         "no-undef": "off",
         "no-unused-vars": "off",

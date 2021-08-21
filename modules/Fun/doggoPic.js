@@ -2,6 +2,7 @@ const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const https = require('https');
 const Tantrum = require('#tantrum');
+const { generalStrings } = require('#assets/global/strings.json');
 
 module.exports = {
 	name: 'dog',
@@ -19,7 +20,7 @@ module.exports = {
 		let msg = await message.channel.send('Thinking...');
 
 		// API endpoint
-		const endpoint = `https://dog.ceo/api/breeds/image/random`;
+		const endpoint = 'https://dog.ceo/api/breeds/image/random';
 
 		const dogEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
@@ -51,7 +52,7 @@ module.exports = {
 		function sendError(e) {
 			if (msg.deletable) msg.delete();
 			new Tantrum(client, 'doggoPic.js', 'API did not respond', e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription(`So uh the API doesn't wanna talk rn`).setColor(tofuError)] }).catch(f => {
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'doggoPic.js', 'Error on sending error embed', f);
 			});
 		}

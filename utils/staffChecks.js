@@ -14,7 +14,7 @@ const checkBanStaff = (client, message, returnMessage) => {
 		return false;
 	}
 	return true;
-}
+};
 
 /**
  * Check if the message author can manage messages
@@ -28,7 +28,7 @@ const checkMessageStaff = (client, message, returnMessage) => {
 		return false;
 	}
 	return true;
-}
+};
 
 /**
  * Check if the message author is one of the masters
@@ -44,9 +44,9 @@ const masterCheck = (client, message) => {
 		return false;
 	}
 	return true;
-}
+};
 module.exports = {
 	checkBanStaff,
 	checkMessageStaff,
 	masterCheck
-}
+};

@@ -6,7 +6,7 @@
  */
 const pluralizeWordOnly = (word, times) => {
 	return times === 1 ? word : `${word}s`;
-}
+};
 
 /**
  * Add an 's' to a word when needed
@@ -16,9 +16,9 @@ const pluralizeWordOnly = (word, times) => {
  */
 const pluralizeWithNumber = (word, times) => {
 	return times === 1 ? `${times} ${word}` : `${times} ${word}s`;
-}
+};
 
 module.exports = {
 	pluralizeWordOnly,
 	pluralizeWithNumber
-}
+};

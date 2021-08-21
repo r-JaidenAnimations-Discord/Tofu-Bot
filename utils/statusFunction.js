@@ -51,7 +51,7 @@ const setSts = (client, selectedStatus) => {
 		default:
 			return false;
 	}
-}
+};
 
 /**
  * Actually does the DJS API call to set the client status
@@ -69,7 +69,7 @@ const setRPC = async (client, activityStatus, activityName, activityType) => {
 		}]
 	});
 	return true;
-}
+};
 
 const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e']; // We don't want to have the bot appear offline
 /**
@@ -85,7 +85,7 @@ const randomStatus = async (client) => {
 		const nextState = states[Math.floor(Math.random() * states.length)];
 		setSts(client, nextState);
 	}
-}
+};
 
 module.exports = {
 	setSts,

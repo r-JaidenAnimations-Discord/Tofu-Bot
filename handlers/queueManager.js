@@ -24,8 +24,8 @@ const constructQueue = async (client, message) => {
 		return false;
 	});
 	return queue;
-}
+};
 
 module.exports = {
 	constructQueue
-}
+};

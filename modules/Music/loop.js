@@ -23,7 +23,7 @@ module.exports = {
 			0: 'Looping is now **disabled**',
 			1: 'Now looping the **current track.**',
 			2: 'Now looping the **queue**'
-		}
+		};
 
 		const queue = client.player.getQueue(message.guild);
 

@@ -12,4 +12,4 @@ module.exports = async (client) => {
 
 	// --register slashies
 	if (process.argv.includes('--register')) await publishInteractions(client, client.config.jaidenServerID);
-}
+};

@@ -26,7 +26,7 @@ module.exports = {
 		if (!args[1] || !validateDate(args[1])) return message.channel.send('Please enter a valid date');
 
 		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
-		if (!suggestion) return message.channel.send(`Looks like an invalid ID, check your spelling.`);
+		if (!suggestion) return message.channel.send('Looks like an invalid ID, check your spelling.');
 
 		let suggestionMessageID = await suggestion.suggestionMessageID;
 

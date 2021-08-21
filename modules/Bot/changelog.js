@@ -31,7 +31,7 @@ module.exports = {
 		for (let a = 0; a < release.fixes.length; a++) fixList += '✓ ' + release.fixes[a] + '\n';
 		for (let x = 0; x < release.removals.length; x++) removalList += '- ' + release.removals[x] + '\n';
 
-		const log = `**Tofu Bot ${release.version}${release === releases[releases.length - 1] ? ' (Latest)' : ''}**\nChanges:\n\`\`\`diff\n${additionList}${fixList}${removalList}\n\`\`\``
+		const log = `**Tofu Bot ${release.version}${release === releases[releases.length - 1] ? ' (Latest)' : ''}**\nChanges:\n\`\`\`diff\n${additionList}${fixList}${removalList}\n\`\`\``;
 
 		message.channel.send(log);
 	},

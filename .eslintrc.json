@@ -33,6 +33,10 @@
             "error",
             "last"
         ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
         "no-undef": "off",
         "no-unused-vars": "off",
         "no-case-declarations": "off"

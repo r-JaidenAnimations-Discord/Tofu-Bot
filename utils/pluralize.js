@@ -4,9 +4,7 @@
  * @param {Number} times How many times the word references
  * @returns {String} Word either with or without 's'
  */
-const pluralizeWordOnly = (word, times) => {
-	return times === 1 ? word : `${word}s`;
-};
+const pluralizeWordOnly = (word, times) => { return times === 1 ? word : `${word}s` };
 
 /**
  * Add an 's' to a word when needed

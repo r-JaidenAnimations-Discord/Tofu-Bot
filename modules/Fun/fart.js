@@ -11,7 +11,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: true,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		if (!masterCheck(client, message)) return;

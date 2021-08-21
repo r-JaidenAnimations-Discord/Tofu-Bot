@@ -1,4 +1,4 @@
-//Event handler is very broken, | not anymore!!!!!!!!!!!!!!!!!!!!!!!!
+// Event handler is very broken, | not anymore!!!!!!!!!!!!!!!!!!!!!!!!
 
 const fs = require('fs'); // fs is the package we need to read all files which are in folders
 
@@ -14,12 +14,12 @@ module.exports = client => {
 			const evt = require(`../events/${dirs}/${file}`);
 			let eName = file.split('.')[0];
 			client.on(eName, evt.bind(null, client));
-			//console.log(eName + ' loaded');
+			// console.log(eName + ' loaded');
 			table.addRow(eName, '✔   Loaded');
 		}
 	};
 	['client', 'guild'].forEach(x => load(x));
 	console.log(table.toString());
 };
-//wait might run be because the module export of the event has to be different too?
+// wait might run be because the module export of the event has to be different too?
 // don't know how bind works with object methods x d 

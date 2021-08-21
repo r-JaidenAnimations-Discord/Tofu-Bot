@@ -9,7 +9,7 @@ const setSts = (client, selectedStatus) => {
 	const { jaidenServerID, level20RoleID } = client.config;
 
 	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
-	switch (/*this.*/selectedStatus) { // lmao, i fucking hate this.
+	switch (/* this. */selectedStatus) { // lmao, i fucking hate this.
 		case 'online':
 			return setRPC(client, 'online', youOrJaiden, 'WATCHING');
 		case 'idle':
@@ -71,7 +71,7 @@ const setRPC = async (client, activityStatus, activityName, activityType) => {
 	return true;
 };
 
-const states = ['online', 'idle', 'dnd', /*'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e']; // We don't want to have the bot appear offline
+const states = ['online', 'idle', 'dnd', /* 'gone', */'stream', 'play', 'listen', 'randomuser', 'wall-e']; // We don't want to have the bot appear offline
 /**
  * Pick a random status and set it
  * @param {Client} client Discord client

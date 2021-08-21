@@ -160,6 +160,6 @@ module.exports = async (client, message) => {
 		command.execute(client, message, args);
 	} catch (e) {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
-		//message.reply('Sooo i like um broke');
+		// message.reply('Sooo i like um broke');
 	}
 };

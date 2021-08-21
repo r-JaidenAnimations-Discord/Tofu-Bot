@@ -34,7 +34,7 @@ function getAll(client, message) {
 	Basically, this reads recursively each directory from ./modules
 	Then, for each category, it adds a field to the embed with the name and its commands */
 	client.categories.forEach(category => {
-		/*let filesArr = fs.readdirSync(`./modules/${category}`)
+		/* let filesArr = fs.readdirSync(`./modules/${category}`)
 			.filter(file => file.endsWith('.js')); // Accepts only .js files 
 
 		console.log(filesArr

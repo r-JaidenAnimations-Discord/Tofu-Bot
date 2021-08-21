@@ -23,7 +23,7 @@ module.exports = {
 		});
 		const warnEmbed = new Discord.MessageEmbed()
 			.setColor(tofuRed)
-			//.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
+			// .setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
 			.setTitle('HOLD UP')
 			.setDescription('Posting useless things or trolls is a punishable offense. If you are planning on trolling, dismiss right now. Otherwise, confirm below.')
 			.setFooter('This is also a good moment to check your report before posting just in case you missed something.')

@@ -27,6 +27,6 @@ module.exports = {
 
 		message.channel.send(`\`\`\`nim\n${currtr}\n\n${trlist}\n${footer}\n\`\`\``).catch(e => {
 			throw new Tantrum(client, 'queue.js', 'Error on sending queue', e);
-		}); //TODO: pagination
+		}); // TODO: pagination
 	},
 };

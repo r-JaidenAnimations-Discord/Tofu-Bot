@@ -11,7 +11,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: true,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (message.author.id !== shrimpID) return message.channel.send('ahahahhahahah are you shrimp? Only the all mighty shrimp can use this almighty command! **vanish**').catch(e => {

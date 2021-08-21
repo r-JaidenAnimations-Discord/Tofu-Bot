@@ -15,7 +15,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: true,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 

@@ -11,7 +11,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: true,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		const { movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;

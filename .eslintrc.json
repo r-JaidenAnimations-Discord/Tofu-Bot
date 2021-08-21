@@ -26,6 +26,13 @@
                 "omitLastInOneLineBlock": true
             }
         ],
+        "semi-spacing": "error",
+        "no-extra-semi": "error",
+        "spaced-comment": "warn",
+        "semi-style": [
+            "error",
+            "last"
+        ],
         "no-undef": "off",
         "no-unused-vars": "off",
         "no-case-declarations": "off"

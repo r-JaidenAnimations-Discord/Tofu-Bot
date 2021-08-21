@@ -13,7 +13,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!checkMusic(client, message)) return;

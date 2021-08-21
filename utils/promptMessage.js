@@ -1,4 +1,4 @@
-//Plagiarized from tera, like 90% of this codebase
+// Plagiarized from tera, like 90% of this codebase
 
 /**
 * Sends a message (prompt) with X reactions, the bot will take action depending on the chosen reaction.
@@ -34,7 +34,7 @@ async function promptButtons(message, authorID, time) {
 
 	return await message.awaitMessageComponent({
 		filter: i => i.user.id == authorID, time
-	}).catch(() => {/*void*/ });
+	}).catch(() => {/* void */ });
 }
 
 module.exports = {

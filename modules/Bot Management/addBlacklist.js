@@ -73,7 +73,7 @@ module.exports = {
 			}
 		}
 
-		//what if, yeah works better
+		// what if, yeah works better
 		switch (args[1]) {
 			case 'python':
 			case 'bamboozle':

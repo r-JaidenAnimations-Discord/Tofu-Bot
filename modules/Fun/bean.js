@@ -10,7 +10,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		if (!args[0] || message.mentions.users.first() === message.author) {

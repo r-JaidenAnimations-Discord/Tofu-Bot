@@ -31,7 +31,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		// If you think reading this is bad, i had to write it
 		if (args[0] === 'rules') {
-			//return message.channel.send('Rules and info will be put here');
+			// return message.channel.send('Rules and info will be put here');
 			const ruleEmbed = new Discord.MessageEmbed()
 				.setTitle('Trivia Info')
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
@@ -42,7 +42,7 @@ module.exports = {
 			});
 		}
 
-		//message.channel.send('hotel? Trivia!');
+		// message.channel.send('hotel? Trivia!');
 		let q = trivia[Math.floor(Math.random() * trivia.length)];
 
 		let answersMarkedList = q.answers.map((answer, i) =>
@@ -64,7 +64,7 @@ module.exports = {
 
 		message.channel.send({ embeds: [mainEmbed] }).then(async sentEmbed => {
 			for (let i = 1; i <= q.answers.length; i++) {
-				//console.log(`${numberReactions.get(i + 1)}`);
+				// console.log(`${numberReactions.get(i + 1)}`);
 				try {
 					await sentEmbed.react(`${numberReactions[i]}`);
 					const d = async () => new Promise(r => setTimeout(r, 260));
@@ -77,14 +77,14 @@ module.exports = {
 				const correct = await promptMessage(sentEmbed, message.author, 45, '✅');
 
 				if (correct === '✅') {
-					//message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
+					// message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
 					correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
 					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => {
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
 					});
 				}
 				else {
-					//message.channel.send('k')
+					// message.channel.send('k')
 					correctedEmbed.setFooter('1 minute passed, the answer has been revealed.');
 					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => {
 						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);

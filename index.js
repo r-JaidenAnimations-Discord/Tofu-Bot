@@ -64,7 +64,7 @@ client.login(client.config.apiKey).catch(e => {
 	process.exit(1);
 });
 
-//if sh!t goes wrong
+// if sh!t goes wrong
 // if (client.config.devMode) client.on('debug', d => console.log(`${chalk.cyan('[Debug]')}:`, d)); // Debug stuff, only loads when running in debug mode
 client.on('rateLimit', r => console.warn(`${chalk.yellow('[Ratelimit]')}:`, r));
 client.on('warn', w => console.warn(`${chalk.yellow('[Warn]')}:`, w));

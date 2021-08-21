@@ -12,7 +12,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
-	//aliases: [''],
+	// aliases: [''],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!args[0]) return message.channel.send('Please specify a tag.');

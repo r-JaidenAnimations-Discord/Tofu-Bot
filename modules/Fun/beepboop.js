@@ -10,7 +10,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		message.channel.send('boop').catch(e => {

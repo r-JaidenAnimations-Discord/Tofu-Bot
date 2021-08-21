@@ -82,11 +82,11 @@ module.exports = {
 			answers: ['Parent Stories', 'Random Thoughts', 'Things I Do that Adults Probably Don\'t Do', 'My Childhood Stories'],
 			correct: 2,
 		},
-		/*{
+		/* {
 				question: 'Quote: 'Two can play at that game James'',
 				answers: ['[]', '[]', '[]', 'Things I Do that Adults Probably Don't Do'],
 				correct: 3,
-		},*/
+		}, */
 		{
 			question: 'Will you hold something for me?',
 			answers: ['My Wallet', 'My Hand', 'Ari', 'My Card'],
@@ -107,11 +107,11 @@ module.exports = {
 			answers: ['I\'m counting to 3!', 'Any longer?', 'Calmed down?', 'Are you done?'],
 			correct: 3,
 		},
-		/*{
+		/* {
 			question: 'Quote: 'What do you think you did?'',
 			answers: ['[]', 'Childhood stories', '[]', '[]'],
 			correct: 1,
-		},*/
+		}, */
 		{
 			question: 'What did Jaiden do when her mom said \'What do you think you did?\'',
 			answers: ['Played outside with pyjamas', 'Walked Kaisha without telling anyone', 'Ate the whole bag of chips', 'Stole mom\'s candy'],

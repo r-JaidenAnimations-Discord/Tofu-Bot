@@ -11,7 +11,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 3,
 	execute: async function(client, message, args) {
 		if (Math.floor(Math.random() * 10 > 3))

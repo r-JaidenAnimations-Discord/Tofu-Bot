@@ -8,7 +8,7 @@ module.exports = {
 	isDeprecated: false,
 	isDangerous: false,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		if (args.length < 1) return message.reply('What 👏 to 👏 say 👏 tho. 👏 ;-;');

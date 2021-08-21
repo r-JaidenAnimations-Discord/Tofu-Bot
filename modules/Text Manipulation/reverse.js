@@ -9,7 +9,7 @@ module.exports = {
 	isDangerous: false,
 	isHidden: false,
 	isHidden: false,
-	//aliases: [],
+	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		let input = args.join(' ');

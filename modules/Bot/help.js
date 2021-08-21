@@ -35,7 +35,7 @@ function getAll(client, message) {
 	Basically, this reads recursively each directory from ./modules
 	Then, for each category, it adds a field to the embed with the name and its commands */
 	client.categories.forEach(category => {
-		let commands = client.commands.filter(cmd => cmd.category == category && !cmd.isHidden);
+		let commands = client.commands.filter(cmd => cmd.category == category && !cmd.isHidden); // Hide the hidden commands
 
 		// If this is not the main server, and the command is for the main server only, we remove those commands from the help list
 		if (![jaidenServerID, tofuBotServerID].includes(message.guild.id)) commands = commands.filter(cmd => cmd.category == category && !cmd.mainServerOnly);

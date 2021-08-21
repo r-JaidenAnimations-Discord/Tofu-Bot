@@ -107,9 +107,9 @@ module.exports = {
 			case 'custom-stream':
 				const url = interaction.options.getString('url');
 				// Scary as always
-				const youtubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/
-				const twitchRegex = /^(?:https?:\/\/)?(?:www\.|go\.)?twitch\.tv\/([a-z0-9_]+)($|\?)/
-				if (!youtubeRegex.test(url) && !twitchRegex.test(url)) return await interaction.reply('You have to provide a valid Twitch or YouToob url')
+				const youtubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?$/;
+				const twitchRegex = /^(?:https?:\/\/)?(?:www\.|go\.)?twitch\.tv\/([a-z0-9_]+)($|\?)/;
+				if (!youtubeRegex.test(url) && !twitchRegex.test(url)) return await interaction.reply('You have to provide a valid Twitch or YouToob url');
 
 				client.user.setPresence({
 					status: 'online',

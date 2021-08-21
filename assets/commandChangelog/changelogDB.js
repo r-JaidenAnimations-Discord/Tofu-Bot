@@ -523,5 +523,17 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.2.2',
+			aliases: [],
+			additions: [
+				'Bot status slashie'
+			],
+			fixes: [
+				'Start enforcing LF eol sequence',
+				'Fixed mistakes in GitHub CI workflow yml'
+			],
+			removals: []
+		}
 	]
 };

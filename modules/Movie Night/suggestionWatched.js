@@ -1,6 +1,6 @@
 const { suggestionWatched } = require('#colors');
 const Discord = require('discord.js');
-const { checkBanStaff } = require('#utils/staffChecks.js');
+const { checkMessageStaff } = require('#utils/staffChecks.js');
 const { validateDate } = require('#utils/dateValidation.js');
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID } = client.config;
 
-		if (!checkBanStaff(client, message, true)) return;
+		if (!checkMessageStaff(client, message, true)) return;
 
 		const id = parseInt(args[0]);
 		if (!args[0] || isNaN(id)) return message.channel.send('Please specify a valid suggestion ID.');

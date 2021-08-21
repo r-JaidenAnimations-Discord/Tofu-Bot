@@ -510,5 +510,18 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.2.1',
+			aliases: [],
+			additions: [
+				'GitHub actions CI eslint checking',
+				'Eslint config and stuffs',
+			],
+			fixes: [
+				'Changed loading string on dog command to global string',
+				'Changed ban perm check to message perm check on movie night suggestion management commands'
+			],
+			removals: []
+		},
 	]
 };

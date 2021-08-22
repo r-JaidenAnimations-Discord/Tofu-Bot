@@ -18,7 +18,7 @@ module.exports = {
 				description: 'What game to play',
 				type: 'STRING',
 				choices: [
-					{ name: 'Poker Night', value: 'poker' },
+					// { name: 'Poker Night', value: 'poker' },
 					{ name: 'Betrayal.io', value: 'betrayal' },
 					{ name: 'Youtube Together', value: 'youtube' },
 					{ name: 'Fishington.io', value: 'fishing' },

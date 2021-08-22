@@ -6,9 +6,10 @@ const Tantrum = require('#tantrum');
 const { autoResponders } = require('../../handlers/autoResponder.js');
 const { dangerCommandPrompt } = require('#utils/dangerPrompt.js');
 const { simpleDuration } = require('#utils/buildTimeString.js');
+const { notifyMaintenance } = require('#utils/maintenanceNotifier.js');
 
 module.exports = async (client, message) => {
-	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers, tofuBotServerID } = client.config;
+	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers, tofuBotServerID, maintenance } = client.config;
 
 	// Bots shall not trigger me
 	if (message.author.bot) return;
@@ -120,6 +121,8 @@ module.exports = async (client, message) => {
 			throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e);
 		});
 	}
+
+	if (maintenance) notifyMaintenance(message);
 
 	// Cooldown?
 	let cooldowns = client.cooldowns;

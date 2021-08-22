@@ -11,7 +11,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
-	mainServerOnly: false,
+	mainServerOnly: true,
 	isHidden: false,
 	aliases: ['sts', 'stat'],
 	cooldown: 1,

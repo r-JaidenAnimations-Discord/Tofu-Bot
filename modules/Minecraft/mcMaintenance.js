@@ -10,7 +10,7 @@ module.exports = {
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: true,
-	mainServerOnly: false,
+	mainServerOnly: true,
 	isHidden: false,
 	aliases: ['mcm', 'minecraffmaintenance', 'minecrapmaintenance'],
 	cooldown: 0,

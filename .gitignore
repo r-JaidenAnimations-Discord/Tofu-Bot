@@ -21,3 +21,6 @@ configDebug.json
 
 # Spotlight
 .DS_Store*
+
+# Package Lock file
+package-lock.json

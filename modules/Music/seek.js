@@ -16,8 +16,8 @@ module.exports = {
 	// aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		checkMusic(client, message)
-		checkQueueExists(client, message)
+		checkMusic(client, message);
+		checkQueueExists(client, message);
 
 		const time = !isNaN(args[0]) ? Number(args[0]) * 1000 : ms(args[0]);
 

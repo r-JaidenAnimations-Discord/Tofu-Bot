@@ -557,7 +557,7 @@ module.exports = {
 				'Refactored master check',
 				'Refactored Tantrum',
 				'Renamed newSuggestMovie.js to suggestionAdd.js',
-				'Lowercase message before checking for prefix (mobile users you\'re welcome',
+				'Lowercase message before checking for prefix (mobile users you\'re welcome)',
 				'Fix return on movie suggestion create command to make it usable again'
 			],
 			removals: [

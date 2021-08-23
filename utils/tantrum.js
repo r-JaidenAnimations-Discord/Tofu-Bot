@@ -1,28 +1,31 @@
+// Yes, I could just console log it, but I could also poke
+// myself in the eye with a sharp stick. Either way you wouldn't
+// be able to see what's going on.
 const { tofuError } = require('#colors');
 const { maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const chalk = require('chalk');
 
-class Tantrum {
+class Tantrum extends Error {
 	/**
 	 * Handles errors by DM notifying and console logging
 	 * @param {Client} client Discord client
 	 * @param {String} file File name
-	 * @param {String} message Error message
-	 * @param {String} err Error output
+	 * @param {String} msg Error message
+	 * @param {String|Error} err Error output
 	 */
-	constructor(client, file, message, err) {
+	constructor(client, file, msg, err) {
+		super(`${chalk.cyan(msg)} in ${chalk.redBright(file)}\n${err.stack}`);
 		this.client = client;
 		this.file = file;
-		this.message = message;
+		this.msg = msg;
 		this.err = err;
 		this.handle();
 	}
 	handle() {
-		console.log(`${chalk.yellow('[ERROR]')}: ${this.file}: ${this.message}: ${this.err}`, this.err.stack);
 		// How did i even write this without having a freaking aneurysm
-		return this.client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`WAAAH: ${this.file}: ${this.message} \n\`\`${this.err}\`\``).setColor(tofuError)] }).catch(f => {
-			throw new Error(`Sending error DM ${chalk.redBright('failed')}! DMError: ${f}`);
+		return this.client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`WAAAH: ${this.file}: ${this.msg} \n\`\`${this.err}\`\``).setColor(tofuError)] }).catch(f => {
+			new Error(`Sending error DM ${chalk.redBright('failed')}! DMError: ${f}`);
 		});
 	}
 }

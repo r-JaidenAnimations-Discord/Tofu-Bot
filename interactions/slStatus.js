@@ -1,4 +1,4 @@
-const Tantrum = require('#utils/tantrum.js');
+const Tantrum = require('#tantrum');
 const { setSts } = require('#utils/statusFunction.js');
 
 module.exports = {

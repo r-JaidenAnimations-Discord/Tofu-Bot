@@ -1,4 +1,4 @@
-const Tantrum = require('#utils/tantrum.js');
+const Tantrum = require('#tantrum');
 const ms = require('ms');
 const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 
@@ -6,7 +6,7 @@ module.exports = {
 	name: 'seek',
 	helpTitle: 'Seek',
 	category: 'Music',
-	usage: 'not yet',
+	usage: 'seek [{seconds/x s}]',
 	description: 'Coming soon: seek trough the current track!',
 	isDMAllowed: false,
 	isDeprecated: false,

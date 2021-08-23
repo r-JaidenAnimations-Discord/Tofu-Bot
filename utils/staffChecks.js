@@ -6,6 +6,7 @@ const Tantrum = require('#tantrum');
  * Check if the message author can ban members
  * @param {Client} client Discord client
  * @param {Message} message Message object
+ * @param {Boolean} returnMessage whether a message needs to be returned
  * @returns {Boolean} Returns true if message.author can ban members
  */
 const checkBanStaff = (client, message, returnMessage) => {
@@ -20,6 +21,7 @@ const checkBanStaff = (client, message, returnMessage) => {
  * Check if the message author can manage messages
  * @param {Client} client Discord client
  * @param {Message} message Message object
+ * @param {Boolean} returnMessage whether a message needs to be returned
  * @returns {Boolean} Returns true if message.author can manage messages
  */
 const checkMessageStaff = (client, message, returnMessage) => {
@@ -37,7 +39,7 @@ const checkMessageStaff = (client, message, returnMessage) => {
  * @returns {Boolean} Returns true if message.author is one of the masters
  */
 const masterCheck = (client, message) => {
-	if (message.author.id !== teraID && message.author.id !== maxID && message.author.id !== gradyID && message.author.id !== retainedID) {
+	if (![teraID, maxID, gradyID].includes(message.author.id)) {
 		message.channel.send('You are not worthy enough to use this command, **perish**').catch(e => {
 			throw new Tantrum(client, 'staffChecks.js', 'Error while sending master permission message', e);
 		});

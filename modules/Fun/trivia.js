@@ -44,7 +44,7 @@ module.exports = {
 		}
 
 		// message.channel.send('hotel? Trivia!');
-		let q = trivia[Math.floor(Math.random() * trivia.length)];
+		let q = trivia.randomElement();
 
 		let answersMarkedList = q.answers.map((answer, i) =>
 			i === q.correct ?

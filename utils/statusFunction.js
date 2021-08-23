@@ -36,16 +36,14 @@ const setSts = (client, selectedStatus) => {
 		case 'wall-e':
 			return setRPC(client, 'online', 'Wall-E', 'WATCHING');
 		case 'next':
-			const nextState = states[Math.floor(Math.random() * states.length)];
+			const nextState = states.randomElement();
 			return setSts(client, nextState);
 		case 'randomuser':
-
 			let memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
-			let randomMember = memberList[Math.floor(Math.random() * memberList.length)];
+			let randomMember = memberList.randomElement();
 
 			// We don't want to have the bot appear offline
-			const simpleStates = ['online', 'idle', 'dnd'];
-			let randomSimpleState = simpleStates[Math.floor(Math.random() * simpleStates.length)];
+			let randomSimpleState = ['online', 'idle', 'dnd'].randomElement();
 
 			return setRPC(client, randomSimpleState, randomMember, 'WATCHING');
 		default:
@@ -81,10 +79,7 @@ const randomStatus = async (client) => {
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
 	var settingsFile = JSON.parse(data);
 
-	if (settingsFile.randomStatus.state === true) {
-		const nextState = states[Math.floor(Math.random() * states.length)];
-		setSts(client, nextState);
-	}
+	if (settingsFile.randomStatus.state) setSts(client, states.randomElement());
 };
 
 module.exports = {

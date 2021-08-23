@@ -77,3 +77,6 @@ process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}:`, e.stack))
 ['commands', 'event', 'music', 'interaction'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
+
+// Custom prototypes
+require('./handlers/prototypes.js');

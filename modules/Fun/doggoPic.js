@@ -2,7 +2,7 @@ const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const https = require('https');
 const Tantrum = require('#tantrum');
-const { generalStrings } = require('#assets/global/strings.json');
+const { loadingString } = require('#utils/funnyLoad.js');
 
 module.exports = {
 	name: 'dog',
@@ -18,7 +18,7 @@ module.exports = {
 	aliases: ['doge', 'doggo'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		let msg = await message.channel.send(generalStrings.loading);
+		let msg = await message.channel.send(loadingString());
 
 		// API endpoint
 		const endpoint = 'https://dog.ceo/api/breeds/image/random';

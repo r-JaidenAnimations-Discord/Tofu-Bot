@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const https = require('https');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
-const { generalStrings } = require('#assets/global/strings.json');
+const { loadingString } = require('#utils/funnyLoad.js');
 
 module.exports = {
 	name: 'minecraft',
@@ -21,7 +21,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { minecraftIP } = client.config;
 
-		let msg = await message.channel.send(generalStrings.loading);
+		let msg = await message.channel.send(loadingString());
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');

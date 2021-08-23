@@ -6,7 +6,7 @@ const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
 const { checkMusic } = require('#utils/musicChecks.js');
 const { constructQueue } = require('#handlers/queueManager.js');
-const { generalStrings } = require('#assets/global/strings.json');
+const { loadingString } = require('#utils/funnyLoad.js');
 
 module.exports = {
 	name: 'play',
@@ -45,7 +45,7 @@ module.exports = {
 			});
 		}
 
-		const loadMsg = await message.channel.send(generalStrings.loading);
+		const loadMsg = await message.channel.send(loadingString());
 
 		const track = await client.player.search(args.join(' '), {
 			requestedBy: message.author

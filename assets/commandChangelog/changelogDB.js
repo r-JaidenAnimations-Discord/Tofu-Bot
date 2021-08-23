@@ -534,6 +534,36 @@ module.exports = {
 				'Fixed mistakes in GitHub CI workflow yml'
 			],
 			removals: []
-		}
+		},
+		{
+			version: '2.3.0',
+			aliases: ['2.3'],
+			additions: [
+				'Main server only option (hides and disables commands in other servers)',
+				'Maintenance downtime notifier (let people know when bot goes down soon)',
+				'Custom array protoype for random element',
+				'Random loading messages',
+				'Lyrics command',
+				'Seek command',
+
+			],
+			fixes: [
+				'Moved contribution guidelines from readme to separate file',
+				'Fix linting errors',
+				'Ignore files in ./modules directory (finally .DS_Store no longer messes up my bot)',
+				'Clean up help command and fix alias',
+				'Fix typo in interaction event',
+				'Disabled poker night activity (18+ so bad)',
+				'Refactored master check',
+				'Refactored Tantrum',
+				'Renamed newSuggestMovie.js to suggestionAdd.js',
+				'Lowercase message before checking for prefix (mobile users you\'re welcome',
+				'Fix return on movie suggestion create command to make it usable again'
+			],
+			removals: [
+				'Remove package-lock from repo',
+				'Report system and notify users'
+			]
+		},
 	]
 };

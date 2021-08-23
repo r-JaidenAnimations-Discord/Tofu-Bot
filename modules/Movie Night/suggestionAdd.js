@@ -16,12 +16,10 @@ module.exports = {
 	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {
-		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote, devMode } = client.config;
-
-		if (!devMode) return message.channel.send('Sorry, suggestions have been disabled until the database overhaul is complete.');
+		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;
 
 		let movie = args.slice(0).join(' ');
-		if (!movie) return message.reply('So how about sugggesting a movie instead of just sending a useless command?');
+		if (!movie) return message.reply('So how about sugggesting a movie instead of just sending a useless command? You vertical laudry wire');
 
 		const suggestionEmbed = new Discord.MessageEmbed()
 			.setColor(suggestionOpen)

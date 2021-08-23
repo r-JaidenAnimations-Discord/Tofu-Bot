@@ -21,16 +21,16 @@ module.exports = {
 
 		const time = !isNaN(args[0]) ? Number(args[0]) * 1000 : ms(args[0]);
 
-		if (isNaN(time) || Number(args[0]) <= 0) return message.channel.send('That\'s not a valid time.')
+		if (isNaN(time)) return message.channel.send('That\'s not a valid time.');
 
-		const queue = client.player.getQueue(message.guild)
+		const queue = client.player.getQueue(message.guild);
 
 		if (!queue.current) return;
 
 		if (await queue.seek(time)) {
 			await message.react('👌').catch(e => {
 				throw new Tantrum(client, 'seek.js', 'Error on reacting', e);
-			})
+			});
 		}
 	},
 };

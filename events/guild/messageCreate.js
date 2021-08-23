@@ -73,7 +73,7 @@ module.exports = async (client, message) => {
 	}
 
 	// Does the message not start with the prefix or is this not a command?
-	if (!message.content.startsWith(prefix) || !command) return;
+	if (!message.content.toLowerCase().startsWith(prefix) || !command) return;
 
 	// Is the command only allowed for the main server and is the server elegible
 	if (command.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return;

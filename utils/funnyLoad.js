@@ -36,6 +36,7 @@ const loadings = [
 	'PC LOAD LETTER...',
 	'Deleting system32...',
 	'Oh, are you waiting for me?',
+	'🐻 Bear with me...'
 ];
 
 const loadingString = () => { return `<a:tofuSpin:873583910989205594> ${loadings.randomElement()}` };

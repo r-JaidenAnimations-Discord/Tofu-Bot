@@ -7,17 +7,17 @@ module.exports = {
 	helpTitle: 'Seek',
 	category: 'Music',
 	usage: 'seek [{seconds/x s}]',
-	description: 'Coming soon: seek trough the current track!',
+	description: 'Seek trough the current track',
 	isDMAllowed: false,
 	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
-	isHidden: true,
+	isHidden: false,
 	// aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		checkMusic(client, message);
-		checkQueueExists(client, message);
+		if (!checkMusic(client, message)) return;
+		if (!checkQueueExists(client, message)) return;
 
 		const time = !isNaN(args[0]) ? Number(args[0]) * 1000 : ms(args[0]);
 

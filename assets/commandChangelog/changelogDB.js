@@ -544,8 +544,7 @@ module.exports = {
 				'Custom array protoype for random element',
 				'Random loading messages',
 				'Lyrics command',
-				'Seek command',
-
+				'Seek command'
 			],
 			fixes: [
 				'Moved contribution guidelines from readme to separate file',

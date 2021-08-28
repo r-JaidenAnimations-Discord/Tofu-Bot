@@ -14,7 +14,8 @@ class AutoResponder {
 
 const autoResponders = [
 	new AutoResponder('tofu', 'that\'s me（☆ω☆*)', 10),
-	new AutoResponder(/^!p/, '`!play` is not a command! Use:\n<:tofu:869529243187544084> Tofu Bot: `t+play`\n<:groovy:869528339545735228> Groovy: `-play`\n<:rythm:869528983899865098> Rythm: `*play`\nCheck the help command on each bot for more info.', 5, true)
+	new AutoResponder(/^!p/, '`!play` is not a command! Use:\n<:tofu:869529243187544084> Tofu Bot: `t+play`\n<:rythm:869528983899865098> Rythm: `*play`\nCheck the help command on each bot for more info.', 5, true),
+	new AutoResponder(/^-/, 'Unfortunately, Google has killed groovy, i am mad about that. But you\'ll have to use tofu or rythm.', 10, true)
 ];
 module.exports = {
 	autoResponders

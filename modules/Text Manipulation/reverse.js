@@ -9,7 +9,6 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	isHidden: false,
 	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {

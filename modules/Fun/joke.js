@@ -1,6 +1,6 @@
 const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const https = require('https');
+const fetch = require('node-fetch')
 const Tantrum = require('#tantrum');
 const { loadingString } = require('#utils/funnyLoad.js');
 
@@ -18,44 +18,33 @@ module.exports = {
 	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		let msg = await message.channel.send(loadingString());
+		const jokeEmbed = new Discord.MessageEmbed()
+			.setColor(tofuGreen)
+			.setTitle(loadingString())
+			.setFooter('The API does not have good jokes, don\'t get your hopes up');
+
+		const msg = await message.channel.send({ embeds: [jokeEmbed] });
 
 		// API endpoint
 		const url = 'https://official-joke-api.appspot.com/random_joke';
 
-		const jokeEmbed = new Discord.MessageEmbed()
-			.setColor(tofuGreen)
-			.setFooter('The API does not have good jokes, don\'t get your hopes up');
+		const APIresponse = await fetch(url).then(r => r.json()).catch(e => {
+			console.log(e);
+			return null;
+		})
 
-		https.get(url, function(res) {
-			var body = '';
-
-			res.on('data', function(chunk) {
-				body += chunk;
-			});
-
-			res.on('close', () => {
-				var APIresponse = JSON.parse(body);
-
-				if (!APIresponse.setup || !APIresponse.punchline) return sendError('API reponse invalid');
-				jokeEmbed.setTitle(APIresponse.setup);
-				jokeEmbed.setDescription(`||${APIresponse.punchline}||`);
-
-				if (msg.deletable) msg.delete();
-				message.channel.send({ embeds: [jokeEmbed] }).catch(e => {
-					console.log(`kek ${e}`);
-				});
-			});
-		}).on('error', function(e) {
-			sendError(e);
-		});
-
-		function sendError(e) {
-			if (msg.deletable) msg.delete();
-			new Tantrum(client, 'joke.js', 'API did not respond', e);
-			message.channel.send({ content: '', embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(f => {
-				new Tantrum(client, 'joke.js', 'Error on sending error embed', f);
+		if (APIresponse?.setup && APIresponse?.punchline) {
+			jokeEmbed.setTitle(APIresponse.setup);
+			jokeEmbed.setDescription(`||${APIresponse.punchline}||`);
+			return msg.edit({ embeds: [jokeEmbed] }).catch(e => {
+				throw new Tantrum(client, 'joke.js', 'Error on editing jokeEmbed', e);
 			});
 		}
+
+		if (msg.deletable) msg.delete();
+		new Tantrum(client, 'joke.js', 'API did not respond', 'No error message defined');
+		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(e => {
+			new Tantrum(client, 'joke.js', 'Error on sending error embed', e);
+		});
 	},
 };

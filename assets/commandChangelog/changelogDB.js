@@ -564,5 +564,21 @@ module.exports = {
 				'Report system and notify users'
 			]
 		},
+		{
+			version: '2.3.1',
+			aliases: [],
+			additions: [
+				'Rewind command',
+				'Groovy\'s death autoresponder'
+			],
+			fixes: [
+				'Refactored minecraft command',
+				'Refactored dog command',
+				'Refactored joke command',
+				'Fix seek info and music checks',
+				'Remove Groovy from autoresponder'
+			],
+			removals: []
+		},
 	]
 };

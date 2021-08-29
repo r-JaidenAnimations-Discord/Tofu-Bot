@@ -1,6 +1,6 @@
 const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const https = require('https');
+const fetch = require('node-fetch')
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { loadingString } = require('#utils/funnyLoad.js');
@@ -21,7 +21,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { minecraftIP } = client.config;
 
-		let msg = await message.channel.send(loadingString());
+		const msg = await message.channel.send(loadingString());
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
@@ -48,48 +48,40 @@ module.exports = {
 			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] });
 		}
 
-		https.get(url, function(res) {
-			var body = '';
+		try {
+			const APIresponse = await fetch(url).then(r => r.json());
 
-			res.on('data', function(chunk) {
-				body += chunk;
+			var playerList = 'Sadly, no online members';
+			var userCount = 0;
+			downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`;
+
+			if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);
+
+			if (APIresponse.online && APIresponse.players.online && APIresponse.players.list) {
+				playerList = '';
+				for (let i = 0; i < APIresponse.players.list.length; i++) playerList += APIresponse.players.list[i] + '\n';
+			}
+
+			if (APIresponse.online && APIresponse.players.online && !APIresponse.players.list) playerList = 'Member list not available';
+
+			if (APIresponse.online) {
+				userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
+				minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
+			}
+
+			minecraftEmbed.addField('Server status:', downStatus);
+			if (!APIresponse.online) minecraftEmbed.setFooter('This is what the API told me, it might actually be running but there is caching etc.');
+
+			if (msg.deletable) msg.delete();
+			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {
+				console.log(`kek ${e}`);
 			});
-
-			res.on('close', () => {
-				const APIresponse = JSON.parse(body);
-				// console.log('Got a response: ', APIresponse.ip);
-				var playerList = 'Sadly, no online members';
-				var userCount = 0;
-				downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`;
-
-				if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);
-
-				if (APIresponse.online && APIresponse.players.online && APIresponse.players.list) {
-					playerList = '';
-					for (let i = 0; i < APIresponse.players.list.length; i++) playerList += APIresponse.players.list[i] + '\n';
-				}
-
-				if (APIresponse.online && APIresponse.players.online && !APIresponse.players.list) playerList = 'Member list not available';
-
-				if (APIresponse.online) {
-					userCount = `${APIresponse.players.online}/${APIresponse.players.max}`;
-					minecraftEmbed.addField(`Online Users: ${userCount}`, playerList);
-				}
-
-				minecraftEmbed.addField('Server status:', downStatus);
-				if (!APIresponse.online) minecraftEmbed.setFooter('This is what the API told me, it might actually be running but there is caching etc.');
-
-				if (msg.deletable) msg.delete();
-				message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {
-					console.log(`kek ${e}`);
-				});
-			});
-		}).on('error', function(e) {
+		} catch (e) {
 			if (msg.deletable) msg.delete();
 			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
 			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(f => {
 				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
 			});
-		});
+		}
 	},
 };

@@ -12,9 +12,9 @@ module.exports = {
 	description: 'Get yourself a cute doge pic',
 	isDMAllowed: false,
 	isDeprecated: false,
-	isDangerous: true,
+	isDangerous: false,
 	mainServerOnly: false,
-	isHidden: true,
+	isHidden: false,
 	aliases: ['doge', 'doggo'],
 	cooldown: 0,
 	execute: async function(client, message, args) {

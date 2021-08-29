@@ -1,6 +1,6 @@
 const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
 const { loadingString } = require('#utils/funnyLoad.js');

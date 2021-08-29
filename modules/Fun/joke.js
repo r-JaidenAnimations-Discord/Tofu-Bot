@@ -1,6 +1,6 @@
 const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 const Tantrum = require('#tantrum');
 const { loadingString } = require('#utils/funnyLoad.js');
 
@@ -31,7 +31,7 @@ module.exports = {
 		const APIresponse = await fetch(url).then(r => r.json()).catch(e => {
 			console.log(e);
 			return null;
-		})
+		});
 
 		if (APIresponse?.setup && APIresponse?.punchline) {
 			jokeEmbed.setTitle(APIresponse.setup);

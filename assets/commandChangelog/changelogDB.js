@@ -580,5 +580,14 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.3.2',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Made Groovy\'s death autoresponder only react to -p...'
+			],
+			removals: []
+		},
 	]
 };

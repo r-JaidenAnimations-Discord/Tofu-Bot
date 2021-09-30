@@ -13,13 +13,15 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: true,
 	isHidden: false,
-	// aliases: [''],
+	aliases: ['addtag'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!args[0]) return message.channel.send('Please specify a tag.');
 		if (!args[1]) return message.channel.send('Please specify the content of the tag.');
 
 		let name = args[0], desc = args.slice(1).join(' ');
+		
+		if (client.commands.has(name)) return message.channel.send('Nope, don\'t add my command names, nope.');
 
 		if (args[0] === 'staff') {
 			if (!checkMessageStaff(client, message, true)) return;

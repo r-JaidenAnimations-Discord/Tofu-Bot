@@ -1,5 +1,5 @@
-const { tofuBlue } = require('#colors')
-const Discord = require('discord.js')
+const { tofuBlue } = require('#colors');
+const Discord = require('discord.js');
 
 module.exports = {
 	name: 'listtags',
@@ -90,8 +90,8 @@ module.exports = {
 			button.reply('this horribleness you have to do').then(() => button.deleteReply());
 		});
 		collector.on('end', () => {
-			msg.edit({ components: [] })
-		})
+			msg.edit({ components: [] });
+		});
 
 	}
 };

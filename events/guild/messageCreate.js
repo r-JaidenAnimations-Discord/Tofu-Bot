@@ -33,22 +33,22 @@ module.exports = async (client, message) => {
 			const ARnow = Date.now();
 			const ARtimestamps = client.autoResponderCooldowns.get(elem);
 			const ARcooldownAmount = cooldown;
-			if (ARtimestamps.has(message.author.id)) {
-				const ARexpirationTime = ARtimestamps.get(message.author.id) + ARcooldownAmount;
+			if (ARtimestamps.has(message.guild.id)) {
+				const ARexpirationTime = ARtimestamps.get(message.guild.id) + ARcooldownAmount;
 				if (ARnow < ARexpirationTime) return; // if on cooldown, don't do anything
 			}
 
 			if (regexp) {
 				if (input.test(message.content.toLowerCase())) {
 					message.channel.send(output);
-					ARtimestamps.set(message.author.id, ARnow);
-					setTimeout(() => ARtimestamps.delete(message.author.id), ARcooldownAmount);
+					ARtimestamps.set(message.guild.id, ARnow);
+					setTimeout(() => ARtimestamps.delete(message.guild.id), ARcooldownAmount);
 				}
 			} else {
 				if (message.content.toLowerCase().includes(input)) {
 					message.channel.send(output);
-					ARtimestamps.set(message.author.id, ARnow);
-					setTimeout(() => ARtimestamps.delete(message.author.id), ARcooldownAmount);
+					ARtimestamps.set(message.guild.id, ARnow);
+					setTimeout(() => ARtimestamps.delete(message.guild.id), ARcooldownAmount);
 				}
 			}
 		}

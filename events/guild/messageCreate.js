@@ -62,7 +62,7 @@ module.exports = async (client, message) => {
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 	// Tags
-	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } })
+	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } });
 	if (tag) {
 		tag.increment('usage_count');
 		message.channel.send(tag.get('description'));

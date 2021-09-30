@@ -61,13 +61,6 @@ module.exports = async (client, message) => {
 	// Include aliases
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	// Tags
-	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } });
-	if (tag) {
-		tag.increment('usage_count');
-		message.channel.send(tag.get('description'));
-	}
-
 	// Is this command allowed inside DM?
 	if (message.channel.type === 'DM') {
 		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
@@ -89,6 +82,13 @@ module.exports = async (client, message) => {
 	if (command?.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
 		throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e);
 	});
+
+	// Tags
+	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } });
+	if (tag) {
+		tag.increment('usage_count');
+		message.channel.send(tag.get('description'));
+	}
 
 	// Kirito trust
 	if (message.author.id === banKirito && !kt) return message.reply({ content: 'You know, I really don\'t trust you, like at all. So stop messaging me!', files: ['./assets/memberTrust/banKirito.png'] }).catch(e => {

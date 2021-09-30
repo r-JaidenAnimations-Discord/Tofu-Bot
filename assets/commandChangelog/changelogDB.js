@@ -583,9 +583,13 @@ module.exports = {
 		{
 			version: '2.3.2',
 			aliases: [],
-			additions: [],
+			additions: [
+				'Tag list command'
+			],
 			fixes: [
-				'Made Groovy\'s death autoresponder only react to -p...'
+				'Made Groovy\'s death autoresponder only react to -p... instead of -...',
+				'Removed rythm from autoresponder (never liked it anyway)',
+				'Autoresponder cooldowns now lock to guild instead of member'
 			],
 			removals: []
 		},

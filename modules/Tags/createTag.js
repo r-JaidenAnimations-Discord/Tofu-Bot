@@ -21,7 +21,10 @@ module.exports = {
 
 		let name = args[0], desc = args.slice(1).join(' ');
 		
-		if (client.commands.has(name)) return message.channel.send('Nope, don\'t add my command names, nope.');
+		if (
+			client.commands.has(name) ||
+			client.aliases.has(name)
+		) return message.channel.send('Nope, don\'t add my command names, nope.');
 
 		if (args[0] === 'staff') {
 			if (!checkMessageStaff(client, message, true)) return;

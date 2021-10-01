@@ -156,6 +156,7 @@ module.exports = {
 					Random status: \`${formatBool(readData.randomStatus.state)}\`
 					Blacklisting: \`${formatBool(readData.blackListing.state)}\`
 					Minecraft Maintenance: \`${formatBool(readData.minecraftMaintenance.state)}\`
+					Autoresponders: \`${formatBool(readData.autoResponders.state)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
 				message.channel.send({ embeds: [embed] }).catch(e => {

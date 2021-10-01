@@ -9,6 +9,7 @@ module.exports = async (client) => {
 
 	client.tags.sync();
 	client.movieSuggestions.sync();
+	client.birthdays.sync();
 
 	// --register slashies
 	if (process.argv.includes('--register')) await publishInteractions(client, client.config.jaidenServerID);

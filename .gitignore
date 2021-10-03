@@ -24,3 +24,6 @@ configDebug.json
 
 # Package Lock file
 package-lock.json
+
+# Jest coverage reports
+/coverage/

@@ -5,7 +5,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest . --coverage",
     "start": "nodemon"
   },
   "keywords": [],
@@ -41,6 +41,8 @@
     "#memberIDs": "./assets/global/memberIDs.json"
   },
   "devDependencies": {
-    "eslint": "^7.32.0"
+    "@types/jest": "^27.0.2",
+    "eslint": "^7.32.0",
+    "jest": "^27.2.4"
   }
 }

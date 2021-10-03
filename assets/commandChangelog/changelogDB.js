@@ -596,14 +596,22 @@ module.exports = {
 		{
 			version: '2.3.3',
 			aliases: [],
+			additions: [],
+			fixes: [
+				'Commanded tag breaking bug'
+			],
+			removals: []
+		},
+		{
+			version: '2.3.4',
+			aliases: [],
 			additions: [
 				'Unit tests',
 				'Birthday command (kinda)'
 			],
 			fixes: [
 				'Add auto responder to settings list',
-				'Refactored createBar',
-				'Commanded tag breaking bug'
+				'Refactored createBar'
 			],
 			removals: []
 		},

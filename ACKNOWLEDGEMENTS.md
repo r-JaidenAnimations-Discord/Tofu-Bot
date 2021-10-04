@@ -15,6 +15,11 @@ These people helped making Tofu what it is today
 - Maidenator
 - RetainedEdge
 
+### Bdays command
+
+- TeraBytes
+- Firebreak
+
 ### Trivia Questions
 
 - Acama

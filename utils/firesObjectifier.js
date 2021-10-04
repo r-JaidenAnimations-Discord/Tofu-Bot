@@ -11,7 +11,7 @@ const firesObjectifier = (num) => {
 		other: 'th'
 	};
 	const suffix = suffixes[rules.select(num)];
-	return [num, suffix].join();
+	return `${num.toString().padStart(2, '0')}${suffix}`;
 };
 
 module.exports = {

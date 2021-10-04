@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest . --coverage",
+    "lint": "eslint .",
     "start": "nodemon"
   },
   "keywords": [],

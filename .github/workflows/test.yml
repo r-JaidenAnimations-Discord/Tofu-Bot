@@ -1,0 +1,17 @@
+name: Unit Tests
+on: [push, pull_request, workflow_dispatch] # workflow_dispatch allows you to run this workflow manually from the Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Installs modules
+      - name: Install Jest
+        run: npm i -g jest
+        
+      # Jest
+      - name: Run ESLint
+        run: jest . --coverage

@@ -13,7 +13,7 @@ class AutoResponder {
 }
 
 const autoResponders = [
-	new AutoResponder('tofu', 'that\'s me（☆ω☆*)', 10),
+	new AutoResponder('tofu', 'that\'s me（☆ω☆*)', 60),
 	new AutoResponder(/^!p/, '`!play` is not a command! Use:\n<:tofu:869529243187544084> Tofu Bot: `t+play`\nCheck the help command on each bot for more info.', 5, true),
 	new AutoResponder(/^-p/, 'Unfortunately, Google has killed groovy (also rythm now but who cares), i am mad about that. But you\'ll have to use tofu for now. I know it\'s not great but sorry.', 10, true)
 ];

@@ -13,5 +13,8 @@ jobs:
         run: npm i -g jest
         
       # Jest
-      - name: Run ESLint
+      - name: Run Jest
+        run: npm ci
+        #run: npm run build --if-present
+        run: npm test
         run: jest . --coverage

@@ -11,7 +11,7 @@ module.exports = {
 	name: 'settings',
 	helpTitle: 'Settings',
 	category: 'Bot Management',
-	usage: 'settings {[{enable, disable}] [command], [{welcomer, announce, welcome, greeting, alitrust, ali, kirito, kiritotrust, bankirito}] [{enable, disable}]}',
+	usage: 'settings {[{enable, disable}] [command], [{welcomer, announce, welcome, greeting}] [{enable, disable}]}',
 	description: 'Change bot settings.',
 	isDMAllowed: false,
 	isDangerous: true,
@@ -35,21 +35,6 @@ module.exports = {
 			case 'welcome':
 			case 'greeting': {
 				updateSetting(client, message, 'welcome', args[1]);
-				break;
-			}
-
-			// Kiritotrust
-			case 'kirito':
-			case 'bankirito':
-			case 'kiritotrust': {
-				updateSetting(client, message, 'kiritoTrust', args[1]);
-				break;
-			}
-
-			// Alitrust
-			case 'ali':
-			case 'alitrust': {
-				updateSetting(client, message, 'aliTrust', args[1]);
 				break;
 			}
 
@@ -150,8 +135,6 @@ module.exports = {
 					.setColor(tofuBlue)
 					.setDescription(
 						stripIndents`Welcome Messages: \`${formatBool(readData.welcome.state)}\`
-					Kirito Trust: \`${formatBool(readData.kiritoTrust.state)}\`
-					Ali Trust: \`${formatBool(readData.aliTrust.state)}\`
 					Random status: \`${formatBool(readData.randomStatus.state)}\`
 					Blacklisting: \`${formatBool(readData.blackListing.state)}\`
 					Minecraft Maintenance: \`${formatBool(readData.minecraftMaintenance.state)}\`

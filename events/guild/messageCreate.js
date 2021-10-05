@@ -1,5 +1,5 @@
 const { tofuRed, tofuError } = require('#colors');
-const { banKirito, banAli, maxID } = require('#memberIDs');
+const { maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs-extra');
 const Tantrum = require('#tantrum');
@@ -16,9 +16,7 @@ module.exports = async (client, message) => {
 
 	const {
 		autoResponders: { state: ar },
-		aliTrust: { state: at },
 		blackListing: { state: bl },
-		kiritoTrust: { state: kt },
 		disabledCommands
 	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
 
@@ -84,16 +82,6 @@ module.exports = async (client, message) => {
 		tag.increment('usage_count');
 		message.channel.send(tag.get('description'));
 	}
-
-	// Kirito trust
-	if (message.author.id === banKirito && !kt) return message.reply({ content: 'You know, I really don\'t trust you, like at all. So stop messaging me!', files: ['./assets/memberTrust/banKirito.png'] }).catch(e => {
-		throw new Tantrum(client, 'message.js', 'Error on sending nokirito message', e);
-	});
-
-	// Ali trust
-	if (message.author.id === banAli && !at) return message.reply({ content: 'Your very existence causes me intense pain with how unfunny you are.\nNever send a message again.\nNever even fscking conceive a thought again.', files: ['./assets/memberTrust/infinitecringe.png'] }).catch(e => {
-		throw new Tantrum(client, 'message.js', 'Error on sending nocringe message', e);
-	});
 
 	if (bl) {
 		// Member Blacklisting

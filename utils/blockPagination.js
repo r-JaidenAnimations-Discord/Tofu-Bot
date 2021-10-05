@@ -1,5 +1,10 @@
 class BlockPaginate {
-
+	/**
+	 * Split a long array into multiple smaller arrays
+	 * @param {Array} arr array to split up
+	 * @param {Number} size split up array every x items
+	 * @returns {Array} array of split up items ('pages') 
+	 */
 	static createPages(arr, size) {
 		return arr.reduce((acc, val, i) => {
 			let idx = Math.floor(i / size);
@@ -10,7 +15,13 @@ class BlockPaginate {
 		}, []);
 	}
 
-	static runner(msg, pages) {
+	/**
+	 * Creates a reaction controller to a sent message
+	 * @param {Object} msg message to run the collector on
+	 * @param {Array} pages pages to switch trough
+	 * @param {Object} author message author
+	 */
+	static runner(msg, pages, author) {
 		const d = async () => new Promise(r => setTimeout(r, 260));
 		const emojis = ['⬅️', '➡️'];
 		let curPage = 0;
@@ -20,14 +31,14 @@ class BlockPaginate {
 			await d();
 		});
 
-		const filter = (reaction, user) => emojis.includes(reaction.emoji.name) && user.id === msg.author.id;
+		const filter = (reaction, user) => emojis.includes(reaction.emoji.name) && user.id === author.id;
 		const collector = msg.createReactionCollector({
 			filter,
 			idle: 30000
 		});
 
 		collector.on('collect', async (reaction) => {
-			// await reaction.users.remove(msg.author);
+			await reaction.users.remove(author);
 			await d(); // Wait before continuing to avoid ratelimits
 
 			switch (reaction.emoji.name) {
@@ -41,7 +52,7 @@ class BlockPaginate {
 					throw new Error('Invalid emoji!!!! HOW TF DID THIS HAPPEN??');
 			}
 
-			msg.edit(`\`\`\`diff${pages[curPage].join('\n')}\n\nPage ${curPage + 1} of ${pages.length}\n\`\`\``);
+			msg.edit(`${pages[curPage]}\nPage ${curPage + 1} of ${pages.length}\n\`\`\``);
 
 		});
 		collector.on('end', async (_, reason) => {

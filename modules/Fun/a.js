@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'a',
 	description: 'Shrimp',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: false,
 	isHidden: true,

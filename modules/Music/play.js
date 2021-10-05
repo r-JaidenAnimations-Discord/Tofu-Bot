@@ -15,7 +15,6 @@ module.exports = {
 	usage: 'play [query]',
 	description: 'Play some choons',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

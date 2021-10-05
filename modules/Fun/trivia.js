@@ -23,7 +23,6 @@ module.exports = {
 	usage: 'trivia (rules)',
 	description: 'Play some trivia.',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

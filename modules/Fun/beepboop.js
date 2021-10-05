@@ -7,7 +7,6 @@ module.exports = {
 	usage: 'beep',
 	description: 'Beep boop?',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

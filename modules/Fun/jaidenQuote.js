@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'quote',
 	description: 'Send a random quote from Jaiden',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

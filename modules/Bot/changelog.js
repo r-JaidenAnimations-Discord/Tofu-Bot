@@ -7,7 +7,6 @@ module.exports = {
 	usage: 'changelog ({specific version, list})',
 	description: 'See what we have been up to',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

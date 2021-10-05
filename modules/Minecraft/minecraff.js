@@ -12,7 +12,6 @@ module.exports = {
 	usage: 'minecraft',
 	description: 'Show info about our minecraft server!',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

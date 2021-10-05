@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'minecraft',
 	description: 'Show info about our minecraft server!',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,

@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'disconnect',
 	description: 'Done? Stop the music I suppose',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

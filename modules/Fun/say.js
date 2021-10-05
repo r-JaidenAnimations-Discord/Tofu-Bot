@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'say [#channel] (embed) [message]',
 	description: 'Mess with members',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

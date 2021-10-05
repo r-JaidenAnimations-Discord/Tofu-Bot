@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'approvemovie [id] (reason)',
 	description: 'Approve a movie',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,

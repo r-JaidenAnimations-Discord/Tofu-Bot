@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'rewind',
 	description: 'Go back to the start of the current track',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

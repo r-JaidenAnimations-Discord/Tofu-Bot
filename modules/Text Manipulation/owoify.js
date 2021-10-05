@@ -7,7 +7,6 @@ module.exports = {
 	usage: 'owoify [text]',
 	description: 'OwO what\'s this',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

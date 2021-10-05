@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'customstatus [{online, idle, dnd}] [{watch, play, listen}] [text]',
 	description: 'Set the client\'s status',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,

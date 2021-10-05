@@ -12,7 +12,6 @@ module.exports = {
 	usage: 'whitelist [{id, mention}]',
 	description: 'blacklist',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: false,
 	isHidden: false,

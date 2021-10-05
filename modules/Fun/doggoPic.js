@@ -11,7 +11,6 @@ module.exports = {
 	usage: 'dog',
 	description: 'Get yourself a cute doge pic',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

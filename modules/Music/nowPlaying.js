@@ -12,7 +12,6 @@ module.exports = {
 	usage: 'nowplaying',
 	description: 'Check what\'s that vibing choon',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

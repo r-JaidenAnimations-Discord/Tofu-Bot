@@ -11,7 +11,6 @@ module.exports = {
 	usage: 'joke',
 	description: 'Bad jokes!',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

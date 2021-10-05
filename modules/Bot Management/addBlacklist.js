@@ -13,7 +13,6 @@ module.exports = {
 	usage: 'blacklist {[{id, mention}], [{python, bamboozle, hate, wrongchannel, other}]}',
 	description: 'blacklist',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: false,
 	isHidden: false,

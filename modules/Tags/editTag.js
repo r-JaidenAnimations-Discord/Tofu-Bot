@@ -5,7 +5,6 @@ module.exports = {
 	usage: 'edittag [name] [content]',
 	description: 'Edits a tag\'s content',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: true,
 	isHidden: false,

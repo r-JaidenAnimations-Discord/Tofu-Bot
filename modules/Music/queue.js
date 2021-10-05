@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'queue',
 	description: 'See the upcoming choons',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

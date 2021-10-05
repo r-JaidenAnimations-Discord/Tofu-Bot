@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'clearqueue',
 	description: 'Clear the queue.',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

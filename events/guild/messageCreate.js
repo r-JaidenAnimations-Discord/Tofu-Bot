@@ -78,11 +78,6 @@ module.exports = async (client, message) => {
 	// Is the command only allowed for the main server and is the server elegible
 	if (command.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return;
 
-	// Is this command deprecated?
-	if (command?.isDeprecated) message.reply('This command has been deprecated and will be removed soon, enjoy it while you can!').catch(e => {
-		throw new Tantrum(client, 'message.js', 'Error on sending deprecated command message', e);
-	});
-
 	// Tags
 	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } });
 	if (tag) {

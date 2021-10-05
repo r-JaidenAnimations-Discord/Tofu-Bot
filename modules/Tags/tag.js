@@ -5,7 +5,6 @@ module.exports = {
 	usage: 'tag [name]',
 	description: 'Gets the content of a tag',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

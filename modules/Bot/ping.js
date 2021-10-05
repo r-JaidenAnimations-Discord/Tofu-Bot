@@ -7,7 +7,6 @@ module.exports = {
 	usage: 'ping',
 	description: 'Ping!',
 	isDMAllowed: true,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

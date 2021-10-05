@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'report',
 	description: 'Report bugs or other issues on Tofu.\nImproper use is punishable!',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

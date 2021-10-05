@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'loop',
 	description: 'Toggle trough the looping modes',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

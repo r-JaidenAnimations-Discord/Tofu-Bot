@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'movieinfo [id]',
 	description: 'Get the full info of a movie suggestion',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,

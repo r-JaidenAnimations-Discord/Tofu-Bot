@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'remove [id]',
 	description: 'Whoops wrong song',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

@@ -12,7 +12,6 @@ module.exports = {
 	usage: 'lyrics',
 	description: 'Sing along',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

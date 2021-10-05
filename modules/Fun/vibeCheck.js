@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'vibecheck',
 	description: 'U vibin?',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

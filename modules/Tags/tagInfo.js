@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'taginfo [name]',
 	description: 'Get a tag\'s info',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

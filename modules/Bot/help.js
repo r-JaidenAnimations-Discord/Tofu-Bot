@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'help (command)',
 	description: 'Stop, get help',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

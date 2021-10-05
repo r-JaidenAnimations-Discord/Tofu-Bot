@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'createtag (staff) [name] [content]',
 	description: 'Create your own tag',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: true,
 	isHidden: false,
@@ -20,7 +19,7 @@ module.exports = {
 		if (!args[1]) return message.channel.send('Please specify the content of the tag.');
 
 		let name = args[0], desc = args.slice(1).join(' ');
-		
+
 		if (
 			client.commands.has(name) ||
 			client.aliases.has(name)

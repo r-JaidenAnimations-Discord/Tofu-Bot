@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'seek [{seconds/x s}]',
 	description: 'Seek trough the current track',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

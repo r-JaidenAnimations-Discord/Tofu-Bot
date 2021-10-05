@@ -9,7 +9,6 @@ module.exports = {
 	usage: 'denymovie [id] (reason)',
 	description: 'Deny a movie',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,

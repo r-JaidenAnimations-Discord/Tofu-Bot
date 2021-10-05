@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'pause',
 	description: 'brb hold on',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

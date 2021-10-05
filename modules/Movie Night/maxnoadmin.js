@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'maxnoadnin (invite) [#channel] [message]',
 	description: 'Because Max doesn\'t have perms to ping movie night AAAAAAAAAAAA',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: false,
 	isHidden: false,

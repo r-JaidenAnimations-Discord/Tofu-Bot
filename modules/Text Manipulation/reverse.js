@@ -5,7 +5,6 @@ module.exports = {
 	usage: 'reverse [text]',
 	description: 'Reverse text.',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

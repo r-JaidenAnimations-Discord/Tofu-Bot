@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'back',
 	description: 'Hello, I was wondering if you could play that song *again*',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

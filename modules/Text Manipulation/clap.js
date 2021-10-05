@@ -5,7 +5,6 @@ module.exports = {
 	usage: 'clap [text]',
 	description: 'Why 👏 did 👏 I 👏 make 👏 this? 👏',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,

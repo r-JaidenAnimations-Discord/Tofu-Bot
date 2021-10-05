@@ -10,7 +10,6 @@ module.exports = {
 	usage: 'watchedmovie [id] [date]',
 	description: 'Mark a movie as watched',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,

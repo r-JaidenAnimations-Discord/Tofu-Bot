@@ -8,7 +8,6 @@ module.exports = {
 	usage: 'listtags',
 	description: 'Get a list of all tags',
 	isDMAllowed: false,
-	isDeprecated: false,
 	isDangerous: false,
 	mainServerOnly: true,
 	isHidden: false,

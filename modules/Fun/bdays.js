@@ -4,6 +4,7 @@ const { tofuBlue } = require('#colors');
 const { isEven } = require('#utils/isEven.js');
 const { getLongestString } = require('#utils/getLongestString.js');
 const BlockPaginate = require('#utils/blockPagination.js');
+const { firesObjectifier } = require('#utils/firesObjectifier.js');
 
 module.exports = {
 	name: 'bdays',
@@ -14,7 +15,12 @@ module.exports = {
     bdays remove [name]
 	bdays sort {name, date}`,
 	description: 'Check the birthdays of someone, sort them, or add and remove birthdays!',
-	aliases: ['birthdays'],
+	isDMAllowed: false,
+	isDangerous: false,
+	mainServerOnly: true,
+	isHidden: false,
+	aliases: ['birthdays', 'bd'],
+	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!args[1]) { // t+bdays, t+bdays user
 			if (!args[0] || args[0] == 'list' || args.join(' ') == 'sort name') { // t+bdays
@@ -29,7 +35,10 @@ module.exports = {
 					if (nameA > nameB) return 1;
 					return 0;
 				})
-					.map(t => t.name.padEnd(longestName + 2, '.') + t.date.toDateString());
+					.map(t => {
+						const date = new Date(t.date);
+						return `${t.name.padEnd(longestName + 2, '.')}${firesObjectifier(date.getDate())} ${date.toLocaleString('default', { month: 'long' })}`;
+					});
 				return this.list(message, users);
 			} else {
 				const user = client.birthdays.findOne({ where: { name: { [like]: args.join(' ') } } });
@@ -63,9 +72,14 @@ module.exports = {
 				case 'sort': {
 					switch (args[1]) {
 						case 'date': {
-							const users = (await client.birthdays.findAll())
-								.sort((a, b) => a.date - b.date)
-								.map(t => t.name + ' - ' + t.date.toDateString());
+							const dbData = (await client.birthdays.findAll());
+							let longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
+
+							const users = dbData.sort((a, b) => a.date - b.date)
+								.map(t => {
+									const date = new Date(t.date);
+									return `${t.name.padEnd(longestName + 2, '.')}${firesObjectifier(date.getDate())} ${date.toLocaleString('default', { month: 'long' })}`;
+								});
 							this.list(message, users);
 							break;
 						}
@@ -75,75 +89,19 @@ module.exports = {
 		}
 	},
 
-	paginate: function(arr, size) {
-		return arr.reduce((acc, val, i) => {
-			let idx = Math.floor(i / size);
-			let page = acc[idx] || (acc[idx] = []);
-			page.push(val);
+	list: async function(message, users) {
+		let pages = BlockPaginate.createPages(users, 25);
+		const formattedPages = [];
 
-			return acc;
-		}, []);
+		pages.forEach(page => formattedPages.push(this.format(page)));
+
+		let mesag = await message.channel.send(`${formattedPages[0]}${formattedPages.length > 1 ? `\nPage 1 of ${formattedPages.length}` : ''}\`\`\``);
+		if (formattedPages.length > 1) BlockPaginate.runner(mesag, formattedPages, message.author);
 	},
 
-	list: async function(message, users) {
-		// const components = [new Discord.MessageActionRow()
-		// .addComponents(
-		// 	new Discord.MessageButton()
-		// 		.setCustomId('b')
-		// 		.setLabel('Back')
-		// 		.setStyle('PRIMARY'),
-		// 	new Discord.MessageButton()
-		// 		.setCustomId('n')
-		// 		.setLabel('Next')
-		// 		.setStyle('PRIMARY')
-		// )];
-
-		// let curPage = 0;
-
-		// let pages = BlockPaginate.createPages(users, 2);
-
-		// let mesag = await message.channel.send(`\`\`\`diff\n${pages[0]}\n\`\`\``);
-		// if (pages.length > 1) BlockPaginate.runner(mesag, pages);
-		// let pages = this.paginate(users, 10);
-		// let embeds = [
-		// new Discord.MessageEmbed()
-		// .setDescription(pages[curPage].join('\n'))
-		// .setFooter(`Page ${curPage + 1} of ${pages.length}`)
-		// .setColor(tofuBlue)
-		// ];
-		let toSend = '**THIS THING IS STILL BROKEN, SORRY**\n```diff\n';
-		// users.forEach(e => toSend += `${}${e}\n`)
-
-		for (let i = 0; i < users.length; i++) toSend += `${isEven(i) ? '+' : '='} ${users[i]}\n`;
-
-		toSend += '```';
-		message.channel.send(toSend);
-		// const msg = await message.channel.send({ embeds, components });
-		// const collector = msg.createMessageComponentCollector({
-		// 	filter: i => i.user.id == message.author.id,
-		// 	idle: 30000
-		// });
-
-		// collector.on('collect', button => {
-		// 	switch (button.customId) {
-		// 		case 'b': {
-		// 			if (curPage - 1 < 0) curPage = pages.length - 1;
-		// 			else curPage--;
-		// 			break;
-		// 		}
-		// 		case 'n': {
-		// 			if (curPage + 1 >= pages.length) curPage = 0;
-		// 			else curPage++;
-		// 			break;
-		// 		}
-		// 	}
-		// 	embeds[0].setDescription(pages[curPage].join('\n'));
-		// 	embeds[0].setFooter(`Page ${curPage + 1} of ${pages.length}`);
-		// 	msg.edit({ embeds });
-		// 	button.reply('.').then(() => button.deleteReply());
-		// });
-		// collector.on('end', () => {
-		// 	msg.edit({ components: [] });
-		// });
+	format: function(page) {
+		let block = '```diff\n';
+		for (let i = 0; i < page.length; i++) block += `${isEven(i) ? '+' : '='} ${page[i]}\n`;
+		return block;
 	}
 };

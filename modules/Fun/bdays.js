@@ -1,6 +1,4 @@
-const Discord = require('discord.js');
 const { Op: { like } } = require('sequelize');
-const { tofuBlue } = require('#colors');
 const { isEven } = require('#utils/isEven.js');
 const { getLongestString } = require('#utils/getLongestString.js');
 const BlockPaginate = require('#utils/blockPagination.js');

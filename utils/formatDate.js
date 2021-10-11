@@ -11,7 +11,8 @@ const formatDate = (date) => {
 		weekday: 'long',
 		hour: 'numeric',
 		minute: 'numeric',
-		second: 'numeric'
+		second: 'numeric',
+		timeZone: 'Europe/Brussels'
 	}).format(date);
 };
 

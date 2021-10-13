@@ -65,16 +65,10 @@ module.exports = async (client, message) => {
 			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
 		});
 
-		if (command.isDMAllowed === false) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
+		if (!command.isDMAllowed) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
 		});
 	}
-
-	// Does the message not start with the prefix or is this not a command?
-	if (!message.content.toLowerCase().startsWith(prefix) || !command) return;
-
-	// Is the command only allowed for the main server and is the server elegible
-	if (command.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return;
 
 	// Tags
 	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } });
@@ -82,6 +76,12 @@ module.exports = async (client, message) => {
 		tag.increment('usage_count');
 		message.channel.send(tag.get('description'));
 	}
+
+	// Does the message not start with the prefix or is this not a command?
+	if (!message.content.toLowerCase().startsWith(prefix) || !command) return;
+
+	// Is the command only allowed for the main server and is the server elegible
+	if (command.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return;
 
 	if (bl) {
 		// Member Blacklisting

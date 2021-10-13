@@ -16,7 +16,7 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!args[0]) return message.channel.send('Please specify a tag.');
-		if (!args[1]) return message.channel.send('Please specify the content of the tag.');
+		if ((!args[1] || (args[0] === 'staff' && !args[2]))) return message.channel.send('Please specify the content of the tag.');
 
 		let name = args[0], desc = args.slice(1).join(' ');
 

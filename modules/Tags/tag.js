@@ -1,3 +1,5 @@
+const { checkMessageStaff } = require('#utils/staffChecks.js');
+
 module.exports = {
 	name: 'tag',
 	helpTitle: 'Get Tag',
@@ -15,7 +17,7 @@ module.exports = {
 
 		const tag = await client.tags.findOne({ where: { name: args[0] } });
 
-		if (tag?.staffOnly) return message.channel.send('You can\'t use a staff only tag.');
+		if (tag?.staffOnly && !checkMessageStaff(client, message, false)) return message.channel.send('You can\'t use a staff only tag.');
 
 		if (tag) {
 			tag.increment('usage_count');

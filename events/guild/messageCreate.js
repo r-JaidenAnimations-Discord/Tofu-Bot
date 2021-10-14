@@ -83,32 +83,12 @@ module.exports = async (client, message) => {
 	// Is the command only allowed for the main server and is the server elegible
 	if (command.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return;
 
+	// Member Blacklisting
 	if (bl) {
-		// Member Blacklisting
-		const { python, bamboozle, hate, wrongchannel, bloop, other } = await fs.readJSONSync('./deployData/blacklist.json', 'utf-8');
+		const blacklist = await fs.readJSONSync('./deployData/blacklist.json', 'utf-8');
 
-		if (python.includes(message.author.id)) return message.channel.send('Come back when you stop using Python').catch(e => {
+		if (blacklist.find(({ member }) => member === message.author.id)) return message.channel.send('Nope, not listening to you').catch(e => {
 			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e);
-		});
-
-		else if (bamboozle.includes(message.author.id)) return message.channel.send({ content: 'Ahahahahahahah get fscked you foul piece of $h!t', files: ['./assets/blacklisting/lemao.png'] }).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending bamboozle blacklist message', e);
-		});
-
-		else if (hate.includes(message.author.id)) return message.channel.send('I hate you too').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending hate blacklist message', e);
-		});
-
-		else if (wrongchannel.includes(message.author.id)) return message.channel.send('Come back when you learn to use commands in the right place').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending wrongchannel blacklist message', e);
-		});
-
-		else if (bloop.includes(message.author.id)) return message.channel.send({ content: 'Haha, queen mush', files: ['./assets/blacklisting/lemao.png'] }).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending bloop blacklist message', e);
-		});
-
-		else if (other.includes(message.author.id)) return message.channel.send('Nope, not listening to you').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending other blacklist message', e);
 		});
 	}
 

@@ -20,7 +20,8 @@ module.exports = {
 	cooldown: 5,
 	execute: async function(client, message, args) {
 
-		let toBlacklist = false;
+		let toBlacklist = null;
+		let reason = args.slice(1).join(' ');
 
 		// Pull the blacklist JSON
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
@@ -44,7 +45,11 @@ module.exports = {
 		if (toBlacklist === maxID) {
 			try {
 				message.channel.send('Oh you sly fox, trying to bamboozle me. Get blacklisted LMAO');
-				blackListJSON.bamboozle.push(message.author.id);
+				blackListJSON.push({
+					member: message.author.id,
+					reason: 'Bamboozle attempt',
+					date: Date.now()
+				});
 				return writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
 			} catch (e) {
 				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending get blacklisted message');
@@ -53,55 +58,32 @@ module.exports = {
 
 		if (!checkBanStaff(client, message, true)) return;
 
-		let category = args[1];
-		if (!category) return message.channel.send('Give me a category to put them in though').catch(e => {
-			throw new Tantrum(client, 'addBlacklist.js', 'Error on sending no category defined message', e);
+		if (!reason) return message.channel.send('No reason provided');
+
+		if (blackListJSON.find(({ member }) => member === toBlacklist)) {
+			const alreadyBlacklistedEmbed = new Discord.MessageEmbed()
+				.setTitle('Error')
+				.setColor(tofuRed)
+				.setDescription('This member is already blacklisted.')
+				.setTimestamp();
+
+			return message.channel.send({ embeds: [alreadyBlacklistedEmbed] }).catch(e => {
+				throw new Tantrum(client, 'addBlacklist.js', 'Error on sending member already in blacklist message.', e);
+			});
+		}
+
+		blackListJSON.push({
+			member: toBlacklist,
+			reason,
+			date: Date.now()
 		});
-
-		const categories = ['python', 'bamboozle', 'hate', 'wrongchannel', 'bloop', 'other'];
-		for (category of categories) {
-			if (blackListJSON[category].includes(toBlacklist)) {
-				const alreadyBlacklistedEmbed = new Discord.MessageEmbed()
-					.setTitle('Error')
-					.setColor(tofuRed)
-					.setDescription(`This member is already blacklisted in the \`${category}\` list.`)
-					.setTimestamp();
-
-				return message.channel.send({ embeds: [alreadyBlacklistedEmbed] }).catch(e => {
-					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending member already in blacklist category message.', e);
-				});
-			}
-		}
-
-		// what if, yeah works better
-		switch (args[1]) {
-			case 'python':
-			case 'bamboozle':
-			case 'hate':
-			case 'wrongchannel':
-			case 'bloop':
-			case 'other':
-				blackListJSON[args[1]].push(toBlacklist);
-				break;
-			default:
-				const invalidCategoryEmbed = new Discord.MessageEmbed()
-					.setTitle('Error')
-					.setColor(tofuRed)
-					.setDescription(`\`${args[1]}\` is not a valid category.\nConsider checking the help command.`)
-					.setTimestamp();
-
-				message.channel.send({ embeds: [invalidCategoryEmbed] }).catch(e => {
-					throw new Tantrum(client, 'addBlacklist.js', 'Error on sending invalid category message', e);
-				});
-				break;
-		}
 
 		try {
 			writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
 			const blackListEmbed = new Discord.MessageEmbed()
 				.setTitle('Added to blacklist')
 				.setColor(tofuGreen)
-				.setDescription(`Added <@${toBlacklist}> to the \`${args[1]}\` list.`)
+				.setDescription(`Added <@${toBlacklist}> to the blacklist.`)
 				.setTimestamp();
 
 			message.channel.send({ embeds: [blackListEmbed] });

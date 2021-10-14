@@ -25,7 +25,7 @@ module.exports = {
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
 		var blackListJSON = JSON.parse(raw);
 
-		let toWhitelist = false;
+		let toWhitelist = null;
 		if (message.mentions.members.first()) {
 			toWhitelist = message.mentions.members.first().id;
 		} else if (/^\d{18}$/.test(args[0])) { // regex AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
@@ -37,25 +37,25 @@ module.exports = {
 			});
 		}
 
-		const categories = ['python', 'bamboozle', 'hate', 'wrongchannel', 'bloop', 'other'];
-		for (blackListCategory of categories) {
-			if (blackListJSON[blackListCategory].includes(toWhitelist)) {
-				try {
-					blackListJSON[blackListCategory].splice(blackListJSON[blackListCategory].indexOf(toWhitelist), 1);
-					writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
-					const whitelistEmbed = new Discord.MessageEmbed()
-						.setTitle('Removed from blacklist')
-						.setColor(tofuGreen)
-						.setDescription(`Removed <@${toWhitelist}> from the \`${blackListCategory}\` list.`)
-						.setTimestamp();
+		// const categories = ['python', 'bamboozle', 'hate', 'wrongchannel', 'bloop', 'other'];
+		// for (blackListCategory of categories) {
+		if (blackListJSON.find(({ member }) => member === toWhitelist)) {
+			try {
+				blackListJSON.splice(blackListJSON.indexOf(blackListJSON.find(({ member }) => member === toWhitelist)), 1);
+				writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
+				const whitelistEmbed = new Discord.MessageEmbed()
+					.setTitle('Removed from blacklist')
+					.setColor(tofuGreen)
+					.setDescription(`Removed <@${toWhitelist}> from the blacklist.`)
+					.setTimestamp();
 
-					message.channel.send({ embeds: [whitelistEmbed] });
-					return;
-				} catch (e) {
-					throw new Tantrum(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
-				}
+				message.channel.send({ embeds: [whitelistEmbed] });
+				return;
+			} catch (e) {
+				throw new Tantrum(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
 			}
 		}
+		// }
 
 		const memberNotFoundEmbed = new Discord.MessageEmbed()
 			.setTitle('Error')

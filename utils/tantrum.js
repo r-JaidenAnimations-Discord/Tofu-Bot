@@ -15,7 +15,7 @@ class Tantrum extends Error {
 	 * @param {String|Error} err Error output
 	 */
 	constructor(client, file, msg, err) {
-		super(`${chalk.cyan(msg)} in ${chalk.redBright(file)}\n${err.stack}`);
+		super(`${chalk.cyan(msg)} in ${chalk.redBright(file)}\n${err?.stack}`);
 		this.client = client;
 		this.file = file;
 		this.msg = msg;

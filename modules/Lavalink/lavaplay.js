@@ -31,7 +31,6 @@ module.exports = {
 
 		// if queue exists, and paused, resume
 		const existing = await LavaManager.getPlayer(client, message);
-		console.log(existing)
 		if (existing && existing.paused) {
 			if (existing.resume()) {
 				return await message.react('👌').catch(e => {

@@ -12,7 +12,7 @@ module.exports = {
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,
-	aliases: ['moviesuggest', 'movie-suggest', 'suggest-movie', 'moviesuggestion', 'movie-suggestion', 'mvsuggest', 'suggestmv'],
+	aliases: ['suggest-movie', 'moviesuggestion', 'movie-suggestion'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;
@@ -41,11 +41,13 @@ module.exports = {
 					.setColor(suggestionOpen)
 					.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)
 					.setTitle(`**${suggestion.movie}**`)
+					// .setDescription(`Suggested by <@${suggestion.suggester}>`)
 					.addField('Status:', suggestion.status)
 					.setFooter(`Suggestion #${suggestion.id}`)
 					.setTimestamp();
 
 				suggestionMsg.edit({ embeds: [populatedEmbed] });
+				await message.react('✅');
 				message.channel.send('Your movie suggestion was registered, thank you!');
 
 				const d = async () => new Promise(r => setTimeout(r, 260));
@@ -54,11 +56,13 @@ module.exports = {
 				await d();
 				await suggestionMsg.react(fingerdownvote);
 			} else {
+				await message.react('❌');
 				message.channel.send('Something went wrong, please try again later.');
 				return suggestionMsg.delete();
 			}
 		} catch (e) {
-			new Tantrum(client, e);
+			await message.react('❌');
+			new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
 			return message.channel.send('Something went wrong, please try again later.');
 		}
 	},

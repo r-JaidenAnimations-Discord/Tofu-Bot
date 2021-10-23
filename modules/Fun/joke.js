@@ -28,17 +28,22 @@ module.exports = {
 		const url = 'https://official-joke-api.appspot.com/random_joke';
 
 		const APIresponse = await fetch(url).then(r => r.json()).catch(e => {
-			new Tantrum(client, e);
+			console.log(e);
+			return null;
 		});
 
 		if (APIresponse?.setup && APIresponse?.punchline) {
 			jokeEmbed.setTitle(APIresponse.setup);
 			jokeEmbed.setDescription(`||${APIresponse.punchline}||`);
-			return msg.edit({ embeds: [jokeEmbed] });
+			return msg.edit({ embeds: [jokeEmbed] }).catch(e => {
+				throw new Tantrum(client, 'joke.js', 'Error on editing jokeEmbed', e);
+			});
 		}
 
 		if (msg.deletable) msg.delete();
-		
-		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
+		new Tantrum(client, 'joke.js', 'API did not respond', 'No error message defined');
+		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(e => {
+			new Tantrum(client, 'joke.js', 'Error on sending error embed', e);
+		});
 	},
 };

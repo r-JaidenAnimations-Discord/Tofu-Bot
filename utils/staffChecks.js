@@ -1,5 +1,6 @@
 const { teraID, maxID, gradyID, retainedID } = require('#memberIDs');
 const { Permissions } = require('discord.js');
+const Tantrum = require('#tantrum');
 
 /**
  * Check if the message author can ban members
@@ -10,7 +11,7 @@ const { Permissions } = require('discord.js');
  */
 const checkBanStaff = (client, message, returnMessage) => {
 	if (!message.member.permissions.has(Permissions.FLAGS.BAN_MEMBERS)) {
-		if (returnMessage) message.channel.send('You fool, need more permissions');
+		if (returnMessage) message.channel.send('You fool, need more permissions').catch(e => { throw new Tantrum(client, 'staffChecks.js', 'Error while sending ban permission message', e) });
 		return false;
 	}
 	return true;
@@ -25,7 +26,7 @@ const checkBanStaff = (client, message, returnMessage) => {
  */
 const checkMessageStaff = (client, message, returnMessage) => {
 	if (!message.member.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
-		if (returnMessage) message.channel.send('You fool, need more permissions');
+		if (returnMessage) message.channel.send('You fool, need more permissions').catch(e => { throw new Tantrum(client, 'staffChecks.js', 'Error while sending message permission message', e) });
 		return false;
 	}
 	return true;
@@ -39,7 +40,9 @@ const checkMessageStaff = (client, message, returnMessage) => {
  */
 const masterCheck = (client, message) => {
 	if (![teraID, maxID, gradyID].includes(message.author.id)) {
-		message.channel.send('You are not worthy enough to use this command, **perish**');
+		message.channel.send('You are not worthy enough to use this command, **perish**').catch(e => {
+			throw new Tantrum(client, 'staffChecks.js', 'Error while sending master permission message', e);
+		});
 		return false;
 	}
 	return true;

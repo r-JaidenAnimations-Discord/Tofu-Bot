@@ -1,5 +1,6 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
+const Tantrum = require('#tantrum');
 const { promptMessage } = require('#utils/promptMessage.js');
 const { trivia } = require('#assets/commandTrivia/jaidenTriviaList.js');
 
@@ -36,7 +37,9 @@ module.exports = {
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
 				.setColor(tofuGreen);
 
-			return message.channel.send({ embeds: [ruleEmbed] });
+			return message.channel.send({ embeds: [ruleEmbed] }).catch(e => {
+				throw new Tantrum(client, 'trivia.js', 'Error on sending ruleEmbed', e);
+			});
 		}
 
 		// message.channel.send('hotel? Trivia!');
@@ -60,10 +63,15 @@ module.exports = {
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
 		message.channel.send({ embeds: [mainEmbed] }).then(async sentEmbed => {
-			for (let i = 1; i <= q.answers.length; i++) {			
-				await sentEmbed.react(`${numberReactions[i]}`);
-				const d = async () => new Promise(r => setTimeout(r, 260));
-				await d();
+			for (let i = 1; i <= q.answers.length; i++) {
+				// console.log(`${numberReactions.get(i + 1)}`);
+				try {
+					await sentEmbed.react(`${numberReactions[i]}`);
+					const d = async () => new Promise(r => setTimeout(r, 260));
+					await d();
+				} catch (e) {
+					throw new Tantrum(client, 'trivia.js', 'Error on reacting to embed', e);
+				}
 			}
 			setTimeout(async () => {
 				const correct = await promptMessage(sentEmbed, message.author, 45, '✅');
@@ -71,14 +79,20 @@ module.exports = {
 				if (correct === '✅') {
 					// message.channel.send('YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS');
 					correctedEmbed.setFooter(`${message.member.displayName} revealed the answer.`);
-					sentEmbed.edit({ embeds: [correctedEmbed] });
+					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => {
+						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
+					});
 				}
 				else {
 					// message.channel.send('k')
 					correctedEmbed.setFooter('1 minute passed, the answer has been revealed.');
-					sentEmbed.edit({ embeds: [correctedEmbed] });
+					sentEmbed.edit({ embeds: [correctedEmbed] }).catch(e => {
+						throw new Tantrum(client, 'trivia.js', 'Error on editing message to correctedEmbed', e);
+					});
 				}
 			}, 15000);
+		}).catch(e => {
+			throw new Tantrum(client, 'trivia.js', 'Error on sending mainEmbed', e);
 		});
 	},
 };

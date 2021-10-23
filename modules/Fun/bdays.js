@@ -24,6 +24,7 @@ module.exports = {
 			if (!args[0] || args[0] == 'list' || args.join(' ') == 'sort name') { // t+bdays
 
 				const dbData = (await client.birthdays.findAll());
+				if (dbData.length === 0) return message.channel.send('There is *nothing*, add something to be the first');
 				let longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
 				// const users = (await client.birthdays.findAll())
 				const users = dbData.sort((a, b) => {
@@ -48,13 +49,16 @@ module.exports = {
 				case 'add': {
 					const user = await client.birthdays.findOne({ where: { name: { [like]: args[1] } } });
 					if (user) return message.channel.send('This user has already been added!');
+					let toadd = args[1].replace(/[-[\]{}()*+?\`.,\\^$|#\s]/g, '');
+					if (!toadd) return message.channel.send('That\'s not a valid name buddy');
 					const date = new Date(args.slice(1).join(' '));
 					if (isNaN(date)) return message.channel.send('Invalid date provided.');
 					await client.birthdays.create({
-						name: args[1],
+						// name: args[1].replace(/[-[\]{}()*+?\`.,\\^$|#\s]/g, '\\$&'),
+						name: toadd,
 						date
 					});
-					message.channel.send(`Added ${args[1]}'s birthday!'`);
+					message.channel.send(`Added ${toadd}'s birthday!'`);
 					break;
 				}
 				case 'remove':

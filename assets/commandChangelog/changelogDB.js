@@ -641,5 +641,14 @@ module.exports = {
 				'Kiritotrust'
 			]
 		},
+		{
+			version: '2.4.1',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Sort bdays by date instead of name by default',
+			],
+			removals: []
+		},
 	]
 };

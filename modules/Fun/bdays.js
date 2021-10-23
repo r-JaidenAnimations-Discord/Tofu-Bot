@@ -21,24 +21,18 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!args[1]) { // t+bdays, t+bdays user
-			if (!args[0] || args[0] == 'list' || args.join(' ') == 'sort name') { // t+bdays
+			if (!args[0] || args[0] == 'list' || args.join(' ') == 'sort date') { // t+bdays
 
 				const dbData = (await client.birthdays.findAll());
-				if (dbData.length === 0) return message.channel.send('There is *nothing*, add something to be the first');
 				let longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
-				// const users = (await client.birthdays.findAll())
-				const users = dbData.sort((a, b) => {
-					let nameA = a.name.toUpperCase();
-					let nameB = b.name.toUpperCase();
-					if (nameA < nameB) return -1;
-					if (nameA > nameB) return 1;
-					return 0;
-				})
+
+				const users = dbData.sort((a, b) => a.date - b.date)
 					.map(t => {
 						const date = new Date(t.date);
 						return `${t.name.padEnd(longestName + 2, '.')}${firesObjectifier(date.getDate())} ${date.toLocaleString('default', { month: 'long' })}`;
 					});
 				return this.list(message, users);
+
 			} else {
 				const user = client.birthdays.findOne({ where: { name: { [like]: args.join(' ') } } });
 				if (!user) return message.channel.send('Sorry, there is nothing I can help with here.');
@@ -73,16 +67,23 @@ module.exports = {
 				}
 				case 'sort': {
 					switch (args[1]) {
-						case 'date': {
+						case 'name': {
 							const dbData = (await client.birthdays.findAll());
+							if (dbData.length === 0) return message.channel.send('There is *nothing*, add something to be the first');
 							let longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
-
-							const users = dbData.sort((a, b) => a.date - b.date)
+							// const users = (await client.birthdays.findAll())
+							const users = dbData.sort((a, b) => {
+								let nameA = a.name.toUpperCase();
+								let nameB = b.name.toUpperCase();
+								if (nameA < nameB) return -1;
+								if (nameA > nameB) return 1;
+								return 0;
+							})
 								.map(t => {
 									const date = new Date(t.date);
 									return `${t.name.padEnd(longestName + 2, '.')}${firesObjectifier(date.getDate())} ${date.toLocaleString('default', { month: 'long' })}`;
 								});
-							this.list(message, users);
+							return this.list(message, users);
 							break;
 						}
 					}

@@ -27,7 +27,8 @@ class Tantrum extends Error {
 	handle() {
 		// THIS GUY PUT AN ERROR HANDLER FOR HIS ERROR HANDLER NO FUCKING WAY
 		// - tera
-		return this.client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`WAAAH\n\`\`${this.err}\`\``).setColor(tofuError)] });
+		return this.client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`WAAAH\n\`\`${this.err}\`\``).setColor(tofuError)] })
+			.catch(__ => {});
 	}
 }
 

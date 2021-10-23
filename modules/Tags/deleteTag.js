@@ -1,4 +1,4 @@
-const { checkMessageStaff } = require('utils/staffChecks.js');
+const { checkMessageStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
 	name: 'deletetag',

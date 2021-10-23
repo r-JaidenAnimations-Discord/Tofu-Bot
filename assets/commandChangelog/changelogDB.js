@@ -661,5 +661,14 @@ module.exports = {
 				'Commanded tags (prefix+tag)'
 			]
 		},
+		{
+			version: '2.4.3',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Typo in delete tag'
+			],
+			removals: []
+		},
 	]
 };

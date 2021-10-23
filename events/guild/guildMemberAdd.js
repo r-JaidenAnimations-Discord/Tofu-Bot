@@ -1,6 +1,5 @@
 const { devMode, gradyID, maxID } = require('#memberIDs');
 const fs = require('fs');
-const Tantrum = require('#tantrum');
 const { joinMessages } = require('#assets/greeting/greetings.json');
 
 module.exports = async (client, member) => {

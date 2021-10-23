@@ -1,6 +1,5 @@
 const { teraID, maxID, gradyID, retainedID } = require('#memberIDs');
 const { Permissions } = require('discord.js');
-const Tantrum = require('#tantrum');
 
 /**
  * Check if the message author can ban members

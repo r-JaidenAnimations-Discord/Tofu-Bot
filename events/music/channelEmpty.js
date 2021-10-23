@@ -1,6 +1,5 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { musicStrings } = require('#assets/global/strings.json');
 
 module.exports = (client, queue) => {

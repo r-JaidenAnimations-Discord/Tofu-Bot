@@ -2,7 +2,6 @@ const { tofuRed, tofuError } = require('#colors');
 const { maxID } = require('#memberIDs');
 const Discord = require('discord.js');
 const fs = require('fs-extra');
-const Tantrum = require('#tantrum');
 const { autoResponders } = require('../../handlers/autoResponder.js');
 const { dangerCommandPrompt } = require('#utils/dangerPrompt.js');
 const { simpleDuration } = require('#utils/buildTimeString.js');
@@ -114,6 +113,6 @@ module.exports = async (client, message) => {
 	try {
 		command.execute(client, message, args);
 	} catch (e) {
-		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
+		throw new Tantrum(client, e);
 	}
 };

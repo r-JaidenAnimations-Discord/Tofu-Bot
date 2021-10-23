@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const { masterCheck } = require('#utils/staffChecks.js');
 
 module.exports = {
@@ -11,7 +10,6 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: true,
-	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		if (!masterCheck(client, message)) return;

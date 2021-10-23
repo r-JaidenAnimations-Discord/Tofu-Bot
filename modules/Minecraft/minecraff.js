@@ -75,7 +75,7 @@ module.exports = {
 			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] });
 		} catch (e) {
 			if (msg.deletable) msg.delete();
-			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
+			new Tantrum(client, e);
 			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 		}
 	},

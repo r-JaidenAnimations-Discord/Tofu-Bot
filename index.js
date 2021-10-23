@@ -27,6 +27,7 @@ const client = new Discord.Client({
 const { randomStatus } = require('#utils/statusFunction.js');
 const { tagSequelize, movieSuggestionSequelize, birthdaySequelize } = require('./handlers/databases.js');
 const { DiscordTogether } = require('discord-together');
+const Tantrum = require('./utils/tantrum.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 
@@ -66,9 +67,9 @@ client.login(client.config.apiKey);
 // if (client.config.devMode) client.on('debug', d => console.log(`${chalk.cyan('[Debug]')}:`, d)); // Debug stuff, only loads when running in debug mode
 client.on('rateLimit', r => console.warn(`${chalk.yellow('[Ratelimit]')}:`, r));
 client.on('warn', w => console.warn(`${chalk.yellow('[Warn]')}:`, w));
-client.on('error', e => console.error(`${chalk.redBright('[Error]')}:`, e.stack));
-process.on('uncaughtException', e => console.error(`${chalk.redBright('[Error]')}:`, e.stack));
-process.on('unhandledRejection', e => console.error(`${chalk.redBright('[Error]')}:`, e.stack));
+client.on('error', e => new Tantrum(client, e));
+process.on('uncaughtException', e => new Tantrum(client, e));
+process.on('unhandledRejection', e => new Tantrum(client, e));
 process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}:`, e.stack));
 
 // Handlers' modules

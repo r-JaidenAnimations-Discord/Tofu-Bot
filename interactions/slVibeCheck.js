@@ -1,5 +1,3 @@
-const Tantrum = require('#tantrum');
-
 module.exports = {
 	data: {
 		name: 'vibecheck',

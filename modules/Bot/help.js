@@ -1,6 +1,5 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'help',

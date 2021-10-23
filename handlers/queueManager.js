@@ -17,7 +17,7 @@ const constructQueue = async (client, message) => {
 	});
 	if (!queue.connection) await queue.connect(message.member.voice.channel).catch(e => {
 		queue.destroy();
-		new Tantrum(client, 'play.js', 'Error when connecting to vc', e);
+		new Tantrum(client, e);
 		message.channel.send('Something went wrong when joining');
 		return false;
 	});

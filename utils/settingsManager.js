@@ -1,6 +1,5 @@
 const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 
 /**

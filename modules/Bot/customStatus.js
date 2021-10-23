@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const { checkBanStaff } = require('#utils/staffChecks.js');
 
 module.exports = {

@@ -1,6 +1,4 @@
 // Grady's first command :3
-const Tantrum = require('#tantrum');
-
 module.exports = {
 	name: 'vibecheck',
 	helpTitle: 'Vibecheck',

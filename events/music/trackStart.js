@@ -1,6 +1,5 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 
 module.exports = (client, queue, track) => {
 	const nowPlayingEmbed = new Discord.MessageEmbed()

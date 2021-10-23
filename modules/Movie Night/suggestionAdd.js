@@ -58,7 +58,7 @@ module.exports = {
 				return suggestionMsg.delete();
 			}
 		} catch (e) {
-			new Tantrum(client, 'movieSuggestion.js', 'Error on registering a movie suggestion', e);
+			new Tantrum(client, e);
 			return message.channel.send('Something went wrong, please try again later.');
 		}
 	},

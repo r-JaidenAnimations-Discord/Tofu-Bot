@@ -1,7 +1,6 @@
 const { tofuGreen, tofuError, tofuRed } = require('#colors');
 const { teraID, retainedID, maxID } = require('#memberIDs');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const beautify = require('beautify');
 // NOTE TO SELF: THIS IS SOME DANGEROUS $HIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 

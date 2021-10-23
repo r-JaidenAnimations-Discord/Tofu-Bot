@@ -1,5 +1,4 @@
 const { Util: { removeMentions } } = require('discord.js');
-const Tantrum = require('#tantrum');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 
 module.exports = {

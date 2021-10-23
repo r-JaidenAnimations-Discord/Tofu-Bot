@@ -1,4 +1,3 @@
-const Tantrum = require('../../utils/tantrum');
 const { setSts } = require('#utils/statusFunction.js');
 const { checkBanStaff } = require('#utils/staffChecks.js');
 

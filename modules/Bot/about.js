@@ -2,7 +2,6 @@ const { tofuGreen } = require('#colors');
 const { maxID, teraID, retainedID } = require('#memberIDs');
 const { version, releaseDate } = require('../../package.json');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { formatDate } = require('#utils/formatDate.js');
 
 module.exports = {

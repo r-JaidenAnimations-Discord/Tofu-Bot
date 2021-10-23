@@ -1,6 +1,5 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { quotes } = require('#assets/commandQuote/jaidenQuoteList.js');
 
 module.exports = {

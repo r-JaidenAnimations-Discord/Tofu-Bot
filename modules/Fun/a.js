@@ -1,5 +1,4 @@
 const { shrimpID } = require('#memberIDs');
-const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'a',

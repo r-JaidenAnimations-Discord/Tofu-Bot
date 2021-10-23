@@ -1,6 +1,5 @@
 const { tofuGreen, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const fetch = require('node-fetch');
 const { loadingString } = require('#utils/funnyLoad.js');
 
@@ -26,7 +25,9 @@ module.exports = {
 		// API endpoint
 		const endpoint = 'https://dog.ceo/api/breeds/image/random';
 
-		const APIresponse = await fetch(endpoint).then(r => r.json());
+		const APIresponse = await fetch(endpoint)
+			.then(r => r.json())
+			.catch(e => new Tantrum(client, e));
 
 		if (APIresponse.status === 'success') {
 			dogEmbed.setTitle('Cute doggo');
@@ -34,7 +35,7 @@ module.exports = {
 			return msg.edit({ embeds: [dogEmbed] });
 		}
 		if (msg.deletable) msg.delete();
-		new Tantrum(client, 'doggoPic.js', 'API did not respond', 'No error message defined');
+		
 		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 	},
 };

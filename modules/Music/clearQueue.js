@@ -1,4 +1,4 @@
-const Tantrum = require('#tantrum');
+
 const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 
 module.exports = {

@@ -16,7 +16,7 @@ module.exports = (client, queue, error, ...args) => {
 				.setDescription(`Tofu choked :headstone:\n\`${error}\``)
 				.setFooter('This error has been automatically reported to the devs')
 				.setTimestamp();
-			new Tantrum(client, 'error.js', 'Tofu Choked', `${error}`);
+			new Tantrum(client, `${error}`);
 			queue.metadata.channel.send({ embeds: [errorEmbed] });
 			break;
 	}

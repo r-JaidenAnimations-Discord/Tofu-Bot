@@ -28,8 +28,7 @@ module.exports = {
 		const url = 'https://official-joke-api.appspot.com/random_joke';
 
 		const APIresponse = await fetch(url).then(r => r.json()).catch(e => {
-			console.log(e);
-			return null;
+			new Tantrum(client, e);
 		});
 
 		if (APIresponse?.setup && APIresponse?.punchline) {
@@ -39,7 +38,7 @@ module.exports = {
 		}
 
 		if (msg.deletable) msg.delete();
-		new Tantrum(client, 'joke.js', 'API did not respond', 'No error message defined');
+		
 		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 	},
 };

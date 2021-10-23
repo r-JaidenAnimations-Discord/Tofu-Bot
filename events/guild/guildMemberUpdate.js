@@ -1,5 +1,4 @@
 const { maxID } = require('#memberIDs');
-const Tantrum = require('#tantrum');
 
 module.exports = async (client, oldMember, newMember) => {
 	const { staffChatID } = client.config;

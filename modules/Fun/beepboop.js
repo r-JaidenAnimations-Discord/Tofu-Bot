@@ -1,5 +1,3 @@
-const Tantrum = require('#tantrum');
-
 module.exports = {
 	name: 'beep',
 	helpTitle: 'Beep',
@@ -10,7 +8,6 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
 		message.channel.send('boop');

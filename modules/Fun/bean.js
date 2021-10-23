@@ -1,5 +1,3 @@
-const Tantrum = require('#tantrum');
-
 module.exports = {
 	name: 'bean',
 	helpTitle: 'Bean',

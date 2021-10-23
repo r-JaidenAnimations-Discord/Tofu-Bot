@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const { setSts } = require('#utils/statusFunction.js');
 
 module.exports = {
@@ -123,7 +122,6 @@ module.exports = {
 				break;
 			default:
 				await interaction.reply('That\'s not supposed to happen..............');
-				new Tantrum(client, 'slStatus.js', 'Invalid subcommand was sent', 'What more can i say');
 				break;
 		}
 	}

@@ -1,6 +1,5 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { quotes } = require('#assets/commandQuote/jaidenQuoteList.js');
 
 module.exports = {
@@ -22,8 +21,6 @@ module.exports = {
 			.setColor(tofuGreen)
 			.setDescription(randomQuote);
 
-		message.channel.send({ embeds: [randomQuoteEmbed] }).catch(e => {
-			throw new Tantrum(client, 'jaidenQuote.js', 'Error on sending randomQuoteEmbed', e);
-		});
+		message.channel.send({ embeds: [randomQuoteEmbed] });
 	},
 };

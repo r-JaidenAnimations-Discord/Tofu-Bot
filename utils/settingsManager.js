@@ -1,6 +1,5 @@
 const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 
 /**
@@ -18,9 +17,7 @@ const updateSetting = async (client, message, setting, selectedState) => {
 		case 'true':
 		case 'on': {
 			if (readData[setting].state === true) {
-				return message.channel.send({ embeds: [new Discord.MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} setting is already \`enabled\``)] }).catch(e => {
-					throw new Tantrum(client, 'settingsManager.js', 'Error on sending setting already enabled message.', e);
-				});
+				return message.channel.send({ embeds: [new Discord.MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} setting is already \`enabled\``)] });
 			} else {
 				readData[setting].state = true; // Enable the setting thing
 
@@ -40,9 +37,7 @@ const updateSetting = async (client, message, setting, selectedState) => {
 		case 'false':
 		case 'off': {
 			if (readData[setting].state === false) {
-				return message.channel.send({ embeds: [new Discord.MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} is already \`disabled\``)] }).catch(e => {
-					throw new Tantrum(client, 'settingsManager.js', 'Error on sending setting already disabled message.', e);
-				});
+				return message.channel.send({ embeds: [new Discord.MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} is already \`disabled\``)] });
 			} else {
 				readData[setting].state = false; // Disable the setting thing
 
@@ -65,9 +60,7 @@ const updateSetting = async (client, message, setting, selectedState) => {
 				.setColor(tofuGreen)
 				.setDescription(`${readData[setting].humanizedString} settings are currently \`${formatBool(readData[setting].state)}\`.`);
 
-			message.channel.send({ embeds: [stateEmbed] }).catch(e => {
-				throw new Tantrum(client, 'settingsManager.js', 'Error on sending stateEmbed', e);
-			});
+			message.channel.send({ embeds: [stateEmbed] });
 			break;
 		}
 	}

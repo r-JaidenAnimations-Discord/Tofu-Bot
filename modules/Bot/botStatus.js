@@ -1,4 +1,3 @@
-const Tantrum = require('../../utils/tantrum');
 const { setSts } = require('#utils/statusFunction.js');
 const { checkBanStaff } = require('#utils/staffChecks.js');
 
@@ -31,16 +30,12 @@ module.exports = {
 			case 'randomuser':
 				// yeah it just does this
 				if (!setSts(client, args[0])) {
-					return message.channel.send('Something went wrong').catch(e => {
-						throw new Tantrum(client, 'statusFunction.js', 'Error on sending error', e);
-					});
+					return message.channel.send('Something went wrong');
 				}
 				await message.react('✅');
 				break;
 			default:
-				return message.channel.send('Invalid argument given').catch(e => {
-					throw new Tantrum(client, 'statusFunction.js', 'Error on sending invalid status argument message', e);
-				});
+				return message.channel.send('Invalid argument given');
 		}
 	},
 };

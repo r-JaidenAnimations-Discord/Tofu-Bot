@@ -72,15 +72,11 @@ module.exports = {
 			if (!APIresponse.online) minecraftEmbed.setFooter('This is what the API told me, it might actually be running but there is caching etc.');
 
 			if (msg.deletable) msg.delete();
-			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] }).catch(e => {
-				console.log(`kek ${e}`);
-			});
+			return message.channel.send({ embeds: [minecraftEmbed], files: [attachment] });
 		} catch (e) {
 			if (msg.deletable) msg.delete();
-			new Tantrum(client, 'minecraff.js', 'API did not respond', e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(f => {
-				new Tantrum(client, 'minecraff.js', 'Error on sending error embed', f);
-			});
+			new Tantrum(client, e);
+			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 		}
 	},
 };

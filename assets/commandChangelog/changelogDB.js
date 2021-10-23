@@ -650,5 +650,16 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.4.2',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Staff can now delete tags'
+			],
+			removals: [
+				'Commanded tags (prefix+tag)'
+			]
+		},
 	]
 };

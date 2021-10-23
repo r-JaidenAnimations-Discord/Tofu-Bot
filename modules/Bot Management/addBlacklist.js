@@ -35,7 +35,7 @@ module.exports = {
 			return message.channel.send('No member specified');
 		}
 
-		if (toBlacklist === message.author.id) return message.channel.send('Can\'t blacklist yourself. What the FUCK are you trying to do?');
+		if (toBlacklist === message.author.id) return message.channel.send('Can\'t blacklist yourself. What the FRICK are you trying to do?');
 
 		if (toBlacklist === maxID) {
 			message.channel.send('Oh you sly fox, trying to bamboozle me. Get blacklisted LMAO');

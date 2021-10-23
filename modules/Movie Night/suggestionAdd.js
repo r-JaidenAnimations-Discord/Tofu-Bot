@@ -12,7 +12,7 @@ module.exports = {
 	isDangerous: true,
 	mainServerOnly: true,
 	isHidden: false,
-	aliases: ['moviesuggest', 'movie-suggest', 'suggest-movie', 'moviesuggestion', 'movie-suggestion'],
+	aliases: ['moviesuggest', 'movie-suggest', 'suggest-movie', 'moviesuggestion', 'movie-suggestion', 'mvsuggest', 'suggestmv'],
 	cooldown: 86400,
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;

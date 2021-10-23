@@ -70,13 +70,6 @@ module.exports = async (client, message) => {
 		});
 	}
 
-	// Tags
-	const tag = await client.tags.findOne({ where: { name: commandName, staffOnly: false } });
-	if (tag) {
-		tag.increment('usage_count');
-		message.channel.send(tag.get('description'));
-	}
-
 	// Does the message not start with the prefix or is this not a command?
 	if (!message.content.toLowerCase().startsWith(prefix) || !command) return;
 

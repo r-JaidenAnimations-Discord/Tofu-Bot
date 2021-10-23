@@ -46,7 +46,7 @@ module.exports = {
 
 			message.channel.send({ embeds: [whitelistEmbed] });
 			return;
-			}
+		}
 
 		const memberNotFoundEmbed = new Discord.MessageEmbed()
 			.setTitle('Error')

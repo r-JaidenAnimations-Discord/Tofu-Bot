@@ -60,10 +60,7 @@ switch (launchArgs[0]) {
 }
 
 // Log in
-client.login(client.config.apiKey).catch(e => {
-	console.error(`${chalk.redBright('[Error]')}:`, e.stack);
-	process.exit(1);
-});
+client.login(client.config.apiKey);
 
 // if sh!t goes wrong
 // if (client.config.devMode) client.on('debug', d => console.log(`${chalk.cyan('[Debug]')}:`, d)); // Debug stuff, only loads when running in debug mode

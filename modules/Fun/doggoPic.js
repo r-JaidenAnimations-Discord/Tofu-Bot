@@ -31,14 +31,10 @@ module.exports = {
 		if (APIresponse.status === 'success') {
 			dogEmbed.setTitle('Cute doggo');
 			dogEmbed.setImage(APIresponse.message);
-			return msg.edit({ embeds: [dogEmbed] }).catch(e => {
-				throw new Tantrum(client, 'doggoPic.js', 'Error on editing dogEmbed', e);
-			});
+			return msg.edit({ embeds: [dogEmbed] });
 		}
 		if (msg.deletable) msg.delete();
 		new Tantrum(client, 'doggoPic.js', 'API did not respond', 'No error message defined');
-		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] }).catch(e => {
-			new Tantrum(client, 'doggoPic.js', 'Error on sending error embed', e);
-		});
+		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 	},
 };

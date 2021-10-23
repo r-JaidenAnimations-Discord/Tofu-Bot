@@ -1,6 +1,12 @@
 // Yes, I could just console log it, but I could also poke
 // myself in the eye with a sharp stick. Either way you wouldn't
 // be able to see what's going on.
+
+// Don't listen to Max, he has been in torture for the past months using this system to
+// listen to every single error possible instead of just the really important ones
+// (API errors, ) thats literally it
+// INSTEAD I'll refactor this Tantrum code and bind it to process.on('error') so it'll
+// be more generic and less "something().catch(e => lol(e))"
 const { tofuError } = require('#colors');
 const { maxID } = require('#memberIDs');
 const Discord = require('discord.js');

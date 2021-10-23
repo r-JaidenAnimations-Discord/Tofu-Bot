@@ -19,11 +19,7 @@ module.exports = {
 
 		const queue = client.player.getQueue(message.guild);
 
-		try {
-			await queue.back();
-			await message.react('👌');
-		} catch (e) {
-			throw new Tantrum(client, 'back.js', 'Error on going back in queue', e);
-		}
+		await queue.back();
+		await message.react('👌');
 	},
 };

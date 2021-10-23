@@ -141,9 +141,7 @@ module.exports = {
 					Autoresponders: \`${formatBool(readData.autoResponders.state)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
-				message.channel.send({ embeds: [embed] }).catch(e => {
-					new Tantrum(client, 'setup.js', 'Error on sending settings list', e);
-				});
+				message.channel.send({ embeds: [embed] });
 			}
 		}
 	},

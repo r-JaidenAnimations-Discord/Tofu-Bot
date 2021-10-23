@@ -46,7 +46,6 @@ module.exports = {
 			await interaction.reply({ embeds: [activityEmbed], files: [attachment] });
 			return interaction.channel.send(`${invite.code}`);
 		}).catch(async e => {
-			new Tantrum(client, 'slActivit.js', 'Error when creating activity', e);
 			return await interaction.reply('Something went wrong when creating the activity, i\'m sorry.\n*(The devs have been notified about this)*');
 		});
 	}

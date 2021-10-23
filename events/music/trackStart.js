@@ -8,7 +8,5 @@ module.exports = (client, queue, track) => {
 		.setTitle('Now playing')
 		.setDescription(`[${track.title}](${track.url}) [${track.requestedBy}]`);
 
-	queue.metadata.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {
-		throw new Tantrum(client, 'trackStart.js', 'Error sending nowPlayingEmbed', e);
-	});
+	queue.metadata.channel.send({ embeds: [nowPlayingEmbed] });
 };

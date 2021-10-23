@@ -26,9 +26,7 @@ module.exports = {
 				status = args[0];
 				break;
 			default:
-				return message.channel.send('You must enter the proper status.').catch(e => {
-					throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper status\' message', e);
-				});
+				return message.channel.send('You must enter the proper status.');
 		}
 
 		switch (args[1]) {
@@ -42,16 +40,12 @@ module.exports = {
 				activity = 'LISTENING';
 				break;
 			default:
-				return message.channel.send('You must enter the proper activity.').catch(e => {
-					throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter proper activity\' message', e);
-				});
+				return message.channel.send('You must enter the proper activity.');
 		}
 
 		let textString = args.slice(2).join(' ');
 		if (textString.length === 0) {
-			return message.channel.send('You must enter text to show').catch(e => {
-				throw new Tantrum(client, 'customStatus.js', 'Error on sending \'Enter text to show\' message');
-			});
+			return message.channel.send('You must enter text to show');
 		}
 		client.user.setPresence({
 			status: `${status}`,

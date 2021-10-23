@@ -61,13 +61,9 @@ module.exports = async (client, message) => {
 
 	// Is this command allowed inside DM?
 	if (message.channel.type === 'DM') {
-		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
-		});
+		if (!command) return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 
-		if (!command.isDMAllowed) return message.channel.send('Can\'t talk right now, I\'m eating tofu').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending can\'t talk DM', e);
-		});
+		if (!command.isDMAllowed) return message.channel.send('Can\'t talk right now, I\'m eating tofu');
 	}
 
 	// Does the message not start with the prefix or is this not a command?
@@ -80,9 +76,7 @@ module.exports = async (client, message) => {
 	if (bl) {
 		const blacklist = await fs.readJSONSync('./deployData/blacklist.json', 'utf-8');
 
-		if (blacklist.find(({ member }) => member === message.author.id)) return message.channel.send('Nope, not listening to you').catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending python blacklist message', e);
-		});
+		if (blacklist.find(({ member }) => member === message.author.id)) return message.channel.send('Nope, not listening to you');
 	}
 
 	if (maintenance) notifyMaintenance(message);
@@ -97,9 +91,7 @@ module.exports = async (client, message) => {
 	if (timestamps.has(message.author.id)) {
 		const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
-		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${simpleDuration(expirationTime - now)} before reusing \`${command.name}\`?`).catch(e => {
-			throw new Tantrum(client, 'message.js', 'Error on sending command cooldown message', e);
-		});
+		if (now < expirationTime) return message.reply(`It's cool you're trying to do stuff but could you chill a bit for ${simpleDuration(expirationTime - now)} before reusing \`${command.name}\`?`);
 	}
 	timestamps.set(message.author.id, now);
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
@@ -107,12 +99,8 @@ module.exports = async (client, message) => {
 	if (message.guild) {
 		// Check if bot is used in unauthorized server
 		if (!trustedServers.includes(message.guild.id)) {
-			try {
-				client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`THIS IS BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError)] });
-				return message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
-			} catch (e) {
-				throw new Tantrum(client, 'message.js', 'Error on sending untrusted server message', e);
-			}
+			client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`THIS IS (NOT) BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError)] });
+			return message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
 		}
 
 		// Warn when a command is executed from the devserver to the main deploy
@@ -120,15 +108,12 @@ module.exports = async (client, message) => {
 	}
 
 	// Is this command enabled?
-	if (disabledCommands.includes(command.name)) return message.channel.send({ content: `Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, files: ['./assets/Configuration/commandDisabled.gif'] }).catch(e => {
-		throw new Tantrum(client, 'message.js', 'Something went wrong when sending the command disabled message.', e);
-	});
+	if (disabledCommands.includes(command.name)) return message.channel.send({ content: `Hi ${message.author.username}, whaaats happening.\nWe have sort of a problem here, yeah apparently max broke this command and had to disable it.\nSo if you could try again later, that would be grrrreat. mkay?`, files: ['./assets/Configuration/commandDisabled.gif'] });
 
 	// All requirements are met, try running the command
 	try {
 		command.execute(client, message, args);
 	} catch (e) {
 		throw new Tantrum(client, 'message.js', 'Something went wrong when trying to execute a command', e);
-		// message.reply('Sooo i like um broke');
 	}
 };

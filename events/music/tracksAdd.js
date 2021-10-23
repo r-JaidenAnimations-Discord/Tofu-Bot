@@ -6,7 +6,5 @@ module.exports = (client, queue, tracks) => {
 		.setColor(tofuGreen)
 		.setDescription(`Queued **${tracks.length}** tracks`);
 
-	queue.metadata.channel.send({ embeds: [bulkQueuedEmbed] }).catch(e => {
-		throw new Tantrum(client, 'tracksAdd.js', 'Error sending bulkQueuedEmbed', e);
-	});
+	queue.metadata.channel.send({ embeds: [bulkQueuedEmbed] });
 };

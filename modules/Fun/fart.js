@@ -16,8 +16,6 @@ module.exports = {
 	execute: async function(client, message, args) {
 		if (!masterCheck(client, message)) return;
 
-		await message.react('💨').catch(e => {
-			throw new Tantrum(client, 'fart,js', 'Error on sending fart', e);
-		});
+		await message.react('💨');
 	},
 };

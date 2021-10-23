@@ -38,16 +38,10 @@ module.exports = {
 				userID: message.author.id,
 				staffOnly: args[0] === 'staff'
 			});
-			return message.channel.send(`Tag \`${tag.name}\` added.`).catch(e => {
-				throw new Tantrum(client, 'createTag.js', 'Error on sending tag created message', e);
-			});
+			return message.channel.send(`Tag \`${tag.name}\` added.`);
 		} catch (e) {
-			if (e.name === 'SequelizeUniqueConstraintError') return message.channel.send('That tag already exists.').catch(e => {
-				throw new Tantrum(client, 'createTag.js', 'Error on sending tag exists message', e);
-			});
-			return message.channel.send('Something went wrong with creating the tag.').catch(e => {
-				throw new Tantrum(client, 'createTag.js', 'Error on sending tag creation error message', e);
-			});
+			if (e.name === 'SequelizeUniqueConstraintError') return message.channel.send('That tag already exists.');
+			return message.channel.send('Something went wrong with creating the tag.');
 		}
 	}
 };

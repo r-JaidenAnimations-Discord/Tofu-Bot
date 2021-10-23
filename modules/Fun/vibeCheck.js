@@ -15,13 +15,9 @@ module.exports = {
 	cooldown: 3,
 	execute: async function(client, message, args) {
 		if (Math.floor(Math.random() * 10 > 3))
-			message.reply(`${message.author.username} is vibin!`).catch(e => {
-				throw new Tantrum(client, 'vibeCheck.js', 'Error on sending is vibin message', e);
-			});
+			message.reply(`${message.author.username} is vibin!`);
 		else {
-			message.reply(`${message.author.username} is not vibin!`).catch(e => {
-				throw new Tantrum(client, 'vibeCheck.js', 'Error on sending is not vibin message', e);
-			});
+			message.reply(`${message.author.username} is not vibin!`);
 		}
 	},
 };

@@ -1,7 +1,6 @@
 const { tofuGreen, tofuRed } = require('#colors');
 const Discord = require('discord.js');
 const fs = require('fs');
-const Tantrum = require('#tantrum');
 const { writeJSONSync } = require('fs-extra');
 const { checkBanStaff } = require('#utils/staffChecks.js');
 
@@ -32,30 +31,21 @@ module.exports = {
 			toWhitelist = args[0];
 		}
 		else {
-			return message.channel.send('No member specified').catch(e => {
-				throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending no user defined message', e);
-			});
+			return message.channel.send('No member specified');
 		}
 
-		// const categories = ['python', 'bamboozle', 'hate', 'wrongchannel', 'bloop', 'other'];
-		// for (blackListCategory of categories) {
 		if (blackListJSON.find(({ member }) => member === toWhitelist)) {
-			try {
-				blackListJSON.splice(blackListJSON.indexOf(blackListJSON.find(({ member }) => member === toWhitelist)), 1);
-				writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
-				const whitelistEmbed = new Discord.MessageEmbed()
-					.setTitle('Removed from blacklist')
-					.setColor(tofuGreen)
-					.setDescription(`Removed <@${toWhitelist}> from the blacklist.`)
-					.setTimestamp();
+			blackListJSON.splice(blackListJSON.indexOf(blackListJSON.find(({ member }) => member === toWhitelist)), 1);
+			writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
+			const whitelistEmbed = new Discord.MessageEmbed()
+				.setTitle('Removed from blacklist')
+				.setColor(tofuGreen)
+				.setDescription(`Removed <@${toWhitelist}> from the blacklist.`)
+				.setTimestamp();
 
-				message.channel.send({ embeds: [whitelistEmbed] });
-				return;
-			} catch (e) {
-				throw new Tantrum(client, 'removeBlacklist.js', 'Error on whitelisting member.', e);
-			}
+			message.channel.send({ embeds: [whitelistEmbed] });
+			return;
 		}
-		// }
 
 		const memberNotFoundEmbed = new Discord.MessageEmbed()
 			.setTitle('Error')
@@ -63,8 +53,6 @@ module.exports = {
 			.setDescription(`Couldn't find <@${toWhitelist}> anywhere in the blacklist.`)
 			.setTimestamp();
 
-		message.channel.send({ embeds: [memberNotFoundEmbed] }).catch(e => {
-			throw new Tantrum(client, 'removeBlacklist.js', 'Error on sending membernotfound embed', e);
-		});
+		message.channel.send({ embeds: [memberNotFoundEmbed] });
 	},
 };

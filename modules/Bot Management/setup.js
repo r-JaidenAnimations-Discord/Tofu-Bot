@@ -1,6 +1,5 @@
 const { tofuRed, tofuBlue, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { stripIndents } = require('common-tags');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 const { masterCheck } = require('#utils/staffChecks.js');
@@ -141,9 +140,7 @@ module.exports = {
 					Autoresponders: \`${formatBool(readData.autoResponders.state)}\`
 					Disabled commands: \`${readData.disabledCommands.length ? readData.disabledCommands.join(', ') : 'None'}\``);
 
-				message.channel.send({ embeds: [embed] }).catch(e => {
-					new Tantrum(client, 'setup.js', 'Error on sending settings list', e);
-				});
+				message.channel.send({ embeds: [embed] });
 			}
 		}
 	},

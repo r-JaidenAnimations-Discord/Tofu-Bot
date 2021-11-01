@@ -1,5 +1,6 @@
 
 const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'clearqueue',

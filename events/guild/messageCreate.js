@@ -6,6 +6,7 @@ const { autoResponders } = require('../../handlers/autoResponder.js');
 const { dangerCommandPrompt } = require('#utils/dangerPrompt.js');
 const { simpleDuration } = require('#utils/buildTimeString.js');
 const { notifyMaintenance } = require('#utils/maintenanceNotifier.js');
+const Tantrum = require('#tantrum');
 
 module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers, tofuBotServerID, maintenance } = client.config;

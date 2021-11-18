@@ -52,7 +52,7 @@ module.exports = {
 						name: toadd,
 						date
 					});
-					message.channel.send(`Added ${toadd}'s birthday!'`);
+					message.channel.send(`Added ${toadd}'s birthday!`);
 					break;
 				}
 				case 'remove':

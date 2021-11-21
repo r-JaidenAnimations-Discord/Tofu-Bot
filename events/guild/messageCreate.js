@@ -54,23 +54,30 @@ module.exports = async (client, message) => {
 	}
 
 	// Hey bot, i'm dad
-	if (dad) {
-		if (!['291684752363225098', '531399792740270092'].includes(message.author.id)) return;
+	// if (dad) {
+	if (!['291684752363225098', '531399792740270092'].includes(message.author.id)) return;
 
-		const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
-		const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
+	const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
+	const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
 
-		if (message.content.match(IM_MATCH)) {
-			let imMatchData = message.content.match(IM_MATCH),
-				formattingMatchData = message.content.match(FORMAT_MATCH);
+	let thing = message.content;
 
-			if (!formattingMatchData || formattingMatchData.index > imMatchData.index) {
-				message.channel.send(`Hi ${imMatchData[2]}, I'm Dad`);
-			} else {
-				message.channel.send(`Hi ${formattingMatchData[0]}${imMatchData[2]}, I'm Dad`);
-			}
+	// Supress @everyone, @here and pinging roles
+	[/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+		thing = thing.replace(ping, 'nice try');
+	});
+
+	if (thing.match(IM_MATCH)) {
+		let imMatchData = thing.match(IM_MATCH),
+			formattingMatchData = thing.match(FORMAT_MATCH);
+
+		if (!formattingMatchData || formattingMatchData.index > imMatchData.index) {
+			message.channel.send(`Hi ${imMatchData[2]}, I'm Dad`);
+		} else {
+			message.channel.send(`Hi ${formattingMatchData[0]}${imMatchData[2]}, I'm Dad`);
 		}
 	}
+	// }
 
 	// List up all commands
 	const args = message.content.slice(prefix.length).trim().split(/ +/);

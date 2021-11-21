@@ -670,5 +670,17 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.4.4',
+			aliases: [],
+			additions: [
+				'Dad bot'
+			],
+			fixes: [
+				'Refactored tantrum',
+				'Refactored suggestion add command'
+			],
+			removals: []
+		},
 	]
 };

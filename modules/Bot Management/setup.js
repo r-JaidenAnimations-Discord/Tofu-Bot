@@ -62,6 +62,13 @@ module.exports = {
 				break;
 			}
 
+			// Dad bot
+			case 'dadbot':
+			case 'dad': {
+				updateSetting(client, message, 'dadBot', args[1]);
+				break;
+			}
+
 			// Setting the commands
 			case 'enable': {
 				if (input === 'all') {

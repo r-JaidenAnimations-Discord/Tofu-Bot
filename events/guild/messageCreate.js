@@ -16,6 +16,7 @@ module.exports = async (client, message) => {
 
 	const {
 		autoResponders: { state: ar },
+		dadBot: { state: dad },
 		blackListing: { state: bl },
 		disabledCommands
 	} = fs.readJSONSync('./deployData/settings.json', 'utf-8');
@@ -48,6 +49,23 @@ module.exports = async (client, message) => {
 					ARtimestamps.set(message.guild.id, ARnow);
 					setTimeout(() => ARtimestamps.delete(message.guild.id), ARcooldownAmount);
 				}
+			}
+		}
+	}
+
+	// Hey bot, i'm dad
+	if (dad) {
+		const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
+		const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
+
+		if (message.content.match(IM_MATCH)) {
+			let imMatchData = message.content.match(IM_MATCH),
+				formattingMatchData = message.content.match(FORMAT_MATCH);
+
+			if (!formattingMatchData || formattingMatchData.index > imMatchData.index) {
+				message.channel.send(`Hi ${imMatchData[2]}, I'm Dad`);
+			} else {
+				message.channel.send(`Hi ${formattingMatchData[0]}${imMatchData[2]}, I'm Dad`);
 			}
 		}
 	}

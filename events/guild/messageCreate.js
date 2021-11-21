@@ -55,6 +55,8 @@ module.exports = async (client, message) => {
 
 	// Hey bot, i'm dad
 	if (dad) {
+		if (!['291684752363225098', '531399792740270092'].includes(message.author.id)) return;
+
 		const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
 		const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
 

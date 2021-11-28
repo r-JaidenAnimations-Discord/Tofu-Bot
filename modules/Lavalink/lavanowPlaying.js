@@ -29,17 +29,20 @@ module.exports = {
 
 		if (!track) return; // In between songs, there is no now playing. In that case, return to avoid erroring out.
 
-		// const totalTrackTime = track.length;
-		// const currentTime = player.position;
+		const totalTrackTime = track.length;
+		const currentTime = player.accuratePosition || 0;
 
-		// const humanTotalTime = humanReadableDuration(totalTrackTime);
-		// const humanCurrentTime = humanReadableDuration(currentTime);
+		const humanTotalTime = humanReadableDuration(totalTrackTime);
+		const humanCurrentTime = humanReadableDuration(currentTime);
+
+		console.log(totalTrackTime, currentTime, humanTotalTime, humanCurrentTime);
+
+		LavaManager.lavaLog(player.accuratePosition);
 
 		const nowPlayingEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
-			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`);
-		// .setDescription(`[${track.title}](${track.uri})`);
-		// .setFooter(`${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`);
+			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`)
+			.setFooter(`${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`);
 
 		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {
 			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);

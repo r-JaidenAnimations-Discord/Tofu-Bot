@@ -83,7 +83,7 @@ class LavaManager {
 	 * @returns {Boolean} Playing state
 	 */
 	static async musicChecks(client, message) {
-		if (!(await this.getPlayer(client, message)).playing) {
+		if (!(await this.getPlayer(client, message))?.playing) {
 			const embed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription(musicStrings.noMusicPlaying);

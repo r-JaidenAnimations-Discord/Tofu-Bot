@@ -2,7 +2,6 @@
 // Now, only God knows
 const Discord = require('discord.js');
 const fs = require('fs');
-// const { Player } = require('discord-player');
 const chalk = require('chalk');
 const client = new Discord.Client({
 	intents: [
@@ -36,7 +35,6 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync('./modules/', { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name);
-// client.player = new Player(client);
 client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 client.birthdays = require('./handlers/dbModels/birthdays.js')(birthdaySequelize);

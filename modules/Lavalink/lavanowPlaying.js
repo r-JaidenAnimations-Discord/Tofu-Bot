@@ -25,7 +25,7 @@ module.exports = {
 		const player = await LavaManager.getPlayer(client, message);
 		if (!player) return;
 
-		const track = await client.music.rest.decodeTrack(player.track);
+		const track = player.queue.current;
 
 		if (!track) return; // In between songs, there is no now playing. In that case, return to avoid erroring out.
 
@@ -37,8 +37,8 @@ module.exports = {
 
 		const nowPlayingEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
-			// .setDescription(`[${track.title}](${track.uri}) [${track.requestedBy}]`)
-			.setDescription(`[${track.title}](${track.uri})`);
+			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`);
+		// .setDescription(`[${track.title}](${track.uri})`);
 		// .setFooter(`${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`);
 
 		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {

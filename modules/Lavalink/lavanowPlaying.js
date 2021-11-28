@@ -35,8 +35,6 @@ module.exports = {
 		const humanTotalTime = humanReadableDuration(totalTrackTime);
 		const humanCurrentTime = humanReadableDuration(currentTime);
 
-		console.log(totalTrackTime, currentTime, humanTotalTime, humanCurrentTime);
-
 		LavaManager.lavaLog(player.accuratePosition);
 
 		const nowPlayingEmbed = new Discord.MessageEmbed()

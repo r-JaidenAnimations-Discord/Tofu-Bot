@@ -55,7 +55,7 @@ module.exports = async (client, message) => {
 
 	// Hey bot, i'm dad
 	// if (dad) {
-	if (!['291684752363225098', '531399792740270092'].includes(message.author.id)) return;
+	// if (!['291684752363225098', '531399792740270092'].includes(message.author.id)) return;
 
 	const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
 	const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
@@ -67,7 +67,7 @@ module.exports = async (client, message) => {
 		thing = thing.replace(ping, 'nice try');
 	});
 
-	if (thing.match(IM_MATCH)) {
+	if (thing.match(IM_MATCH) && ['291684752363225098', '531399792740270092'].includes(message.author.id)) {
 		let imMatchData = thing.match(IM_MATCH),
 			formattingMatchData = thing.match(FORMAT_MATCH);
 

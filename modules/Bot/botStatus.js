@@ -29,9 +29,7 @@ module.exports = {
 			case 'next':
 			case 'randomuser':
 				// yeah it just does this
-				if (!setSts(client, args[0])) {
-					return message.channel.send('Something went wrong');
-				}
+				if (!setSts(client, args[0])) return message.channel.send('Something went wrong');
 				await message.react('✅');
 				break;
 			default:

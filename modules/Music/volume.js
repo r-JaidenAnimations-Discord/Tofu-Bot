@@ -5,7 +5,7 @@ const LavaManager = require('#handlers/lavaManager.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
-	name: 'lvolume',
+	name: 'volume',
 	helpTitle: 'Volume',
 	category: 'Music',
 	usage: 'volume [number between 0 and 100]',
@@ -14,7 +14,7 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['lvol'],
+	aliases: ['vol'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!checkMessageStaff(client, message, true)) return;

@@ -4,7 +4,7 @@ const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lremove',
+	name: 'remove',
 	helpTitle: 'Remove',
 	category: 'Music',
 	usage: 'remove [id]',

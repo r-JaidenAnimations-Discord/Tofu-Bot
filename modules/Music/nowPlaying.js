@@ -1,13 +1,12 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 const { createBar } = require('#utils/createBar.js');
 const { humanReadableDuration } = require('#utils/buildTimeString.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lnowplaying',
+	name: 'nowplaying',
 	helpTitle: 'Now Playing',
 	category: 'Music',
 	usage: 'nowplaying',
@@ -16,7 +15,7 @@ module.exports = {
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['now-playing', 'lnp', 'currentsong', 'currentsong', 'cs'],
+	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!LavaManager.vcChecks(client, message)) return;
@@ -34,8 +33,6 @@ module.exports = {
 
 		const humanTotalTime = humanReadableDuration(totalTrackTime);
 		const humanCurrentTime = humanReadableDuration(currentTime);
-
-		LavaManager.lavaLog(player.accuratePosition);
 
 		const nowPlayingEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)

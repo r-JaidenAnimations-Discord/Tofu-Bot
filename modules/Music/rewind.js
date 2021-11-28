@@ -2,16 +2,16 @@ const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lclearqueue',
-	helpTitle: 'Clear Queue',
+	name: 'rewind',
+	helpTitle: 'Rewind',
 	category: 'Music',
-	usage: 'clearqueue',
-	description: 'Clear the queue.',
+	usage: 'rewind',
+	description: 'Go back to the start of the current track',
 	isDMAllowed: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['clear-queue', 'cq', 'clear'],
+	aliases: ['rew'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!LavaManager.vcChecks(client, message)) return;
@@ -20,9 +20,12 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		player.queue.clear();
-		await message.react('👌').catch(e => {
-			throw new Tantrum(client, 'clearQueue.js', 'Error on reacting queue cleared', e);
-		});
+		if (!player) return;
+
+		if (await player.seek(0)) {
+			await message.react('👌').catch(e => {
+				throw new Tantrum(client, 'rewind.js', 'Error on reacting', e);
+			});
+		}
 	},
 };

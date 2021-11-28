@@ -5,7 +5,7 @@ const { loadingString } = require('#utils/funnyLoad.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lsearch',
+	name: 'search',
 	helpTitle: 'Search',
 	category: 'Music',
 	usage: 'search [query]',

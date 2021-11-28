@@ -5,7 +5,7 @@ const LavaManager = require('#handlers/lavaManager.js');
 const { LoopType } = require('@lavaclient/queue');
 
 module.exports = {
-	name: 'lloop',
+	name: 'loop',
 	helpTitle: 'Loop',
 	category: 'Music',
 	usage: 'loop',

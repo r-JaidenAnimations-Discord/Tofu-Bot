@@ -2,16 +2,16 @@ const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lrewind',
-	helpTitle: 'Rewind',
+	name: 'disconnect',
+	helpTitle: 'Disconnect',
 	category: 'Music',
-	usage: 'rewind',
-	description: 'Go back to the start of the current track',
+	usage: 'disconnect',
+	description: 'Done? Stop the music I suppose',
 	isDMAllowed: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['rew'],
+	aliases: ['dc'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!LavaManager.vcChecks(client, message)) return;
@@ -20,12 +20,15 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		if (!player) return;
-
-		if (await player.seek(0)) {
-			await message.react('👌').catch(e => {
-				throw new Tantrum(client, 'rewind.js', 'Error on reacting', e);
+		try {
+			await player.disconnect();
+			// await player.destroy(); // apparently this does nothing
+			await client.music.destroyPlayer(player.guildId);
+			await message.react('👋').catch(e => {
+				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);
 			});
+		} catch (e) {
+			throw new Tantrum(client, 'disconnect.js', 'Error when disconnecting.', e);
 		}
 	},
 };

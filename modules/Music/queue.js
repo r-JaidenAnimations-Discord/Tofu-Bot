@@ -2,7 +2,7 @@ const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lqueue',
+	name: 'queue',
 	helpTitle: 'Queue',
 	category: 'Music',
 	usage: 'queue',

@@ -6,7 +6,7 @@ const { loadingString } = require('#utils/funnyLoad.js');
 const Pagination = require('#utils/pagination.js');
 
 module.exports = {
-	name: 'llyrics',
+	name: 'lyrics',
 	helpTitle: 'Lyrics',
 	category: 'Music',
 	usage: 'lyrics',

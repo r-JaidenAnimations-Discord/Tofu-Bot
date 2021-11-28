@@ -1,17 +1,16 @@
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lskip',
-	helpTitle: 'Skip',
+	name: 'nightcore',
+	helpTitle: 'Nightcore',
 	category: 'Music',
-	usage: 'skip',
-	description: 'Skip what\'s playing. Maybe the cringe factor was too high',
+	usage: 'nightcore',
+	description: 'Uguuuuuuuu...',
 	isDMAllowed: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['sk', 'next', 's'],
+	aliases: ['nc'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!LavaManager.vcChecks(client, message)) return;
@@ -19,14 +18,10 @@ module.exports = {
 		if (!(await LavaManager.musicChecks(client, message))) return;
 
 		const player = await LavaManager.getPlayer(client, message);
-
-		if (player.queue.next()) {
-			await message.react('👌').catch(e => {
-				throw new Tantrum(client, 'skip.js', 'Error on sending skip message', e);
-			});
-		} else {
-			throw new Tantrum(client, 'skip.js', 'Error on skipping music', 'No message');
-		}
-
+		player.filters.timescale = (player.nightcore = !player.nightcore)
+			? { speed: 1.5, pitch: 1.5, rate: 1 }
+			: undefined;
+		await player.setFilters();
+		return message.reply(`${player.nightcore ? 'Enabled' : 'Disabled'} nightcore`); // todo embed
 	},
 };

@@ -4,11 +4,11 @@ const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lpause',
-	helpTitle: 'Pause',
+	name: 'resume',
+	helpTitle: 'Resume',
 	category: 'Music',
-	usage: 'pause',
-	description: 'brb hold on',
+	usage: 'resume',
+	description: 'Alr back, go on',
 	isDMAllowed: false,
 	isDangerous: false,
 	mainServerOnly: false,
@@ -23,22 +23,21 @@ module.exports = {
 		const player = await LavaManager.getPlayer(client, message);
 		if (!player) return;
 
-		if (player.paused) {
-			const alreadyPausedEmbed = new Discord.MessageEmbed()
+		if (!player.paused) {
+			const alreadyPlayingEmbed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
-				.setDescription('The music is already paused!');
-			return message.channel.send({ embeds: [alreadyPausedEmbed] }).catch(e => {
-				throw new Tantrum(client, 'pause.js', 'Error on sending alreadyPausedEmbed', e);
+				.setDescription('The music is already playing!');
+			return message.channel.send({ embeds: [alreadyPlayingEmbed] }).catch(e => {
+				throw new Tantrum(client, 'resume.js', 'Error on sending alreadyPlayingEmbed', e);
 			});
 		}
 
-		try {
-			await player?.pause();
-			await message.react('⏸').catch(e => {
-				throw new Tantrum(client, 'pause.js', 'Error on sending paused message', e);
+		if (player.resume()) {
+			await message.react('▶️').catch(e => {
+				throw new Tantrum(client, 'resume.js', 'Error on sending resumed message', e);
 			});
-		} catch (e) {
-			throw new Tantrum(client, 'pause.js', 'Error on pausing music', e);
+		} else {
+			throw new Tantrum(client, 'resume.js', 'Error on resuming music', 'No message');
 		}
 	},
 };

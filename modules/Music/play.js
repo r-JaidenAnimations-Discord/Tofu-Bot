@@ -4,22 +4,20 @@
 const { tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { checkMusic } = require('#utils/musicChecks.js');
-const { constructQueue } = require('#handlers/queueManager.js');
 const { loadingString } = require('#utils/funnyLoad.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'lavaplay',
+	name: 'play',
 	helpTitle: 'Play',
 	category: 'Music',
-	usage: 'lavaplay [query]',
+	usage: 'play [query]',
 	description: 'Play some choons',
 	isDMAllowed: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	aliases: ['lp'],
+	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		// spotify search

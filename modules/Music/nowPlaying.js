@@ -34,10 +34,12 @@ module.exports = {
 		const humanTotalTime = humanReadableDuration(totalTrackTime);
 		const humanCurrentTime = humanReadableDuration(currentTime);
 
+		const footer = track.isStream ? `${createBar(2, 1, 20, '▬', '🔴LIVE')}` : `${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`;
+
 		const nowPlayingEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
 			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`)
-			.setFooter(`${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`);
+			.setFooter(footer);
 
 		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {
 			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);

@@ -7,7 +7,7 @@
 	},
 	"musicStrings": {
 		"inactiveTimeout": "I left the voice channel because I was inactive for too long.",
-		"noMusicPlaying": "No tracks are currently playing.",
+		"noMusicPlaying": "You must be playing a track to use this command!",
 		"notSameVoiceChannel": "Someone else is already listening to music in different channel!",
 		"notInVoiceChannel": "You have to be connected to a voice channel before you can use this command!",
 		"unableToJoin": "I couldn't join your voice channel. Please check the permissions"

@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -20,13 +19,7 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		if (player.queue.next()) {
-			await message.react('👌').catch(e => {
-				throw new Tantrum(client, 'skip.js', 'Error on sending skip message', e);
-			});
-		} else {
-			throw new Tantrum(client, 'skip.js', 'Error on skipping music', 'No message');
-		}
-
+		player.queue.next();
+		await message.react('👌');
 	},
 };

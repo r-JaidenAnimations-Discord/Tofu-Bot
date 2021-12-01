@@ -3,7 +3,6 @@
  */
 const { tofuGreen, tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { SpotifyItemType } = require('@lavaclient/spotify');
 const LavaManager = require('#handlers/lavaManager.js');
 
@@ -26,13 +25,8 @@ module.exports = {
 		// if queue exists, and paused, resume
 		const existing = await LavaManager.getPlayer(client, message);
 		if (existing && existing.paused) {
-			if (existing.resume()) {
-				return await message.react('👌').catch(e => {
-					throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
-				});
-			} else {
-				throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
-			}
+			existing.resume();
+			return await message.react('👌');
 		}
 
 		if (!args[0]) {
@@ -40,9 +34,7 @@ module.exports = {
 				.setColor(tofuOrange)
 				.setDescription('To play a song, you need to specify which song you want to play!');
 
-			return message.channel.send({ embeds: [noQueryEmbed] }).catch(e => {
-				throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);
-			});
+			return message.channel.send({ embeds: [noQueryEmbed] });
 		}
 
 		const embed = new Discord.MessageEmbed();

@@ -1,6 +1,5 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 const { LoopType } = require('@lavaclient/queue');
 
@@ -36,9 +35,7 @@ module.exports = {
 		loopMode++;
 		if (loopMode > 2) loopMode = 0;
 		loopEmbed.setDescription(`${loopModes[loopMode].message}`);
-		if (!player.queue.setLoop(loopModes[loopMode].type)) throw new Tantrum(client, 'loop.js', 'Error on setting loopMode', player.queue.repeatMode);
-		message.channel.send({ embeds: [loopEmbed] }).catch(e => {
-			throw new Tantrum(client, 'loop.js', 'Error on sending loopEmbed', e);
-		});
+		player.queue.setLoop(loopModes[loopMode].type);
+		message.channel.send({ embeds: [loopEmbed] });
 	},
 };

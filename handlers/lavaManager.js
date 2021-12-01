@@ -1,6 +1,5 @@
 const Discord = require('discord.js');
 const { musicStrings } = require('#assets/global/strings.json');
-const Tantrum = require('#tantrum');
 const chalk = require('chalk');
 const { tofuOrange, tofuError } = require('#colors');
 
@@ -31,17 +30,13 @@ class LavaManager {
 		if (!message.member.voice.channel) {
 			musicCheckEmbed.setColor(tofuOrange);
 			musicCheckEmbed.setDescription(musicStrings.notInVoiceChannel);
-			message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
-				throw new Tantrum(client, 'lavaManager.js', 'Error on sending musicCheckEmbed (notInVoiceChannel)', e);
-			});
+			message.channel.send({ embeds: [musicCheckEmbed] });
 			return false;
 		}
 
 		if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) {
 			musicCheckEmbed.setDescription(musicStrings.notSameVoiceChannel);
-			message.channel.send({ embeds: [musicCheckEmbed] }).catch(e => {
-				throw new Tantrum(client, 'lavaManager.js', 'Error on sending musicCheckEmbed (notSameVoiceChannel)', e);
-			});
+			message.channel.send({ embeds: [musicCheckEmbed] });
 			return false;
 		}
 		return true;
@@ -58,9 +53,7 @@ class LavaManager {
 			const embed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription(musicStrings.noMusicPlaying);
-			message.channel.send({ embeds: [embed] }).catch(e => {
-				throw new Tantrum(client, 'lavaManager.js', 'Error on sending embed (noMusicPlaying)', e);
-			});
+			message.channel.send({ embeds: [embed] });
 			return false;
 		}
 		return true;

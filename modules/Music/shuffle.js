@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -21,8 +20,6 @@ module.exports = {
 		const player = await LavaManager.getPlayer(client, message);
 
 		player.queue.shuffle();
-		await message.react('🔀').catch(e => {
-			throw new Tantrum(client, 'shuffle.js', 'Error sending shuffled message', e);
-		});
+		await message.react('🔀');
 	},
 };

@@ -1,6 +1,5 @@
 const { tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { loadingString } = require('#utils/funnyLoad.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
@@ -25,9 +24,7 @@ module.exports = {
 				.setColor(tofuOrange)
 				.setDescription('To find a song to play, you need to specify which song you want to play!');
 
-			return message.channel.send({ embeds: [noQueryEmbed] }).catch(e => {
-				throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);
-			});
+			return message.channel.send({ embeds: [noQueryEmbed] });
 		}
 		const loadMsg = await message.channel.send(loadingString());
 
@@ -39,17 +36,13 @@ module.exports = {
 				.setDescription('No matches found!');
 
 			if (loadMsg.deletable) loadMsg.delete();
-			return message.channel.send({ embeds: [noResultsEmbed] }).catch(e => {
-				throw new Tantrum(client, 'play.js', 'Error on sending noResultsEmbed', e);
-			});
+			return message.channel.send({ embeds: [noResultsEmbed] });
 		}
 
 		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.info.title}`).join('\n');
 
 		if (loadMsg.deletable) loadMsg.delete();
-		message.channel.send(`\`\`\`nim\n${searchResultString}\n\`\`\``).catch(e => {
-			throw new Tantrum(client, 'searchResults.js', 'Error on sending searchResults', e);
-		}).then(async msg => {
+		message.channel.send(`\`\`\`nim\n${searchResultString}\n\`\`\``).then(async msg => {
 			const collector = message.channel.createMessageCollector({ time: 10000 });
 
 			collector.on('collect', async ({ content }) => {

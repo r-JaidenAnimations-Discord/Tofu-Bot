@@ -1,6 +1,5 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { createBar } = require('#utils/createBar.js');
 const { humanReadableDuration } = require('#utils/buildTimeString.js');
 const LavaManager = require('#handlers/lavaManager.js');
@@ -41,8 +40,6 @@ module.exports = {
 			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`)
 			.setFooter(footer);
 
-		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {
-			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);
-		});
+		message.channel.send({ embeds: [nowPlayingEmbed] });
 	},
 };

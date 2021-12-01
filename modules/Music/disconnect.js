@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -20,15 +19,9 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		try {
-			await player.disconnect();
-			// await player.destroy(); // apparently this does nothing
-			await client.music.destroyPlayer(player.guildId);
-			await message.react('👋').catch(e => {
-				throw new Tantrum(client, 'disconnect.js', 'Error on sending disconnected reaction', e);
-			});
-		} catch (e) {
-			throw new Tantrum(client, 'disconnect.js', 'Error when disconnecting.', e);
-		}
+		await player.disconnect();
+		// await player.destroy(); // apparently this does nothing
+		await client.music.destroyPlayer(player.guildId);
+		await message.react('👋');
 	},
 };

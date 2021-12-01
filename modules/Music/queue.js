@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -26,8 +25,6 @@ module.exports = {
 		}).slice(0, 15).join('\n'); // For now, only the first 15 tracks get pulled
 		const footer = `${player.queue.tracks.length > 8 ? `${queue.tracks.length - 8} more track(s)` : '     This is the end of the queue!'}`;
 
-		message.channel.send(`\`\`\`nim\n${currtr}\n\n${trlist}\n${footer}\n\`\`\``).catch(e => {
-			throw new Tantrum(client, 'queue.js', 'Error on sending queue', e);
-		}); // TODO: pagination
+		message.channel.send(`\`\`\`nim\n${currtr}\n\n${trlist}\n${footer}\n\`\`\``); // TODO: pagination
 	},
 };

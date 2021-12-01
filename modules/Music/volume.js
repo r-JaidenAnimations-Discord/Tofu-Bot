@@ -1,6 +1,5 @@
 const { tofuGreen, tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 
@@ -30,27 +29,18 @@ module.exports = {
 		if (!args[0] || isNaN(args[0]) || args[0] === 'Infinity') {
 			volumeEmbed.setColor(tofuOrange);
 			volumeEmbed.setDescription('The value you entered is not a number');
-			return message.channel.send({ embeds: [volumeEmbed] }).catch(e => {
-				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (invalid number)', e);
-			});
+			return message.channel.send({ embeds: [volumeEmbed] });
 		}
 
 		if (Math.round(parseInt(args[0])) < 1 || Math.round(parseInt(args[0])) > 100) {
 			volumeEmbed.setColor(tofuOrange);
 			volumeEmbed.setDescription('Please enter a number between 1 and 100!');
-			return message.channel.send({ embeds: [volumeEmbed] }).catch(e => {
-				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (number not between 1 and 100)', e);
-			});
+			return message.channel.send({ embeds: [volumeEmbed] });
 		}
 
-		if (await player.setVolume(parseInt(args[0]))) {
-			volumeEmbed.setColor(tofuGreen);
-			volumeEmbed.setDescription(`Volume set to **${parseInt(args[0])}%**!`);
-			message.channel.send({ embeds: [volumeEmbed] }).catch(e => {
-				throw new Tantrum(client, 'volume.js', 'Error on sending volumeEmbed (volume)', e);
-			});
-		} else {
-			throw new Tantrum(client, 'volume.js', 'Error on setting volume', 'No message');
-		}
+		await player.setVolume(parseInt(args[0]));
+		volumeEmbed.setColor(tofuGreen);
+		volumeEmbed.setDescription(`Volume set to **${parseInt(args[0])}%**!`);
+		message.channel.send({ embeds: [volumeEmbed] });
 	},
 };

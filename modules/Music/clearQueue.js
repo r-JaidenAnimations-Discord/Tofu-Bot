@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -21,8 +20,6 @@ module.exports = {
 		const player = await LavaManager.getPlayer(client, message);
 
 		player.queue.clear();
-		await message.react('👌').catch(e => {
-			throw new Tantrum(client, 'clearQueue.js', 'Error on reacting queue cleared', e);
-		});
+		await message.react('👌');
 	},
 };

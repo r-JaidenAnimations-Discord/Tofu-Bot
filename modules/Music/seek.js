@@ -1,4 +1,3 @@
-const Tantrum = require('#tantrum');
 const ms = require('ms');
 const LavaManager = require('#handlers/lavaManager.js');
 
@@ -28,10 +27,7 @@ module.exports = {
 
 		if (!player) return;
 
-		if (await player.seek(time)) {
-			await message.react('👌').catch(e => {
-				throw new Tantrum(client, 'seek.js', 'Error on reacting', e);
-			});
-		}
+		await player.seek(time);
+		await message.react('👌');
 	},
 };

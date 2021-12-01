@@ -20,8 +20,8 @@ module.exports = {
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!LavaManager.nodeChecks(client, message)) return console.log('nodechecks failed');
-		if (!LavaManager.vcChecks(client, message)) return console.log('vc checks failed');
+		if (!LavaManager.nodeChecks(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
 
 		// if queue exists, and paused, resume
 		const existing = await LavaManager.getPlayer(client, message);

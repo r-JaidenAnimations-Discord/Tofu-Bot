@@ -56,8 +56,8 @@ switch (launchArgs[0]) {
 		client.config = require('./configRelease.json');
 		break;
 	default:
-		console.log(`${chalk.magenta('[Config]')}: ${chalk.yellow('No arguments provided, Release configuration will be loaded.')}`);
-		client.config = require('./configRelease.json');
+		console.log(`${chalk.magenta('[Config]')}: ${chalk.yellow('No arguments provided, Debug configuration will be loaded.')}`);
+		client.config = require('./configDebug.json');
 		break;
 }
 

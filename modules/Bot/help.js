@@ -1,6 +1,5 @@
 const { tofuOrange } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'help',
@@ -41,9 +40,7 @@ function getAll(client, message) {
 	});
 
 	// After they're all added, send it
-	return message.channel.send({ embeds: [embed] }).catch(e => {
-		throw new Tantrum(client, 'help.js', 'Error sending help embed', e);
-	});
+	return message.channel.send({ embeds: [embed] });
 }
 
 function getCmd(client, message, input) {
@@ -57,14 +54,10 @@ function getCmd(client, message, input) {
 	const cmd = client.commands.get(input.toLowerCase()) || client.commands.get(client.aliases.get(input.toLowerCase()));
 
 	// If this is not the main server, and the command is for the main server only, we stop here
-	if (cmd?.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return message.channel.send('So that command is not for this server').catch(e => {
-		throw new Tantrum(client, 'help.js', 'Error on sending not for this server message', e);
-	});
+	if (cmd?.mainServerOnly && ![jaidenServerID, tofuBotServerID].includes(message.guild.id)) return message.channel.send('So that command is not for this server');
 
 	// If the command isn't found (likely doesn't exist)
-	if (!cmd) return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`).catch(e => {
-		throw new Tantrum(client, 'help.js', 'Error on sending not a command error.', e);
-	});
+	if (!cmd) return message.channel.send(`**${input.toLowerCase()}** is not a command. Are you being delusional?`);
 
 	// Adds its name based on helpName || uppercase name
 	if (cmd.name) embed.setTitle(`**${cmd.helpName ? cmd.helpName : cmd.name[0].toUpperCase() + cmd.name.slice(1)} Command**`);
@@ -75,7 +68,5 @@ function getCmd(client, message, input) {
 	// The usage
 	if (cmd.usage) embed.addField('**Usage**', `\`${prefix}${cmd.usage}\``);
 
-	return message.channel.send({ embeds: [embed] }).catch(e => {
-		throw new Tantrum(client, 'help.js', 'Error on sending command help embed', e);
-	});
+	return message.channel.send({ embeds: [embed] });
 }

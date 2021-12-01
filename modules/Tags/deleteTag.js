@@ -1,3 +1,5 @@
+const { checkMessageStaff } = require('#utils/staffChecks.js');
+
 module.exports = {
 	name: 'deletetag',
 	helpTitle: 'Delete Tag',
@@ -16,7 +18,7 @@ module.exports = {
 		const tag = await client.tags.findOne({ where: { name: args[0] } });
 		if (!tag) return message.channel.send(`The tag \`${args[0]}\` doesn't exist.`);
 
-		if (/* !checkStaff(message.member) || */tag.userID !== message.author.id) return message.channel.send('You can\'t delete this tag.');
+		if (!checkMessageStaff(client, message, false) || tag.userID !== message.author.id) return message.channel.send('You can\'t delete this tag.');
 		await client.tags.destroy({ where: { name: args[0] } });
 		return message.channel.send('Tag deleted.');
 	}

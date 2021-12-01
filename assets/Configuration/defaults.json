@@ -19,5 +19,9 @@
         "state": true,
         "humanizedString": "auto responder"
     },
+    "dadBot": {
+        "state": false,
+        "humanizedString": "dad bot"
+    },
     "disabledCommands": []
 }

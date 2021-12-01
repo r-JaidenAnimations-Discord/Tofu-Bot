@@ -615,5 +615,72 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.4.0',
+			aliases: ['2.4'],
+			additions: [
+				'Birthday command for real!',
+			],
+			fixes: [
+				'Minor linting issues',
+				'Blockpagination collector',
+				'Music errors no longer tantrum on 403 and 404',
+				'Unit test workflow',
+				'Changed date construction in formatDate()',
+				'Add the forgotten staff checks for staff only tags',
+				'Fixed bug where you could create an empty staff tag',
+				'Tags like commands now actually works (prefix+tag instead of prefix+t+tag)',
+				'Redid the entire blacklisting system',
+				'Fixed tantrum when e.stack doesn\'t exist',
+				'Patch out ping/breaking bypasses in bdays (thanks Firebreak!)'
+			],
+			removals: [
+				'Command isDeprecated property',
+				'Removed report command, moved to GitHub',
+				'Alitrust',
+				'Kiritotrust'
+			]
+		},
+		{
+			version: '2.4.1',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Sort bdays by date instead of name by default',
+			],
+			removals: []
+		},
+		{
+			version: '2.4.2',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Staff can now delete tags'
+			],
+			removals: [
+				'Commanded tags (prefix+tag)'
+			]
+		},
+		{
+			version: '2.4.3',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Typo in delete tag'
+			],
+			removals: []
+		},
+		{
+			version: '2.4.4',
+			aliases: [],
+			additions: [
+				'Dad bot'
+			],
+			fixes: [
+				'Refactored tantrum',
+				'Refactored suggestion add command'
+			],
+			removals: []
+		},
 	]
 };

@@ -2,7 +2,6 @@ const { tofuGreen } = require('#colors');
 const { maxID, teraID, retainedID } = require('#memberIDs');
 const { version, releaseDate } = require('../../package.json');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
 const { formatDate } = require('#utils/formatDate.js');
 
 module.exports = {
@@ -48,8 +47,6 @@ module.exports = {
 			)
 			.setFooter('Made with ☕, without swear words');
 
-		message.channel.send({ embeds: [aboutEmbed] }).catch(e => {
-			throw new Tantrum(client, 'about.js', 'Error on sending aboutEmbed', e);
-		});
+		message.channel.send({ embeds: [aboutEmbed] });
 	},
 };

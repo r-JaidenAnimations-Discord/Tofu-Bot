@@ -19,10 +19,9 @@ module.exports = {
 
 		if (tag?.staffOnly && !checkMessageStaff(client, message, false)) return message.channel.send('You can\'t use a staff only tag.');
 
-		if (tag) {
-			tag.increment('usage_count');
-			return message.channel.send(tag.get('description'));
-		}
-		return message.channel.send(`Couldn't find tag: \`${args[0]}\``);
+		if (!tag) return message.channel.send(`Couldn't find tag: \`${args[0]}\``);
+
+		tag.increment('usage_count');
+		return message.channel.send(tag.get('description'));
 	}
 };

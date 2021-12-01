@@ -1,4 +1,4 @@
-const { teraID, maxID, gradyID, retainedID } = require('#memberIDs');
+const { teraID, maxID, gradyID } = require('#memberIDs');
 const { Permissions } = require('discord.js');
 
 /**

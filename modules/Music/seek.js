@@ -18,7 +18,6 @@ module.exports = {
 		if (!LavaManager.nodeChecks(client, message)) return;
 		if (!(await LavaManager.musicChecks(client, message))) return;
 
-
 		const time = !isNaN(args[0]) ? Number(args[0]) * 1000 : ms(args[0]);
 
 		if (isNaN(time)) return message.channel.send('That\'s not a valid time.');

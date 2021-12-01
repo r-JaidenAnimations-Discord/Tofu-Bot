@@ -57,7 +57,7 @@ module.exports = {
 				message.channel.send('Couldn\'t update the suggestion message, maybe it was deleted?');
 			}
 		} catch (e) { // If you need to log any error put (e) as param and console.error(e) before returning
-			console.error(e);
+			new Tantrum(client, e);
 			return message.channel.send('Something went wrong while updating the database.');
 		}
 	},

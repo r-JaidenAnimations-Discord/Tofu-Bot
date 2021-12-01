@@ -2,7 +2,7 @@ name: Testing
 on: [push, pull_request, workflow_dispatch] # workflow_dispatch allows you to run this workflow manually from the Actions tab
 
 jobs:
-  Unit Tests:
+  Unit-Tests:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it

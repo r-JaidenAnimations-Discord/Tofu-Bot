@@ -1,4 +1,6 @@
 const LavaManager = require('#handlers/lavaManager.js');
+const { MessageEmbed } = require('discord.js');
+const { tofuGreen } = require('#colors');
 
 module.exports = {
 	name: 'nightcore',
@@ -22,6 +24,10 @@ module.exports = {
 			? { speed: 1.5, pitch: 1.5, rate: 1 }
 			: undefined;
 		await player.setFilters();
-		return message.reply(`${player.nightcore ? 'Enabled' : 'Disabled'} nightcore`); // todo embed
+		const embed = new MessageEmbed()
+			.setColor(tofuGreen)
+			.setDescription(`**${player.nightcore ? 'Enabled' : 'Disabled'}** nightcore`);
+
+		return message.reply({ embeds: [embed] });
 	},
 };

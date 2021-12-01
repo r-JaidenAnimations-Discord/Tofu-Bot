@@ -31,7 +31,7 @@ module.exports = {
 		}
 		const loadMsg = await message.channel.send(loadingString());
 
-		const tracks = await client.music.rest.loadTracks(`ytsearch:${args.slice(1).join(' ')}`).then(x => x.tracks);
+		const tracks = await client.music.rest.loadTracks(`ytsearch:${args.slice(0).join(' ')}`).then(x => x.tracks);
 
 		if (!tracks.length) {
 			const noResultsEmbed = new Discord.MessageEmbed()

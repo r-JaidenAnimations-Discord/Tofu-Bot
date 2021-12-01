@@ -4,6 +4,9 @@
   "releaseDate": "11/21/2021",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "test": "jest . --coverage",
     "lint": "eslint .",

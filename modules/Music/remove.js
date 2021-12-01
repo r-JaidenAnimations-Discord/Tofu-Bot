@@ -29,14 +29,14 @@ module.exports = {
 		if (!args[0] ||
 			isNaN(args[0]) ||
 			Number(args[0]) === 0 ||
-			Number(args[0]) >= player.queue.tracks.length ||
+			Number(args[0]) >= (player.queue.tracks.length + 1) ||
 			Number(args[0]) < 1 ||
-			!player.queue.tracks[args[0]]) return message.channel.send('Invalid argument, if needed, refer to the help command.').catch(e => {
+			!player.queue.tracks[Number(args[0]) - 1]) return message.channel.send('Invalid argument, if needed, refer to the help command.').catch(e => {
 				throw new Tantrum(client, 'remove.js', 'Error on sending invalid argument message', e); // eslint-disable-line
 			}); // eslint-disable-line
 		// Be the developer your linter thinks you are
 
-		const success = await player.queue.remove(Number(args[0]));
+		const success = await player.queue.remove(Number(args[0]) - 1);
 		if (success) {
 			const removedEmbed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)

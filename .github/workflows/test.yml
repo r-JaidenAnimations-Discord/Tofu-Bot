@@ -1,8 +1,8 @@
-name: Unit Tests
+name: Testing
 on: [push, pull_request, workflow_dispatch] # workflow_dispatch allows you to run this workflow manually from the Actions tab
 
 jobs:
-  build:
+  Unit Tests:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -11,8 +11,7 @@ jobs:
       # Installs modules
       - name: Install Jest
         run: npm i -g jest
-        
+
       # Jest
       - name: Run Jest
         run: npm test
-

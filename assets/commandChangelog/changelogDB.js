@@ -682,5 +682,26 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.5.0',
+			aliases: ['2.5'],
+			additions: [
+				'Nightcore command',
+				'Node requirement to package.json',
+				'More eslint rules',
+				'Console log tantrums'
+			],
+			fixes: [
+				'Rewrote music (again) to use lavalink',
+				'Fixed possible mass ping in dad bot',
+				'Fix complete messageCreate jam in dad bot',
+				'Minor code simplifications',
+				'Renamed GitHub workflows to make them more descriptive',
+				'Run debug config by default instead of release'
+			],
+			removals: [
+				'Back command'
+			]
+		},
 	]
 };

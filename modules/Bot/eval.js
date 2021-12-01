@@ -29,7 +29,7 @@ module.exports = {
 			evaluated = (evaluated + '').replace(client.token, 'funny token time');
 			if (['token', 'key', 'apikey'].includes(toEval.toLowerCase())) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 
-			let embed = new Discord.MessageEmbed()
+			const embed = new Discord.MessageEmbed()
 				.setColor(tofuGreen)
 				.setTimestamp()
 				.setTitle('Eval')

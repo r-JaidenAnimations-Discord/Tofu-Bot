@@ -45,7 +45,7 @@ client.groupActivities = new DiscordTogether(client);
 
 
 // Config loading
-let launchArgs = process.argv.slice(2);
+const launchArgs = process.argv.slice(2);
 switch (launchArgs[0]) {
 	case 'debug':
 		console.log(`${chalk.magenta('[Config]')}: Debug configuration will be loaded.`);

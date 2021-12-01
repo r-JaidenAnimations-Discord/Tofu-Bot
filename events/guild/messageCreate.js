@@ -68,7 +68,7 @@ module.exports = async (client, message) => {
 	});
 
 	if (thing.match(IM_MATCH) && ['291684752363225098', '531399792740270092'].includes(message.author.id)) {
-		let imMatchData = thing.match(IM_MATCH),
+		const imMatchData = thing.match(IM_MATCH),
 			formattingMatchData = thing.match(FORMAT_MATCH);
 
 		if (!formattingMatchData || formattingMatchData.index > imMatchData.index) {
@@ -109,7 +109,7 @@ module.exports = async (client, message) => {
 	if (maintenance) notifyMaintenance(message);
 
 	// Cooldown?
-	let cooldowns = client.cooldowns;
+	const cooldowns = client.cooldowns;
 	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
 
 	const now = Date.now();

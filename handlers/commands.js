@@ -9,7 +9,7 @@
 const { readdirSync } = require('fs');
 const ascii = require('ascii-table');
 
-let table = new ascii('Commands');
+const table = new ascii('Commands');
 table.setHeading('Command', 'Load Status');
 
 module.exports = bot => {
@@ -18,8 +18,8 @@ module.exports = bot => {
 		.map(dirent => dirent.name)
 		.forEach(dir => {
 			const commands = readdirSync(`./modules/${dir}/`).filter(file => file.endsWith('.js'));
-			for (let file of commands) {
-				let pull = require(`../modules/${dir}/${file}`);
+			for (const file of commands) {
+				const pull = require(`../modules/${dir}/${file}`);
 				if (pull.name) {
 					bot.commands.set(pull.name, pull);
 					table.addRow(file, '✔   Loaded');

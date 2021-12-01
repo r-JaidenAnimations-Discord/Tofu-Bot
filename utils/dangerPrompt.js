@@ -60,7 +60,7 @@ const buttonedDangerCommandPrompt = async (message) => {
 		return false;
 	}
 	else {
-		// No reactions		
+		// No reactions
 		return false;
 	}
 };

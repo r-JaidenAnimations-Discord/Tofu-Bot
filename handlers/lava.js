@@ -2,7 +2,7 @@ const fs = require('fs');
 
 const ascii = require('ascii-table');
 
-let table = new ascii('Music Events');
+const table = new ascii('Music Events');
 table.setHeading('Music Event', 'Load Status');
 
 module.exports = client => {

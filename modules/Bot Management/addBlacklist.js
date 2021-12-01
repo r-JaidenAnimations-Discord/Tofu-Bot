@@ -20,11 +20,11 @@ module.exports = {
 	execute: async function(client, message, args) {
 
 		let toBlacklist = null;
-		let reason = args.slice(1).join(' ');
+		const reason = args.slice(1).join(' ');
 
 		// Pull the blacklist JSON
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
-		var blackListJSON = JSON.parse(raw);
+		const blackListJSON = JSON.parse(raw);
 
 		if (message.mentions.members.first()) {
 			toBlacklist = message.mentions.members.first().id;

@@ -3,12 +3,12 @@ class BlockPaginate {
 	 * Split a long array into multiple smaller arrays
 	 * @param {Array} arr array to split up
 	 * @param {Number} size split up array every x items
-	 * @returns {Array} array of split up items ('pages') 
+	 * @returns {Array} array of split up items ('pages')
 	 */
 	static createPages(arr, size) {
 		return arr.reduce((acc, val, i) => {
-			let idx = Math.floor(i / size);
-			let page = acc[idx] || (acc[idx] = []);
+			const idx = Math.floor(i / size);
+			const page = acc[idx] || (acc[idx] = []);
 			page.push(val);
 
 			return acc;

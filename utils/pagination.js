@@ -16,7 +16,7 @@ class Pagination {
 	}
 
 	/**
-	 * 
+	 * Pagination runner func
 	 * @param {Message} msg Sent message object
 	 * @param {User} author Message author
 	 * @param {Array} chunks The chunks that will become different pages

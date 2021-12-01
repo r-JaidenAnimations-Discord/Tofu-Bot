@@ -15,7 +15,7 @@ module.exports = {
 	// aliases: [],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		let channel = message.mentions.channels.first() ||
+		const channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
 			message.guild.channels.cache.find(c => c.name === args[0]);
 
@@ -31,13 +31,12 @@ module.exports = {
 				.setColor(tofuGreen)
 				.setDescription(args.slice(2).join(' '));
 
-			
 			channel.send({ embeds: [embed] });
 			await message.react('✅');
 		}
 		else {
 			if (!args.slice(1).join(' ')) return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
-		
+
 			channel.send(args.slice(1).join(' '));
 			await message.react('✅');
 		}

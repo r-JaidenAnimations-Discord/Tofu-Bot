@@ -38,7 +38,7 @@ module.exports = {
 		}
 
 		if (msg.deletable) msg.delete();
-		
+
 		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 	},
 };

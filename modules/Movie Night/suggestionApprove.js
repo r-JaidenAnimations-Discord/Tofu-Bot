@@ -26,9 +26,9 @@ module.exports = {
 		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
 		if (!suggestion) return message.channel.send('Looks like an invalid ID, check your spelling.');
 
-		let suggestionMessageID = await suggestion.suggestionMessageID;
+		const suggestionMessageID = await suggestion.suggestionMessageID;
 
-		let newData = {
+		const newData = {
 			status: 'Approved',
 			verdicter: message.author.username,
 			verdicterID: message.author.id,
@@ -49,7 +49,7 @@ module.exports = {
 				.setTimestamp();
 
 			try {
-				let suggestionEmbed = await client.channels.cache.get(movieNightSuggestionChannelID).messages.fetch(suggestionMessageID);
+				const suggestionEmbed = await client.channels.cache.get(movieNightSuggestionChannelID).messages.fetch(suggestionMessageID);
 				if (suggestionEmbed) suggestionEmbed.edit({ embeds: [approvalEmbed] });
 				await message.react('✅');
 			} catch (e) {

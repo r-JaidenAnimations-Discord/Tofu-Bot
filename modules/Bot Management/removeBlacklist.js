@@ -22,7 +22,7 @@ module.exports = {
 
 		// Pull the blacklist JSON
 		const raw = await fs.readFileSync('./deployData/blacklist.json', 'utf-8');
-		var blackListJSON = JSON.parse(raw);
+		const blackListJSON = JSON.parse(raw);
 
 		let toWhitelist = null;
 		if (message.mentions.members.first()) {

@@ -16,8 +16,8 @@ module.exports = async (client, member) => {
 	const welcomerState = settingsFile.welcome.state;
 
 	if (welcomerState === false) return;
-	let randomWelc = joinMessages.randomElement();
-	let formatWelc = randomWelc.replace('{user}', `<@${member.id}>`);
+	const randomWelc = joinMessages.randomElement();
+	const formatWelc = randomWelc.replace('{user}', `<@${member.id}>`);
 
 	client.channels.cache.get(generalChannelID).send(`${formatWelc}\nPlease make sure to read <#${rulesChannelID}> and the pinned comments / topics for this and other channels.\nAnd for the context, Jaiden isn't here :p`);
 };

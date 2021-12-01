@@ -6,13 +6,13 @@ const { tofuOrange, tofuError } = require('#colors');
 class LavaManager {
 	/**
 	 * Creates a player
-	 * @param {Client} client 
-	 * @param {Message} message 
+	 * @param {Client} client Discord client
+	 * @param {Message} message Message object
 	 */
 	static async createPlayer(client, message) {
 		if (await this.getPlayer(client, message)) return this.lavaLog('A player already exists! createPlayer() called illegaly');
 		this.lavaLog('Creating player...');
-		let player = await client.music.createPlayer(message.guild.id);
+		const player = await client.music.createPlayer(message.guild.id);
 
 		player.queue.channel = message.channel;
 		await player.connect(message.member.voice.channel, { deafened: true });
@@ -81,7 +81,7 @@ class LavaManager {
 	/**
 	 * Returns the player if it exists, null if it doesn't
 	 * @param {Client} client Discord client
-	 * @param {Message} message Message object 
+	 * @param {Message} message Message object
 	 * @returns {Player|null} Player if exists, otherwise null
 	 */
 	static async getPlayer(client, message) {
@@ -90,7 +90,7 @@ class LavaManager {
 	}
 
 	/**
-	 * Checks if music is being played 
+	 * Checks if music is being played
 	 * @param {Client} client Discord client
 	 * @param {Message} message Message object
 	 * @returns {Boolean} Music playing state

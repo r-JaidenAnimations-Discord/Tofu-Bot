@@ -687,7 +687,7 @@ module.exports = {
 			aliases: ['2.5'],
 			additions: [
 				'Nightcore command',
-				'Node requirement to package.json',
+				'Node version requirement to package.json',
 				'More eslint rules',
 				'Console log tantrums'
 			],

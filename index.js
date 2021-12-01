@@ -2,7 +2,6 @@
 // Now, only God knows
 const Discord = require('discord.js');
 const fs = require('fs');
-const { Player } = require('discord-player');
 const chalk = require('chalk');
 const client = new Discord.Client({
 	intents: [
@@ -27,6 +26,8 @@ const client = new Discord.Client({
 const { randomStatus } = require('#utils/statusFunction.js');
 const { tagSequelize, movieSuggestionSequelize, birthdaySequelize } = require('./handlers/databases.js');
 const { DiscordTogether } = require('discord-together');
+const { Node } = require('lavaclient');
+const { load } = require('@lavaclient/spotify');
 const Tantrum = require('./utils/tantrum.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
@@ -35,7 +36,6 @@ client.commands = new Discord.Collection();
 client.cooldowns = new Discord.Collection();
 client.aliases = new Discord.Collection();
 client.categories = fs.readdirSync('./modules/', { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name);
-client.player = new Player(client);
 client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 client.birthdays = require('./handlers/dbModels/birthdays.js')(birthdaySequelize);
@@ -43,8 +43,9 @@ client.interactions = new Discord.Collection();
 client.autoResponderCooldowns = new Discord.Collection();
 client.groupActivities = new DiscordTogether(client);
 
+
 // Config loading
-let launchArgs = process.argv.slice(2);
+const launchArgs = process.argv.slice(2);
 switch (launchArgs[0]) {
 	case 'debug':
 		console.log(`${chalk.magenta('[Config]')}: Debug configuration will be loaded.`);
@@ -60,6 +61,28 @@ switch (launchArgs[0]) {
 		break;
 }
 
+require('@lavaclient/queue/register');
+load({
+	client: {
+		id: client.config.spotifyClientID,
+		secret: client.config.spotifyToken,
+	},
+	autoResolveYoutubeTracks: false,
+});
+
+client.music = new Node({
+	sendGatewayPayload: (id, payload) => client.guilds.cache.get(id)?.shard?.send(payload),
+	connection: {
+		host: 'localhost',
+		port: 2333,
+		password: 'youshallnotpass'
+	}
+});
+client.queues = new Discord.Collection();
+
+client.ws.on('VOICE_SERVER_UPDATE', data => client.music.handleVoiceUpdate(data));
+client.ws.on('VOICE_STATE_UPDATE', data => client.music.handleVoiceUpdate(data));
+
 // Log in
 client.login(client.config.apiKey);
 
@@ -73,7 +96,7 @@ process.on('unhandledRejection', e => new Tantrum(client, e));
 process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}:`, e.stack));
 
 // Handlers' modules
-['commands', 'event', 'music', 'interaction'].forEach(handler => {
+['commands', 'event', 'lava', 'interaction'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
 

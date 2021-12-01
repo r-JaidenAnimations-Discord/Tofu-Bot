@@ -42,7 +42,7 @@ module.exports = {
 				return message.channel.send('You must enter the proper activity.');
 		}
 
-		let textString = args.slice(2).join(' ');
+		const textString = args.slice(2).join(' ');
 		if (textString.length === 0) {
 			return message.channel.send('You must enter text to show');
 		}

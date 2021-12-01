@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const { tofuGreen, tofuError, tofuOrange } = require('#colors');
 const Genius = require('genius-lyrics');
-const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
+const LavaManager = require('#handlers/lavaManager.js');
 const { loadingString } = require('#utils/funnyLoad.js');
 const Pagination = require('#utils/pagination.js');
 
@@ -20,20 +20,21 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { lyricsToken } = client.config;
 
-		if (!checkMusic(client, message)) return;
-		if (!checkQueueExists(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
+		if (!(await LavaManager.musicChecks(client, message))) return;
 		const lyricsClient = new Genius.Client(lyricsToken);
 
-		const queue = client.player.getQueue(message.guild);
+		const player = await LavaManager.getPlayer(client, message);
 
 		const lyricsEmbed = new Discord.MessageEmbed()
-			.setTitle(`Lyrics for ${queue.current.title}`)
+			.setTitle(`Lyrics for ${player.queue.current.title}`)
 			.setColor(tofuOrange)
 			.setDescription(loadingString());
 
 		const sentMessage = await message.channel.send({ embeds: [lyricsEmbed] });
 
-		let track = queue.current;
+		let track = player.queue.current;
 		if (!track) return;
 		track = track.title.toLowerCase()
 			.replace(/\(lyrics|lyric|official music video|official video hd|official video|audio|official|clip officiel|clip|extended|hq\)/g, '');

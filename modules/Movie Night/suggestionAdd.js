@@ -17,7 +17,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { movieNightSuggestionChannelID, fingerupvote, fingerdownvote } = client.config;
 
-		let movie = args.slice(0).join(' ');
+		const movie = args.slice(0).join(' ');
 		if (!movie) return message.reply('So how about sugggesting a movie instead of just sending a useless command? You vertical laudry wire');
 
 		const suggestionEmbed = new Discord.MessageEmbed()

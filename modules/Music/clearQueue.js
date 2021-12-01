@@ -1,6 +1,4 @@
-
-const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
-const Tantrum = require('#tantrum');
+const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
 	name: 'clearqueue',
@@ -15,20 +13,13 @@ module.exports = {
 	aliases: ['clear-queue', 'cq', 'clear'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!checkMusic(client, message)) return;
-		if (!checkQueueExists(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
+		if (!(await LavaManager.musicChecks(client, message))) return;
 
-		const queue = client.player.getQueue(message.guild);
+		const player = await LavaManager.getPlayer(client, message);
 
-		// TODO: do this for v5
-		// if (client.player.getQueue(message).tracks.length <= 1) return message.channel.send('There is only one song in the queue.').catch(e => {
-		// throw new Tantrum(client, 'clearQueue.js', 'Error on sending only one song queued message', e);
-		// });
-
-		queue.clear();
-
-		await message.react('👌').catch(e => {
-			throw new Tantrum(client, 'clearQueue.js', 'Error on reacting queue cleared', e);
-		});
+		player.queue.clear();
+		await message.react('👌');
 	},
 };

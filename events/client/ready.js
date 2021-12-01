@@ -11,6 +11,8 @@ module.exports = async (client) => {
 	client.movieSuggestions.sync();
 	client.birthdays.sync();
 
+	client.music.connect(client.user.id);
+
 	// --register slashies
 	if (process.argv.includes('--register')) await publishInteractions(client, client.config.jaidenServerID);
 };

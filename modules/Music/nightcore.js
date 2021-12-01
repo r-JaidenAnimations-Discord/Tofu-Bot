@@ -1,33 +1,27 @@
-const ms = require('ms');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'seek',
-	helpTitle: 'Seek',
+	name: 'nightcore',
+	helpTitle: 'Nightcore',
 	category: 'Music',
-	usage: 'seek [{seconds/x s}]',
-	description: 'Seek trough the current track',
+	usage: 'nightcore',
+	description: 'Uguuuuuuuu...',
 	isDMAllowed: false,
 	isDangerous: false,
 	mainServerOnly: false,
 	isHidden: false,
-	// aliases: [],
+	aliases: ['nc'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
 		if (!LavaManager.vcChecks(client, message)) return;
 		if (!LavaManager.nodeChecks(client, message)) return;
 		if (!(await LavaManager.musicChecks(client, message))) return;
 
-
-		const time = !isNaN(args[0]) ? Number(args[0]) * 1000 : ms(args[0]);
-
-		if (isNaN(time)) return message.channel.send('That\'s not a valid time.');
-
 		const player = await LavaManager.getPlayer(client, message);
-
-		if (!player) return;
-
-		await player.seek(time);
-		await message.react('👌');
+		player.filters.timescale = (player.nightcore = !player.nightcore)
+			? { speed: 1.5, pitch: 1.5, rate: 1 }
+			: undefined;
+		await player.setFilters();
+		return message.reply(`${player.nightcore ? 'Enabled' : 'Disabled'} nightcore`); // todo embed
 	},
 };

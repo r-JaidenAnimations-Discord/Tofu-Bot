@@ -8,7 +8,7 @@ const fs = require('fs');
 const setSts = (client, selectedStatus) => {
 	const { jaidenServerID, level20RoleID } = client.config;
 
-	let youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
+	const youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/* this. */selectedStatus) { // lmao, i fucking hate this.
 		case 'online':
 			return setRPC(client, 'online', youOrJaiden, 'WATCHING');
@@ -39,11 +39,11 @@ const setSts = (client, selectedStatus) => {
 			const nextState = states.randomElement();
 			return setSts(client, nextState);
 		case 'randomuser':
-			let memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
-			let randomMember = memberList.randomElement();
+			const memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
+			const randomMember = memberList.randomElement();
 
 			// We don't want to have the bot appear offline
-			let randomSimpleState = ['online', 'idle', 'dnd'].randomElement();
+			const randomSimpleState = ['online', 'idle', 'dnd'].randomElement();
 
 			return setRPC(client, randomSimpleState, randomMember, 'WATCHING');
 		default:
@@ -53,7 +53,7 @@ const setSts = (client, selectedStatus) => {
 
 /**
  * Actually does the DJS API call to set the client status
- * @param {Client} client Discord client 
+ * @param {Client} client Discord client
  * @param {String} activityStatus Presence status (idle, dnd, online, invisible)
  * @param {String} activityName Custom status, what goes behind the 'playing, watching,...'
  * @param {String} activityType Type of activity (playing, watching, streaming,...)
@@ -77,7 +77,7 @@ const states = ['online', 'idle', 'dnd', /* 'gone', */'stream', 'play', 'listen'
 const randomStatus = async (client) => {
 	// Fetch the settings JSON file and pull it's randomStatus string
 	const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
-	var settingsFile = JSON.parse(data);
+	const settingsFile = JSON.parse(data);
 
 	if (settingsFile.randomStatus.state) setSts(client, states.randomElement());
 };

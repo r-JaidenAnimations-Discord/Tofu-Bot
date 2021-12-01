@@ -23,7 +23,7 @@ module.exports = {
 		if (!masterCheck(client, message)) return;
 
 		const readData = readJSONSync('./deployData/settings.json', 'utf-8');
-		let { disabledCommands } = readData;
+		const { disabledCommands } = readData;
 		const input = args[1];
 
 		switch (args[0]) {

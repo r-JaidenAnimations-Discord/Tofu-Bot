@@ -40,9 +40,9 @@ module.exports = {
 		}
 
 		// message.channel.send('hotel? Trivia!');
-		let q = trivia.randomElement();
+		const q = trivia.randomElement();
 
-		let answersMarkedList = q.answers.map((answer, i) =>
+		const answersMarkedList = q.answers.map((answer, i) =>
 			i === q.correct ?
 				`✅ ${numberReactions[i + 1]}**: ${answer}**` :
 				`❌ ${numberReactions[i + 1]}: ${answer}`
@@ -60,7 +60,7 @@ module.exports = {
 			.setFooter(`${message.member.displayName} can reveal the answer in 15s when the ✅ appears. Or wait 1m.`);
 
 		message.channel.send({ embeds: [mainEmbed] }).then(async sentEmbed => {
-			for (let i = 1; i <= q.answers.length; i++) {			
+			for (let i = 1; i <= q.answers.length; i++) {
 				await sentEmbed.react(`${numberReactions[i]}`);
 				const d = async () => new Promise(r => setTimeout(r, 260));
 				await d();

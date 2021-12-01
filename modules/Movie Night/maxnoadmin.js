@@ -15,7 +15,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { movieNightRoleID, jaidenServerID, movieNightChannelID } = client.config;
 
-		let channel = message.mentions.channels.first() ||
+		const channel = message.mentions.channels.first() ||
 			message.guild.channels.cache.find(c => c.id === args[0]) ||
 			message.guild.channels.cache.find(c => c.name === args[0]);
 
@@ -24,7 +24,7 @@ module.exports = {
 		if (!channel) return message.channel.send('Where the actual F*CK do you want me to place that?');
 
 		if (args[1] === 'invite') {
-			let movieNightChannelInvite = await client.guilds.cache.get(jaidenServerID).channels.cache.get(movieNightChannelID).createInvite(
+			const movieNightChannelInvite = await client.guilds.cache.get(jaidenServerID).channels.cache.get(movieNightChannelID).createInvite(
 				{
 					maxAge: 3600, // maximum time for the invite, in seconds
 					maxUses: 0 // maximum times it can be used, 0 for infinite

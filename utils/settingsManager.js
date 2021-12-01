@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 
 /**
- * Either enables or disables a setting depending on 
+ * Either enables or disables a setting depending state
  * @param {Object} message Message object
  * @param {String} setting The setting to change
  * @param {String} selectedState Argument to either enable or disable the setting

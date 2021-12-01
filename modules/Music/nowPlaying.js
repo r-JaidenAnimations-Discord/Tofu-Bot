@@ -1,9 +1,8 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
 const { createBar } = require('#utils/createBar.js');
 const { humanReadableDuration } = require('#utils/buildTimeString.js');
+const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
 	name: 'nowplaying',
@@ -18,27 +17,29 @@ module.exports = {
 	aliases: ['now-playing', 'np', 'currentsong', 'currentsong', 'cs'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!checkMusic(client, message)) return;
-		if (!checkQueueExists(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
 
-		const queue = client.player.getQueue(message.guild);
+		const player = await LavaManager.getPlayer(client, message);
+		if (!player) return;
 
-		const track = queue.current;
+		const track = player.queue.current;
+
 		if (!track) return; // In between songs, there is no now playing. In that case, return to avoid erroring out.
 
-		const totalTrackTime = track.durationMS;
-		const currentTime = queue.streamTime;
+		const totalTrackTime = track.length;
+		const currentTime = player.accuratePosition || 0;
 
 		const humanTotalTime = humanReadableDuration(totalTrackTime);
 		const humanCurrentTime = humanReadableDuration(currentTime);
 
+		const footer = track.isStream ? `${createBar(2, 1, 20, '▬', '🔴LIVE')}` : `${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`;
+
 		const nowPlayingEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen)
-			.setDescription(`[${track.title}](${track.url}) [${track.requestedBy}]`)
-			.setFooter(`${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`);
+			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`)
+			.setFooter(footer);
 
-		message.channel.send({ embeds: [nowPlayingEmbed] }).catch(e => {
-			throw new Tantrum(client, 'nowPlaying.js', 'Error on sending nowPlayingEmbed', e);
-		});
+		message.channel.send({ embeds: [nowPlayingEmbed] });
 	},
 };

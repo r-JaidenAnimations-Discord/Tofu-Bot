@@ -19,13 +19,13 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const { botProfile } = client.config;
 
-		let { heapUsed, heapTotal } = process.memoryUsage();
+		const { heapUsed, heapTotal } = process.memoryUsage();
 
 		// Uptime calculations
 		let seconds = Math.floor(process.uptime()); // Math.floor(message.client.uptime / 1000);
 		let minutes = Math.floor(seconds / 60);
 		let hours = Math.floor(minutes / 60);
-		let days = Math.floor(hours / 24);
+		const days = Math.floor(hours / 24);
 
 		seconds %= 60;
 		minutes %= 60;

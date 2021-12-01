@@ -1,9 +1,7 @@
-const { tofuGreen, tofuOrange, tofuError } = require('#colors');
+const { tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
-const { checkMusic } = require('#utils/musicChecks.js');
-const { constructQueue } = require('#handlers/queueManager.js');
 const { loadingString } = require('#utils/funnyLoad.js');
+const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
 	name: 'search',
@@ -18,22 +16,19 @@ module.exports = {
 	aliases: ['src', 'find'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!checkMusic(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
 
 		if (!args[0]) {
 			const noQueryEmbed = new Discord.MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('To find a song to play, you need to specify which song you want to play!');
 
-			return message.channel.send({ embeds: [noQueryEmbed] }).catch(e => {
-				throw new Tantrum(client, 'search.js', 'Error on sending no query defined message', e);
-			});
+			return message.channel.send({ embeds: [noQueryEmbed] });
 		}
 		const loadMsg = await message.channel.send(loadingString());
 
-		const tracks = await client.player.search(args.join(' '), {
-			requestedBy: message.author
-		}).then(x => x.tracks);
+		const tracks = await client.music.rest.loadTracks(`ytsearch:${args.slice(0).join(' ')}`).then(x => x.tracks);
 
 		if (!tracks.length) {
 			const noResultsEmbed = new Discord.MessageEmbed()
@@ -41,17 +36,13 @@ module.exports = {
 				.setDescription('No matches found!');
 
 			if (loadMsg.deletable) loadMsg.delete();
-			return message.channel.send({ embeds: [noResultsEmbed] }).catch(e => {
-				throw new Tantrum(client, 'play.js', 'Error on sending noResultsEmbed', e);
-			});
+			return message.channel.send({ embeds: [noResultsEmbed] });
 		}
 
-		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.title}`).join('\n');
+		const searchResultString = tracks.map((t, i) => `${i + 1}) ${t.info.title}`).join('\n');
 
 		if (loadMsg.deletable) loadMsg.delete();
-		message.channel.send(`\`\`\`nim\n${searchResultString}\n\`\`\``).catch(e => {
-			throw new Tantrum(client, 'searchResults.js', 'Error on sending searchResults', e);
-		}).then(async msg => {
+		message.channel.send(`\`\`\`nim\n${searchResultString}\n\`\`\``).then(async msg => {
 			const collector = message.channel.createMessageCollector({ time: 10000 });
 
 			collector.on('collect', async ({ content }) => {
@@ -61,10 +52,12 @@ module.exports = {
 					collector.stop('success');
 					const index = parseInt(content, 10);
 					const track = tracks[index - 1];
-					const queue = await constructQueue(client, message);
 
-					queue.addTrack(track);
-					if (!queue.playing) await queue.play();
+					const player = await LavaManager.getPlayer(client, message) || await LavaManager.createPlayer(client, message);
+
+					await player.queue.add([track], { requester: message.author });
+					if (!player.playing) player.queue.start();
+
 					return track;
 
 				} else {

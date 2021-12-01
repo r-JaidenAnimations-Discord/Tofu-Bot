@@ -17,7 +17,7 @@ test('Array with single item', () => {
 });
 
 test('Multiple items, no identical length', () => {
-	let array = [
+	const array = [
 		'hi',
 		'shorty',
 		'i don\'t know',
@@ -28,7 +28,7 @@ test('Multiple items, no identical length', () => {
 });
 
 test('Multiple items, identical length', () => {
-	let array = [
+	const array = [
 		'*these',
 		'**have',
 		'***the',

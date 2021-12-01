@@ -1,7 +1,7 @@
 const { tofuGreen } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
+const LavaManager = require('#handlers/lavaManager.js');
+const { LoopType } = require('@lavaclient/queue');
 
 module.exports = {
 	name: 'loop',
@@ -16,27 +16,26 @@ module.exports = {
 	aliases: ['lp', 'repeat'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!checkMusic(client, message)) return;
-		if (!checkQueueExists(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
+		if (!(await LavaManager.musicChecks(client, message))) return;
 
 		const loopModes = {
-			0: 'Looping is now **disabled**',
-			1: 'Now looping the **current track.**',
-			2: 'Now looping the **queue**'
+			0: { type: LoopType.None, message: 'Looping is now **disabled**' },
+			1: { type: LoopType.Queue, message: 'Now looping the **queue**' },
+			2: { type: LoopType.Song, message: 'Now looping the **current track.**' }
 		};
 
-		const queue = client.player.getQueue(message.guild);
+		const player = await LavaManager.getPlayer(client, message);
 
 		const loopEmbed = new Discord.MessageEmbed()
 			.setColor(tofuGreen);
 
-		let loopMode = queue.repeatMode;
+		let loopMode = player.queue.loop.type;
 		loopMode++;
 		if (loopMode > 2) loopMode = 0;
-		loopEmbed.setDescription(`${loopModes[loopMode]}`);
-		if (!queue.setRepeatMode(loopMode)) throw new Tantrum(client, 'loop.js', 'Error on setting loopMode', queue.repeatMode);
-		message.channel.send({ embeds: [loopEmbed] }).catch(e => {
-			throw new Tantrum(client, 'loop.js', 'Error on sending loopEmbed', e);
-		});
+		loopEmbed.setDescription(`${loopModes[loopMode].message}`);
+		player.queue.setLoop(loopModes[loopMode].type);
+		message.channel.send({ embeds: [loopEmbed] });
 	},
 };

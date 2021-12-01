@@ -32,8 +32,8 @@ module.exports = {
 			attributes: ['name', 'username']
 		}))
 			.sort((a, b) => {
-				let nameA = a.name.toUpperCase();
-				let nameB = b.name.toUpperCase();
+				const nameA = a.name.toUpperCase();
+				const nameB = b.name.toUpperCase();
 				if (nameA < nameB) return -1;
 				if (nameA > nameB) return 1;
 				return 0;
@@ -43,14 +43,14 @@ module.exports = {
 		/**
 		 * Splits an array every x elements
 		 * from stackoverflow lolllllll
-		 * @param {Array} arr 
+		 * @param {Array} arr array to split
 		 * @param {Number} size Every how much it'll split
 		 * @returns {Array}
 		 */
 		function paginate(arr, size) {
 			return arr.reduce((acc, val, i) => {
-				let idx = Math.floor(i / size);
-				let page = acc[idx] || (acc[idx] = []);
+				const idx = Math.floor(i / size);
+				const page = acc[idx] || (acc[idx] = []);
 				page.push(val);
 
 				return acc;
@@ -60,7 +60,7 @@ module.exports = {
 		// Current page (args[0] or 0), if it's less it returns
 		let curPage = parseInt(args[0]) - 1 || 0;
 		if (curPage < 0) return message.channel.send('Please enter a valid page number!');
-		let pages = paginate(tags, 10);
+		const pages = paginate(tags, 10);
 		const embed = new Discord.MessageEmbed()
 			.setTitle('All Tags')
 			.setDescription(pages[curPage].join('\n'))

@@ -1,9 +1,8 @@
-const Tantrum = require('#tantrum');
-const { checkMusic, checkQueueExists } = require('#utils/musicChecks.js');
+const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
-	name: 'seek',
-	helpTitle: 'Seek',
+	name: 'rewind',
+	helpTitle: 'Rewind',
 	category: 'Music',
 	usage: 'rewind',
 	description: 'Go back to the start of the current track',
@@ -14,17 +13,15 @@ module.exports = {
 	aliases: ['rew'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		checkMusic(client, message);
-		checkQueueExists(client, message);
+		if (!LavaManager.vcChecks(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
+		if (!(await LavaManager.musicChecks(client, message))) return;
 
-		const queue = client.player.getQueue(message.guild);
+		const player = await LavaManager.getPlayer(client, message);
 
-		if (!queue.current) return;
+		if (!player) return;
 
-		if (await queue.seek(0)) {
-			await message.react('👌').catch(e => {
-				throw new Tantrum(client, 'rewind.js', 'Error on reacting', e);
-			});
-		}
+		await player.seek(0);
+		await message.react('👌');
 	},
 };

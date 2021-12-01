@@ -16,8 +16,8 @@ module.exports = async (client, member) => {
 	const welcomerState = settingsFile.welcome.state;
 
 	if (welcomerState === false) return;
-	let randomBye = leaveMessages.randomElement();
-	let formatBye = randomBye.replace('{user}', `**${member.displayName}**`);
+	const randomBye = leaveMessages.randomElement();
+	const formatBye = randomBye.replace('{user}', `**${member.displayName}**`);
 	client.channels.cache.get(generalChannelID).send(formatBye);
 
 };

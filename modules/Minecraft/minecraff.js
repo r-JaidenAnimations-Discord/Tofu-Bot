@@ -24,12 +24,12 @@ module.exports = {
 
 		// Load the settings file
 		const data = await fs.readFileSync('./deployData/settings.json', 'utf-8');
-		var settingsFile = JSON.parse(data);
+		const settingsFile = JSON.parse(data);
 
 		// API endpoint
 		const url = `https://api.mcsrvstat.us/2/${minecraftIP}`;
 
-		var downStatus = null;
+		let downStatus = null;
 
 		const attachment = new Discord.MessageAttachment('./assets/commandMinecraft/minecraff.png', 'minecraff.png');
 		const minecraftEmbed = new Discord.MessageEmbed()
@@ -50,8 +50,8 @@ module.exports = {
 		try {
 			const APIresponse = await fetch(url).then(r => r.json());
 
-			var playerList = 'Sadly, no online members';
-			var userCount = 0;
+			let playerList = 'Sadly, no online members';
+			let userCount = 0;
 			downStatus = `${APIresponse.online ? 'The server is currently working' : '⚠️ **The server might be down**'}`;
 
 			if (APIresponse.online) minecraftEmbed.addField('Version:', APIresponse.version);

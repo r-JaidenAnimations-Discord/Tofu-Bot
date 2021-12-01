@@ -24,7 +24,7 @@ module.exports = {
 			if (!args[0] || args[0] == 'list' || args.join(' ') == 'sort date') { // t+bdays
 
 				const dbData = (await client.birthdays.findAll());
-				let longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
+				const longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
 
 				const users = dbData.sort((a, b) => a.date - b.date)
 					.map(t => {
@@ -43,7 +43,7 @@ module.exports = {
 				case 'add': {
 					const user = await client.birthdays.findOne({ where: { name: { [like]: args[1] } } });
 					if (user) return message.channel.send('This user has already been added!');
-					let toadd = args[1].replace(/[-[\]{}()*+?\`.,\\^$|#\s]/g, '');
+					const toadd = args[1].replace(/[-[\]{}()*+?\`.,\\^$|#\s]/g, '');
 					if (!toadd) return message.channel.send('That\'s not a valid name buddy');
 					const date = new Date(args.slice(1).join(' '));
 					if (isNaN(date)) return message.channel.send('Invalid date provided.');
@@ -70,11 +70,11 @@ module.exports = {
 						case 'name': {
 							const dbData = (await client.birthdays.findAll());
 							if (dbData.length === 0) return message.channel.send('There is *nothing*, add something to be the first');
-							let longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
+							const longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
 							// const users = (await client.birthdays.findAll())
 							const users = dbData.sort((a, b) => {
-								let nameA = a.name.toUpperCase();
-								let nameB = b.name.toUpperCase();
+								const nameA = a.name.toUpperCase();
+								const nameB = b.name.toUpperCase();
 								if (nameA < nameB) return -1;
 								if (nameA > nameB) return 1;
 								return 0;
@@ -93,12 +93,12 @@ module.exports = {
 	},
 
 	list: async function(message, users) {
-		let pages = BlockPaginate.createPages(users, 25);
+		const pages = BlockPaginate.createPages(users, 25);
 		const formattedPages = [];
 
 		pages.forEach(page => formattedPages.push(this.format(page)));
 
-		let mesag = await message.channel.send(`${formattedPages[0]}${formattedPages.length > 1 ? `\nPage 1 of ${formattedPages.length}` : ''}\`\`\``);
+		const mesag = await message.channel.send(`${formattedPages[0]}${formattedPages.length > 1 ? `\nPage 1 of ${formattedPages.length}` : ''}\`\`\``);
 		if (formattedPages.length > 1) BlockPaginate.runner(mesag, formattedPages, message.author);
 	},
 

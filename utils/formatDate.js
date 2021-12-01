@@ -1,6 +1,6 @@
 /**
  * Formats a given Date() to be shown in en-US format with "Weekday, Month D, YYYY, HH:MM:SS" display
- * @param {*} date 
+ * @param {Date} date date object
  * @returns Date but formatted
  */
 const formatDate = (date) => {

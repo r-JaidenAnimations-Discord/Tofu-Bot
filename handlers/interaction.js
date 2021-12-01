@@ -1,7 +1,7 @@
 const ascii = require('ascii-table');
 const { readdirSync } = require('fs');
 
-let table = new ascii();
+const table = new ascii();
 table.setHeading('Interaction', 'Status');
 
 /**
@@ -32,8 +32,8 @@ function checkData(client, command, fileName) {
  */
 module.exports = client => {
 	const commands = readdirSync('./interactions/').filter(file => file.endsWith('.js'));
-	for (let file of commands) {
-		let pull = require(`../interactions/${file}`);
+	for (const file of commands) {
+		const pull = require(`../interactions/${file}`);
 		checkData(client, pull, file);
 	}
 	console.log(table.toString());

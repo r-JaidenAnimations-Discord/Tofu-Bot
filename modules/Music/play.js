@@ -1,12 +1,10 @@
 /**
  * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
  */
-const { tofuOrange, tofuError } = require('#colors');
+const { tofuGreen, tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
-const Tantrum = require('#tantrum');
-const { checkMusic } = require('#utils/musicChecks.js');
-const { constructQueue } = require('#handlers/queueManager.js');
-const { loadingString } = require('#utils/funnyLoad.js');
+const { SpotifyItemType } = require('@lavaclient/spotify');
+const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
 	name: 'play',
@@ -21,17 +19,14 @@ module.exports = {
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		if (!checkMusic(client, message)) return;
+		if (!LavaManager.nodeChecks(client, message)) return;
+		if (!LavaManager.vcChecks(client, message)) return;
 
-		const resumeQueue = client.player.getQueue(message.guild);
-		if (resumeQueue && resumeQueue.connection?.paused) {
-			if (resumeQueue.setPaused(false)) {
-				return await message.react('👌').catch(e => {
-					throw new Tantrum(client, 'play.js', 'Error on reacting resume', e);
-				});
-			} else {
-				throw new Tantrum(client, 'play.js', 'Error on resuming', 'No message');
-			}
+		// if queue exists, and paused, resume
+		const existing = await LavaManager.getPlayer(client, message);
+		if (existing && existing.paused) {
+			existing.resume();
+			return await message.react('👌');
 		}
 
 		if (!args[0]) {
@@ -39,34 +34,84 @@ module.exports = {
 				.setColor(tofuOrange)
 				.setDescription('To play a song, you need to specify which song you want to play!');
 
-			return message.channel.send({ embeds: [noQueryEmbed] }).catch(e => {
-				throw new Tantrum(client, 'play.js', 'Error on sending no query defined message', e);
-			});
+			return message.channel.send({ embeds: [noQueryEmbed] });
 		}
 
-		const loadMsg = await message.channel.send(loadingString());
+		const embed = new Discord.MessageEmbed();
+		const query = args.slice(0).join(' ');
 
-		const track = await client.player.search(args.join(' '), {
-			requestedBy: message.author
-		});
+		let tracks = [];
+		if (client.music.spotify.isSpotifyUrl(query)) {
+			const item = await client.music.spotify.load(query);
+			switch (item?.type) {
+				case SpotifyItemType.Track: {
+					LavaManager.lavaLog('Spotify track given');
+					const track = await item.resolveYoutubeTrack();
+					tracks = [track];
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued [${item.name}](${query}) [${message.author}]`);
+					break;
+				}
+				case SpotifyItemType.Album:
+				case SpotifyItemType.Playlist:
+				case SpotifyItemType.Artist:
+					LavaManager.lavaLog('Spotify list given');
+					tracks = await item.resolveYoutubeTracks();
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued **${tracks.length}** tracks`);
+					break;
+				default:
+					embed.setDescription('Found no results from your Spotify query.');
+					embed.setColor(tofuError);
+					message.channel.send({ embed: [embed] });
+					return;
+			}
+		}
+		else {
+			const results = await client.music.rest.loadTracks(/^https?:\/\//.test(query) ? query : `ytsearch:${query}`);
 
-		if (!track.tracks.length) {
-			if (loadMsg.deletable) loadMsg.delete();
-			const noResultsEmbed = new Discord.MessageEmbed()
-				.setColor(tofuError)
-				.setDescription('No matches found!');
-
-			return message.channel.send({ embeds: [noResultsEmbed] }).catch(e => {
-				throw new Tantrum(client, 'play.js', 'Error on sending noResultsEmbed', e);
-			});
+			switch (results.loadType) {
+				case 'PLAYLIST_LOADED':
+					LavaManager.lavaLog('Youtube list given');
+					tracks = results.tracks;
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued ${tracks.length} tracks`);
+					break;
+				case 'TRACK_LOADED':
+				case 'SEARCH_RESULT': {
+					LavaManager.lavaLog('Youtube track given');
+					const [track] = results.tracks;
+					tracks = [track];
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued [${track.info.title}](${track.info.uri}) [${message.author}]`);
+					break;
+				}
+				case 'NO_MATCHES': {
+					LavaManager.lavaLog('Nothing found');
+					embed.setColor(tofuError);
+					embed.setDescription('No matches found!');
+					message.channel.send({ embeds: [embed] });
+					break;
+				}
+				default:
+					console.log(results);
+					embed.setColor(tofuError);
+					embed.setDescription('Tofu choked :headstone:');
+					embed.setFooter('Please try again later');
+					embed.setTimestamp();
+					message.channel.send({ embeds: [embed] });
+					return;
+			}
 		}
 
-		const queue = await constructQueue(client, message);
+		const player = existing ? existing : await LavaManager.createPlayer(client, message);
 
-		if (loadMsg.deletable) loadMsg.delete();
+		player.queue.add(tracks, { requester: message.author.id, insert: null });
 
-		track.playlist ? queue.addTracks(track.tracks) : queue.addTrack(track.tracks[0]);
+		const started = player.playing || player.paused;
 
-		if (!queue.playing) await queue.play();
+		if (!started) await player.queue.start();
+
+		message.channel.send({ embeds: [embed] });
 	},
 };

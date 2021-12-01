@@ -1,10 +1,10 @@
 /**
  * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
  */
-const { tofuOrange, tofuError } = require('#colors');
+const { tofuGreen, tofuOrange, tofuError } = require('#colors');
 const Discord = require('discord.js');
 const Tantrum = require('#tantrum');
-const { loadingString } = require('#utils/funnyLoad.js');
+const { SpotifyItemType } = require('@lavaclient/spotify');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -20,10 +20,6 @@ module.exports = {
 	aliases: ['p'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		// spotify search
-		// ytmsearch? (youtub music)
-		// scsearch? (soundclo)
-
 		if (!LavaManager.nodeChecks(client, message)) return console.log('nodechecks failed');
 		if (!LavaManager.vcChecks(client, message)) return console.log('vc checks failed');
 
@@ -49,11 +45,81 @@ module.exports = {
 			});
 		}
 
-		const results = await client.music.rest.loadTracks(`ytsearch:${args.slice(1).join(' ')}`);
-		const player = existing || await LavaManager.createPlayer(client, message);
-		// console.log(player)
+		const embed = new Discord.MessageEmbed();
+		const query = args.slice(0).join(' ');
 
-		await player.queue.add([results.tracks[0]], { requester: message.author });
-		if (!player.playing) player.queue.start();
+		let tracks = [];
+		if (client.music.spotify.isSpotifyUrl(query)) {
+			const item = await client.music.spotify.load(query);
+			switch (item?.type) {
+				case SpotifyItemType.Track: {
+					LavaManager.lavaLog('Spotify track given');
+					const track = await item.resolveYoutubeTrack();
+					tracks = [track];
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued [${item.name}](${query}) [${message.author}]`);
+					break;
+				}
+				case SpotifyItemType.Album:
+				case SpotifyItemType.Playlist:
+				case SpotifyItemType.Artist:
+					LavaManager.lavaLog('Spotify list given');
+					tracks = await item.resolveYoutubeTracks();
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued **${tracks.length}** tracks`);
+					break;
+				default:
+					embed.setDescription('Found no results from your Spotify query.');
+					embed.setColor(tofuError);
+					message.channel.send({ embed: [embed] });
+					return;
+			}
+		}
+		else {
+			const results = await client.music.rest.loadTracks(/^https?:\/\//.test(query) ? query : `ytsearch:${query}`);
+
+			switch (results.loadType) {
+				case 'PLAYLIST_LOADED':
+					LavaManager.lavaLog('Youtube list given');
+					tracks = results.tracks;
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued ${tracks.length} tracks`);
+					break;
+				case 'TRACK_LOADED':
+				case 'SEARCH_RESULT': {
+					LavaManager.lavaLog('Youtube track given');
+					const [track] = results.tracks;
+					tracks = [track];
+					embed.setColor(tofuGreen);
+					embed.setDescription(`Queued [${track.info.title}](${track.info.uri}) [${message.author}]`);
+					break;
+				}
+				case 'NO_MATCHES': {
+					LavaManager.lavaLog('Nothing found');
+					embed.setColor(tofuError);
+					embed.setDescription('No matches found!');
+					message.channel.send({ embeds: [embed] });
+					break;
+				}
+				default:
+					console.log(results);
+					embed.setColor(tofuError);
+					embed.setDescription('Tofu choked :headstone:');
+					embed.setFooter('Please try again later');
+					embed.setTimestamp();
+					message.channel.send({ embeds: [embed] });
+					return;
+			}
+		}
+
+		const player = existing ? existing : await LavaManager.createPlayer(client, message);
+
+		player.queue.add(tracks, { requester: message.author.id, insert: null });
+
+		const started = player.playing || player.paused;
+
+		if (!started) await player.queue.start();
+
+		message.channel.send({ embeds: [embed] });
 	},
 };

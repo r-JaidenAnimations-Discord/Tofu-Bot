@@ -61,6 +61,14 @@ switch (launchArgs[0]) {
 }
 
 require('@lavaclient/queue/register');
+load({
+	client: {
+		id: client.config.spotifyClientID,
+		secret: client.config.spotifyToken,
+	},
+	autoResolveYoutubeTracks: false,
+});
+
 client.music = new Node({
 	sendGatewayPayload: (id, payload) => client.guilds.cache.get(id)?.shard?.send(payload),
 	connection: {
@@ -73,38 +81,6 @@ client.queues = new Discord.Collection();
 
 client.ws.on('VOICE_SERVER_UPDATE', data => client.music.handleVoiceUpdate(data));
 client.ws.on('VOICE_STATE_UPDATE', data => client.music.handleVoiceUpdate(data));
-
-
-
-client.music.on('queueFinish', queue => {
-	queue.channel.send('The queue has finished, I will now disconnect');
-	queue.player.disconnect();
-	queue.player.node.destroyPlayer(queue.player.guildId);
-});
-
-client.music.on('trackStart', track => {
-	queue.channel.send(`**Now playing:** ${track.title}`);
-});
-
-
-// load({
-// 	/* information used to authenticate */
-// 	client: {
-// 		id: client.config.spotifyClientID,
-// 		secret: client.config.spotifyToken,
-// 	},
-// 	/* whether you want spotify tracks to resolve their youtube counterpart */
-// 	autoResolveYoutubeTracks: false,
-// 	/* the loaders to use. */
-// 	loaders: ['track', 'album']
-// });
-
-// client.ws.on('VOICE_STATE_UPDATE', async (data) => await lavalink.handleVoiceUpdate(data));
-// client.ws.on('VOICE_SERVER_UPDATE', async (data) => await lavalink.handleVoiceUpdate(data));
-
-
-
-
 
 // Log in
 client.login(client.config.apiKey).catch(e => {

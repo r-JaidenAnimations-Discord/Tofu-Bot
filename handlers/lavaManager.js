@@ -13,45 +13,16 @@ class LavaManager {
 	static async createPlayer(client, message) {
 		if (await this.getPlayer(client, message)) return this.lavaLog('A player already exists! createPlayer() called illegaly');
 		this.lavaLog('Creating player...');
-		return await client.music.createPlayer(message.guild.id)
-			.connect(message.member.voice.channel)
+		let player = await client.music.createPlayer(message.guild.id);
 
-			.on('channelMove', async function(oldChannel, newChannel) {
-				const channel = message.guild.channels.cache.get(newChannel);
-				const me = await message.guild.members.fetch(client.user.id);
-
-				if (channel.type === 'GUILD_STAGE_VOICE' && me.voice.suppress) await message.guild.me.voice.setSuppressed(false).catch(e => {
-					this.disconnect();
-				});
-
-				// await require('util').promisify(setTimeout)(1000);
-
-				await this.pause();
-
-				// await require('util').promisify(setTimeout)(1000);
-
-				await this.resume();
-			})
-
-			.on('trackException', async function(str) {
-				const track = await client.music.rest.decodeTrack(str).catch(e => {
-					this.lavaLog('Decoding track failed');
-				});
-
-				// const channel = message.guild.channels.cache.get(messsage.channel.id);
-				// channel.send(`**${track.title}** is not available`).catch(e => {
-				// 	console.error(e); // will tantrum maybe. i'll see. i do plan on partially deprecating it
-				// });
-			})
-
-			.on('channelLeave', async function(c, reason, remote) {
-				await this.destroy();
-			});
+		player.queue.channel = message.channel;
+		await player.connect(message.member.voice.channel, { deafened: true });
+		return player;
 	}
 
 	/**
 	 * Check if the message author is in a voice channel (that is also the same one)
-	 * @param {Client} client Discord client 
+	 * @param {Client} client Discord client
 	 * @param {Message} message Message object
 	 * @returns {Boolean} Author is (not) in (same) voice channel
 	 */

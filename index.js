@@ -122,7 +122,7 @@ process.on('unhandledRejection', e => console.error(`${chalk.redBright('[Error]'
 process.on('warning', e => console.warn(`${chalk.yellow('[Error]')}:`, e.stack));
 
 // Handlers' modules
-['commands', 'event', /* 'music', */ 'lava', 'interaction'].forEach(handler => {
+['commands', 'event', 'lava', 'interaction'].forEach(handler => {
 	require(`./handlers/${handler}`)(client);
 });
 

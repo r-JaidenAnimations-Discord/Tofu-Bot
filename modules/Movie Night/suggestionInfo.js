@@ -1,5 +1,5 @@
 const { suggestionOpen, suggestionApproved, suggestionDenied, suggestionWatched } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
 		const suggestion = await client.movieSuggestions.findOne({ where: { id } });
 		if (!suggestion) return message.channel.send('Looks like an invalid ID, check your spelling.');
 
-		const embed = new Discord.MessageEmbed()
+		const embed = new MessageEmbed()
 			.setTitle(suggestion.movie)
 			.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)
 			.setFooter(`Suggester ID: ${suggestion.suggester}`)

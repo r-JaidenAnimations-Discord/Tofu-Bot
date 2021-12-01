@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -33,7 +33,7 @@ module.exports = {
 
 		await player.queue.remove(Number(args[0]) - 1);
 
-		const removedEmbed = new Discord.MessageEmbed()
+		const removedEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setDescription(`Removed [${success.title}](${success.uri}) [<@${success.requester}>]`);
 

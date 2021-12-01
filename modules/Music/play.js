@@ -2,7 +2,7 @@
  * Dear future me. Please forgive me. I can't even begin to express how sorry I am.
  */
 const { tofuGreen, tofuOrange, tofuError } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { SpotifyItemType } = require('@lavaclient/spotify');
 const LavaManager = require('#handlers/lavaManager.js');
 
@@ -30,14 +30,14 @@ module.exports = {
 		}
 
 		if (!args[0]) {
-			const noQueryEmbed = new Discord.MessageEmbed()
+			const noQueryEmbed = new MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('To play a song, you need to specify which song you want to play!');
 
 			return message.channel.send({ embeds: [noQueryEmbed] });
 		}
 
-		const embed = new Discord.MessageEmbed();
+		const embed = new MessageEmbed();
 		const query = args.slice(0).join(' ');
 
 		let tracks = [];

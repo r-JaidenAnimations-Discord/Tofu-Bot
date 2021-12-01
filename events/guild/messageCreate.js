@@ -1,6 +1,6 @@
 const { tofuRed, tofuError } = require('#colors');
 const { maxID } = require('#memberIDs');
-const Discord = require('discord.js');
+const { MessageEmbed, Collection } = require('discord.js');
 const fs = require('fs-extra');
 const { autoResponders } = require('../../handlers/autoResponder.js');
 const { dangerCommandPrompt } = require('#utils/dangerPrompt.js');
@@ -27,7 +27,7 @@ module.exports = async (client, message) => {
 		for (elem of autoResponders) {
 			const { input, output, cooldown, regexp } = elem;
 
-			if (!client.autoResponderCooldowns.has(elem)) client.autoResponderCooldowns.set(elem, new Discord.Collection());
+			if (!client.autoResponderCooldowns.has(elem)) client.autoResponderCooldowns.set(elem, new Collection());
 
 			const ARnow = Date.now();
 			const ARtimestamps = client.autoResponderCooldowns.get(elem);
@@ -110,7 +110,7 @@ module.exports = async (client, message) => {
 
 	// Cooldown?
 	const cooldowns = client.cooldowns;
-	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Discord.Collection());
+	if (!cooldowns.has(command.name)) cooldowns.set(command.name, new Collection());
 
 	const now = Date.now();
 	const timestamps = cooldowns.get(command.name);
@@ -126,7 +126,7 @@ module.exports = async (client, message) => {
 	if (message.guild) {
 		// Check if bot is used in unauthorized server
 		if (!trustedServers.includes(message.guild.id)) {
-			client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`THIS IS (NOT) BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError)] });
+			client.users.cache.get(maxID).send({ embeds: [new MessageEmbed().setDescription(`THIS IS (NOT) BAD: Tofu has been used in an untrusted server!\nServer id: ${message.guild.id}`).setColor(tofuError)] });
 			return message.channel.send('This is a proprietary bot for the r/JaidenAnimations server. Please remove it from your server.');
 		}
 

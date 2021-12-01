@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { promptMessage } = require('#utils/promptMessage.js');
 const { trivia } = require('#assets/commandTrivia/jaidenTriviaList.js');
 
@@ -31,7 +31,7 @@ module.exports = {
 		// If you think reading this is bad, i had to write it
 		if (args[0] === 'rules') {
 			// return message.channel.send('Rules and info will be put here');
-			const ruleEmbed = new Discord.MessageEmbed()
+			const ruleEmbed = new MessageEmbed()
 				.setTitle('Trivia Info')
 				.setDescription('A question gets presented, users can click the reaction corresponding to the answer they think is correct.\n \nAfter 15s, a ✅ reaction appears, the original starter of the trivia can react to highlight the answer.\n \nAfter 1m, the correct answer is automatically highlighted.')
 				.setColor(tofuGreen);
@@ -48,12 +48,12 @@ module.exports = {
 				`❌ ${numberReactions[i + 1]}: ${answer}`
 		).join('\n\n');
 
-		const correctedEmbed = new Discord.MessageEmbed()
+		const correctedEmbed = new MessageEmbed()
 			.setTitle(`${q.question}`)
 			.setDescription(`${answersMarkedList}`)
 			.setColor(tofuGreen);
 
-		const mainEmbed = new Discord.MessageEmbed()
+		const mainEmbed = new MessageEmbed()
 			.setTitle(`${q.question}`)
 			.setDescription(`${q.answers.map((e, i) => `${numberReactions[i + 1]}: ${e}`).join('\n\n')}`)
 			.setColor(tofuGreen)

@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { tofuGreen, tofuError, tofuOrange } = require('#colors');
 const Genius = require('genius-lyrics');
 const LavaManager = require('#handlers/lavaManager.js');
@@ -27,7 +27,7 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		const lyricsEmbed = new Discord.MessageEmbed()
+		const lyricsEmbed = new MessageEmbed()
 			.setTitle(`Lyrics for ${player.queue.current.title}`)
 			.setColor(tofuOrange)
 			.setDescription(loadingString());

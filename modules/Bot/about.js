@@ -1,7 +1,7 @@
 const { tofuGreen } = require('#colors');
 const { maxID, teraID, retainedID } = require('#memberIDs');
 const { version, releaseDate } = require('../../package.json');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { formatDate } = require('#utils/formatDate.js');
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
 		minutes %= 60;
 		hours %= 24;
 
-		const aboutEmbed = new Discord.MessageEmbed()
+		const aboutEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setAuthor('About Tofu Bot', botProfile)
 			.addFields(

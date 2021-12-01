@@ -1,9 +1,9 @@
 const { tofuRed } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed, MessageButton } = require('discord.js');
 const { promptMessage, promptButtons } = require('#utils/promptMessage.js');
 
 const dangerCommandPrompt = (message) => {
-	const warnEmbed = new Discord.MessageEmbed()
+	const warnEmbed = new MessageEmbed()
 		.setColor(tofuRed)
 		.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
 		.setTitle('HOLD UP')
@@ -30,19 +30,19 @@ const dangerCommandPrompt = (message) => {
 };
 
 const buttonedDangerCommandPrompt = async (message) => {
-	const warnEmbed = new Discord.MessageEmbed()
+	const warnEmbed = new MessageEmbed()
 		.setColor(tofuRed)
 		.setAuthor(message.author.tag, message.member.user.displayAvatarURL({ format: 'png', size: 4096, dynamic: true }))
 		.setTitle('HOLD UP')
 		.setDescription('This is a **__dangerous__** command. It affects the main server, are you absolutely sure you want to continue?')
 		.setTimestamp();
 
-	const yesButton = new Discord.MessageButton()
+	const yesButton = new MessageButton()
 		.setCustomId('yes')
 		.setLabel('Continue')
 		.setStyle('SUCCESS');
 
-	const noButton = new Discord.MessageButton()
+	const noButton = new MessageButton()
 		.setCustomId('no')
 		.setLabel('k sowwy no continue')
 		.setStyle('DANGER');

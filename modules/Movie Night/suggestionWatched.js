@@ -1,7 +1,8 @@
 const { suggestionWatched } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 const { validateDate } = require('#utils/dateValidation.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'watchedmovie',
@@ -46,7 +47,7 @@ module.exports = {
 				weekday: 'long',
 			}).format(suggestion.watchedDate);
 
-			const watchedEmbed = new Discord.MessageEmbed()
+			const watchedEmbed = new MessageEmbed()
 				.setColor(suggestionWatched)
 				.setTitle(`**${await suggestion.movie}**`)
 				// .setDescription(`Suggested by <@${suggestion.suggester}>`)

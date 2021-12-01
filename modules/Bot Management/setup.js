@@ -1,5 +1,5 @@
 const { tofuRed, tofuBlue, tofuOrange } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { stripIndents } = require('common-tags');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 const { masterCheck } = require('#utils/staffChecks.js');
@@ -22,8 +22,7 @@ module.exports = {
 
 		if (!masterCheck(client, message)) return;
 
-		const readData = readJSONSync('./deployData/settings.json', 'utf-8');
-		const { disabledCommands } = readData;
+		const { disabledCommands } = readJSONSync('./deployData/settings.json', 'utf-8');
 		const input = args[1];
 
 		switch (args[0]) {
@@ -75,7 +74,7 @@ module.exports = {
 					disabledCommands.splice(0, disabledCommands.length);
 					await message.channel.send({
 						embeds: [
-							new Discord.MessageEmbed()
+							new MessageEmbed()
 								.setColor(tofuBlue)
 								.setDescription('Enabled all previously disabled commands')
 								.setTimestamp()
@@ -89,7 +88,7 @@ module.exports = {
 				if (!client.commands.get(input)) return message.channel.send('There\'s no such command! Make sure you are not using an alias.');
 				if (!disabledCommands.includes(input)) return message.channel.send(`The command \`${input}\` is not disabled!`);
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new MessageEmbed()
 					.setColor(tofuBlue)
 					.setDescription(`Enabled the command \`${input}\``)
 					.setTimestamp()
@@ -106,7 +105,7 @@ module.exports = {
 				if (disabledCommands.includes(input)) return message.channel.send(`The command \`${input}\` is already disabled!`);
 				if (input === 'settings') return message.channel.send('HAHAHAHAHAHAHAHAHAHAHHAHAHHAHAHAHHA very funni');
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new MessageEmbed()
 					.setColor(tofuRed)
 					.setDescription(`Disabled the command \`${input}\``)
 					.setTimestamp()
@@ -123,7 +122,7 @@ module.exports = {
 
 				if (JSON.stringify(readData) === JSON.stringify(defaults)) return message.channel.send('The bot is already in its default settings!');
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new MessageEmbed()
 					.setColor(tofuOrange)
 					.setDescription('Reset to defaults')
 					.setTimestamp()
@@ -137,7 +136,7 @@ module.exports = {
 			default: {
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
 
-				const embed = new Discord.MessageEmbed()
+				const embed = new MessageEmbed()
 					.setColor(tofuBlue)
 					.setDescription(
 						stripIndents`Welcome Messages: \`${formatBool(readData.welcome.state)}\`

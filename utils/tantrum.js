@@ -9,7 +9,7 @@
 // be more generic and less "something().catch(e => lol(e))"
 const { tofuError } = require('#colors');
 const { maxID } = require('#memberIDs');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const chalk = require('chalk');
 
 class Tantrum extends Error {
@@ -28,7 +28,7 @@ class Tantrum extends Error {
 		// THIS GUY PUT AN ERROR HANDLER FOR HIS ERROR HANDLER NO FUCKING WAY
 		// - tera
 		console.error(`${chalk.redBright('[Error]')}: ${this.err}`);
-		return this.client.users.cache.get(maxID).send({ embeds: [new Discord.MessageEmbed().setDescription(`WAAAH\n\`\`${this.err}\`\``).setColor(tofuError)] })
+		return this.client.users.cache.get(maxID).send({ embeds: [new MessageEmbed().setDescription(`WAAAH\n\`\`${this.err}\`\``).setColor(tofuError)] })
 			.catch(__ => { });
 	}
 }

@@ -1,5 +1,5 @@
 const { tofuOrange } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	name: 'help',
@@ -25,7 +25,7 @@ module.exports = {
 function getAll(client, message) {
 	const { jaidenServerID, tofuBotServerID } = client.config;
 
-	const embed = new Discord.MessageEmbed()
+	const embed = new MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional, [] = required, {a, b} = choose between a or b');
 
@@ -46,7 +46,7 @@ function getAll(client, message) {
 function getCmd(client, message, input) {
 	const { prefix, jaidenServerID, tofuBotServerID } = client.config;
 
-	const embed = new Discord.MessageEmbed()
+	const embed = new MessageEmbed()
 		.setColor(tofuOrange)
 		.setFooter('Syntax: () = optional; [] = required; {a, b} = choose between a or b');
 

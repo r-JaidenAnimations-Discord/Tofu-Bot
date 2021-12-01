@@ -1,6 +1,7 @@
 const { suggestionDenied } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'denymovie',
@@ -36,7 +37,7 @@ module.exports = {
 		};
 		try {
 			await suggestion.update(newData);
-			const denialEmbed = new Discord.MessageEmbed()
+			const denialEmbed = new MessageEmbed()
 				.setColor(suggestionDenied)
 				.setTitle(`**${await suggestion.movie}**`)
 				.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)

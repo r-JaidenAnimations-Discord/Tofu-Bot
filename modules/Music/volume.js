@@ -1,5 +1,5 @@
 const { tofuGreen, tofuOrange } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const LavaManager = require('#handlers/lavaManager.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 
@@ -24,7 +24,7 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		const volumeEmbed = new Discord.MessageEmbed();
+		const volumeEmbed = new MessageEmbed();
 
 		if (!args[0] || isNaN(args[0]) || args[0] === 'Infinity') {
 			volumeEmbed.setColor(tofuOrange);

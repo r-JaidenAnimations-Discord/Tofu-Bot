@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const LavaManager = require('#handlers/lavaManager.js');
 const { LoopType } = require('@lavaclient/queue');
 
@@ -28,7 +28,7 @@ module.exports = {
 
 		const player = await LavaManager.getPlayer(client, message);
 
-		const loopEmbed = new Discord.MessageEmbed()
+		const loopEmbed = new MessageEmbed()
 			.setColor(tofuGreen);
 
 		let loopMode = player.queue.loop.type;

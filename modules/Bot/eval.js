@@ -1,6 +1,6 @@
 const { tofuGreen, tofuError, tofuRed } = require('#colors');
 const { teraID, retainedID, maxID } = require('#memberIDs');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const beautify = require('beautify');
 // NOTE TO SELF: THIS IS SOME DANGEROUS $HIT RIGHT HERE, MAKE A MISTAKE AND POOF, THERE GOES THE API KEY. DO NOT UNDERESTIMATE THE POWER OF THIS COMMAND!!!!!!!
 
@@ -29,7 +29,7 @@ module.exports = {
 			evaluated = (evaluated + '').replace(client.token, 'funny token time');
 			if (['token', 'key', 'apikey'].includes(toEval.toLowerCase())) return message.channel.send('oh nononono you\'re not getting the token you\'re NOT GETTING IT IDNFIABGDJDNWIKG');
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new MessageEmbed()
 				.setColor(tofuGreen)
 				.setTimestamp()
 				.setTitle('Eval')
@@ -40,7 +40,7 @@ module.exports = {
 
 			message.channel.send({ embeds: [embed] });
 		} catch (e) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new MessageEmbed()
 				.setColor(tofuError)
 				.setTitle('Error')
 				.setDescription(e.toString())

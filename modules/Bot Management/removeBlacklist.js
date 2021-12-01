@@ -1,5 +1,5 @@
 const { tofuGreen, tofuRed } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const { writeJSONSync } = require('fs-extra');
 const { checkBanStaff } = require('#utils/staffChecks.js');
@@ -37,7 +37,7 @@ module.exports = {
 		if (blackListJSON.find(({ member }) => member === toWhitelist)) {
 			blackListJSON.splice(blackListJSON.indexOf(blackListJSON.find(({ member }) => member === toWhitelist)), 1);
 			writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
-			const whitelistEmbed = new Discord.MessageEmbed()
+			const whitelistEmbed = new MessageEmbed()
 				.setTitle('Removed from blacklist')
 				.setColor(tofuGreen)
 				.setDescription(`Removed <@${toWhitelist}> from the blacklist.`)
@@ -47,7 +47,7 @@ module.exports = {
 			return;
 		}
 
-		const memberNotFoundEmbed = new Discord.MessageEmbed()
+		const memberNotFoundEmbed = new MessageEmbed()
 			.setTitle('Error')
 			.setColor(tofuRed)
 			.setDescription(`Couldn't find <@${toWhitelist}> anywhere in the blacklist.`)

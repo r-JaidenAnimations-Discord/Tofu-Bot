@@ -1,6 +1,6 @@
 const { maxID } = require('#memberIDs');
 const { tofuGreen, tofuRed } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const fs = require('fs');
 const { writeJSONSync } = require('fs-extra');
 const { checkBanStaff } = require('#utils/staffChecks.js');
@@ -52,7 +52,7 @@ module.exports = {
 		if (!reason) return message.channel.send('No reason provided');
 
 		if (blackListJSON.find(({ member }) => member === toBlacklist)) {
-			const alreadyBlacklistedEmbed = new Discord.MessageEmbed()
+			const alreadyBlacklistedEmbed = new MessageEmbed()
 				.setTitle('Error')
 				.setColor(tofuRed)
 				.setDescription('This member is already blacklisted.')
@@ -68,7 +68,7 @@ module.exports = {
 		});
 
 		writeJSONSync('./deployData/blacklist.json', blackListJSON, { spaces: 4 });
-		const blackListEmbed = new Discord.MessageEmbed()
+		const blackListEmbed = new MessageEmbed()
 			.setTitle('Added to blacklist')
 			.setColor(tofuGreen)
 			.setDescription(`Added <@${toBlacklist}> to the blacklist.`)

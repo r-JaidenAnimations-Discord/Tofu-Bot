@@ -1,5 +1,5 @@
 const { tofuOrange } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
 		if (!player) return;
 
 		if (!player.paused) {
-			const alreadyPlayingEmbed = new Discord.MessageEmbed()
+			const alreadyPlayingEmbed = new MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('The music is already playing!');
 			return message.channel.send({ embeds: [alreadyPlayingEmbed] });

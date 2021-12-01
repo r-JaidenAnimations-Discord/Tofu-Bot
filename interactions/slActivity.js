@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { MessageEmbed, MessageAttachment } = require('discord.js');
 const { tofuGreen } = require('#colors');
 
 module.exports = {
@@ -33,8 +33,8 @@ module.exports = {
 	execute: async (client, interaction) => {
 		const game = interaction.options.get('game').value;
 		client.groupActivities.createTogetherCode(interaction.options.get('channel').value, game).then(async invite => {
-			const attachment = new Discord.MessageAttachment(`./assets/commandActivity/${game}.png`, 'activity.png');
-			const activityEmbed = new Discord.MessageEmbed()
+			const attachment = new MessageAttachment(`./assets/commandActivity/${game}.png`, 'activity.png');
+			const activityEmbed = new MessageEmbed()
 				.setTitle('Activity launched!')
 				.setDescription(`[Click here to start it, after that you can use the invite embed below](${invite.code})`)
 				.setColor(tofuGreen)

@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const LavaManager = require('#handlers/lavaManager.js');
 const { musicStrings } = require('#assets/global/strings.json');
 const { tofuOrange } = require('#colors');
@@ -13,7 +13,7 @@ module.exports = (client, queue) => {
 		const channel = p.queue.channel;
 		p.disconnect();
 		client.music.destroyPlayer(p.guildId);
-		const embed = new Discord.MessageEmbed()
+		const embed = new MessageEmbed()
 			.setColor(tofuOrange)
 			.setDescription(musicStrings.inactiveTimeout);
 

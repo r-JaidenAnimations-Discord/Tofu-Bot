@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { createBar } = require('#utils/createBar.js');
 const { humanReadableDuration } = require('#utils/buildTimeString.js');
 const LavaManager = require('#handlers/lavaManager.js');
@@ -35,7 +35,7 @@ module.exports = {
 
 		const footer = track.isStream ? `${createBar(2, 1, 20, '▬', '🔴LIVE')}` : `${createBar(totalTrackTime, currentTime, 20)} ${humanCurrentTime} / ${humanTotalTime}`;
 
-		const nowPlayingEmbed = new Discord.MessageEmbed()
+		const nowPlayingEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setDescription(`[${track.title}](${track.uri}) [<@${track.requester}>]`)
 			.setFooter(footer);

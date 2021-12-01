@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 		if (args[1] === 'embed') {
 			if (!args.slice(2).join(' ')) return message.reply('All fine and good, but like. What to send. Can\'t you guys do this first try for once?');
 
-			const embed = new Discord.MessageEmbed()
+			const embed = new MessageEmbed()
 				.setColor(tofuGreen)
 				.setDescription(args.slice(2).join(' '));
 

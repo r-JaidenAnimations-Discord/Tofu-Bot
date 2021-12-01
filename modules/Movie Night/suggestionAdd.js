@@ -1,5 +1,5 @@
 const { suggestionOpen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const Tantrum = require('#tantrum');
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
 		const movie = args.slice(0).join(' ');
 		if (!movie) return message.reply('So how about sugggesting a movie instead of just sending a useless command? You vertical laudry wire');
 
-		const suggestionEmbed = new Discord.MessageEmbed()
+		const suggestionEmbed = new MessageEmbed()
 			.setColor(suggestionOpen)
 			.setTitle('<a:tofuSpin:873583910989205594> Loading Suggestion')
 			.setTimestamp();
@@ -37,7 +37,7 @@ module.exports = {
 			});
 
 			if (suggestion) {
-				const populatedEmbed = new Discord.MessageEmbed()
+				const populatedEmbed = new MessageEmbed()
 					.setColor(suggestionOpen)
 					.setAuthor(suggestion.suggesterTag, suggestion.suggesterAvatar)
 					.setTitle(`**${suggestion.movie}**`)

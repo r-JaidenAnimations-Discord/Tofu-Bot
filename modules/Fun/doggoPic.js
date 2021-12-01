@@ -1,5 +1,5 @@
 const { tofuGreen, tofuError } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const fetch = require('node-fetch');
 const { loadingString } = require('#utils/funnyLoad.js');
 const Tantrum = require('#tantrum');
@@ -17,7 +17,7 @@ module.exports = {
 	aliases: ['doge', 'doggo'],
 	cooldown: 0,
 	execute: async function(client, message, args) {
-		const dogEmbed = new Discord.MessageEmbed()
+		const dogEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setTitle(loadingString());
 
@@ -37,6 +37,6 @@ module.exports = {
 		}
 		if (msg.deletable) msg.delete();
 
-		return message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
+		return message.channel.send({ embeds: [new MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 	},
 };

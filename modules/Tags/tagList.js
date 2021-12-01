@@ -1,5 +1,5 @@
 const { tofuBlue } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js');
 
 module.exports = {
 	name: 'listtags',
@@ -15,13 +15,13 @@ module.exports = {
 	cooldown: 0,
 	execute: async function(client, message, args) {
 
-		const component = new Discord.MessageActionRow()
+		const component = new MessageActionRow()
 			.addComponents(
-				new Discord.MessageButton()
+				new MessageButton()
 					.setCustomId('prev')
 					.setLabel('Prev')
 					.setStyle('PRIMARY'),
-				new Discord.MessageButton()
+				new MessageButton()
 					.setCustomId('next')
 					.setLabel('Next')
 					.setStyle('PRIMARY')
@@ -30,15 +30,13 @@ module.exports = {
 		// Sorted tags with a "name - by user" format
 		const tags = (await client.tags.findAll({
 			attributes: ['name', 'username']
-		}))
-			.sort((a, b) => {
-				const nameA = a.name.toUpperCase();
-				const nameB = b.name.toUpperCase();
-				if (nameA < nameB) return -1;
-				if (nameA > nameB) return 1;
-				return 0;
-			})
-			.map(t => `**${t.name}**` + ' - by ' + t.username);
+		})).sort((a, b) => {
+			const nameA = a.name.toUpperCase();
+			const nameB = b.name.toUpperCase();
+			if (nameA < nameB) return -1;
+			if (nameA > nameB) return 1;
+			return 0;
+		}).map(t => `**${t.name}**` + ' - by ' + t.username);
 
 		/**
 		 * Splits an array every x elements
@@ -61,7 +59,7 @@ module.exports = {
 		let curPage = parseInt(args[0]) - 1 || 0;
 		if (curPage < 0) return message.channel.send('Please enter a valid page number!');
 		const pages = paginate(tags, 10);
-		const embed = new Discord.MessageEmbed()
+		const embed = new MessageEmbed()
 			.setTitle('All Tags')
 			.setDescription(pages[curPage].join('\n'))
 			.setFooter(`Page ${curPage + 1} of ${pages.length}`)

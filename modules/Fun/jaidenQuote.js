@@ -1,5 +1,5 @@
 const { tofuGreen } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { quotes } = require('#assets/commandQuote/jaidenQuoteList.js');
 
 module.exports = {
@@ -17,7 +17,7 @@ module.exports = {
 	execute: async function(client, message, args) {
 		const randomQuote = quotes.randomElement();
 
-		const randomQuoteEmbed = new Discord.MessageEmbed()
+		const randomQuoteEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setDescription(randomQuote);
 

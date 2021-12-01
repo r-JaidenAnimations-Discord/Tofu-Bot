@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { tofuGreen } = require('#colors');
 const { formatDate } = require('#utils/formatDate.js');
 
@@ -19,7 +19,7 @@ module.exports = {
 
 		const tag = await client.tags.findOne({ where: { name: args[0] } });
 		if (tag) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new MessageEmbed()
 				.setTitle(tag.name)
 				.setColor(tofuGreen)
 				.addFields(

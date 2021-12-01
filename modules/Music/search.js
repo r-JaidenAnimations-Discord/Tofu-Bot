@@ -1,5 +1,5 @@
 const { tofuOrange, tofuError } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { loadingString } = require('#utils/funnyLoad.js');
 const LavaManager = require('#handlers/lavaManager.js');
 
@@ -20,7 +20,7 @@ module.exports = {
 		if (!LavaManager.nodeChecks(client, message)) return;
 
 		if (!args[0]) {
-			const noQueryEmbed = new Discord.MessageEmbed()
+			const noQueryEmbed = new MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription('To find a song to play, you need to specify which song you want to play!');
 
@@ -31,7 +31,7 @@ module.exports = {
 		const tracks = await client.music.rest.loadTracks(`ytsearch:${args.slice(0).join(' ')}`).then(x => x.tracks);
 
 		if (!tracks.length) {
-			const noResultsEmbed = new Discord.MessageEmbed()
+			const noResultsEmbed = new MessageEmbed()
 				.setColor(tofuError)
 				.setDescription('No matches found!');
 
@@ -61,7 +61,7 @@ module.exports = {
 					return track;
 
 				} else {
-					const searchInvalidResponseEmbed = new Discord.MessageEmbed()
+					const searchInvalidResponseEmbed = new MessageEmbed()
 						.setColor(tofuOrange)
 						.setDescription(`Response has to be a valid number between **1** and **${tracks.length}**!`);
 					msg.channel.send({ embeds: [searchInvalidResponseEmbed] });
@@ -70,7 +70,7 @@ module.exports = {
 
 			collector.on('end', (_, reason) => {
 				if (reason === 'time' || reason === 'cancelled') {
-					const embed = new Discord.MessageEmbed()
+					const embed = new MessageEmbed()
 						.setColor(tofuOrange)
 						.setDescription('Search cancelled.');
 					msg.channel.send({ embeds: [embed] });

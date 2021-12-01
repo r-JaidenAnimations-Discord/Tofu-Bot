@@ -1,6 +1,7 @@
 const { suggestionApproved } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { checkMessageStaff } = require('#utils/staffChecks.js');
+const Tantrum = require('#tantrum');
 
 module.exports = {
 	name: 'approvemovie',
@@ -36,7 +37,7 @@ module.exports = {
 		};
 		try {
 			await suggestion.update(newData);
-			const approvalEmbed = new Discord.MessageEmbed()
+			const approvalEmbed = new MessageEmbed()
 				.setColor(suggestionApproved)
 				.setTitle(`**${await suggestion.movie}**`)
 				// .setDescription(`Suggested by <@${suggestion.suggester}>`)

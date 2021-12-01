@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { musicStrings } = require('#assets/global/strings.json');
 const chalk = require('chalk');
 const { tofuOrange, tofuError } = require('#colors');
@@ -26,7 +26,7 @@ class LavaManager {
 	 * @returns {Boolean} Author is (not) in (same) voice channel
 	 */
 	static vcChecks(client, message) {
-		const musicCheckEmbed = new Discord.MessageEmbed();
+		const musicCheckEmbed = new MessageEmbed();
 		if (!message.member.voice.channel) {
 			musicCheckEmbed.setColor(tofuOrange);
 			musicCheckEmbed.setDescription(musicStrings.notInVoiceChannel);
@@ -50,7 +50,7 @@ class LavaManager {
 	 */
 	static async musicChecks(client, message) {
 		if (!(await this.getPlayer(client, message))?.playing) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new MessageEmbed()
 				.setColor(tofuOrange)
 				.setDescription(musicStrings.noMusicPlaying);
 			message.channel.send({ embeds: [embed] });
@@ -67,7 +67,7 @@ class LavaManager {
 	 */
 	static async nodeChecks(client, message) {
 		if (!client.music.conn || !client.music.conn.active) {
-			const embed = new Discord.MessageEmbed()
+			const embed = new MessageEmbed()
 				.setColor(tofuError)
 				.setDescription('The music node got disconnected, no music can be fetched')
 				.setTimestamp();

@@ -1,5 +1,5 @@
 const { tofuGreen, tofuOrange } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const { readJSONSync, writeJSONSync } = require('fs-extra');
 
 /**
@@ -17,12 +17,12 @@ const updateSetting = async (client, message, setting, selectedState) => {
 		case 'true':
 		case 'on': {
 			if (readData[setting].state === true) {
-				return message.channel.send({ embeds: [new Discord.MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} setting is already \`enabled\``)] });
+				return message.channel.send({ embeds: [new MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} setting is already \`enabled\``)] });
 			} else {
 				readData[setting].state = true; // Enable the setting thing
 
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
-				const embed = new Discord.MessageEmbed()
+				const embed = new MessageEmbed()
 					.setColor(tofuGreen)
 					.setDescription(`\`${formatBool(readData[setting].state)}\` ${readData[setting].humanizedString} settings`)
 					.setTimestamp()
@@ -37,12 +37,12 @@ const updateSetting = async (client, message, setting, selectedState) => {
 		case 'false':
 		case 'off': {
 			if (readData[setting].state === false) {
-				return message.channel.send({ embeds: [new Discord.MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} is already \`disabled\``)] });
+				return message.channel.send({ embeds: [new MessageEmbed().setColor(tofuOrange).setDescription(`${readData[setting].humanizedString} is already \`disabled\``)] });
 			} else {
 				readData[setting].state = false; // Disable the setting thing
 
 				const formatBool = (elem) => elem ? 'Enabled' : 'Disabled';
-				const embed = new Discord.MessageEmbed()
+				const embed = new MessageEmbed()
 					.setColor(tofuGreen)
 					.setDescription(`\`${formatBool(readData[setting].state)}\` ${readData[setting].humanizedString} settings`)
 					.setTimestamp()
@@ -56,7 +56,7 @@ const updateSetting = async (client, message, setting, selectedState) => {
 		default: {
 			const formatBool = (elem) => elem ? 'enabled' : 'disabled';
 
-			const stateEmbed = new Discord.MessageEmbed()
+			const stateEmbed = new MessageEmbed()
 				.setColor(tofuGreen)
 				.setDescription(`${readData[setting].humanizedString} settings are currently \`${formatBool(readData[setting].state)}\`.`);
 

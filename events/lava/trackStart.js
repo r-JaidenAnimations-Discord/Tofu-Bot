@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const { MessageEmbed } = require('discord.js');
 const LavaManager = require('#handlers/lavaManager.js');
 const { tofuGreen } = require('#colors');
 
@@ -11,7 +11,7 @@ module.exports = (client, queue, song) => {
 		delete queue.player.timeout;
 	}
 
-	const embed = new Discord.MessageEmbed()
+	const embed = new MessageEmbed()
 		.setColor(tofuGreen)
 		.setTitle('Now playing')
 		.setDescription(`[${song.title}](${song.uri}) [<@${song.requester}>]`);

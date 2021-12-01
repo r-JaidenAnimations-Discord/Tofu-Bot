@@ -1,5 +1,5 @@
 const { tofuGreen, tofuError } = require('#colors');
-const Discord = require('discord.js');
+const { MessageEmbed, MessageAttachment } = require('discord.js');
 const fetch = require('node-fetch');
 const fs = require('fs');
 const Tantrum = require('#tantrum');
@@ -31,8 +31,8 @@ module.exports = {
 
 		let downStatus = null;
 
-		const attachment = new Discord.MessageAttachment('./assets/commandMinecraft/minecraff.png', 'minecraff.png');
-		const minecraftEmbed = new Discord.MessageEmbed()
+		const attachment = new MessageAttachment('./assets/commandMinecraft/minecraff.png', 'minecraff.png');
+		const minecraftEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setTitle('Jaiden Animations Minecraft Server')
 			.setThumbnail('attachment://minecraff.png')
@@ -76,7 +76,7 @@ module.exports = {
 		} catch (e) {
 			if (msg.deletable) msg.delete();
 			new Tantrum(client, e);
-			message.channel.send({ embeds: [new Discord.MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
+			message.channel.send({ embeds: [new MessageEmbed().setDescription('So uh the API doesn\'t wanna talk rn').setColor(tofuError)] });
 		}
 	},
 };

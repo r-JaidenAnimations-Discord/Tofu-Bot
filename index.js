@@ -1,23 +1,23 @@
 // When I started writing this, only God and I understood what I was doing
 // Now, only God knows
-const Discord = require('discord.js');
+const { Client, Intents, Collection } = require('discord.js');
 const fs = require('fs');
 const chalk = require('chalk');
-const client = new Discord.Client({
+const client = new Client({
 	intents: [
-		Discord.Intents.FLAGS.DIRECT_MESSAGES,
-		Discord.Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
-		Discord.Intents.FLAGS.GUILDS,
-		Discord.Intents.FLAGS.GUILD_BANS,
-		// Discord.Intents.FLAGS.GUILD_EMOJIS,
-		// Discord.Intents.FLAGS.GUILD_INTEGRATIONS,
-		Discord.Intents.FLAGS.GUILD_INVITES,
-		Discord.Intents.FLAGS.GUILD_MEMBERS,
-		Discord.Intents.FLAGS.GUILD_MESSAGES,
-		Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-		// Discord.Intents.FLAGS.GUILD_MESSAGE_TYPING,
-		Discord.Intents.FLAGS.GUILD_PRESENCES,
-		Discord.Intents.FLAGS.GUILD_VOICE_STATES
+		Intents.FLAGS.DIRECT_MESSAGES,
+		Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+		Intents.FLAGS.GUILDS,
+		Intents.FLAGS.GUILD_BANS,
+		// Intents.FLAGS.GUILD_EMOJIS,
+		// Intents.FLAGS.GUILD_INTEGRATIONS,
+		Intents.FLAGS.GUILD_INVITES,
+		Intents.FLAGS.GUILD_MEMBERS,
+		Intents.FLAGS.GUILD_MESSAGES,
+		Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+		// Intents.FLAGS.GUILD_MESSAGE_TYPING,
+		Intents.FLAGS.GUILD_PRESENCES,
+		Intents.FLAGS.GUILD_VOICE_STATES
 	],
 	partials: [
 		'CHANNEL'
@@ -32,15 +32,15 @@ const Tantrum = require('./utils/tantrum.js');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 
-client.commands = new Discord.Collection();
-client.cooldowns = new Discord.Collection();
-client.aliases = new Discord.Collection();
+client.commands = new Collection();
+client.cooldowns = new Collection();
+client.aliases = new Collection();
 client.categories = fs.readdirSync('./modules/', { withFileTypes: true }).filter(dirent => dirent.isDirectory()).map(dirent => dirent.name);
 client.tags = require('./handlers/dbModels/tags.js')(tagSequelize);
 client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js')(movieSuggestionSequelize);
 client.birthdays = require('./handlers/dbModels/birthdays.js')(birthdaySequelize);
-client.interactions = new Discord.Collection();
-client.autoResponderCooldowns = new Discord.Collection();
+client.interactions = new Collection();
+client.autoResponderCooldowns = new Collection();
 client.groupActivities = new DiscordTogether(client);
 
 
@@ -78,7 +78,7 @@ client.music = new Node({
 		password: 'youshallnotpass'
 	}
 });
-client.queues = new Discord.Collection();
+client.queues = new Collection();
 
 client.ws.on('VOICE_SERVER_UPDATE', data => client.music.handleVoiceUpdate(data));
 client.ws.on('VOICE_STATE_UPDATE', data => client.music.handleVoiceUpdate(data));

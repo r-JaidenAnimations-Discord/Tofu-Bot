@@ -18,5 +18,5 @@ module.exports = (client, queue) => {
 			.setDescription(musicStrings.inactiveTimeout);
 
 		channel.send({ embeds: [embed] });
-	}, 1800, queue.player);
+	}, client.config.musicTimeout, queue.player);
 };

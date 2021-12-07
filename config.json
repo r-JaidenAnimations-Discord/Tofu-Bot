@@ -1,0 +1,17 @@
+{
+	"prefix": "+",
+    "apiKey": "",
+    "botVersion": "1.0.1",
+    "releaseDate": "12/14/2020",
+    "mxmProfile": "https://cdn.discordapp.com/avatars/778997567554977842/c22f7c00bb2b2a46acdcc75c9479c55a.webp",
+    "infonetSvr": "https://cdn.discordapp.com/icons/592103938958819341/b138b5a69d0e5ac466ee224a31793f57.webp",
+    "botProfile": "https://cdn.discordapp.com/avatars/778997567554977842/c22f7c00bb2b2a46acdcc75c9479c55a.webp",
+    "infonetBlue": "#30b0e6",
+    "infonetGreen": "#79c748",
+    "infonetOrange": "#f48723",
+    "botLogChannelId": "784348580055220237",
+    "generalChannelId": "784348580055220237",
+    "tofuRed": "#bf242d",
+    "tofuGreen": "#4aa428",
+    "tofuBlue": "#3a94ff"
+}

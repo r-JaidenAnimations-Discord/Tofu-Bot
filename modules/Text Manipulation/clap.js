@@ -18,7 +18,13 @@ module.exports = {
         }
         console.log(args)
         //const clapped = args.split(' ').join(' 👏 ');
-        const clapped = args.join(' 👏 ');
+        let clapped = args.join(' 👏 ');
+
+        // Supress @everyone, @here and pinging roles
+        [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+            clapped = clapped.replace(ping, 'haha funny ping');
+        });
+
         const clappedEnd = `${clapped} 👏`;
         if (clappedEnd.length < 2000) {
             return message.channel.send(clappedEnd);

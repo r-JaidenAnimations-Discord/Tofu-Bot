@@ -13,9 +13,16 @@ module.exports = {
 			message.channel.send('Something went *very* wrong, I\'m sorry.');
 			console.error('Basically, without saying too much, you\'re screwed. Royally');
 		});
-        if (args.length < 1) {
+		if (args.length < 1) {
             return message.reply('You must input text to be reversed!');
         }
-        message.channel.send(args.join(' ').split('').reverse().join(''));
+        let input = args.join(' ');
+
+		// Supress @everyone, @here and pinging roles
+		[/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+			input = input.replace(ping, 'haha funny ping');
+		});
+
+		message.channel.send(input.split('').reverse().join(''));
 	},
 };

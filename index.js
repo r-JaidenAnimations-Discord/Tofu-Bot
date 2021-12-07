@@ -25,10 +25,10 @@ const client = new Client({
 });
 const { randomStatus } = require('#utils/statusFunction.js');
 const { tagSequelize, movieSuggestionSequelize, birthdaySequelize } = require('./handlers/databases.js');
-const { DiscordTogether } = require('discord-together');
+const DiscordActivities = require('#handlers/discordActivities.js');
 const { Node } = require('lavaclient');
 const { load } = require('@lavaclient/spotify');
-const Tantrum = require('./utils/tantrum.js');
+const Tantrum = require('#tantrum');
 
 setInterval(function() { randomStatus(client) }, 60 * 30 * 1000); // change status every 30 min
 
@@ -41,7 +41,7 @@ client.movieSuggestions = require('./handlers/dbModels/movieNightSuggestions.js'
 client.birthdays = require('./handlers/dbModels/birthdays.js')(birthdaySequelize);
 client.interactions = new Collection();
 client.autoResponderCooldowns = new Collection();
-client.groupActivities = new DiscordTogether(client);
+client.groupActivities = new DiscordActivities(client);
 
 
 // Config loading

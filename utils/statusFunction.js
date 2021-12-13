@@ -10,44 +10,46 @@ const setSts = (client, selectedStatus) => {
 
 	const youOrJaiden = Math.random() < 0.5 ? 'you' : 'Jaiden';
 	switch (/* this. */selectedStatus) { // lmao, i fucking hate this.
-		case 'online':
-			return setRPC(client, 'online', youOrJaiden, 'WATCHING');
-		case 'idle':
-			return setRPC(client, 'idle', `${youOrJaiden} but half asleep`, 'WATCHING');
-		case 'dnd':
-			return setRPC(client, 'dnd', `${youOrJaiden} but in a meeting`, 'WATCHING');
-		case 'gone':
-			return setRPC(client, 'invisible', 'or am i?', 'WATCHING');
-		case 'stream':
-			client.user.setPresence({
-				status: 'online',
-				activities: [{
-					name: 'something',
-					type: 'STREAMING',
-					url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
-				}]
-			});
-			return true;
-		case 'play':
-			return setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
-		case 'listen':
-			return setRPC(client, 'online', 'Grady\'s Playlist', 'LISTENING');
-		case 'walle':
-		case 'wall-e':
-			return setRPC(client, 'online', 'Wall-E', 'WATCHING');
-		case 'next':
-			const nextState = states.randomElement();
-			return setSts(client, nextState);
-		case 'randomuser':
-			const memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
-			const randomMember = memberList.randomElement();
+		// case 'online':
+		// 	return setRPC(client, 'online', youOrJaiden, 'WATCHING');
+		// case 'idle':
+		// 	return setRPC(client, 'idle', `${youOrJaiden} but half asleep`, 'WATCHING');
+		// case 'dnd':
+		// 	return setRPC(client, 'dnd', `${youOrJaiden} but in a meeting`, 'WATCHING');
+		// case 'gone':
+		// 	return setRPC(client, 'invisible', 'or am i?', 'WATCHING');
+		// case 'stream':
+		// 	client.user.setPresence({
+		// 		status: 'online',
+		// 		activities: [{
+		// 			name: 'something',
+		// 			type: 'STREAMING',
+		// 			url: 'https://www.youtube.com/watch?v=raTkZqz680Y'
+		// 		}]
+		// 	});
+		// 	return true;
+		// case 'play':
+		// 	return setRPC(client, 'online', 'with Ari Bot', 'PLAYING');
+		// case 'listen':
+		// 	return setRPC(client, 'online', 'Grady\'s Playlist', 'LISTENING');
+		// case 'walle':
+		// case 'wall-e':
+		// 	return setRPC(client, 'online', 'Wall-E', 'WATCHING');
+		// case 'next':
+		// 	const nextState = states.randomElement();
+		// 	return setSts(client, nextState);
+		// case 'randomuser':
+		// 	const memberList = client.guilds.cache.get(jaidenServerID).roles.cache.get(level20RoleID).members.map(m => m.displayName);
+		// 	const randomMember = memberList.randomElement();
 
-			// We don't want to have the bot appear offline
-			const randomSimpleState = ['online', 'idle', 'dnd'].randomElement();
+		// 	// We don't want to have the bot appear offline
+		// 	const randomSimpleState = ['online', 'idle', 'dnd'].randomElement();
 
-			return setRPC(client, randomSimpleState, randomMember, 'WATCHING');
+		// 	return setRPC(client, randomSimpleState, randomMember, 'WATCHING');
 		default:
-			return false;
+			const snowy = [{activity: 'it snow ❄️', thing: 'WATCHING'}, {activity: 'with the snow ❄️', thing: 'PLAYING'}, {activity: 'jolly music', thing: 'LISTENING'}].randomElement();
+			return setRPC(client, 'online', snowy.activity, snowy.thing);
+			// return false;
 	}
 };
 

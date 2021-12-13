@@ -714,7 +714,7 @@ module.exports = {
 			fixes: [
 				'Destructured Discord object',
 				'Use tantrum instead of console.logging suggestion failures',
-				'Embedify nightcore command',
+				'Embedified nightcore command',
 				'Minor refactors',
 				'Bumped deps',
 				'Rewrote vc activity system'

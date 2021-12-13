@@ -703,5 +703,23 @@ module.exports = {
 				'Back command'
 			]
 		},
+		{
+			version: '2.5.1',
+			aliases: [],
+			additions: [
+				'More vc activities',
+				'Added staf checks to tag edit command',
+				'Added gitattributes file'
+			],
+			fixes: [
+				'Destructured Discord object',
+				'Use tantrum instead of console.logging suggestion failures',
+				'Embedify nightcore command',
+				'Minor refactors',
+				'Bumped deps',
+				'Rewrote vc activity system'
+			],
+			removals: []
+		},
 	]
 };

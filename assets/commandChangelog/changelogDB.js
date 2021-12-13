@@ -708,7 +708,7 @@ module.exports = {
 			aliases: [],
 			additions: [
 				'More vc activities',
-				'Added staf checks to tag edit command',
+				'Added staff checks to tag edit command',
 				'Added gitattributes file'
 			],
 			fixes: [

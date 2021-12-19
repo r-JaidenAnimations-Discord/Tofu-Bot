@@ -15,7 +15,7 @@ module.exports = {
 	// aliases: [],
 	cooldown: 5,
 	execute: async function(client, message, args) {
-		const joke = jokes.randomElement()
+		const joke = jokes.randomElement();
 		const jokeEmbed = new MessageEmbed()
 			.setColor(tofuGreen)
 			.setTitle(joke.setup)

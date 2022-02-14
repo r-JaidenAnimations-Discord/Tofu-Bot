@@ -67,7 +67,7 @@ module.exports = async (client, message) => {
 		thing = thing.replace(ping, 'nice try');
 	});
 
-	if (thing.match(IM_MATCH) && ['291684752363225098', '531399792740270092'].includes(message.author.id)) {
+	if (thing.match(IM_MATCH) && ['291684752363225098'].includes(message.author.id)) {
 		const imMatchData = thing.match(IM_MATCH),
 			formattingMatchData = thing.match(FORMAT_MATCH);
 

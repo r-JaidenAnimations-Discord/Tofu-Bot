@@ -15,7 +15,7 @@ module.exports = {
 	description: 'Check the birthdays of someone, sort them, or add and remove birthdays!',
 	isDMAllowed: false,
 	isDangerous: false,
-	mainServerOnly: true,
+	mainServerOnly: false,
 	isHidden: false,
 	aliases: ['birthdays', 'bd'],
 	cooldown: 0,

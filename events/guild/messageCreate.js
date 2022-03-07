@@ -57,26 +57,26 @@ module.exports = async (client, message) => {
 	// if (dad) {
 	// if (!['291684752363225098', '531399792740270092'].includes(message.author.id)) return;
 
-	const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
-	const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
+	// const IM_MATCH = /\b((?:i|l)(?:(?:'|`|‛|‘|’|′|‵)?m| am)) ([\s\S]*)/i;
+	// const FORMAT_MATCH = /(\*\*?\*?|``?`?|__?|~~|\|\|)+/i;
 
-	let thing = message.content;
+	// let thing = message.content;
 
-	// Supress @everyone, @here and pinging roles
-	[/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
-		thing = thing.replace(ping, 'nice try');
-	});
+	// // Supress @everyone, @here and pinging roles
+	// [/@everyone/gi, /@here/gi, /<@&\d{18}>/].forEach(ping => {
+	// 	thing = thing.replace(ping, 'nice try');
+	// });
 
-	if (thing.match(IM_MATCH) && ['291684752363225098'].includes(message.author.id)) {
-		const imMatchData = thing.match(IM_MATCH),
-			formattingMatchData = thing.match(FORMAT_MATCH);
+	// if (thing.match(IM_MATCH) && ['291684752363225098'].includes(message.author.id)) {
+	// 	const imMatchData = thing.match(IM_MATCH),
+	// 		formattingMatchData = thing.match(FORMAT_MATCH);
 
-		if (!formattingMatchData || formattingMatchData.index > imMatchData.index) {
-			message.channel.send(`Hi ${imMatchData[2]}, I'm Dad`);
-		} else {
-			message.channel.send(`Hi ${formattingMatchData[0]}${imMatchData[2]}, I'm Dad`);
-		}
-	}
+	// 	if (!formattingMatchData || formattingMatchData.index > imMatchData.index) {
+	// 		message.channel.send(`Hi ${imMatchData[2]}, I'm Dad`);
+	// 	} else {
+	// 		message.channel.send(`Hi ${formattingMatchData[0]}${imMatchData[2]}, I'm Dad`);
+	// 	}
+	// }
 	// }
 
 	// List up all commands

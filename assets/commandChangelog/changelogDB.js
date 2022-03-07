@@ -730,7 +730,8 @@ module.exports = {
 			fixes: [
 				'Joke command API was dead',
 				'Made bd command public',
-				'Minor code fixes'
+				'Minor code fixes',
+				'Removed music playing check from disconnect command'
 			],
 			removals: [
 				'Dad bot (for now)'

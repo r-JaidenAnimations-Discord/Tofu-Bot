@@ -721,5 +721,20 @@ module.exports = {
 			],
 			removals: []
 		},
+		{
+			version: '2.6.0',
+			aliases: ['2.6'],
+			additions: [
+				'a. slashie'
+			],
+			fixes: [
+				'Joke command API was dead',
+				'Made bd command public',
+				'Minor code fixes'
+			],
+			removals: [
+				'Dad bot (for now)'
+			]
+		},
 	]
 };

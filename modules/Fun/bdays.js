@@ -24,6 +24,7 @@ module.exports = {
 			if (!args[0] || args[0] == 'list' || args.join(' ') == 'sort date') { // t+bdays
 
 				const dbData = (await client.birthdays.findAll());
+				if (dbData.length === 0) return message.channel.send('There is *nothing*, add something to be the first');
 				const longestName = getLongestString(dbData.map(function(e) { return e.name })).length;
 
 				const users = dbData.sort((a, b) => a.date - b.date)

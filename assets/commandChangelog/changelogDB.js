@@ -737,5 +737,15 @@ module.exports = {
 				'Dad bot (for now)'
 			]
 		},
+		{
+			version: '2.6.1',
+			aliases: [],
+			additions: [],
+			fixes: [
+				'Switch back to normal statuses',
+				'Fix error on t+bd when db is empty'
+			],
+			removals: []
+		},
 	]
 };

@@ -12,6 +12,22 @@ const ascii = require('ascii-table');
 const table = new ascii('Commands');
 table.setHeading('Command', 'Load Status');
 
+const checkProps = (command) => {
+	if (typeof command.name === 'string' &&
+		typeof command.helpTitle === 'string' &&
+		typeof command.category === 'string' &&
+		typeof command.usage === 'string' &&
+		typeof command.description === 'string' &&
+		typeof command.isDMAllowed === 'boolean' &&
+		typeof command.isDangerous === 'boolean' &&
+		typeof command.mainServerOnly === 'boolean' &&
+		typeof command.isHidden === 'boolean' &&
+		['array', 'undefined'].includes(typeof command.aliases) &&
+		typeof command.cooldown === 'number' &&
+		typeof command.execute === 'function') return true;
+	return false;
+}
+
 module.exports = bot => {
 	readdirSync('./modules/', { withFileTypes: true })
 		.filter(dirent => dirent.isDirectory())
@@ -20,12 +36,12 @@ module.exports = bot => {
 			const commands = readdirSync(`./modules/${dir}/`).filter(file => file.endsWith('.js'));
 			for (const file of commands) {
 				const pull = require(`../modules/${dir}/${file}`);
-				if (pull.name) {
+				if (checkProps(pull)) {
 					bot.commands.set(pull.name, pull);
 					table.addRow(file, '✔   Loaded');
 				}
 				else {
-					table.addRow(file, 'X   Not loaded -> missing a help.name, or help.name is not a string.');
+					table.addRow(file, 'X   Not loaded -> missing or incorrectly typed properties!');
 					continue;
 				}
 				if (pull.aliases && Array.isArray(pull.aliases)) pull.aliases.forEach(alias => bot.aliases.set(alias, pull.name));

@@ -22,11 +22,12 @@ const checkProps = (command) => {
 		typeof command.isDangerous === 'boolean' &&
 		typeof command.mainServerOnly === 'boolean' &&
 		typeof command.isHidden === 'boolean' &&
-		['array', 'undefined'].includes(typeof command.aliases) &&
+		// ['array', 'undefined'].includes(typeof command.aliases) &&
+		(command.aliases === undefined || (Array.isArray(command.aliases) && command.aliases.every(alias => typeof alias === 'string'))) &&
 		typeof command.cooldown === 'number' &&
 		typeof command.execute === 'function') return true;
 	return false;
-}
+};
 
 module.exports = bot => {
 	readdirSync('./modules/', { withFileTypes: true })

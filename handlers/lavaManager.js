@@ -1,4 +1,5 @@
-const { MessageEmbed } = require('discord.js');
+const { Client, Message, MessageEmbed } = require('discord.js');
+const { Player } = require('lavaclient');
 const { musicStrings } = require('#assets/global/strings.json');
 const chalk = require('chalk');
 const { tofuOrange, tofuError } = require('#colors');
@@ -46,7 +47,7 @@ class LavaManager {
 	 * Checks if the music is playing
 	 * @param {Client} client Discord client
 	 * @param {Message} message Message object
-	 * @returns {Boolean} Playing state
+	 * @returns {Promise<boolean>} Playing state
 	 */
 	static async musicChecks(client, message) {
 		if (!(await this.getPlayer(client, message))?.playing) {
@@ -82,7 +83,7 @@ class LavaManager {
 	 * Returns the player if it exists, null if it doesn't
 	 * @param {Client} client Discord client
 	 * @param {Message} message Message object
-	 * @returns {Player|null} Player if exists, otherwise null
+	 * @returns {Promise<Player|null>} Player if exists, otherwise null
 	 */
 	static async getPlayer(client, message) {
 		const player = await client.music.players.get(message.guild.id);
@@ -93,7 +94,7 @@ class LavaManager {
 	 * Checks if music is being played
 	 * @param {Client} client Discord client
 	 * @param {Message} message Message object
-	 * @returns {Boolean} Music playing state
+	 * @returns {Promise<boolean>} Music playing state
 	 */
 	static async isPlaying(client, message) {
 		const player = await this.getPlayer(client, message);
@@ -102,7 +103,7 @@ class LavaManager {
 
 	/**
 	 * Logs a message with the [Lavalink]: prefix
-	 * @param {*} message Message to log
+	 * @param {any} message Message to log
 	 */
 	static lavaLog(message) {
 		console.log(`${chalk.yellowBright('[Lavalink]')}:`, message);

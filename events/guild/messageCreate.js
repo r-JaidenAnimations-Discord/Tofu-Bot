@@ -12,9 +12,9 @@ module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers, tofuBotServerID, maintenance } = client.config;
 
 	// Special case: Respond to Ari Bot when it mentions Tofu
-	if (message.author.bot && message.author.username.startsWith('Ari Bot')) {
+	if (message.author.id === '750433829034000485') {
 		const messageContent = message.content.toLowerCase();
-		if (messageContent.includes('tofu') && messageContent.includes('ari')) {
+		if (messageContent.includes('hey i\'m ari and this is my pal tofu. look at us, we\'re cute right?')) {
 			return message.reply('Yes, we are! （☆ω☆*）');
 		}
 	}

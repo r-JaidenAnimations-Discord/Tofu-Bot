@@ -11,6 +11,14 @@ const Tantrum = require('#tantrum');
 module.exports = async (client, message) => {
 	const { prefix, devMode, jaidenServerID, generalChannelID, trustedServers, tofuBotServerID, maintenance } = client.config;
 
+	// Special case: Respond to Ari Bot when it mentions Tofu
+	if (message.author.bot && message.author.username.toLowerCase().includes('ari')) {
+		const messageContent = message.content.toLowerCase();
+		if (messageContent.includes('tofu') && messageContent.includes('ari')) {
+			return message.reply('Yes, we are! （☆ω☆*）');
+		}
+	}
+
 	// Bots shall not trigger me
 	if (message.author.bot) return;
 
